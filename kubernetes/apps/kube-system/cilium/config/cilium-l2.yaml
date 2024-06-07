@@ -21,5 +21,4 @@ metadata:
 spec:
   allowFirstLastIPs: "Yes"
   blocks:
-    - start: "192.168.201.200"
-      stop: "192.168.201.250"
+    - cidr: "192.168.201.0/24"
