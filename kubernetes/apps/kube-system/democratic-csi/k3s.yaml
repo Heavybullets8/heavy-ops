@@ -5,7 +5,7 @@ metadata:
   name: nfs
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/kube-system/democratic-csi/iscsi
+  path: ./kubernetes/apps/kube-system/democratic-csi/nfs
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
