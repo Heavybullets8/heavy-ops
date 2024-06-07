@@ -69,13 +69,13 @@ spec:
           extentBlocksize: 512
           extentRpm: "SSD"
           extentAvailThreshold: 0
-  node:
-    hostPID: true
-    driver:
-      extraEnv:
-        - name: ISCSIADM_HOST_STRATEGY
-          value: nsenter
-        - name: ISCSIADM_HOST_PATH
-          value: /usr/local/sbin/iscsiadm
-      iscsiDirHostPath: /usr/local/etc/iscsi
-      iscsiDirHostPathType: ""
+    node:
+      hostPID: true
+      driver:
+        extraEnv:
+          - name: ISCSIADM_HOST_STRATEGY
+            value: nsenter
+          - name: ISCSIADM_HOST_PATH
+            value: /usr/local/sbin/iscsiadm
+        iscsiDirHostPath: /usr/local/etc/iscsi
+        iscsiDirHostPathType: ""
