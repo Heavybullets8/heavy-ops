@@ -43,7 +43,7 @@ spec:
         httpConnection:
           protocol: http
           host: ${SECRET_TRUENAS_IP}
-          port: 80
+          port: 81
           allowInsecure: true
           apiKey: ${SECRET_TRUENAS_API}
         zfs:
