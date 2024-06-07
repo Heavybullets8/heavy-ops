@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
+---
+# renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+talosVersion: v1.7.4
+# renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
+kubernetesVersion: v1.30.1
+
+clusterName: "heavy-cluster"
+endpoint: https://192.168.201.100:6443
+clusterPodNets:
+  - "10.69.0.0/16"
+clusterSvcNets:
+  - "10.96.0.0/16"
+additionalApiServerCertSans: &sans
+  - "192.168.201.100"
+  - 127.0.0.1 # KubePrism
+additionalMachineCertSans: *sans
+
+# Disable built-in Flannel to use Cilium
+cniConfig:
+  name: none
+
+nodes:
+  - hostname: "heavy-control"
+    ipAddress: "192.168.201.101"
+    installDisk: "/dev/vda"
+    talosImageURL: factory.talos.dev/installer/831bcd3df93662159641b00d8b3bb96edc64b3911d507affe524e9c18a3a467f
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:a0:98:45:98:e6"
+        dhcp: false
+        addresses:
+          - "192.168.201.101/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.200.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.201.100"
+
+# Global patches
+patches:
+  - # Force nameserver
+    |-
+    machine:
+      network:
+        nameservers:
+          - 9.9.9.9
+          - 149.112.112.112
+  - "@./patches/global/cluster-discovery.yaml"
+  - "@./patches/global/containerd.yaml"
+  - "@./patches/global/disable-search-domain.yaml"
+  - "@./patches/global/hostdns.yaml"
+  - "@./patches/global/kubelet.yaml"
+  - "@./patches/global/openebs-local.yaml"
+  - "@./patches/global/sysctl.yaml"
+
+# Controller patches
+controlPlane:
+  patches:
+    - "@./patches/controller/api-access.yaml"
+    - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/disable-admission-controller.yaml"
+    - "@./patches/controller/etcd.yaml"
+
