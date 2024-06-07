@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: nfs
+  namespace: disk
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: democratic-csi
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
+        namespace: flux-system
+  values:
+    csiDriver:
+      name: "nfs"
+    storageClasses:
+    - name: nfs
+      defaultClass: false
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: nfs
+        detachedVolumesFromSnapshots: "false"
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+  #  volumeSnapshotClasses:
+  #  - name: nfs
+  #    parameters:
+  #      detachedSnapshots: "true"
+    driver:
+      config:
+        driver: freenas-api-nfs
+        instance_id:
+        httpConnection:
+          protocol: http
+          host: ${SECRET_TRUENAS_IP}
+          port: 80
+          allowInsecure: true
+          apiKey: ${SECRET_TRUENAS_API}
+        zfs:
+          datasetParentName: speed/TalosOS/nfs/volumes
+          detachedSnapshotsDatasetParentName: speed/TalosOS/nfs/snapshots
+          datasetEnableQuotas: true
+          datasetEnableReservation: false
+          datasetPermissionsMode: "0777"
+          datasetPermissionsUser: 0
+          datasetPermissionsGroup: 0
+        nfs:
+          shareHost: ${SECRET_TRUENAS_IP}
+          shareAlldirs: false
+          shareAllowedHosts: []
+          shareAllowedNetworks: []
+          shareMaprootUser: root
+          shareMaprootGroup: root
+          shareMapallUser: ""
+          shareMapallGroup: ""
