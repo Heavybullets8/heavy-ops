@@ -126,7 +126,7 @@ spec:
 
       media:
         enabled: true
-        existingClaim: media-nfs-pvc
+        existingClaim: media-pvc
         globalMounts:
           - path: /media
             readOnly: false
