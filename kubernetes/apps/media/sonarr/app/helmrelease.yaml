@@ -126,5 +126,6 @@ spec:
 
       media:
         enabled: true
+        type: persistentVolumeClaim
         existingClaim: media-pvc
 
