@@ -127,6 +127,4 @@ spec:
       media:
         enabled: true
         existingClaim: media-pvc
-        globalMounts:
-          - path: /media
-            readOnly: false
+
