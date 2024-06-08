@@ -16,14 +16,60 @@ spec:
     csiDriver:
       name: "nfs"
     storageClasses:
-    - name: nfs
+    - name: existing-pvs
       defaultClass: false
-      reclaimPolicy: Delete
+      reclaimPolicy: Retain
       volumeBindingMode: Immediate
       allowVolumeExpansion: true
       parameters:
         fsType: nfs
         detachedVolumesFromSnapshots: "false"
+        mountOptions: "nfsvers=4,tcp,intr,hard,noatime,nodiratime,nolock"
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+    - name: app-hostpathconfigs
+      defaultClass: false
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: nfs
+        detachedVolumesFromSnapshots: "false"
+        mountOptions: "nfsvers=4,tcp,intr,hard,noatime,nodiratime,nolock"
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+    - name: media
+      defaultClass: false
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: nfs
+        detachedVolumesFromSnapshots: "false"
+        mountOptions: "nfsvers=4,tcp,intr,hard,noatime,nodiratime,nolock"
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+    - name: talos-nfs
+      defaultClass: false
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: nfs
+        detachedVolumesFromSnapshots: "false"
+        mountOptions: "nfsvers=4,tcp,intr,hard,noatime,nodiratime,nolock"
       secrets:
         provisioner-secret:
         controller-publish-secret:
