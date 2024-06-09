@@ -1,10 +1,19 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage
+provisioner: none  # Static provisioning for NFS
+volumeBindingMode: Immediate
+
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: media-pv
   namespace: media
 spec:
-  storageClassName: media
+  storageClassName: nfs-storage
   capacity:
     storage: 1Mi
   accessModes:
@@ -13,6 +22,14 @@ spec:
   nfs:
     server: ${SECRET_TRUENAS_IP}
     path: "/mnt/tank/media"
+  mountOptions:
+    - nfsvers=4
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
+    - nolock
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,7 +37,7 @@ metadata:
   name: media-pvc
   namespace: media
 spec:
-  storageClassName: media
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteMany
   resources:
