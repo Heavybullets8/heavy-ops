@@ -11,12 +11,12 @@ kind: PersistentVolume
 metadata:
   name: media-pv
 spec:
-  storageClassName: nfs-storage
   capacity:
-    storage: 1Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-storage
   nfs:
     server: ${SECRET_TRUENAS_IP}
     path: "/mnt/tank/media"
@@ -40,4 +40,4 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Mi
+      storage: 1Gi

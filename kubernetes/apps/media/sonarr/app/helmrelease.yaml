@@ -126,7 +126,5 @@ spec:
 
       media:
         enabled: true
-        type: nfs
-        server: ${SECRET_TRUENAS_IP}
-        path: "/mnt/tank/media"
-
+        type: persistentVolumeClaim
+        existingClaim: media-pvc
