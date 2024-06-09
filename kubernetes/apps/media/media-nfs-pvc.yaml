@@ -3,15 +3,13 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nfs-storage
-provisioner: none  # Static provisioning for NFS
+provisioner: none
 volumeBindingMode: Immediate
-
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: media-pv
-  namespace: media
 spec:
   storageClassName: nfs-storage
   capacity:
