@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: radarr
   namespace: media
 spec:
   interval: 15m
@@ -41,29 +41,29 @@ spec:
         seccompProfile: { type: RuntimeDefault }
 
     controllers:
-      sonarr:
+      radarr:
         annotations:
           reloader.stakater.com/auto: 'true'
 
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr-develop
-              tag: 4.0.5.1719@sha256:602af44d766a8c7c494d01fb79f6e7624aed58f0b86ffe10e1ecad280160a3df
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.6.0.8846@sha256:99c264af3f2d177e6674a9b304b64a35261202de30e54b35d5758d40edd94366
 
             env:
-              SONARR__AUTH__METHOD: External
-              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              SONARR__APP__INSTANCENAME: Sonarr
-              SONARR__SERVER__PORT: &port 80
-              SONARR__LOG__LEVEL: info
-              SONARR__APP__THEME: dark
-              SONARR__LOG__ANALYTICS_ENABLED: 'false'
-              SONARR__UPDATE__BRANCH: develop
+              RADARR__APP__INSTANCENAME: Radarr
+              RADARR__APP__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__LOG__LEVEL: info
+              RADARR__SERVER__PORT: &port 80
+              RADARR__UPDATE__BRANCH: develop
 
             envFrom:
               - secretRef:
-                  name: sonarr-secret
+                  name: radarr-secret
 
             probes:
               liveness: &probes
@@ -100,8 +100,8 @@ spec:
       app:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.201.201
-        controller: sonarr
+          io.cilium/lb-ipam-ips: 192.168.201.202
+        controller: radarr
         ports:
           http:
             enabled: true
@@ -123,7 +123,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: sonarr-config
+        existingClaim: radarr-config
 
       tmp:
         type: emptyDir

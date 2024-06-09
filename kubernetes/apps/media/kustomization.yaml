@@ -5,3 +5,4 @@ resources:
   - ./media-nfs-pvc.yaml
   - ./namespace.yaml
   - ./sonarr/k3s.yaml
+  - ./radarr/k3s.yaml
