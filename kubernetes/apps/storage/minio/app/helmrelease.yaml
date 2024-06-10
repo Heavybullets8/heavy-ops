@@ -120,6 +120,10 @@ spec:
 
     persistence:
       speed:
+        enabled: true
+        type: persistentVolumeClaim
         existingClaim: minio-speed-pvc
       tank:
+        enabled: true
+        type: persistentVolumeClaim
         existingClaim: minio-tank-pvc
