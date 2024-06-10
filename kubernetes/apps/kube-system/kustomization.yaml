@@ -10,4 +10,4 @@ resources:
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
   - ./external-secrets/k3s.yaml
-  - ./democratic-csi/k3s.yaml
+  # - ./democratic-csi/k3s.yaml
