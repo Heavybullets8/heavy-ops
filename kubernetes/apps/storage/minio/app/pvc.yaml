@@ -10,7 +10,6 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: iscsi-speed
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -24,3 +23,16 @@ spec:
     requests:
       storage: 250Gi
   storageClassName: iscsi-tank
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-config-pvc
+  namespace: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: iscsi-speed
