@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: loki
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: loki
+      version: 6.6.3
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+        namespace: flux-system
+      interval: 30m
+  install:
+    crds: CreateReplace
+    createNamespace: true
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+  rollback:
+    cleanupOnFail: true
+  values:
+    deploymentMode: SingleBinary
+    gateway:
+      deploymentStrategy:
+        type: Recreate
+    loki:
+      schemaConfig:
+        configs:
+          - from: "2024-04-01"
+            store: tsdb
+            object_store: filesystem
+            schema: v13
+            index:
+              prefix: loki_index_
+              period: 24h
+      storage:
+        type: filesystem
+      structuredConfig:
+        analytics:
+          reporting_enabled: false
+        auth_enabled: false
+        frontend:
+          max_outstanding_per_tenant: 4096
+        limits_config:
+          retention_period: 14d
+          reject_old_samples: true
+          reject_old_samples_max_age: 168h
+          max_cache_freshness_per_query: 10m
+          ingestion_rate_mb: 8
+          ingestion_burst_size_mb: 16
+          shard_streams:
+            enabled: true
+          split_queries_by_interval: 15m
+          max_query_parallelism: 32
+        query_scheduler:
+          max_outstanding_requests_per_tenant: 4096
+        query_range:
+          parallelise_shardable_queries: true
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
+    write:
+      replicas: 0
+    chunksCache:
+      enabled: false
+    resultsCache:
+      enabled: false
+    singleBinary:
+      persistence:
+        enabled: true
+        storageClassName: iscsi-speed
+        accessModes: [ReadWriteOnce]
+        size: 100Gi
+      replicas: 1
+    lokiCanary:
+      enabled: false
+    test:
+      enabled: false
