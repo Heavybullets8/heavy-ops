@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
   values:
     csiDriver:
-      name: "iscsi"
+      name: "iscsi-tank"
     storageClasses:
     - name: iscsi-tank
       defaultClass: false

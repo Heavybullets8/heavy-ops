@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
   values:
     csiDriver:
-      name: "iscsi"
+      name: "iscsi-speed"
     storageClasses:
     - name: iscsi-speed
       defaultClass: true
