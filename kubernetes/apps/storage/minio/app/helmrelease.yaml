@@ -121,7 +121,5 @@ spec:
     persistence:
       speed:
         existingClaim: minio-speed-pvc
-        mountPath: /data/speed
       tank:
         existingClaim: minio-tank-pvc
-        mountPath: /data/tank
