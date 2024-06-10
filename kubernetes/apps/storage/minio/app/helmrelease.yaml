@@ -1,9 +1,9 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: minio
-  namespace: storage
 spec:
   interval: 30m
   chart:
@@ -14,35 +14,24 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
-  maxHistory: 3
-
   install:
     remediation:
       retries: 3
-
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-
-  uninstall:
-    keepHistory: false
-
   values:
     controllers:
-      main:
+      minio:
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
-          main:
+          app:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-06-06T09-36-42Z@sha256:c97dbb0238dbd650ebe3f57dda68984993f466abad70d36c6e3ca306ceec3f58
-
-            args: ["server", "/data/speed", "/data/tank", "--console-address", ":9001"]
-
             env:
               TZ: ${TIMEZONE}
               MINIO_UPDATE: "off"
@@ -57,6 +46,7 @@ spec:
               - secretRef:
                   name: minio-secret
 
+            args: ["server", "/tank", "/speed", "--console-address", ":9001"]
             probes:
               liveness: &probes
                 enabled: true
@@ -70,54 +60,59 @@ spec:
                   timeoutSeconds: 10
                   failureThreshold: 6
               readiness: *probes
-              startup:
-                enabled: false
-
             securityContext:
-              runAsUser: 568
-              runAsGroup: 568
-              fsGroup: 568
-              fsGroupChangePolicy: OnRootMismatch
-              supplementalGroups: [100]
-
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 2Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [10000]
+        seccompProfile: { type: RuntimeDefault }
     service:
-      main:
-        controller: main
+      app:
+        controller: minio
         ports:
           http:
-            port: &port-console 9001
-          api:
-            port: &port-api 9000
-
+            port: 9001
+          s3:
+            port: 9000
+    # serviceMonitor:
+    #   app:
+    #     serviceName: minio
+    #     endpoints:
+    #       - port: s3
+    #         scheme: http
+    #         path: /minio/v2/metrics/cluster
+    #         interval: 1m
+    #         scrapeTimeout: 10s
     ingress:
-      main:
-        className: external
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        className: internal
         hosts:
-          - host:  "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  identifier: main
-                  port: *port-console
-
-      s3:
-        className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
-          nginx.ingress.kubernetes.io/proxy-body-size: 5000m
-          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            chunked_transfer_encoding off;
-        hosts:
+                  identifier: app
+                  port: http
           - host: "s3.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  identifier: main
-                  port: *port-api
-
+                  identifier: app
+                  port: s3
     persistence:
       speed:
         enabled: true
