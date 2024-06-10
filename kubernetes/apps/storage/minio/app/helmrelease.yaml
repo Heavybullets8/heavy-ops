@@ -123,6 +123,7 @@ spec:
         existingClaim: minio-tank-pvc
       config:
         enabled: true
+        type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 10Gi
         storageClass: iscsi-speed
