@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: minio
+  name: minio-speed
 spec:
   interval: 30m
   chart:
@@ -33,8 +33,8 @@ spec:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-06-06T09-36-42Z@sha256:c97dbb0238dbd650ebe3f57dda68984993f466abad70d36c6e3ca306ceec3f58
             env:
-              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
-              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
+              MINIO_API_CORS_ALLOW_ORIGIN: https://{{ .Release.Name }}.${SECRET_DOMAIN},https://s3-speed.${SECRET_DOMAIN}
+              MINIO_BROWSER_REDIRECT_URL: https://{{ .Release.Name }}.${SECRET_DOMAIN}
               MINIO_PROMETHEUS_JOB_ID: minio
               MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
               MINIO_PROMETHEUS_AUTH_TYPE: public
@@ -104,24 +104,16 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: "s3.${SECRET_DOMAIN}"
+          - host: "s3-speed.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: s3
     persistence:
-      speed:
-        enabled: true
-        type: persistentVolumeClaim
-        existingClaim: minio-speed-pvc
-      tank:
-        enabled: true
-        type: persistentVolumeClaim
-        existingClaim: minio-tank-pvc
       config:
         enabled: true
         type: persistentVolumeClaim
-        existingClaim: minio-config-pvc
+        existingClaim: minio-speed-pvc
         globalMounts:
           - path: /data
