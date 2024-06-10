@@ -33,12 +33,12 @@ spec:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-06-06T09-36-42Z@sha256:c97dbb0238dbd650ebe3f57dda68984993f466abad70d36c6e3ca306ceec3f58
             env:
-              MINIO_API_CORS_ALLOW_ORIGIN: https://{{ .Release.Name }}.${SECRET_DOMAIN},https://s3-speed.${SECRET_DOMAIN}
-              MINIO_BROWSER_REDIRECT_URL: https://{{ .Release.Name }}.${SECRET_DOMAIN}
+              MINIO_API_CORS_ALLOW_ORIGIN: "https://{{ .Release.Name }}.${SECRET_DOMAIN},https://s3-speed.${SECRET_DOMAIN}"
+              MINIO_BROWSER_REDIRECT_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               MINIO_PROMETHEUS_JOB_ID: minio
-              MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_URL: "https://prometheus.${SECRET_DOMAIN}"
               MINIO_PROMETHEUS_AUTH_TYPE: public
-              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
+              MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
               MINIO_UPDATE: "off"
             envFrom:
               - secretRef:
