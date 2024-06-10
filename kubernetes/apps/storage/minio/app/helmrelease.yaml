@@ -45,7 +45,7 @@ spec:
             envFrom:
               - secretRef:
                   name: minio-secret
-            args: ["server", "/tank", "/speed", "--console-address", ":9001", "--log", "debug"]
+            args: ["server", "/tank", "/speed", "--console-address", ":9001"]
             probes:
               liveness: &probes
                 enabled: true
@@ -121,3 +121,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         existingClaim: minio-tank-pvc
+      config:
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        storageClass: iscsi-speed
