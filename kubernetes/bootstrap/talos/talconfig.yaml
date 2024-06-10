@@ -38,6 +38,13 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.201.100"
+    schematic:
+      customization:
+          systemExtensions:
+              officialExtensions:
+                  - siderolabs/amd-ucode
+                  - siderolabs/iscsi-tools
+                  - siderolabs/qemu-guest-agent
 
 # Global patches
 patches:
