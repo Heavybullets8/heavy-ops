@@ -45,7 +45,7 @@ spec:
             envFrom:
               - secretRef:
                   name: minio-secret
-            args: ["server", "/tank", "/speed", "--console-address", ":9001"]
+            args: ["server", "/tank", "/speed", "--console-address", ":9001", "--log", "debug"]
             probes:
               liveness: &probes
                 enabled: true
