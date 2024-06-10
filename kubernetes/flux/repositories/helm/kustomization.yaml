@@ -8,6 +8,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./democratic-csi.yaml
+  - ./grafana.yaml
   - ./jetstack.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
