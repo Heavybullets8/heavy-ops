@@ -55,7 +55,7 @@ spec:
 
             envFrom:
               - secretRef:
-                  name: minio-storage
+                  name: minio-secret
 
             probes:
               liveness: &probes
