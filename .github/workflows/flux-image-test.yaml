@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "Flux Image Test"
 
@@ -30,6 +29,9 @@ jobs:
         with:
           token: "${{ steps.app-token.outputs.token }}"
           fetch-depth: 0
+
+      - name: Verify Checkout
+        run: ls -la /github/workspace/kubernetes/flux
 
       - name: Get Changed Clusters
         id: changed-clusters
@@ -78,18 +80,24 @@ jobs:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
+      - name: Verify Default Branch Checkout
+        run: ls -la /github/workspace/default/kubernetes/flux
+
       - name: Checkout Pull Request Branch
         uses: actions/checkout@v4
         with:
           token: "${{ steps.app-token.outputs.token }}"
           path: pull
 
+      - name: Verify Pull Request Branch Checkout
+        run: ls -la /github/workspace/pull/kubernetes/flux
+
       - name: Gather Images in Default Branch
         uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
         with:
           args: >-
             get cluster
-            --path /github/workspace/default/${{ matrix.paths }}/flux
+            --path /github/workspace/default/kubernetes/flux
             --enable-images
             --output yaml
             --output-file default.yaml
@@ -99,7 +107,7 @@ jobs:
         with:
           args: >-
             get cluster
-            --path /github/workspace/pull/${{ matrix.paths }}/flux
+            --path /github/workspace/pull/kubernetes/flux
             --enable-images
             --output yaml
             --output-file pull.yaml
