@@ -36,7 +36,7 @@ spec:
         envFrom:
           - secretRef:
               name: &secret grafana-secret
-    replicas: 2
+    replicas: 1
     env:
       # GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
       # GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
@@ -56,7 +56,7 @@ spec:
         check_for_updates: false
         check_for_plugin_updates: false
         reporting_enabled: false
-      # auth:
+      auth:
       #   oauth_auto_login: true
       #   oauth_allow_insecure_email_lookup: true
       # auth.generic_oauth:
@@ -72,10 +72,10 @@ spec:
       # auth.generic_oauth.group_mapping:
       #   org_id: 1
       #   role_attribute_path: contains(groups[*], 'admins') && 'Admin' || 'Viewer'
-      # auth.basic:
-      #   enabled: false
-      # auth.anonymous:
-      #   enabled: false
+      auth.basic:
+        enabled: false
+      auth.anonymous:
+        enabled: false
       news:
         news_feed_enabled: false
     dashboardProviders:
