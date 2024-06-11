@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+    outputs:
+      images: ${{ steps.extract-images.outputs.images }}
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v1
