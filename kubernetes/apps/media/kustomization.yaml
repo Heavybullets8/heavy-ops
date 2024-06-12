@@ -7,3 +7,4 @@ resources:
   - ./sonarr/k3s.yaml
   - ./radarr/k3s.yaml
   - ./prowlarr/k3s.yaml
+  - ./overseerr/k3s.yaml
