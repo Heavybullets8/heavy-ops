@@ -96,9 +96,13 @@ spec:
 
     persistence:
       config:
-        existingClaim: overseerr-config
+        existingClaim: overseerr
         globalMounts:
           - path: /app/config
+      cache:
+        existingClaim: overseerr-cache
+        globalMounts:
+          - path: /app/config/cache
       logs:
         type: emptyDir
         globalMounts:
