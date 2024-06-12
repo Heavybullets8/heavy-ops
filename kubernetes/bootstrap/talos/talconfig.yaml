@@ -31,7 +31,7 @@ nodes:
           hardwareAddr: "00:a0:98:45:98:e6"
         dhcp: false
         addresses:
-          - "192.168.201.101/24"
+          - "192.168.201.101/23"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.200.1"
