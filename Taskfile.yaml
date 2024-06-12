@@ -16,7 +16,6 @@ includes:
   flux: .taskfiles/Flux
   kubernetes: .taskfiles/Kubernetes
   talos: .taskfiles/Talos
-  volsync: .taskfiles/VolSync
 
 tasks:
 
