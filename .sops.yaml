@@ -1,4 +1,3 @@
----
 creation_rules:
   - # IMPORTANT: Keep this rule first
     path_regex: talos/.+\.secret(\.sops)?\.ya?ml
