@@ -34,11 +34,11 @@ spec:
               tag: RELEASE.2024-06-11T03-13-30Z@sha256:bf461534d577e8600a22d4cac4830fc754cc6cce2547be399151c8763742f23e
             env:
               MINIO_API_CORS_ALLOW_ORIGIN: "https://{{ .Release.Name }}.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN},http://192.168.201.209"
-              MINIO_BROWSER_REDIRECT_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN},http://192.168.201.209"
+              MINIO_BROWSER_REDIRECT_URL: "http://192.168.201.209"
               MINIO_PROMETHEUS_JOB_ID: minio
               MINIO_PROMETHEUS_URL: "https://prometheus.${SECRET_DOMAIN}"
               MINIO_PROMETHEUS_AUTH_TYPE: public
-              MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN},http://192.168.201.209"
+              MINIO_SERVER_URL: "http://192.168.201.209"
               MINIO_UPDATE: "off"
             envFrom:
               - secretRef:
