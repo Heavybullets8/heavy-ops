@@ -10,8 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: node-feature-discovery-rules
+  # dependsOn:
+  #   - name: node-feature-discovery-rules
   path: ./kubernetes/apps/system-upgrade/system-upgrade-controller/app
   prune: true
   sourceRef:
