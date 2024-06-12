@@ -78,6 +78,9 @@ spec:
     service:
       app:
         controller: minio
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.201.209"
         ports:
           http:
             port: 9001
@@ -95,8 +98,8 @@ spec:
     ingress:
       app:
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        className: external
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        className: internal
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
