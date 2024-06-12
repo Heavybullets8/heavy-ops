@@ -4,6 +4,7 @@ version: "3"
 
 vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  KUBECONFIG_FILE: "{{.ROOT_DIR}}/kubernetes/kubeconfig"
 
 env:
   KUBECONFIG: "{{.KUBERNETES_DIR}}/kubernetes/kubeconfig"
