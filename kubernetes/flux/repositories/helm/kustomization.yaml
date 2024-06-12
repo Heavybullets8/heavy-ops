@@ -4,11 +4,13 @@ kind: Kustomization
 resources:
   - ./actions-runner-controller.yaml
   - ./backube.yaml
+  - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./democratic-csi.yaml
+  - ./descheduler.yaml
   - ./grafana.yaml
   - ./jetstack.yaml
   - ./metrics-server.yaml

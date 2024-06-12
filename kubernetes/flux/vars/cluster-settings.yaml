@@ -6,3 +6,4 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: "America/Denver"
+  CLUSTER_NAME: heavy-cluster

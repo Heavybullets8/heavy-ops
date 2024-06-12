@@ -5,9 +5,9 @@ resources:
   - ./namespace.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
+  - ./democratic-csi/ks.yaml
+  - ./descheduler/ks.yaml
+  - ./kubelet-csr-approver/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
-  - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
-  - ./external-secrets/k3s.yaml
-  - ./democratic-csi/k3s.yaml

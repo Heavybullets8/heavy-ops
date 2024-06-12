@@ -7,15 +7,15 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: "ssh://git@github.com/Heavybullets8/talos.git"
+  url: "ssh://git@github.com/Heavybullets8/talos"
+  ref:
+    branch: main
   secretRef:
     name: github-deploy-key
-  ref:
-    branch: "main"
   ignore: |
     # exclude all
     /*
-    # include kubernetes directory
+    # include flux directories
     !/kubernetes
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -40,5 +40,7 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-settings
+        optional: false
       - kind: Secret
         name: cluster-secrets
+        optional: false

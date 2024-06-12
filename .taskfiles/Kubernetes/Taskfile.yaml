@@ -2,35 +2,39 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
 
-vars:
-  KUBECONFORM_SCRIPT: "{{.SCRIPTS_DIR}}/kubeconform.sh"
-
 tasks:
 
-  resources:
-    desc: Gather common resources in your cluster, useful when asking for support
-    cmds:
-      - for: { var: resource }
-        cmd: kubectl get {{.ITEM}} {{.CLI_ARGS | default "-A"}}
+  browse-pvc:
+    desc: Browse PersistentVolumeClaims
+    summary: |
+      Args:
+        cluster: Cluster to run command against (required)
+        ns: Namespace to browse PersistentVolumeClaims in (default: default)
+        claim: PersistentVolumeClaim to browse (required)
+    interactive: true
+    cmd: kubectl browse-pvc --context heavy-cluster --namespace {{.ns}} {{.claim}}
     vars:
-      resource: >-
-        nodes
-        gitrepositories
-        kustomizations
-        helmrepositories
-        helmreleases
-        certificates
-        certificaterequests
-        ingresses
-        pods
+      ns: '{{.ns | default "default"}}'
+    requires:
+      vars: ["cluster", "claim"]
 
-  kubeconform:
-    desc: Validate Kubernetes manifests with kubeconform
-    cmd: bash {{.KUBECONFORM_SCRIPT}} {{.KUBERNETES_DIR}}
-    preconditions:
-      - msg: Missing kubeconform script
-        sh: test -f {{.KUBECONFORM_SCRIPT}}
+  drain:
+    desc: Drain a node
+    summary: |
+      Args:
+        cluster: Cluster to run command against (required)
+        node: Node to drain (required)
+    cmd: kubectl --context heavy-cluster drain {{.node}} --ignore-daemonsets --delete-local-data --force
+    requires:
+      vars: ["cluster", "node"]
 
-  .reset:
-    internal: true
-    cmd: rm -rf {{.KUBERNETES_DIR}}
+  delete-failed-pods:
+    desc: Deletes pods with a fucked status
+    summary: |
+      Args:
+        cluster: Cluster to run command against (required)
+    cmds:
+      - for: ["Evicted", "Failed", "Succeeded"]
+        cmd: kubectl --context heavy-cluster delete pods --field-selector status.phase={{.ITEM}} -A --ignore-not-found=true
+    requires:
+      vars: ["cluster"]

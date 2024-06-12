@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -19,7 +20,11 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
+  dependsOn:
+    - name: nginx-external
+      namespace: network
   values:
     controllers:
       cloudflared:
@@ -30,7 +35,7 @@ spec:
           app:
             image:
               repository: docker.io/cloudflare/cloudflared
-              tag: 2024.6.0
+              tag: 2024.6.0@sha256:8245fa2eeeabf437b061909cd59f123b39730f626bc676dc37cd3fb9f6880580
             env:
               NO_AUTOUPDATE: true
               TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
@@ -38,17 +43,12 @@ spec:
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
-              TUNNEL_ID:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflared-secret
-                    key: TUNNEL_ID
             args:
               - tunnel
               - --config
               - /etc/cloudflared/config/config.yaml
               - run
-              - "$(TUNNEL_ID)"
+              - "${CLUSTER_CLOUDFLARE_TUNNEL_ID}"
             probes:
               liveness: &probes
                 enabled: true
@@ -102,7 +102,7 @@ spec:
             readOnly: true
       creds:
         type: secret
-        name: cloudflared-secret
+        name: cloudflared-tunnel-secret
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: credentials.json

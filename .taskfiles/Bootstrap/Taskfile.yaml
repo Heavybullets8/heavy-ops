@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+
+  heavy-cluster:
+    vars: &vars
+      cluster: heavy-cluster
+    cmds:
+      - task: :talos:bootstrap
+        vars: *vars
+      - task: :flux:bootstrap
+        vars: *vars
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
