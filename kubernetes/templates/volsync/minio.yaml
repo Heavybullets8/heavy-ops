@@ -13,10 +13,10 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "{{ .data.REPOSITORY_TEMPLATE }}/${APP}"
-        RESTIC_PASSWORD: "{{ .data.RESTIC_PASSWORD }}"
-        AWS_ACCESS_KEY_ID: "{{ .data.MINIO_ROOT_USER }}"
-        AWS_SECRET_ACCESS_KEY: "{{ .data.MINIO_ROOT_PASSWORD }}"
+        RESTIC_REPOSITORY: "{{ .REPOSITORY_TEMPLATE }}/${APP}"
+        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        AWS_ACCESS_KEY_ID: "{{ .MINIO_ROOT_USER }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .MINIO_ROOT_PASSWORD }}"
   data:
     - secretKey: AWS_ACCESS_KEY_ID
       remoteRef:
