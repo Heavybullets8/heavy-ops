@@ -13,6 +13,8 @@ resources:
   - ./descheduler.yaml
   - ./grafana.yaml
   - ./jetstack.yaml
+  - ./k8s-gateway.yaml
+  - ./node-feature-discovery.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
@@ -23,4 +25,3 @@ resources:
   - ./external-dns.yaml
   - ./external-secrets.yaml
   - ./ingress-nginx.yaml
-  - ./k8s-gateway.yaml
