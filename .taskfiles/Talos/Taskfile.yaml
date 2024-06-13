@@ -89,7 +89,7 @@ tasks:
     vars:
       mode: '{{.mode | default "no-reboot"}}'
     requires:
-      vars: ["cluster", "hostname"]
+      vars: ["cluster"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
       - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml
@@ -98,17 +98,16 @@ tasks:
   upgrade:
     desc: Upgrade Talos on a node
     cmds:
-      - until kubectl --context {{.cluster}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
-      - talosctl --context {{.cluster}} --nodes heavy-control upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}" --wait=true --timeout=10m --preserve=true
-      - talosctl --context {{.cluster}} --nodes heavy-control health --wait-timeout=10m --server=false
-      - until kubectl --context {{.cluster}} wait --timeout=5m --for=jsonpath=.status.ceph.health=HEALTH_OK cephcluster --all --all-namespaces; do sleep 10; done
+      # - until kubectl --context {{.cluster}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
+      - talosctl --context {{.cluster}} --nodes {{.hostname}} upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}" --wait=true --timeout=10m --preserve=true
+      - talosctl --context {{.cluster}} --nodes {{.hostname}} health --wait-timeout=10m --server=false
     vars: *vars
     requires:
-      vars: ["cluster"]
+      vars: ["cluster", "hostname"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
       - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - talosctl --context {{.cluster}} --nodes heavy-control get machineconfig >/dev/null 2>&1
+      - talosctl --context {{.cluster}} --nodes {{.hostname}} get machineconfig >/dev/null 2>&1
 
   upgrade-k8s:
     desc: Upgrade Kubernetes
