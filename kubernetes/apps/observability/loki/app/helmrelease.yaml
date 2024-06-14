@@ -27,6 +27,18 @@ spec:
     gateway:
       deploymentStrategy:
         type: Recreate
+      ingress:
+        app:
+          className: external
+          annotations:
+            external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hosts:
+            - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              paths:
+                - path: /
+                  service:
+                    identifier: app
+                    port: http
     loki:
       schemaConfig:
         configs:
@@ -78,15 +90,3 @@ spec:
       enabled: false
     test:
       enabled: false
-    ingress:
-      app:
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
