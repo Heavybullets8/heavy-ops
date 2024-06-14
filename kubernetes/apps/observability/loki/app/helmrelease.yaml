@@ -28,17 +28,16 @@ spec:
       deploymentStrategy:
         type: Recreate
       ingress:
-        app:
-          className: external
-          annotations:
-            external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hosts:
-            - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  service:
-                    identifier: app
-                    port: http
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.{SECRET_DOMAIN}
+        ingressClassName: internal
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls: []
     loki:
       schemaConfig:
         configs:
