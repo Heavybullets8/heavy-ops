@@ -21,3 +21,9 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      # GATUS_SUBDOMAIN: requests
+      # GATUS_PATH: /api/v1/status
+      VOLSYNC_CAPACITY: 5Gi
