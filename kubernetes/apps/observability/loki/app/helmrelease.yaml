@@ -75,7 +75,7 @@ spec:
         enabled: true
         storageClassName: iscsi-speed
         accessModes: [ReadWriteOnce]
-        size: 100Gi
+        size: 20Gi
       replicas: 1
     lokiCanary:
       enabled: false
