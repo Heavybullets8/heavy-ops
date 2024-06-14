@@ -72,10 +72,7 @@ spec:
       enabled: false
     singleBinary:
       persistence:
-        enabled: true
-        storageClassName: iscsi-speed
-        accessModes: [ReadWriteOnce]
-        size: 20Gi
+        existingClaim: loki
       replicas: 1
     lokiCanary:
       enabled: false
