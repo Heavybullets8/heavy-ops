@@ -24,6 +24,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      # GATUS_SUBDOMAIN: requests
-      # GATUS_PATH: /api/v1/status
+      GATUS_PATH: /api/v1/status
       VOLSYNC_CAPACITY: 25Gi
