@@ -102,12 +102,12 @@ spec:
         analytics:
           reporting_enabled: false
     backend:
-      replicas: 1
+      replicas: 2
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
     gateway:
-      replicas: 1
+      replicas: 2
       image:
         registry: ghcr.io
       ingress:
@@ -121,8 +121,10 @@ spec:
               - path: /
                 pathType: Prefix
         tls: []
+    read:
+      replicas: 2
     write:
-      replicas: 1
+      replicas: 2
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
