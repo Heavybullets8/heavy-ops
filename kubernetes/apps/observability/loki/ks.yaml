@@ -20,5 +20,4 @@ spec:
   wait: false
   interval: 30m
   retryInterval: 1m
-  # TODO: change this back to 15m
-  timeout: 5m
+  timeout: 15m

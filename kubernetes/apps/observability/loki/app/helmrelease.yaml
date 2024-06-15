@@ -1,13 +1,11 @@
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: loki
+  namespace: observability
 spec:
   interval: 30m
-  # TODO: change this back to 15m
-  timeout: 5m
+  timeout: 15m
   chart:
     spec:
       chart: loki
@@ -53,11 +51,14 @@ spec:
     loki:
       ingester:
         chunk_encoding: snappy
+        lifecycler:
+          ring:
+            replication_factor: 1
       storage:
         type: s3
         s3:
           s3ForcePathStyle: true
-          insecure: true
+          insecure: false
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
@@ -114,10 +115,10 @@ spec:
       ingress:
         enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         ingressClassName: internal
         hosts:
-          - host: loki.${SECRET_DOMAIN}
+          - host: "loki.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
