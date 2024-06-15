@@ -34,11 +34,11 @@ spec:
     - targetPath: loki.storage.bucketNames.chunks
       kind: Secret
       name: loki-secret
-      valuesKey: BUCKET_NAME
+      valuesKey: S3_BUCKET_NAME
     - targetPath: loki.storage.s3.endpoint
       kind: Secret
       name: loki-secret
-      valuesKey: BUCKET_HOST
+      valuesKey: S3_BUCKET_HOST
     - targetPath: loki.storage.s3.accessKeyId
       kind: Secret
       name: loki-secret
