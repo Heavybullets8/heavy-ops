@@ -30,7 +30,7 @@ spec:
       ingress:
         enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.{SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         ingressClassName: external
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
