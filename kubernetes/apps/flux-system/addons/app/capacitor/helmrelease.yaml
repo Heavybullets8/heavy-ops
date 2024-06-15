@@ -40,7 +40,7 @@ spec:
                 ephemeral-storage: 1Gi
               limits:
                 memory: 2Gi
-                ephemeral-storage: 5i
+                ephemeral-storage: 2Gi
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
