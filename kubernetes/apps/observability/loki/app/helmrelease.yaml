@@ -24,8 +24,12 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: volsync
-      namespace: storage
+    - name: openebs
+      namespace: openebs-system
+    - name: vector-agent
+      namespace: observability
+    - name: vector-aggregator
+      namespace: observability
   valuesFrom:
     - targetPath: loki.storage.bucketNames.chunks
       kind: Secret
