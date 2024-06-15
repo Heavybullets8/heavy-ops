@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: overseerr
+  name: &app glauth
 spec:
   interval: 30m
   chart:
@@ -22,33 +22,27 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-    - name: volsync
-      namespace: volsync-system
   values:
     controllers:
-      overseerr:
+      glauth:
+        replicas: 1
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/sct/overseerr
-              tag: 1.33.2@sha256:714ea6db2bc007a2262d112bef7eec74972eb33d9c72bddb9cbd98b8742de950
-            env:
-              TZ: America/New_York
-              LOG_LEVEL: "info"
-              PORT: &port 80
+              repository: docker.io/glauth/glauth
+              tag: v2.3.2@sha256:5112abbb2b5145dadb1a2fed57242ad3718e4af11062d0bb812b50cda6c708ab
+            command: ["/app/glauth", "-c", "/config"]
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /api/v1/status
-                    port: *port
+                    path: /
+                    port: &port 5555
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -62,51 +56,50 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 5Gi
+                memory: 128Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
+        runAsUser: 65534
+        runAsGroup: 65534
         seccompProfile: { type: RuntimeDefault }
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: *app
     service:
       app:
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 192.168.201.204
-        controller: overseerr
+        controller: *app
         ports:
           http:
-            enabled: true
             port: *port
-
-    # ingress:
-    #   app:
-    #     className: external
-    #     annotations:
-    #       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-    #     hosts:
-    #       - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-    #         paths:
-    #           - path: /
-    #             service:
-    #               identifier: app
-    #               port: http
-
+          ldap:
+            enabled: true
+            port: 389
+            protocol: TCP
+    serviceMonitor:
+      app:
+        serviceName: *app
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     persistence:
       config:
-        existingClaim: overseerr
+        type: secret
+        name: glauth-secret
         globalMounts:
-          - path: /app/config
-      cache:
-        existingClaim: overseerr-cache
-        globalMounts:
-          - path: /app/config/cache
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /app/config/logs
-      tmp:
-        type: emptyDir
+          - path: /config/groups.toml
+            subPath: groups.toml
+            readOnly: true
+          - path: /config/server.toml
+            subPath: server.toml
+            readOnly: true
+          - path: /config/users.toml
+            subPath: users.toml
+            readOnly: true
