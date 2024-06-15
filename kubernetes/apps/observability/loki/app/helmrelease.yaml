@@ -115,8 +115,8 @@ spec:
       ingress:
         enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        ingressClassName: internal
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        ingressClassName: external
         hosts:
           - host: "loki.${SECRET_DOMAIN}"
             paths:
