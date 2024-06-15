@@ -6,7 +6,8 @@ metadata:
   name: loki
 spec:
   interval: 30m
-  timeout: 15m
+  # TODO: change this back to 15m
+  timeout: 5m
   chart:
     spec:
       chart: loki
