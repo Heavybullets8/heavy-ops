@@ -58,7 +58,7 @@ spec:
         type: s3
         s3:
           s3ForcePathStyle: true
-          insecure: true
+          insecure: false
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
