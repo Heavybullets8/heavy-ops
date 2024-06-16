@@ -78,7 +78,7 @@ access_control:
 
 identity_validation:
   reset_password:
-    jwt_secret: "{{ .jwt_reset_secret | base64dec | base64dec }}"
+    jwt_secret: "{{ .jwt_reset_secret }}"
 
 identity_providers:
   oidc:
@@ -88,7 +88,7 @@ identity_providers:
       allowed_origins_from_client_redirect_uris: true
     jwks:
       - key: |
-          "{{ .jwks }}"
+          "{{ .jwks | base64dec }}"
         algorithm: 'RS256'
     clients:
       - client_id: "{{ .grafana_oauth_client_id }}"
