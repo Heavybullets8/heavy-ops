@@ -41,8 +41,6 @@ notifier:
   smtp:
     disable_html_emails: false
     disable_require_tls: false
-    enabled: true
-    enabledSecret: false
     address: smtp.gmail.com:587
     identifier: localhost
     sender: "support@${SECRET_DOMAIN}"
