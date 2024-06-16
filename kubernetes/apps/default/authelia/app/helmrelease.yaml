@@ -30,6 +30,7 @@ spec:
       authelia:
         replicas: 1
         strategy: RollingUpdate
+
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -123,6 +124,7 @@ spec:
                 service:
                   identifier: app
                   port: http
+
     persistence:
       config:
         type: configMap

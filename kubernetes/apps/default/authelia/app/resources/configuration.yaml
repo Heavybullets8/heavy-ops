@@ -31,9 +31,9 @@ session:
     - name: "${SECRET_DOMAIN%.com}_session"
       domain: "${SECRET_DOMAIN}"
       authelia_url: "https://auth1.${SECRET_DOMAIN}"
-      default_redirection_url: "https://auth1.${SECRET_DOMAIN}"
+      default_redirection_url: "https://${SECRET_DOMAIN}"
   redis:
-    database_index: 2
+    database_index: 1
     host: dragonfly.database.svc.cluster.local
 
 notifier:
@@ -43,10 +43,8 @@ notifier:
     disable_require_tls: false
     enabled: true
     enabledSecret: false
-    host: smtp.gmail.com
+    address: smtp.gmail.com:587
     identifier: localhost
-    plain_password: "$${SMTP_PASSWORD}"
-    port: 587
     sender: "support@${SECRET_DOMAIN}"
     startup_check_address: test@authelia.com
     subject: '[Authelia] {title}'
@@ -55,7 +53,6 @@ notifier:
       minimum_version: TLS1.2
       server_name: ''
       skip_verify: false
-    username: "$${SMTP_USERNAME}"
 
 totp:
   disable: false
@@ -65,10 +62,8 @@ webauthn:
   disable: true
 
 duo_api:
-  enabled: true
-  hostname: "$${DUO_HOSTNAME}"
-  integration_key: "$${DUO_INTEGRATION_KEY}"
-  plain_api_key: "$${DUO_PLAIN_API_KEY}"
+  disable: false
+  hostname: api-6ac2d48c.duosecurity.com
 
 access_control:
   default_policy: two_factor
