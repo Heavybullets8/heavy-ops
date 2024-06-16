@@ -71,6 +71,9 @@ identity_providers:
     cors:
       endpoints: ["authorization", "token", "revocation", "introspection"]
       allowed_origins_from_client_redirect_uris: true
+    jwks:
+      - key: |
+          {{ env "JKWS" | base64dec }}
     clients:
       - client_name: Grafana
         client_id: grafana
