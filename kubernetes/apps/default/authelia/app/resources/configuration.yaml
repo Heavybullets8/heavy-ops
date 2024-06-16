@@ -78,7 +78,7 @@ access_control:
 
 identity_validation:
   reset_password:
-    jwt_secret: "{{ .jwt_reset_secret }}"
+    jwt_secret: "{{ .jwt_reset_secret | base64dec | base64dec }}"
 
 identity_providers:
   oidc:
