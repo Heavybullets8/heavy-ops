@@ -1,5 +1,8 @@
 ---
 # Note: Authelia vars should be escaped with $${VAR_NAME} to avoid interpolation by Flux
+log:
+  level: 'debug'
+
 authentication_backend:
   ldap:
     address: ldap://glauth.default.svc.cluster.local:389
