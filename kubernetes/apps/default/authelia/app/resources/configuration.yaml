@@ -66,73 +66,73 @@ duo_api:
 access_control:
   default_policy: two_factor
 
-identity_providers:
-  oidc:
-    cors:
-      endpoints: ["authorization", "token", "revocation", "introspection"]
-      allowed_origins_from_client_redirect_uris: true
-    jwks:
-      - key: |
-          -----BEGIN PRIVATE KEY-----
-          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
-          Jh4FouvBb4cDYmSCXmXQLQLDwbDFnEI=
-          -----END PRIVATE KEY-----
+# identity_providers:
+#   oidc:
+#     cors:
+#       endpoints: ["authorization", "token", "revocation", "introspection"]
+#       allowed_origins_from_client_redirect_uris: true
+#     jwks:
+#       - key: |
+#           -----BEGIN PRIVATE KEY-----
+#           MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQC1kKTinC6/uZ4f
+#           bNaDBNRCDdYz8lIs6tclJsCZg4n2x9swPN6gNhqLxUyPNpD5LcVlnsa4NqgHqIdD
+#           wNo3D83Bqi7rqXK2vKGu8lT65bI/g300zlKVxfK4K1lRQpIH1t5mZbNdlus8BZ9X
+#           p7s7TS0FnWicOFIwmNzxCyHEpaWZ8ZxZdvXBz4GzWViHBkOuvfHKcw54fJSwWhgm
+#           jZIdqndQu4K/C7k6jNMhN52o4//89bTm2kjSu+51WUDuIfLRGxc82qa20JONWEFw
+#           sPrndiUxP4HAGpWolX3Mm0Z4s0gSNF9ui2Mg/BNm0+MZUjxmiyhT3pJjI4SFSk5Z
+#           pCrp2oRpE3ykBodlfyk2ODhvHEUJn4W88BegQl99n7Huk4iC7x/efVOmriHIe3R1
+#           y20+PHni/g5j6iTb4amfGPxYbEm8ALZPH4jhVI7XCj3+/GsHCQQXJoYMdTUURxEf
+#           7NuAoVnmjVxaQW3m4SIea8jW0l9nbqKOoOv0YNKJiU2nv+TSbaJakhYCLSGD5YzG
+#           7daTPTUdDU5rNKOEU5j24DTuxlF3/i0mhk9t91S3gXHWVeh9qxnFnNfWLpRPJw+b
+#           ra5e5ToExIvjfRuwvDEbyFZDiV04Z5lHHHa46ekUbCjOS8Qll0ZR2Kb9D6SR4GUr
+#           dxphk+QuTQXLttkIGyaOJxVOI5G1yQIDAQABAoICAAUbjLHlxiBlXLwCVC4DH6P8
+#           juku8M4b7KG6S3p+E25ebK14luQvpXNHYXoZZT5nQdl0HB/ARN2TSXvX0+Ou5YFE
+#           U/XT8lrO52b8IPUea1NjU+09fSACvatd59E0A9bl3eOISqGQPm2VtGfzO16FkyXI
+#           afIUGQbONA/xWdm19bjFDdqL8MmrGFlW4vlIbTTAGepRrodn7MhhvnJuMt00B499
+#           OOY+Mo+huMpDTeN7h37inBxO6XPJLuH8+OlCCfpFLnQLLBuyNiZopE2i4uoKPi1a
+#           naAtd0aS7wMnnpXEaFt/vuwFjow13ydaQFYc5L9XPJMQbLKOhBq6ToYxyrXBrI4a
+#           fx4MMnAP48fS3bo0kXjDZykchTrO6+preIy2TO15/5Dx07fjhDCTWF+WC1jhbVym
+#           2VyCraBGYGlnnm8jQEm5Q3fj/735faZElR6ZPn0w5DKbluggVVQ6FZXAiWufOn0r
+#           9yN+RxvE2H4sO7tuSiQR/NYyUTq00f7VyDBLUCs0fepPWqkEYoYZ4q5fRpA+xU8w
+#           TiLDKt0Lsc93heFM9rf72x3L/zT8nO6ThSHQsCytqqNb0CvJlQwPRfKUDzd9qAsP
+#           bsmRNYzkITP02fjA+JqKvmG5O1F8ESvH8LD+BEpU0XMNmJlORKvUt+8u897e713s
+#           rxauSSaMb1e9CHiQqD4xAoIBAQDqC8S99LTPg9oN9JHZCz+8DHVuCzD3Z9L2r8vT
+#           nIHlVdrgYRtqF9t7IGKAHWmYCIcB4KNuYgW0uRbG/TQcHUYapNmsjhvlC7qGthxQ
+#           jhGsbaOMH183TR9HVE9IdOmZjysZP3N5DTtvgDK2jA/G2tuNoJLcaMMm4dmbE6cJ
+#           VV36QWAKGVZ1tAK9z5/P/d/2NbiiPRwtZgyoPs+fLe1oiSxuzQZ1+zyTEaPtGoIM
+#           7nG0ONgGJa08O8Za5oShzUbWwWipUSnKRwOHXaduZEV+94y04V/Du/u0Pb+iH/nV
+#           J19NjuSy7RyFriBoKku4R4VbQIqCd1f2FLhGfy7FKWT92H2RAoIBAQDGmKGWXp4a
+#           bm4KN38B1ZMgfpsgdEnrWcqCRYILLiXzIdTnDpkMqKBdYxBoL5vhl8tajCjLTp6z
+#           rJwaaCbE/1F1f3+xwljRMrZIbZlW0Yd0qP00g0k21KFVF1rkWudoa8Ap5yKJmaWI
+#           DmZtD/kvyL6c/4ckJKCifR6PnBPFXwI391GXfbQ7i1xWBptl2ktUzmqHhd6iNEpp
+#           SytJYUlrhsv1JMcGADi05abPIqxc1a9MqmN3sSgYgJwN2y1d3jSpSrRxwiVC041C
+#           +fDLVPcfgX4JEC++pQM+f/EyLlSmwamDHLkUEfXw+vWtPIlbf7EvbJ6y09R3hqFc
+#           zPqOEPjNk3i5AoIBACvyfcT1eCYnKgDI1cIdnKAg7sP1EgLC2hg8NlfL4ZBAqNLN
+#           KSqoxCvAjv5jh3pmz4MIvWdyvIOM5bwDu48z6AAEyGLgZFiD9UhqVbLCmor4I2ei
+#           VGy77I2mRSTj3yFYgs1A3tvyIiDzv5ILhsLeQa+8YRdGDK72Zbf63rif8P+W2wPK
+#           cjOz03f0zpttnmpK+BpuwyW7LdFByhantxaT+2Xq1bW9sUgkXdWdzqHC/FLNAbNV
+#           y8utpbdX5bvEIfMdahuxA9nZr83xRgkyhuIqdZ9ZWnQUjlTv61X0DyN5OyoDFOqM
+#           H3jyk1874e/+bgoOenO5GSk6BsgmBZA8D5yi1CECggEBAL6eEbr65lYIWKaFzeo8
+#           zRMLcmocNDcp4C5Z+RAyI0rS1j9Qy6ZS1FnOlBjsWXqW8CDhFubNd5aNvue5wDyl
+#           s9JLpo1ANW/WdQ/f4qZqRtG6wg59VPDD9nZuDFfSyPp5MeEGcSgRychlyfo0ssEi
+#           tZKL0XLnlSdhYMwGyxNOthpx0GbPyQa+JMqNXOrONDAaUDX0UFTwS9v0wn+UWZxT
+#           rcCGpGEmJUe8hfebGEWi9LdpdD+WUx3xk9fY4BqRBYrYoYnvB0S1OYlnza/cxbX/
+#           3LFmT+11BUAgHapEvguxJrsp/ps9AgtjVhwJVu30CmWypECRAgYXuxoPxQ5HTAhF
+#           3EECggEBANUDM1l/uELNTM2LbXKcoQrbxE4ZxLpOvYgHKhyYWl+JJH/cBC60AWkk
+#           wBeVqCw9Z5wQQz8c87XLYKW19+6IvQYskGQfDwQSVp8jaTvMUdj+QI7nhQ2bV9lu
+#           18+glIZ3sjJ5xOPVUaZUSHd3aXflulpYRzxnO1FZqt3g/UR5L91WAWw7pLE/4QHv
+#           F9iR8U7DhfQ72I6RqkZJsqcztjrliR4yXbnT4DVH3jcxyyCj7tLc3JahWISuwoSl
+#           ngzqbUjPU/KhnkaxuN8lb+m1LR6So2VWEj3k5HGJGaKec5V6KCCpUT1doc59VtUY
+#           Jh4FouvBb4cDYmSCXmXQLQLDwbDFnEI=
+#           -----END PRIVATE KEY-----
 
-    # clients:
-    #   - client_name: Grafana
-    #     client_id: grafana
-    #     client_secret: "$${GRAFANA_OAUTH_CLIENT_SECRET}"
-    #     public: false
-    #     authorization_policy: two_factor
-    #     pre_configured_consent_duration: 1y
-    #     scopes: ["openid", "profile", "groups", "email"]
-    #     redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
-    #     userinfo_signed_response_alg: none
+#     clients:
+#       - client_name: Grafana
+#         client_id: grafana
+#         client_secret: "$${GRAFANA_OAUTH_CLIENT_SECRET}"
+#         public: false
+#         authorization_policy: two_factor
+#         pre_configured_consent_duration: 1y
+#         scopes: ["openid", "profile", "groups", "email"]
+#         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
+#         userinfo_signed_response_alg: none
