@@ -27,3 +27,4 @@ spec:
       GATUS_SUBDOMAIN: sonarr-dev
       GATUS_PATH: /api/system/status
       VOLSYNC_CAPACITY: 50Gi
+      VOLSYNC_ACCESSMODES: ReadWriteMany
