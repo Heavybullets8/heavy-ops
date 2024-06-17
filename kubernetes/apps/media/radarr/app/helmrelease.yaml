@@ -59,6 +59,7 @@ spec:
               RADARR__LOG__LEVEL: info
               RADARR__SERVER__PORT: &port 80
               RADARR__UPDATE__BRANCH: develop
+              TZ: ${TIMEZONE}
 
             envFrom:
               - secretRef:
@@ -118,13 +119,20 @@ spec:
 
     persistence:
       config:
-        enabled: true
-        existingClaim: radarr-config
+        existingClaim: radarr
+
+      pushover-notify:
+        type: configMap
+        name: radarr-configmap
+        defaultMode: 0775
+        globalMounts:
+          - path: /scripts/pushover-notify.sh
+            subPath: pushover-notify.sh
+            readOnly: true
 
       tmp:
         type: emptyDir
 
       media:
-        enabled: true
         type: persistentVolumeClaim
         existingClaim: media-pvc

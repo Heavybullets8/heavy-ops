@@ -60,6 +60,7 @@ spec:
               SONARR__APP__THEME: dark
               SONARR__LOG__ANALYTICS_ENABLED: 'false'
               SONARR__UPDATE__BRANCH: develop
+              TZ: ${TIMEZONE}
 
             envFrom:
               - secretRef:
@@ -119,13 +120,20 @@ spec:
 
     persistence:
       config:
-        enabled: true
-        existingClaim: sonarr-config
+        existingClaim: sonarr
+
+      pushover-notify:
+        type: configMap
+        name: sonarr-configmap
+        defaultMode: 0775
+        globalMounts:
+          - path: /scripts/pushover-notify.sh
+            subPath: pushover-notify.sh
+            readOnly: true
 
       tmp:
         type: emptyDir
 
       media:
-        enabled: true
         type: persistentVolumeClaim
         existingClaim: media-pvc

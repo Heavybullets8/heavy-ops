@@ -6,3 +6,4 @@ resources:
   - ./externalsecret.yaml
   - ./pvc.yaml
   - ../../../../templates/volsync
+  - ../../../../templates/gatus/external

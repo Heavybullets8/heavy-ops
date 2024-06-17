@@ -5,4 +5,5 @@ resources:
   - ./helmrelease.yaml
   - ./externalsecret.yaml
   - ./pvc.yaml
+  - ../../../../templates/gatus/external
   - ../../../../templates/volsync

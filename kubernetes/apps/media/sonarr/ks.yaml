@@ -25,5 +25,5 @@ spec:
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: sonarr-dev
-      # GATUS_PATH: /api/v1/status
-      VOLSYNC_CAPACITY: 55Gi
+      GATUS_PATH: /api/system/status
+      VOLSYNC_CAPACITY: 50Gi

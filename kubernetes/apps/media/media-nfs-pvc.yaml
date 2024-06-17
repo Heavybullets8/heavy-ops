@@ -21,7 +21,8 @@ spec:
     server: ${SECRET_TRUENAS_IP}
     path: "/mnt/tank/media"
   mountOptions:
-    - nfsvers=4
+    - nfsvers=4.2
+    - nconnect=8
     - tcp
     - hard
     - noatime
