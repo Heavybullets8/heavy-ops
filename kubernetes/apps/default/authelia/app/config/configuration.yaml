@@ -80,28 +80,10 @@ access_control:
   default_policy: two_factor
 
   rules:
-    - domain: "overseerr-dev.${SECRET_DOMAIN}"
+    - domain: "*.${SECRET_DOMAIN}"
       resources:
         - "^/api/v1/status$"
-      policy: bypass
-
-    - domain: "plex-dev.${SECRET_DOMAIN}"
-      resources:
         - "^/web/index.html$"
-      policy: bypass
-
-    - domain: "prowlarr-dev.${SECRET_DOMAIN}"
-      resources:
-        - "^/api/system/status$"
-      policy: bypass
-
-    - domain: "sonarr-dev.${SECRET_DOMAIN}"
-      resources:
-        - "^/api/system/status$"
-      policy: bypass
-
-    - domain: "radarr-dev.${SECRET_DOMAIN}"
-      resources:
         - "^/api/system/status$"
       policy: bypass
 
