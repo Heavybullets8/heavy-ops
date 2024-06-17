@@ -47,8 +47,8 @@ storage:
 notifier:
   disable_startup_check: true
   smtp:
-    username: "{{ .smtp_username }}"
-    password: "{{ .smtp_password }}"
+    username: "{{ .smtp_user }}"
+    password: "{{ .smtp_pass }}"
     disable_html_emails: false
     disable_require_tls: false
     address: smtp.gmail.com:587
