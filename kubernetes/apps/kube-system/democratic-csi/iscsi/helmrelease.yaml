@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: iscsi-speed
+  name: iscsi
   namespace: kube-system
 spec:
   interval: 5m
@@ -15,9 +15,9 @@ spec:
         namespace: flux-system
   values:
     csiDriver:
-      name: "iscsi-speed"
+      name: "iscsi"
     storageClasses:
-    - name: iscsi-speed
+    - name: iscsi
       defaultClass: true
       reclaimPolicy: Delete
       volumeBindingMode: Immediate
@@ -33,7 +33,7 @@ spec:
         node-publish-secret:
         controller-expand-secret:
     volumeSnapshotClasses:
-    - name: iscsi-speed
+    - name: iscsi
       parameters:
         detachedSnapshots: "true"
     driver:
