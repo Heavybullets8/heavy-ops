@@ -1,8 +1,9 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: loki
-  namespace: observability
 spec:
   interval: 30m
   timeout: 15m
@@ -15,10 +16,12 @@ spec:
         name: grafana
         namespace: flux-system
   install:
+    crds: Skip
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
+    crds: Skip
     remediation:
       strategy: rollback
       retries: 3
@@ -49,16 +52,15 @@ spec:
   values:
     deploymentMode: SimpleScalable
     loki:
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
       ingester:
         chunk_encoding: snappy
-        lifecycler:
-          ring:
-            replication_factor: 1
       storage:
         type: s3
         s3:
           s3ForcePathStyle: true
-          insecure: false
+          insecure: true
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
