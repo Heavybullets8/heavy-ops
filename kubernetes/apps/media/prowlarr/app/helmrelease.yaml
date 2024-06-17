@@ -93,13 +93,9 @@ spec:
 
     service:
       app:
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 192.168.201.203
         controller: prowlarr
         ports:
           http:
-            enabled: true
             port: *port
 
     ingress:

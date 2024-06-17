@@ -118,7 +118,7 @@ spec:
             add_header X-XSS-Protection "1; mode=block";
         className: external
         hosts:
-          - host: "auth1.${SECRET_DOMAIN}"
+          - host: "auth-dev.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:

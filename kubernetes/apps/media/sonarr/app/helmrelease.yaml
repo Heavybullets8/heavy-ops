@@ -94,13 +94,9 @@ spec:
 
     service:
       app:
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 192.168.201.201
         controller: sonarr
         ports:
           http:
-            enabled: true
             port: *port
 
     ingress:

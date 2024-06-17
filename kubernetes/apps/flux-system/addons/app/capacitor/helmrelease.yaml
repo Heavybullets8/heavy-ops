@@ -51,9 +51,6 @@ spec:
     service:
       app:
         controller: *app
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 192.168.201.200
         ports:
           http:
             enabled: true
@@ -65,12 +62,12 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-method: GET
-          nginx.ingress.kubernetes.io/auth-url: "https://auth1.${SECRET_DOMAIN}/api/verify"
-          nginx.ingress.kubernetes.io/auth-signin: "https://auth1.${SECRET_DOMAIN}/?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth-dev.${SECRET_DOMAIN}/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth-dev.${SECRET_DOMAIN}/?rm=$request_method"
           nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
           nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}-dev.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
