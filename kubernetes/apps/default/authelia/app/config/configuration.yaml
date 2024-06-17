@@ -15,7 +15,7 @@ authentication_backend:
     additional_groups_dn: ou=users
     groups_filter: (&(uniqueMember={dn})(objectClass=posixGroup))
     user: "{{ .glauth_user }}"
-    password: "{{ .glauth_search_password_bcrypt }}"
+    password: "{{ .glauth_search_password }}"
     attributes:
       username: uid
       display_name: givenName
