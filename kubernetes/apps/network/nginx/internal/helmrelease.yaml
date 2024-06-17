@@ -25,6 +25,7 @@ spec:
   values:
     fullnameOverride: nginx-internal
     controller:
+      replicaCount: 2
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
