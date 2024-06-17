@@ -37,7 +37,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://cloudnative-pg/
-      endpointURL: https://r2.${SECRET_DOMAIN}
+      endpointURL: "${SECRET_R2_HOST}"
       serverName: postgres16
       s3Credentials:
         accessKeyId:
