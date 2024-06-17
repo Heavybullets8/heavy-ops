@@ -55,7 +55,7 @@ spec:
           allowInsecure: true
         zfs:
           datasetParentName: speed/talos/nfs/volumes
-          detachedSnapshotsDatasetParentName: speed/talos/iscsi/snapshots
+          detachedSnapshotsDatasetParentName: speed/talos/nfs/snapshots
           datasetEnableQuotas: true
           datasetEnableReservation: false
           datasetPermissionsMode: "0777"
