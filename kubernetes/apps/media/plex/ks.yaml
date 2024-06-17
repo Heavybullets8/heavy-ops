@@ -28,6 +28,7 @@ spec:
       GATUS_SUBDOMAIN: plex-dev
       VOLSYNC_CAPACITY: 300Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
+      VOLSYNC_STORAGECLASS: nfs
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
