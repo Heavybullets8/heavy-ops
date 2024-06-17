@@ -28,7 +28,7 @@ spec:
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
-          io.cilium/lb-ipam-ips: "${NGINX-INTERNAL_IP}"
+          io.cilium/lb-ipam-ips: "${NGINX_INTERNAL_IP}"
       ingressClassResource:
         name: internal
         default: true
