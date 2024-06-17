@@ -32,13 +32,13 @@ spec:
         strategy: RollingUpdate
 
         annotations:
-          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: authelia-secret,authelia-db-secret
         initContainers:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: authelia-db-secret
         containers:
@@ -54,6 +54,7 @@ spec:
               AUTHELIA_THEME: dark
               X_AUTHELIA_CONFIG: /config/configuration.yaml
               X_AUTHELIA_CONFIG_FILTERS: expand-env
+            envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
