@@ -24,6 +24,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      # GATUS_SUBDOMAIN: requests
+      GATUS_SUBDOMAIN: radarr-dev
       # GATUS_PATH: /api/v1/status
       VOLSYNC_CAPACITY: 55Gi
