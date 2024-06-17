@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-  - ../../../../templates/gatus/external
+  - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
 configMapGenerator:
   - name: radarr-configmap
