@@ -125,6 +125,3 @@ spec:
       library:
         type: persistentVolumeClaim
         existingClaim: library-pvc
-        globalMounts:
-          - path: /library
-            readOnly: true
