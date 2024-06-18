@@ -129,4 +129,3 @@ spec:
           - path: /media/library
             subPath: library
             readOnly: true
-
