@@ -122,11 +122,11 @@ spec:
       transcode:
         type: emptyDir
 
-      media:
+      library:
         type: persistentVolumeClaim
         existingClaim: media-pvc
         globalMounts:
-          - path: /library
+          - path: /media/library
             subPath: library
             readOnly: true
 
