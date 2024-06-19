@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -29,6 +28,7 @@ spec:
       qbittorrent:
         annotations:
           reloader.stakater.com/auto: "true"
+          cni.cilium.io/mac-address: "e2:9c:30:38:52:66"
         containers:
           app:
             image:
