@@ -123,6 +123,9 @@ spec:
         type: emptyDir
 
       library:
-        enabled: true
         type: persistentVolumeClaim
         existingClaim: library-pvc
+        globalMounts:
+          - path: /library
+            subPath: library
+            readOnly: true
