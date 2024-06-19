@@ -123,5 +123,6 @@ spec:
         type: emptyDir
 
       library:
+        enabled: true
         type: persistentVolumeClaim
         existingClaim: library-pvc
