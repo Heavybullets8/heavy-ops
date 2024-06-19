@@ -42,38 +42,38 @@ spec:
     requests:
       storage: 1Gi
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: library-pv
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-storage
-  nfs:
-    server: ${SECRET_TRUENAS_IP}
-    path: "/mnt/tank/media/library"
-  mountOptions:
-    - nfsvers=4.2
-    - nconnect=8
-    - tcp
-    - hard
-    - noatime
-    - nodiratime
-    - nolock
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: library-pvc
-  namespace: media
-spec:
-  storageClassName: nfs-storage
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: library-pv
+# spec:
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteMany
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: nfs-storage
+#   nfs:
+#     server: ${SECRET_TRUENAS_IP}
+#     path: "/mnt/tank/media/library"
+#   mountOptions:
+#     - nfsvers=4.2
+#     - nconnect=8
+#     - tcp
+#     - hard
+#     - noatime
+#     - nodiratime
+#     - nolock
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: library-pvc
+#   namespace: media
+# spec:
+#   storageClassName: nfs-storage
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
