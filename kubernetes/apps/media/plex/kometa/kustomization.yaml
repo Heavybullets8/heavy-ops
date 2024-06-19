@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./externalsecret.yaml
+  - ./helmrelease.yaml
+  - ../../../../templates/volsync
+configMapGenerator:
+  - name: kometa-configmap
+    files:
+      - ./configs/config.yml
+  - name: kometa-custom-configs
+    files:
+      - ./custom/Anime - Collections - All.yaml
+      - ./custom/Anime - Overlays - Flags.yaml
+      - ./custom/Movies - Collections - Awards.yaml
+      - ./custom/Movies - Collections - Decades.yaml
+      - ./custom/Movies - Collections - Genres.yaml
+      - ./custom/Movies - Collections - Holidays.yaml
+      - ./custom/Movies - Collections - Suggestions.yaml
+      - ./custom/Series - Collections - Kids.yaml
+      - ./custom/Series - Collections - Networks.yaml
+      - ./custom/Series - Collections - Suggestions.yaml
+      - ./custom/Series - Overlays - Banners.yaml
+generatorOptions:
+  disableNameSuffixHash: true

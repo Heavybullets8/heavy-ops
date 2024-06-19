@@ -1,0 +1,29 @@
+######################################################
+#                  Language Flags                    #
+######################################################
+overlays:
+  - default: languages
+    template_variables:
+      languages:
+        - en
+        - zh
+        - ja
+        - ko
+      style: square
+      horizontal_position: left
+      vertical_position: top
+
+######################################################
+#                Language Flags (Episodes)           #
+######################################################
+  - default: languages
+    template_variables:
+      languages:
+        - en
+        - zh
+        - ja
+        - ko
+      style: square
+      horizontal_position: left
+      vertical_position: top
+      builder_level: episode

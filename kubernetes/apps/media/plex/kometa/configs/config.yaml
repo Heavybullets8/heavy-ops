@@ -1,0 +1,256 @@
+---
+libraries:
+  Anime Series:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+      - file: config/Anime - Collections - All.yaml
+        asset_directory: config/assets/anime
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    overlay_files:
+      - file: config/Anime - Overlays - Flags.yaml
+        asset_directory: config/assets/anime
+    settings:
+      asset_directory:
+      - config/assets/anime
+      - config/assets/posters
+
+  Anime Movies:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+      - file: config/Anime - Collections - All.yaml
+        asset_directory: config/assets/anime
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    overlay_files:
+      - file: config/Anime - Overlays - Flags.yaml
+        asset_directory: config/assets/anime
+    settings:
+      asset_directory:
+      - config/assets/anime
+      - config/assets/posters
+
+  Movies:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+    - file: config/Movies - Collections - Awards.yaml
+      asset_directory: config/assets/awards
+    - file: config/Movies - Collections - Decades.yaml
+      asset_directory: config/assets/decades
+    - file: config/Movies - Collections - Genres.yaml
+      asset_directory: config/assets/genres
+    - file: config/Movies - Collections - Holiday.yaml
+      asset_directory: config/assets/holidays
+    - file: config/Movies - Collections - Suggestions.yaml
+      asset_directory: config/assets/suggestions
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    settings:
+      asset_directory:
+      - config/assets/standard_movies
+      - config/assets/posters
+
+  Kids Movies:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+    - file: config/Movies - Collections - Awards.yaml
+      asset_directory: config/assets/awards
+    - file: config/Movies - Collections - Decades.yaml
+      asset_directory: config/assets/decades
+    - file: config/Movies - Collections - Genres.yaml
+      asset_directory: config/assets/genres
+    - file: config/Movies - Collections - Holiday.yaml
+      asset_directory: config/assets/holidays
+    - file: config/Movies - Collections - Suggestions.yaml
+      asset_directory: config/assets/suggestions
+    settings:
+      asset_directory:
+      - config/assets/kids_movies
+      - config/assets/posters
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+
+  Series:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+      - file: config/Series - Collections - Networks.yaml
+        asset_directory: config/assets/networks
+      - file: config/Series - Collections - Suggestions.yaml
+        asset_directory: config/assets/suggestions
+    settings:
+      asset_directory:
+        - config/assets/standard_series
+        - config/assets/posters
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    overlay_files:
+      - file: config/Series - Overlays - Banners.yaml
+
+  Kids Series:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
+      - file: config/Series - Collections - Kids.yaml
+        asset_directory: config/assets/networks
+      - file: config/Series - Collections - Networks.yaml
+        asset_directory: config/assets/networks
+      - file: config/Series - Collections - Suggestions.yaml
+        asset_directory: config/assets/suggestions
+    settings:
+      asset_directory:
+        - config/assets/kids_series
+        - config/assets/posters
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    overlay_files:
+      - file: config/Series - Overlays - Banners.yaml
+
+settings: # Can be individually specified per library as well
+  cache: true
+  cache_expiration: 60
+  asset_folders: true
+  asset_depth: 3
+  create_asset_folders: true
+  create_asset_directories: true
+  dimensional_asset_rename: true
+  sync_mode: sync
+  delete_below_minimum: true
+  delete_not_scheduled: false
+  missing_only_released: true
+  only_filter_missing: false
+  show_unmanaged: true
+  show_filtered: true
+  show_options: true
+  show_missing: false
+  show_missing_assets: false
+  show_missing_season_assets: false
+  save_missing: false
+  tvdb_language: eng
+  ignore_ids:
+  ignore_imdb_ids:
+  minimum_items: 1
+  default_collection_order:
+  download_url_assets: true
+  verify_ssl: true
+  item_refresh_delay: 0
+  missing_path: config/missing
+  playlist_sync_to_users: all
+  show_missing_episode_assets: true
+  show_asset_not_needed: true
+  custom_repo:
+  prioritize_assets: false
+  playlist_report: true
+  check_nightly: false
+  run_order:
+  - operations
+  - metadata
+  - collections
+  - overlays
+  asset_directory:
+  run_again_delay: 0
+  show_unconfigured: true
+  playlist_exclude_users:
+  overlay_artwork_filetype: jpg
+  overlay_artwork_quality:
+
+anidb:
+  username: <<ANIDB_USERNAME>>
+  password: <<ANIDB_PASSWORD>>
+  language: en
+
+mal:
+  client_id: <<MYANIMELIST_CLIENT_ID>>
+  client_secret: <<MYANIMELIST_CLIENT_SECRET>>
+  localhost_url: <<MYANIMELIST_LOCALHOST_URL>>
+  authorization:
+    access_token: <<MYANIMELIST_ACCESS_TOKEN>>
+    token_type: Bearer
+    expires_in: <<MYANIMELIST_EXPIRES_IN>>
+    refresh_token: <<MYANIMELIST_REFRESH_TOKEN>>
+
+mdblist:
+  apikey: <<MDBLIST_API_KEY>>
+  cache_expiration: 60
+
+omdb:
+  apikey: <<OMDB_API_KEY>>
+  cache_expiration: 60
+
+plex:
+  url: http://plex.media.svc.cluster.local:32400
+  token: <<PLEX_API_KEY>>
+  timeout: 60
+  clean_bundles: false
+  empty_trash: false
+  optimize: false
+
+tautulli:
+  url: http://tautulli.media.svc.cluster.local
+  apikey: <<TAUTULLI_API_KEY>>
+
+tmdb:
+  apikey: <<TMDB_API_KEY>>
+  language: en
+  cache_expiration: 60
+  region:
+
+trakt:
+  client_id: <<TRAKT_CLIENT_ID>>
+  client_secret: <<TRAKT_CLIENT_SECRET>>
+  authorization:
+    access_token: <<TRAKT_ACCESS_TOKEN>>
+    token_type: Bearer
+    expires_in: <<TRAKT_EXPIRES_IN>>
+    refresh_token: <<TRAKT_REFRESH_TOKEN>>
+    scope: public
+    created_at: <<TRAKT_CREATED_AT>>
+  pin:
+
+webhooks:
+  error: notifiarr
+  run_start: notifiarr
+  run_end: notifiarr
+  changes: notifiarr
+  version:
+  delete:
