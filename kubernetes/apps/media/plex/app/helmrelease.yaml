@@ -123,9 +123,9 @@ spec:
         type: emptyDir
 
       library:
-        type: persistentVolumeClaim
-        existingClaim: library-pvc
+        type: nfs
+        server: ${SECRET_TRUENAS_IP}
+        path: /mnt/tank/media/library
         globalMounts:
           - path: /library
-            subPath: library
             readOnly: true
