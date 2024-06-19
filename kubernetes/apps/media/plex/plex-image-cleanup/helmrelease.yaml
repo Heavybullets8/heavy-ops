@@ -53,7 +53,8 @@ spec:
               MODE: remove
               PHOTO_TRANSCODER: true
             envFrom:
-              name: plex-image-cleanup-secret
+              - secretRef:
+                  name: plex-image-cleanup-secret
             probes:
               liveness:
                 enabled: false

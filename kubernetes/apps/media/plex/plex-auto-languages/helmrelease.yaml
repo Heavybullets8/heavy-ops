@@ -37,7 +37,8 @@ spec:
               PLEX_URL: http://plex.media.svc.cluster.local:32400
               REFRESH_LIBRARY_ON_SCAN: false
             envFrom:
-              name: plex-auto-languages-secret
+              - secretRef:
+                  name: plex-auto-languages-secret
             probes:
               liveness:
                 enabled: false
