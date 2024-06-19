@@ -78,4 +78,4 @@ spec:
     - name: plex
   postBuild:
     substitute:
-      APP: *appname
+      APP: *app
