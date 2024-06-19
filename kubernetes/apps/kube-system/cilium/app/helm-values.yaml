@@ -11,8 +11,7 @@ cluster:
   name: heavy-cluster
 cni:
   exclusive: false
-containerRuntime:
-  integration: containerd
+enableRuntimeDeviceDetection: true
 # NOTE: devices might need to be set if you have more than one active NIC on your hosts
 # devices: eno+ eth+
 endpointRoutes:
@@ -30,7 +29,7 @@ l2announcements:
   enabled: true
 loadBalancer:
   algorithm: maglev
-  mode: snat
+  mode: dsr
 localRedirectPolicy: true
 operator:
   rollOutPods: true
