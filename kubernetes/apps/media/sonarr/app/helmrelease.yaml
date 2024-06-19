@@ -135,5 +135,9 @@ spec:
         type: emptyDir
 
       media:
-        type: persistentVolumeClaim
-        existingClaim: media-pvc
+        type: nfs
+        server: ${SECRET_TRUENAS_IP}
+        path: /mnt/tank/media
+        globalMounts:
+          - path: /media
+            readOnly: false

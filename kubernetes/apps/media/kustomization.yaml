@@ -3,9 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./media-nfs-pvc.yaml
   - ./plex/ks.yaml
   - ./sonarr/ks.yaml
+  - ./qbittorrent/ks.yaml
   - ./radarr/ks.yaml
+  - ./recyclarr/ks.yaml
   - ./prowlarr/ks.yaml
+  - ./tautulli/ks.yaml
   - ./overseerr/ks.yaml

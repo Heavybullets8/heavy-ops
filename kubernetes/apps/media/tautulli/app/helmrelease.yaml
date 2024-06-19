@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: plex
+  name: tautulli
 spec:
   interval: 30m
   chart:
@@ -27,46 +27,59 @@ spec:
       namespace: volsync-system
   values:
     controllers:
-      plex:
+      tautulli:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/plex
-              tag: 1.40.3.8555-fef15d30c@sha256:82353ee29f0ba3e782aad43bb2be7c1e04b071b9fc83d6c551ef853793f48ab4
+              repository: ghcr.io/tautulli/tautulli
+              tag: v2.14.2@sha256:99eba3ba70f9e2531335279f472b3c8f120ebc0e938e42bd98037e35e11d130a
             env:
               TZ: ${TIMEZONE}
-              PLEX_ADVERTISE_URL: https://static.${SECRET_DOMAIN}:32400,http://192.168.201.215:32400,https://plex-dev.${SECRET_DOMAIN}:443
-              PLEX_NO_AUTH_NETWORKS: 192.168.200.0/23
+            command: ["/usr/local/bin/python", "Tautulli.py"]
+            args: [
+              "--config", "/config/config.ini",
+              "--datadir", "/config",
+              "--port", "80"
+            ]
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /identity
-                    port: 32400
+                    path: /status
+                    port: &port 80
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 10
-            securityContext:
+            securityContext: &securityContext
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
-                memory: 500Mi
+                cpu: 10m
               limits:
-                memory: 100Gi
+                memory: 1Gi
+          jbops:
+            image:
+              repository: registry.k8s.io/git-sync/git-sync
+              tag: v4.2.3@sha256:19cc7c317d125c5737ecb9a9159d00b5d97f39c45225c6483de365d62fc09fa8
+            env:
+              GITSYNC_REPO: https://github.com/blacktwin/JBOPS
+              GITSYNC_REF: master
+              GITSYNC_PERIOD: 24h
+              GITSYNC_ROOT: /add-ons
+            securityContext: *securityContext
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 128Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -74,22 +87,22 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 10000]
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: plex
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: "${PLEX_IP}"
+        controller: tautulli
         ports:
           http:
-            port: 32400
+            port: *port
     ingress:
       app:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: "https://auth-dev.${SECRET_DOMAIN}/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth-dev.${SECRET_DOMAIN}/?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
         className: external
         hosts:
           - host: "{{ .Release.Name }}-dev.${SECRET_DOMAIN}"
@@ -100,32 +113,8 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: plex
-        # TODO: If setting up Plex for the first time, you'll want to add the globalMounts section
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server
-      # Separate PVC for cache to avoid backing up cache files
-
-      cache:
-        existingClaim: plex-cache
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Cache
-
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Logs
-
+        existingClaim: tautulli
       tmp:
         type: emptyDir
-
-      transcode:
+      add-ons:
         type: emptyDir
-
-      library:
-        type: nfs
-        server: ${SECRET_TRUENAS_IP}
-        path: /mnt/tank/media/library
-        globalMounts:
-          - path: /library
-            readOnly: true
