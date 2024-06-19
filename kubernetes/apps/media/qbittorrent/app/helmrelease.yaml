@@ -45,6 +45,7 @@ spec:
                 10.69.0.0/16, 192.168.200.0/23
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_BitTorrent__Session__Interface: eth0
+              QBT_BitTorrent__Session__InterfaceName: eth0
               QBT_BitTorrent__Session__InterfaceAddress:
                 valueFrom:
                   fieldRef:
@@ -85,22 +86,23 @@ spec:
     service:
       app:
         controller: *app
+        nameOverride: *app
         ports:
           http:
             port: *port
       bittorrent:
-        enabled: true
         controller: *app
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${QBIT_IP}
+        externalTrafficPolicy: Local
         ports:
-          bittorrent:
-            enabled: true
+          bittorrent-tcp:
             port: *bittorrentPort
             protocol: TCP
-            targetPort: *bittorrentPort
-        externalTrafficPolicy: Local
+          bittorrent-udp:
+            port: *bittorrentPort
+            protocol: UDP
 
     ingress:
       app:
