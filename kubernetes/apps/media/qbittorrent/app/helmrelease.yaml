@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qbittorrent
+  name: &app qbittorrent
 spec:
   interval: 30m
   chart:
@@ -45,7 +45,10 @@ spec:
                 10.69.0.0/16, 192.168.200.0/23
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_BitTorrent__Session__Interface: eth0
-              QBT_BitTorrent__Session__InterfaceAddress: ${QBIT_IP}
+              QBT_BitTorrent__Session__InterfaceAddress:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.podIP
             probes:
               liveness: &probes
                 enabled: true
@@ -81,17 +84,23 @@ spec:
 
     service:
       app:
-        controller: qbittorrent
+        controller: *app
+        ports:
+          http:
+            port: *port
+      bittorrent:
+        enabled: true
+        controller: *app
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${QBIT_IP}
         ports:
-          http:
-            port: *port
           bittorrent:
             enabled: true
             port: *bittorrentPort
             protocol: TCP
+            targetPort: *bittorrentPort
+        externalTrafficPolicy: Local
 
     ingress:
       app:
