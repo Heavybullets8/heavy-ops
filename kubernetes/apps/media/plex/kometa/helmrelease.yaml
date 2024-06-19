@@ -109,35 +109,35 @@ spec:
         name: kometa-custom-configs
         globalMounts:
           - path: /config/custom/Anime - Collections - All.yaml
-            subPath: Anime - Collections - All.yaml
+            subPath: Anime_Collections_All.yaml
             readOnly: true
           - path: /config/custom/Anime - Overlays - Flags.yaml
-            subPath: Anime - Overlays - Flags.yaml
+            subPath: Anime_Overlays_Flags.yaml
             readOnly: true
           - path: /config/custom/Movies - Collections - Awards.yaml
-            subPath: Movies - Collections - Awards.yaml
+            subPath: Movies_Collections_Awards.yaml
             readOnly: true
           - path: /config/custom/Movies - Collections - Decades.yaml
-            subPath: Movies - Collections - Decades.yaml
+            subPath: Movies_Collections_Decades.yaml
             readOnly: true
           - path: /config/custom/Movies - Collections - Genres.yaml
-            subPath: Movies - Collections - Genres.yaml
+            subPath: Movies_Collections_Genres.yaml
             readOnly: true
           - path: /config/custom/Movies - Collections - Holidays.yaml
-            subPath: Movies - Collections - Holidays.yaml
+            subPath: Movies_Collections_Holidays.yaml
             readOnly: true
           - path: /config/custom/Movies - Collections - Suggestions.yaml
-            subPath: Movies - Collections - Suggestions.yaml
+            subPath: Movies_Collections_Suggestions.yaml
             readOnly: true
           - path: /config/custom/Series - Collections - Kids.yaml
-            subPath: Series - Collections - Kids.yaml
+            subPath: Series_Collections_Kids.yaml
             readOnly: true
           - path: /config/custom/Series - Collections - Networks.yaml
-            subPath: Series - Collections - Networks.yaml
+            subPath: Series_Collections_Networks.yaml
             readOnly: true
           - path: /config/custom/Series - Collections - Suggestions.yaml
-            subPath: Series - Collections - Suggestions.yaml
+            subPath: Series_Collections_Suggestions.yaml
             readOnly: true
           - path: /config/custom/Series - Overlays - Banners.yaml
-            subPath: Series - Overlays - Banners.yaml
+            subPath: Series_Overlays_Banners.yaml
             readOnly: true

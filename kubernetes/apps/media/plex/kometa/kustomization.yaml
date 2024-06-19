@@ -12,16 +12,16 @@ configMapGenerator:
       - ./configs/config.yaml
   - name: kometa-custom-configs
     files:
-      - ./custom/Anime - Collections - All.yaml
-      - ./custom/Anime - Overlays - Flags.yaml
-      - ./custom/Movies - Collections - Awards.yaml
-      - ./custom/Movies - Collections - Decades.yaml
-      - ./custom/Movies - Collections - Genres.yaml
-      - ./custom/Movies - Collections - Holidays.yaml
-      - ./custom/Movies - Collections - Suggestions.yaml
-      - ./custom/Series - Collections - Kids.yaml
-      - ./custom/Series - Collections - Networks.yaml
-      - ./custom/Series - Collections - Suggestions.yaml
-      - ./custom/Series - Overlays - Banners.yaml
+      - Anime_Collections_All.yaml=./custom/Anime - Collections - All.yaml
+      - Anime_Overlays_Flags.yaml=./custom/Anime - Overlays - Flags.yaml
+      - Movies_Collections_Awards.yaml=./custom/Movies - Collections - Awards.yaml
+      - Movies_Collections_Decades.yaml=./custom/Movies - Collections - Decades.yaml
+      - Movies_Collections_Genres.yaml=./custom/Movies - Collections - Genres.yaml
+      - Movies_Collections_Holidays.yaml=./custom/Movies - Collections - Holidays.yaml
+      - Movies_Collections_Suggestions.yaml=./custom/Movies - Collections - Suggestions.yaml
+      - Series_Collections_Kids.yaml=./custom/Series - Collections - Kids.yaml
+      - Series_Collections_Networks.yaml=./custom/Series - Collections - Networks.yaml
+      - Series_Collections_Suggestions.yaml=./custom/Series - Collections - Suggestions.yaml
+      - Series_Overlays_Banners.yaml=./custom/Series - Overlays - Banners.yaml
 generatorOptions:
   disableNameSuffixHash: true

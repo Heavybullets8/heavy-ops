@@ -7,7 +7,7 @@ libraries:
       - operations
       - overlays
     collection_files:
-      - file: config/Anime - Collections - All.yaml
+      - file: config/Anime_Collections_All.yaml
         asset_directory: config/assets/anime
     operations:
       split_duplicates: false
@@ -15,12 +15,12 @@ libraries:
       delete_collections:
         less: 1
     overlay_files:
-      - file: config/Anime - Overlays - Flags.yaml
+      - file: config/Anime_Overlays_Flags.yaml
         asset_directory: config/assets/anime
     settings:
       asset_directory:
-      - config/assets/anime
-      - config/assets/posters
+        - config/assets/anime
+        - config/assets/posters
 
   Anime Movies:
     run_order:
@@ -29,7 +29,7 @@ libraries:
       - operations
       - overlays
     collection_files:
-      - file: config/Anime - Collections - All.yaml
+      - file: config/Anime_Collections_All.yaml
         asset_directory: config/assets/anime
     operations:
       split_duplicates: false
@@ -37,12 +37,12 @@ libraries:
       delete_collections:
         less: 1
     overlay_files:
-      - file: config/Anime - Overlays - Flags.yaml
+      - file: config/Anime_Overlays_Flags.yaml
         asset_directory: config/assets/anime
     settings:
       asset_directory:
-      - config/assets/anime
-      - config/assets/posters
+        - config/assets/anime
+        - config/assets/posters
 
   Movies:
     run_order:
@@ -51,16 +51,16 @@ libraries:
       - operations
       - overlays
     collection_files:
-    - file: config/Movies - Collections - Awards.yaml
-      asset_directory: config/assets/awards
-    - file: config/Movies - Collections - Decades.yaml
-      asset_directory: config/assets/decades
-    - file: config/Movies - Collections - Genres.yaml
-      asset_directory: config/assets/genres
-    - file: config/Movies - Collections - Holiday.yaml
-      asset_directory: config/assets/holidays
-    - file: config/Movies - Collections - Suggestions.yaml
-      asset_directory: config/assets/suggestions
+      - file: config/Movies_Collections_Awards.yaml
+        asset_directory: config/assets/awards
+      - file: config/Movies_Collections_Decades.yaml
+        asset_directory: config/assets/decades
+      - file: config/Movies_Collections_Genres.yaml
+        asset_directory: config/assets/genres
+      - file: config/Movies_Collections_Holidays.yaml
+        asset_directory: config/assets/holidays
+      - file: config/Movies_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -68,8 +68,8 @@ libraries:
         less: 1
     settings:
       asset_directory:
-      - config/assets/standard_movies
-      - config/assets/posters
+        - config/assets/standard_movies
+        - config/assets/posters
 
   Kids Movies:
     run_order:
@@ -78,20 +78,20 @@ libraries:
       - operations
       - overlays
     collection_files:
-    - file: config/Movies - Collections - Awards.yaml
-      asset_directory: config/assets/awards
-    - file: config/Movies - Collections - Decades.yaml
-      asset_directory: config/assets/decades
-    - file: config/Movies - Collections - Genres.yaml
-      asset_directory: config/assets/genres
-    - file: config/Movies - Collections - Holiday.yaml
-      asset_directory: config/assets/holidays
-    - file: config/Movies - Collections - Suggestions.yaml
-      asset_directory: config/assets/suggestions
+      - file: config/Movies_Collections_Awards.yaml
+        asset_directory: config/assets/awards
+      - file: config/Movies_Collections_Decades.yaml
+        asset_directory: config/assets/decades
+      - file: config/Movies_Collections_Genres.yaml
+        asset_directory: config/assets/genres
+      - file: config/Movies_Collections_Holidays.yaml
+        asset_directory: config/assets/holidays
+      - file: config/Movies_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
     settings:
       asset_directory:
-      - config/assets/kids_movies
-      - config/assets/posters
+        - config/assets/kids_movies
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -105,9 +105,9 @@ libraries:
       - operations
       - overlays
     collection_files:
-      - file: config/Series - Collections - Networks.yaml
+      - file: config/Series_Collections_Networks.yaml
         asset_directory: config/assets/networks
-      - file: config/Series - Collections - Suggestions.yaml
+      - file: config/Series_Collections_Suggestions.yaml
         asset_directory: config/assets/suggestions
     settings:
       asset_directory:
@@ -119,7 +119,7 @@ libraries:
       delete_collections:
         less: 1
     overlay_files:
-      - file: config/Series - Overlays - Banners.yaml
+      - file: config/Series_Overlays_Banners.yaml
 
   Kids Series:
     run_order:
@@ -128,11 +128,11 @@ libraries:
       - operations
       - overlays
     collection_files:
-      - file: config/Series - Collections - Kids.yaml
+      - file: config/Series_Collections_Kids.yaml
         asset_directory: config/assets/networks
-      - file: config/Series - Collections - Networks.yaml
+      - file: config/Series_Collections_Networks.yaml
         asset_directory: config/assets/networks
-      - file: config/Series - Collections - Suggestions.yaml
+      - file: config/Series_Collections_Suggestions.yaml
         asset_directory: config/assets/suggestions
     settings:
       asset_directory:
@@ -144,7 +144,7 @@ libraries:
       delete_collections:
         less: 1
     overlay_files:
-      - file: config/Series - Overlays - Banners.yaml
+      - file: config/Series_Overlays_Banners.yaml
 
 settings: # Can be individually specified per library as well
   cache: true
