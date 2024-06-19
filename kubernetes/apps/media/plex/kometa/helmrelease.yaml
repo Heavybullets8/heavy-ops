@@ -95,8 +95,8 @@ spec:
         type: configMap
         name: kometa-configmap
         globalMounts:
-          - path: /config/config.yml
-            subPath: config.yml
+          - path: /config/config.yaml
+            subPath: config.yaml
             readOnly: true
 
       logs:

@@ -9,7 +9,7 @@ resources:
 configMapGenerator:
   - name: kometa-configmap
     files:
-      - ./configs/config.yml
+      - ./configs/config.yaml
   - name: kometa-custom-configs
     files:
       - ./custom/Anime - Collections - All.yaml
