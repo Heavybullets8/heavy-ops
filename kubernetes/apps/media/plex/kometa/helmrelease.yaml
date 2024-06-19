@@ -85,6 +85,7 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteMany
         size: 75Gi
+        storageClass: nfs
         globalMounts:
           - path: /config/assets
 
