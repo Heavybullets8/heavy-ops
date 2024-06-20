@@ -69,7 +69,7 @@ spec:
               tag: v3.38.0
             env:
               VPN_TYPE: wireguard
-              VPN_INTERFACE: wg0
+              VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
             envFrom:
