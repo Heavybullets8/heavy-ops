@@ -25,7 +25,7 @@ spec:
 
         cronjob:
           schedule: "30 8 * * 6"
-
+          timeZone: &timeZone ${TIMEZONE}
         pod:
           affinity:
             podAffinity:
@@ -48,7 +48,7 @@ spec:
               repository: docker.io/meisnate12/plex-image-cleanup
               tag: v1.0.2
             env:
-              TZ: ${TIMEZONE}
+              TZ: *timeZone
               PLEX_URL: http://plex.media.svc.cluster.local:32400
               PLEX_PATH: /data/plex_config/Library/Application Support/Plex Media Server
               MODE: remove
