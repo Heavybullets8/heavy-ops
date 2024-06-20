@@ -73,6 +73,11 @@ spec:
               limits:
                 memory: 12Gi
 
+        pod:
+          securityContext:
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+
           gluetun:
             image:
               repository: ghcr.io/qdm12/gluetun
@@ -112,17 +117,6 @@ spec:
               capabilities:
                 drop:
                   - ALL
-
-    defaultPodOptions:
-      automountServiceAccountToken: false
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [10000]
-        seccompProfile: { type: RuntimeDefault }
 
     service:
       app:
