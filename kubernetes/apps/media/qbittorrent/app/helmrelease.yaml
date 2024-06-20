@@ -70,6 +70,7 @@ spec:
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
+              FIREWALL_VPN_INPUT_PORTS: "80"
             envFrom:
               - secretRef:
                   name: torguard-secret
