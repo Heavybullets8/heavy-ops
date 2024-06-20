@@ -85,18 +85,24 @@ spec:
 
     service:
       app:
-        controller: qbittorrent
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: ${QBIT_IP}
-          externalTrafficPolicy: Local
+        controller: *app
+        nameOverride: *app
         ports:
           http:
             port: *port
-          bittorrent:
-            enabled: true
+      bittorrent:
+        controller: *app
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: ${QBIT_IP}
+        externalTrafficPolicy: Local
+        ports:
+          bittorrent-tcp:
             port: *bittorrentPort
             protocol: TCP
+          bittorrent-udp:
+            port: *bittorrentPort
+            protocol: UDP
 
     ingress:
       app:
