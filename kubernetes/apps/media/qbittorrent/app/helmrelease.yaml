@@ -42,18 +42,35 @@ spec:
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_BitTorrent__Session__Port: 52885
             probes:
-              liveness: &probes
+              liveness:
                 enabled: true
-                custom: true
                 spec:
                   httpGet:
                     path: /api/v2/app/version
                     port: *port
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 30
                   periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              readiness:
+                enabled: true
+                spec:
+                  httpGet:
+                    path: /api/v2/app/version
+                    port: *port
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              startup:
+                enabled: true
+                spec:
+                  httpGet:
+                    path: /api/v2/app/version
+                    port: *port
+                  failureThreshold: 30
+                  periodSeconds: 5
+                  timeoutSeconds: 5
             securityContext:
               runAsUser: 568
               runAsGroup: 568
