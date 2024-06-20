@@ -75,7 +75,7 @@ spec:
             dependsOn: app
             image:
               repository: ghcr.io/qdm12/gluetun
-              tag: latest
+              tag: v3.38.0
             env:
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
