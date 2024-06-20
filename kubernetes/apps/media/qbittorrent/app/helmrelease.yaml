@@ -44,6 +44,7 @@ spec:
             probes:
               liveness:
                 enabled: true
+                custom: true
                 spec:
                   httpGet:
                     path: /api/v2/app/version
@@ -54,6 +55,7 @@ spec:
                   failureThreshold: 6
               readiness:
                 enabled: true
+                custom: true
                 spec:
                   httpGet:
                     path: /api/v2/app/version
@@ -64,6 +66,7 @@ spec:
                   failureThreshold: 6
               startup:
                 enabled: true
+                custom: true
                 spec:
                   httpGet:
                     path: /api/v2/app/version
