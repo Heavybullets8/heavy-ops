@@ -35,6 +35,7 @@ spec:
             env:
               UMASK: "022"
               QBITTORRENT__PORT: &port 80
+              QBITTORRENT__BT_PORT: &bittorrentPort 52885
               QBT_Preferences__WebUI__AlternativeUIEnabled: false
               QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
               QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
@@ -69,6 +70,7 @@ spec:
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
+              FIREWALL_VPN_INPUT_PORTS: *bittorrentPort
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: *port
             envFrom:
@@ -86,6 +88,14 @@ spec:
         ports:
           http:
             port: *port
+          bittorrent-tcp:
+            enabled: true
+            port: *bittorrentPort
+            protocol: TCP
+          bittorrent-udp:
+            enabled: true
+            port: *bittorrentPort
+            protocol: UDP
 
     ingress:
       app:
