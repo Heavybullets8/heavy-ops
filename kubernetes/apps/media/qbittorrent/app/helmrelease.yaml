@@ -42,6 +42,7 @@ spec:
               repository: ghcr.io/onedr0p/qbittorrent-beta
               tag: 4.6.5@sha256:251916c90b09018e747b775f4924da711d8b4545b5b959030eb428571b38be2f
             env:
+              UMASK: "022"
               TZ: ${TIMEZONE}
               GLUETUN_CONTROL_SERVER_HOST: localhost
               GLUETUN_CONTROL_SERVER_PORT: 8000
@@ -54,6 +55,7 @@ spec:
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_BitTorrent__Session__Interface: wg0
               QBT_BitTorrent__Session__InterfaceName: wg0
+              QBITTORRENT__BT_PORT: &bittorrentPort 52775
               QBT_BitTorrent__Session__InterfaceAddress:
                 valueFrom:
                   fieldRef:
@@ -135,6 +137,14 @@ spec:
         ports:
           http:
             port: *port
+          bittorrent-tcp:
+            enabled: true
+            port: *bittorrentPort
+            protocol: TCP
+          bittorrent-udp:
+            enabled: true
+            port: *bittorrentPort
+            protocol: UDP
 
     ingress:
       app:
