@@ -89,6 +89,7 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${QBIT_IP}
+          externalTrafficPolicy: Local
         ports:
           http:
             port: *port
