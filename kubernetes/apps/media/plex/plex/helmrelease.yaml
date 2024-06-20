@@ -39,6 +39,7 @@ spec:
               TZ: ${TIMEZONE}
               PLEX_ADVERTISE_URL: https://static.${SECRET_DOMAIN}:32400,http://192.168.201.215:32400,https://plex-dev.${SECRET_DOMAIN}:443
               PLEX_NO_AUTH_NETWORKS: 192.168.200.0/23
+              PLEX_CLAIM: claim-chm9Vfey17QNUSDN-iJd
             probes:
               liveness: &probes
                 enabled: true
