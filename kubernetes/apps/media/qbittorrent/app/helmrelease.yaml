@@ -30,6 +30,7 @@ spec:
           reloader.stakater.com/auto: "true"
         containers:
           app:
+            nameOverride: qbittorrent
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
               tag: 4.6.5@sha256:251916c90b09018e747b775f4924da711d8b4545b5b959030eb428571b38be2f
@@ -151,6 +152,10 @@ spec:
     persistence:
       config:
         existingClaim: qbittorrent
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /config
 
       empty-config:
         type: emptyDir
