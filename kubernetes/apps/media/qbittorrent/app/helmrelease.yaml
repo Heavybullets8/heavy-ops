@@ -53,6 +53,7 @@ spec:
                 10.69.0.0/16, 192.168.200.0/23
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_BitTorrent__Session__Interface: wg0
+              QBT_BitTorrent__Session__InterfaceName: wg0
               QBT_BitTorrent__Session__InterfaceAddress:
                 valueFrom:
                   fieldRef:
