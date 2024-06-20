@@ -1,7 +1,11 @@
 ---
 autoDirectNodeRoutes: true
+bandwidthManager:
+  enabled: true
+  bbr: true
 bpf:
-  masquerade: false
+  masquerade: true
+  tproxy: true
 cgroup:
   automount:
     enabled: false
@@ -12,8 +16,6 @@ cluster:
 cni:
   exclusive: false
 enableRuntimeDeviceDetection: true
-# NOTE: devices might need to be set if you have more than one active NIC on your hosts
-# devices: eno+ eth+
 endpointRoutes:
   enabled: true
 externalIPs:
@@ -61,3 +63,4 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
+
