@@ -101,9 +101,8 @@ spec:
         seccompProfile: { type: RuntimeDefault }
 
     service:
-      # Configure a service for the main application
-      main:
-        controller: main
+      app:
+        controller: *app
         type: ClusterIP
         ports:
           http:
@@ -141,7 +140,7 @@ spec:
       gluetun-data:
         type: emptyDir
         advancedMounts:
-          main:
+          app:
             gluetun:
               - path: /tmp/gluetun
             port-forward:
