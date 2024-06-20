@@ -28,6 +28,12 @@ spec:
       qbittorrent:
         annotations:
           reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+
         containers:
           app:
             nameOverride: qbittorrent
@@ -72,11 +78,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 12Gi
-
-        pod:
-          securityContext:
-            fsGroup: 568
-            fsGroupChangePolicy: "OnRootMismatch"
 
           gluetun:
             image:
