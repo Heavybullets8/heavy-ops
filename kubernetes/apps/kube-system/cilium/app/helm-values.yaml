@@ -16,6 +16,8 @@ enableRuntimeDeviceDetection: true
 # devices: eno+ eth+
 endpointRoutes:
   enabled: true
+externalIPs:
+  enabled: true
 hubble:
   enabled: false
 ipam:
