@@ -91,10 +91,11 @@ spec:
               - secretRef:
                   name: torguard-secret
             securityContext:
+              runAsUser: 0
+              runAsGroup: 0
               capabilities:
                 add:
                   - NET_ADMIN
-                  - SYS_MODULE
               allowPrivilegeEscalation: false
 
           port-forward:
