@@ -123,10 +123,10 @@ spec:
       transcode:
         type: emptyDir
 
-      library:
+      media:
         type: nfs
         server: ${SECRET_TRUENAS_IP}
         path: /mnt/tank/media/library
         globalMounts:
-          - path: /library
+          - path: /media
             readOnly: true
