@@ -208,6 +208,7 @@ mal:
     token_type: Bearer
     expires_in: <<MYANIMELIST_EXPIRES_IN>>
     refresh_token: <<MYANIMELIST_REFRESH_TOKEN>>
+  cache_expiration: 60
 
 mdblist:
   apikey: <<MDBLIST_API_KEY>>
@@ -224,6 +225,8 @@ plex:
   clean_bundles: false
   empty_trash: false
   optimize: false
+  verify_ssl:
+  db_cache: 5120
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local
