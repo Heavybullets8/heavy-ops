@@ -56,6 +56,7 @@ spec:
                 wait
             env:
               TZ: *timeZone
+              KOMETA_CONFIG: /config/config.yaml
             envFrom:
               - secretRef:
                   name: kometa-secret
