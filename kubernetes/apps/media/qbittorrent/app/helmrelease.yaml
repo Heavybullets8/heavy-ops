@@ -44,36 +44,13 @@ spec:
             probes:
               liveness:
                 enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/v2/app/version
-                    port: *port
-                  initialDelaySeconds: 30
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 6
               readiness:
                 enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/v2/app/version
-                    port: *port
-                  initialDelaySeconds: 30
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 6
               startup:
                 enabled: true
-                custom: true
                 spec:
-                  httpGet:
-                    path: /api/v2/app/version
-                    port: *port
                   failureThreshold: 30
                   periodSeconds: 5
-                  timeoutSeconds: 5
             securityContext:
               runAsUser: 568
               runAsGroup: 568
@@ -93,7 +70,7 @@ spec:
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_VPN_INPUT_PORTS: "80"
+              FIREWALL_VPN_INPUT_PORTS: *port
             envFrom:
               - secretRef:
                   name: torguard-secret
