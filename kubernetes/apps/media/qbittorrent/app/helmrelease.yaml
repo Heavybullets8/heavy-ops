@@ -1,8 +1,9 @@
+---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app qbittorrent
+  name: qbittorrent
 spec:
   interval: 30m
   chart:
@@ -13,17 +14,7 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  dependsOn:
-    - name: volsync
-      namespace: volsync-system
+
   values:
     controllers:
       qbittorrent:
@@ -39,27 +30,11 @@ spec:
           app:
             nameOverride: qbittorrent
             image:
-              repository: ghcr.io/onedr0p/qbittorrent-beta
-              tag: 4.6.5@sha256:251916c90b09018e747b775f4924da711d8b4545b5b959030eb428571b38be2f
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 4.6.5@sha256:c019af23966ebafcaf1713d4553bc043246858b711a7d57d8bee358a89990a3e
             env:
               UMASK: "022"
-              TZ: ${TIMEZONE}
-              GLUETUN_CONTROL_SERVER_HOST: localhost
-              GLUETUN_CONTROL_SERVER_PORT: 8000
               QBITTORRENT__PORT: &port 80
-              QBT_Application__MemoryWorkingSetLimit: 20000
-              QBT_Preferences__WebUI__AlternativeUIEnabled: false
-              QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
-              QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
-                10.69.0.0/16, 192.168.200.0/23
-              QBT_Preferences__WebUI__LocalHostAuth: false
-              QBT_BitTorrent__Session__Interface: wg0
-              QBT_BitTorrent__Session__InterfaceName: wg0
-              QBITTORRENT__BT_PORT: &bittorrentPort 52775
-              QBT_BitTorrent__Session__InterfaceAddress:
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.podIP
             probes:
               liveness: &probes
                 enabled: true
@@ -76,25 +51,18 @@ spec:
             securityContext:
               runAsUser: 568
               runAsGroup: 568
+              runAsNonRoot: true
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
-            resources:
-              requests:
-                cpu: 100m
-              limits:
-                memory: 12Gi
+              capabilities:
+                drop:
+                  - ALL
 
           gluetun:
             image:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.38.0
             env:
-              DOT: on
-              DOT_PROVIDERS: quad9
-              DOT_CACHING: on
-              DOT_IPV6: off
-              DOT_PRIVATE_ADDRESS: 10.69.0.0/16,10.96.0.0/16
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: custom
@@ -132,19 +100,10 @@ spec:
 
     service:
       app:
-        controller: *app
-        type: ClusterIP
+        controller: qbittorrent
         ports:
           http:
             port: *port
-          bittorrent-tcp:
-            enabled: true
-            port: *bittorrentPort
-            protocol: TCP
-          bittorrent-udp:
-            enabled: true
-            port: *bittorrentPort
-            protocol: UDP
 
     ingress:
       app:
