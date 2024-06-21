@@ -95,7 +95,7 @@ spec:
             port: *port
 
       gluetun:
-        controller: gluetun
+        controller: qbittorrent
         ports:
           http-proxy:
             port: 8888
