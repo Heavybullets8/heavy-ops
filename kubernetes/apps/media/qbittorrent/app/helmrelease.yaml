@@ -69,6 +69,7 @@ spec:
               DOT_PROVIDERS: quad9
               DOT_CACHING: "on"
               BLOCK_MALICIOUS: "off"
+              UNBLOCK: hdts-announce.ru,landof.tv
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
