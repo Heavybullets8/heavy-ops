@@ -266,7 +266,7 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
       ingressClassName: external
-      hosts: ["{{ .Release.Name }}-dev.${SECRET_DOMAIN}"]
+      hosts: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
     persistence:
       enabled: false
     testFramework:
