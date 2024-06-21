@@ -72,11 +72,12 @@ spec:
               DOT_PROVIDERS: quad9
               DOT_CACHING: "on"
               FIREWALL_VPN_INPUT_PORTS: 52885
+              FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
+              FIREWALL_INPUT_PORTS: 80
+              HTTPPROXY: "on"
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
-              FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_INPUT_PORTS: 80
             envFrom:
               - secretRef:
                   name: torguard-secret
@@ -92,6 +93,14 @@ spec:
         ports:
           http:
             port: *port
+
+      gluetun:
+        controller: gluetun
+        ports:
+          http-proxy:
+            port: 8888
+            targetPort: 8888
+            protocol: TCP
 
     ingress:
       app:
