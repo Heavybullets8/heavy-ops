@@ -90,17 +90,17 @@ spec:
     service:
       app:
         controller: qbittorrent
+        nameOverride: qbittorrent
         ports:
           http:
             port: *port
 
       gluetun:
         controller: qbittorrent
+        nameOverride: gluetun
         ports:
-          http-proxy:
+          http:
             port: 8888
-            targetPort: 8888
-            protocol: TCP
 
     ingress:
       app:
