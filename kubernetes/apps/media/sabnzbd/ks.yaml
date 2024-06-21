@@ -24,5 +24,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: nzb-dev
+      GATUS_SUBDOMAIN: nzb
       VOLSYNC_CAPACITY: 5Gi
