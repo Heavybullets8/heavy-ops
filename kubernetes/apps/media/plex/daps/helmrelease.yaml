@@ -50,12 +50,6 @@ spec:
               startup:
                 enabled: false
 
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-
     persistence:
       config:
         type: secret
