@@ -69,7 +69,7 @@ spec:
 
       assets:
         type: persistentVolumeClaim
-        existingClaim: kometa-assets-pvc
+        existingClaim: kometa-assets
         globalMounts:
           - path: /config/assets
 
