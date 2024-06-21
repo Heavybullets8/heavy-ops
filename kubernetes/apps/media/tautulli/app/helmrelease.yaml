@@ -105,7 +105,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
         className: external
         hosts:
-          - host: "{{ .Release.Name }}-dev.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:

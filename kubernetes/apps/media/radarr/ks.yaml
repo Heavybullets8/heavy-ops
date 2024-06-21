@@ -24,7 +24,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: radarr-dev
+      GATUS_SUBDOMAIN: radarr
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
       VOLSYNC_STORAGECLASS: nfs

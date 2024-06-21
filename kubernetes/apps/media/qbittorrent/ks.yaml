@@ -22,7 +22,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: qbit-dev
+      GATUS_SUBDOMAIN: qbit
       VOLSYNC_CAPACITY: 5Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
 ---
