@@ -44,11 +44,25 @@ spec:
             probes:
               liveness:
                 enabled: true
+                spec:
+                  tcpSocket:
+                    port: *port
+                  initialDelaySeconds: 60
+                  periodSeconds: 10
+                  failureThreshold: 3
               readiness:
                 enabled: true
+                spec:
+                  tcpSocket:
+                    port: *port
+                  initialDelaySeconds: 60
+                  periodSeconds: 10
+                  failureThreshold: 3
               startup:
                 enabled: true
                 spec:
+                  tcpSocket:
+                    port: *port
                   failureThreshold: 30
                   periodSeconds: 5
             securityContext:
