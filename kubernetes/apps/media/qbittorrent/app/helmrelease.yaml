@@ -75,6 +75,8 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80
               HTTPPROXY: "on"
+              HTTPPROXY_LISTENING_ADDRESS: 8888
+              HTTPPROXY_LOG: "on"
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
