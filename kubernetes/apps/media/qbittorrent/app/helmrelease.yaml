@@ -66,6 +66,9 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.38.0
             env:
+              DOT_PROVIDERS: quad9
+              DOT_CACHING: "on"
+              BLOCK_MALICIOUS: "off"
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
