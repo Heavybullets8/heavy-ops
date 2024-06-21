@@ -76,7 +76,7 @@ spec:
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_INPUT_PORTS: 80 #,52885
+              FIREWALL_INPUT_PORTS: 80
             envFrom:
               - secretRef:
                   name: torguard-secret
@@ -92,10 +92,6 @@ spec:
         ports:
           http:
             port: *port
-          # bittorrent:
-          #   enabled: true
-          #   port: *bittorrentPort
-          #   protocol: TCP
 
     ingress:
       app:
