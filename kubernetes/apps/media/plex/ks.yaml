@@ -25,7 +25,7 @@ spec:
     substitute:
       APP: *app
       GATUS_PATH: /web/index.html
-      GATUS_SUBDOMAIN: plex-dev
+      GATUS_SUBDOMAIN: plex
       VOLSYNC_CAPACITY: 300Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
       VOLSYNC_STORAGECLASS: nfs
