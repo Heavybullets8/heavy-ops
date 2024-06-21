@@ -132,6 +132,7 @@ spec:
 
       tmp:
         type: emptyDir
+        medium: Memory
 
       media:
         type: nfs

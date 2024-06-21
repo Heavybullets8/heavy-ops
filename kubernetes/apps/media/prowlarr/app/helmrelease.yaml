@@ -123,4 +123,4 @@ spec:
 
       tmp:
         type: emptyDir
-
+        medium: Memory

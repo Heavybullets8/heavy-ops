@@ -114,7 +114,10 @@ spec:
     persistence:
       config:
         existingClaim: tautulli
+
       tmp:
         type: emptyDir
+        medium: Memory
+
       add-ons:
         type: emptyDir
