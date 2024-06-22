@@ -50,9 +50,7 @@ spec:
                 mkdir -p /config/assets/anime /config/assets/awards /config/assets/decades /config/assets/genres /config/assets/holidays /config/assets/networks /config/assets/suggestions &&
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Kids Movies" &
                 python3 kometa.py --run --read-only-config --run-libraries "Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Kids Series" &
                 python3 kometa.py --run --read-only-config --run-libraries "Series" &
                 wait
             env:
@@ -131,9 +129,6 @@ spec:
             readOnly: true
           - path: /config/Movies_Collections_Suggestions.yaml
             subPath: Movies_Collections_Suggestions.yaml
-            readOnly: true
-          - path: /config/Series_Collections_Kids.yaml
-            subPath: Series_Collections_Kids.yaml
             readOnly: true
           - path: /config/Series_Collections_Networks.yaml
             subPath: Series_Collections_Networks.yaml

@@ -71,33 +71,6 @@ libraries:
         - config/assets/standard_movies
         - config/assets/posters
 
-  Kids Movies:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
-    collection_files:
-      - file: config/Movies_Collections_Awards.yaml
-        asset_directory: config/assets/awards
-      - file: config/Movies_Collections_Decades.yaml
-        asset_directory: config/assets/decades
-      - file: config/Movies_Collections_Genres.yaml
-        asset_directory: config/assets/genres
-      - file: config/Movies_Collections_Holidays.yaml
-        asset_directory: config/assets/holidays
-      - file: config/Movies_Collections_Suggestions.yaml
-        asset_directory: config/assets/suggestions
-    settings:
-      asset_directory:
-        - config/assets/kids_movies
-        - config/assets/posters
-    operations:
-      split_duplicates: false
-      assets_for_all: true
-      delete_collections:
-        less: 1
-
   Series:
     run_order:
       - collections
@@ -112,31 +85,6 @@ libraries:
     settings:
       asset_directory:
         - config/assets/standard_series
-        - config/assets/posters
-    operations:
-      split_duplicates: false
-      assets_for_all: true
-      delete_collections:
-        less: 1
-    overlay_files:
-      - file: config/Series_Overlays_Banners.yaml
-
-  Kids Series:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
-    collection_files:
-      - file: config/Series_Collections_Kids.yaml
-        asset_directory: config/assets/networks
-      - file: config/Series_Collections_Networks.yaml
-        asset_directory: config/assets/networks
-      - file: config/Series_Collections_Suggestions.yaml
-        asset_directory: config/assets/suggestions
-    settings:
-      asset_directory:
-        - config/assets/kids_series
         - config/assets/posters
     operations:
       split_duplicates: false

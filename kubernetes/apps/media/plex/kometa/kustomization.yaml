@@ -19,7 +19,6 @@ configMapGenerator:
       - ./custom/Movies_Collections_Genres.yaml
       - ./custom/Movies_Collections_Holidays.yaml
       - ./custom/Movies_Collections_Suggestions.yaml
-      - ./custom/Series_Collections_Kids.yaml
       - ./custom/Series_Collections_Networks.yaml
       - ./custom/Series_Collections_Suggestions.yaml
       - ./custom/Series_Overlays_Banners.yaml

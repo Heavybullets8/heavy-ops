@@ -99,9 +99,7 @@ poster_renamerr:
   library_names:
     - Movies
     - Anime Movies
-    - Kids Movies
     - Series
-    - Kids Series
     - Anime Series
 
   source_dirs:
@@ -164,9 +162,7 @@ unmatched_assets:
   library_names:
     - Movies
     - Anime Movies
-    - Kids Movies
     - Series
-    - Kids Series
     - Anime Series
   ignore_collections:
     - "Christianity"
