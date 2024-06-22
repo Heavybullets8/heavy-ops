@@ -57,6 +57,13 @@ spec:
                 memory: 150Mi
               limits:
                 memory: 10Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
         type: secret
