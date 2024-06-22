@@ -46,6 +46,8 @@ spec:
               - -c
             args:
               - |
+                chown -R 568:568 /config && \
+                chown -R 568:568 /app && \
                 python3 /app/main.py
             env:
               TZ: ${TIMEZONE}
