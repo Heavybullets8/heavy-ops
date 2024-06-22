@@ -106,11 +106,6 @@ libraries:
       - metadata
       - operations
       - overlays
-    collection_files:
-      - file: config/Series_Collections_Networks.yaml
-        asset_directory: config/assets/networks
-      - file: config/Series_Collections_Suggestions.yaml
-        asset_directory: config/assets/suggestions
     settings:
       asset_directory:
         - config/assets/standard_series
@@ -120,7 +115,15 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
+    collection_files:
+      - file: config/Series_Collections_Networks.yaml
+        asset_directory: config/assets/networks
+      - file: config/Series_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
+      - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/collection_files/better_new_and_old_tv_shows_releases.yml
+
     overlay_files:
+      # Status in the top left corner
       - default: status
         template_variables:
           text_airing: .
@@ -153,15 +156,11 @@ libraries:
           final_horizontal_offset: 0
           final_vertical_offset: 0
 
-    network:
-      overlay:
-        name: network
-        default: network
-        # Fallback Network logo which is overwritten by kometa: network if it finds an image for the network. Must run before default: network.
-        url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network_fallback.yml
+      # Fallback Network logo which is overwritten by pmm: network if it finds an image for the network. Must run before pmm: network.
+      - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network_fallback.yml
 
-        # Uses the kometa default network but replaces the image with custom ones
-
+      # Uses the default PMM network but replaces the image with custom ones
+      - default: network
         template_variables:
           horizontal_align: left
           horizontal_offset: 0
