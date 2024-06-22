@@ -32,7 +32,8 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         cronjob:
-          schedule: "0 16,5 * * *"
+          # schedule: "0 16,5 * * *"
+          schedule: "*/5 * * * *"
           timeZone: &timeZone ${TIMEZONE}
           concurrencyPolicy: Forbid
           successfulJobsHistory: 1
@@ -48,12 +49,13 @@ spec:
             args:
               - |
                 mkdir -p /config/assets/anime /config/assets/awards /config/assets/decades /config/assets/genres /config/assets/holidays /config/assets/networks /config/assets/suggestions &&
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Series" &
+                python3 kometa.py --run --read-only-config --overlays-only --run-libraries "Anime Series" &
+
                 wait
             env:
+                # python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
+                # python3 kometa.py --run --read-only-config --run-libraries "Movies" &
+                # python3 kometa.py --run --read-only-config --run-libraries "Series" &
               TZ: *timeZone
               KOMETA_CONFIG: /config/config.yaml
             envFrom:
