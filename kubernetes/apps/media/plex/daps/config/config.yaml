@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Drazzilb08/daps/master/schemas/config-schema.json# Options:
 
-schedule:
-  border_replacerr:
-  health_checkarr: daily(03:00)
-  sync_gdrive:
-  poster_renamerr: daily(01:00|16:00)
-  unmatched_assets: weekly(monday@03:00)
+# schedule:
+#   border_replacerr:
+#   health_checkarr: daily(03:00)
+#   sync_gdrive:
+#   poster_renamerr: daily(01:00|16:00)
+#   unmatched_assets: weekly(monday@03:00)
 
 instances:
   radarr:
