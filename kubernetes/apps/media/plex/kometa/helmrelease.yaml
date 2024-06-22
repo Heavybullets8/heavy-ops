@@ -114,9 +114,6 @@ spec:
           - path: /config/Anime_Collections_All.yaml
             subPath: Anime_Collections_All.yaml
             readOnly: true
-          - path: /config/Anime_Overlays_Flags.yaml
-            subPath: Anime_Overlays_Flags.yaml
-            readOnly: true
           - path: /config/Movies_Collections_Awards.yaml
             subPath: Movies_Collections_Awards.yaml
             readOnly: true
@@ -137,7 +134,4 @@ spec:
             readOnly: true
           - path: /config/Series_Collections_Suggestions.yaml
             subPath: Series_Collections_Suggestions.yaml
-            readOnly: true
-          - path: /config/Series_Overlays_Banners.yaml
-            subPath: Series_Overlays_Banners.yaml
             readOnly: true

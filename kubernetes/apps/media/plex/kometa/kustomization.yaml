@@ -13,7 +13,6 @@ configMapGenerator:
   - name: kometa-custom-configs
     files:
       - ./custom/Anime_Collections_All.yaml
-      - ./custom/Anime_Overlays_Flags.yaml
       - ./custom/Movies_Collections_Awards.yaml
       - ./custom/Movies_Collections_Decades.yaml
       - ./custom/Movies_Collections_Genres.yaml
@@ -21,6 +20,5 @@ configMapGenerator:
       - ./custom/Movies_Collections_Suggestions.yaml
       - ./custom/Series_Collections_Networks.yaml
       - ./custom/Series_Collections_Suggestions.yaml
-      - ./custom/Series_Overlays_Banners.yaml
 generatorOptions:
   disableNameSuffixHash: true
