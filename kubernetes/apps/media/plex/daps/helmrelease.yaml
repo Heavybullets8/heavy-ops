@@ -46,7 +46,7 @@ spec:
               - -c
             args:
               - |
-                python3 /app/main.py
+                python3 /app/main.py 568
             env:
               TZ: ${TIMEZONE}
             resources:
