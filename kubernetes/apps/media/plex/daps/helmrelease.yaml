@@ -46,7 +46,7 @@ spec:
               - -c
             args:
               - |
-                python3 main.py
+                python3 /app/main.py
             env:
               TZ: ${TIMEZONE}
             resources:
@@ -60,7 +60,7 @@ spec:
         type: secret
         name: daps-secret
         globalMounts:
-          - path: /config/config.yaml
+          - path: /app/config/config.yaml
             subPath: config.yaml
             readOnly: true
 
@@ -68,7 +68,7 @@ spec:
         type: secret
         name: daps-sa-secret
         globalMounts:
-          - path: /config/sa.json
+          - path: /app/config/sa.json
             subPath: sa.json
             readOnly: true
 
@@ -76,9 +76,9 @@ spec:
         type: persistentVolumeClaim
         existingClaim: kometa-assets
         globalMounts:
-          - path: /config/assets
+          - path: /app/config/assets
 
       process:
         type: emptyDir
         globalMounts:
-          - path: /config/process
+          - path: /app/config/process
