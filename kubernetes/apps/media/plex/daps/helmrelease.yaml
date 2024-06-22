@@ -66,7 +66,10 @@ spec:
         fsGroupChangePolicy: Always
     persistence:
       config:
-        type: emptyDir
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: nfs
         globalMounts:
           - path: /config
 
