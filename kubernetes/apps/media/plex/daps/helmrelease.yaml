@@ -46,8 +46,6 @@ spec:
               - -c
             args:
               - |
-                chown -R 568:568 /config && \
-                chown -R 568:568 /app && \
                 python3 /app/main.py
             env:
               TZ: ${TIMEZONE}
@@ -62,8 +60,8 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
+        runAsUser: 100
+        runAsGroup: 99
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
     persistence:
