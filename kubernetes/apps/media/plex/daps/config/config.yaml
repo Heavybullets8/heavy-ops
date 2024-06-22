@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Drazzilb08/daps/master/schemas/config-schema.json# Options:
 
 schedule:
-  sync_gdrive: run
-  border_replacerr: run
+  # poster_renamerr runs border_replacerr and unmatched_assets
+  sync_gdrive:
+  border_replacerr:
   poster_renamerr: run
   health_checkarr: run
   unmatched_assets: run
