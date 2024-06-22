@@ -6,6 +6,7 @@ overlays:
   series:
     overlay:
       name: status
+      default: status
       template_variables:
         text_airing: .
         url_airing: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/status-top-left/airing.png
@@ -40,6 +41,7 @@ overlays:
   network:
     overlay:
       name: network
+      default: network
       # Fallback Network logo which is overwritten by kometa: network if it finds an image for the network. Must run before default: network.
       url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network_fallback.yml
 

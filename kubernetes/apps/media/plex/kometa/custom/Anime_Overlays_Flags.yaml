@@ -5,6 +5,7 @@ overlays:
   flags-series:
     overlay:
       name: languages
+      default: languages
       template_variables:
         languages:
           - en
@@ -21,6 +22,7 @@ overlays:
   flags-episodes:
     overlay:
       name: languages
+      default: languages
       template_variables:
         languages:
           - en
