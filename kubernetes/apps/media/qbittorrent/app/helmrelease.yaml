@@ -69,11 +69,8 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.38.0
             env:
-              DOT_PROVIDERS: quad9
-              DOT_CACHING: "on"
-              DNS_UPDATE_PERIOD: 30m
-              DOT_VERBOSITY_DETAILS: 1
-              DOT_VALIDATION_LOGLEVEL: 1
+              DNS_KEEP_NAMESERVER: "on"
+              DOT: "off"
               FIREWALL_VPN_INPUT_PORTS: 52885
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80,8888
