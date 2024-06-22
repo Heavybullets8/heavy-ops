@@ -60,20 +60,12 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
-        runAsUser: 568
-        runAsGroup: 568
+        runAsUser: 0
+        runAsGroup: 0
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
       config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: nfs
-        globalMounts:
-          - path: /config
-
-      config-file:
         type: secret
         name: daps-secret
         globalMounts:
