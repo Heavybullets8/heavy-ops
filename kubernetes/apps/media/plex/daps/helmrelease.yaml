@@ -47,6 +47,8 @@ spec:
             args:
               - |
                 python3 /config/main.py
+            env:
+              TZ: *timeZone
             resources:
               requests:
                 cpu: 10m
