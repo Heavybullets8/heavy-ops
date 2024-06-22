@@ -46,9 +46,10 @@ spec:
               - -c
             args:
               - |
-                python3 /app/main.py 568
+                python3 /app/main.py
             env:
               TZ: ${TIMEZONE}
+              ENV DOCKER_ENV: false
             resources:
               requests:
                 cpu: 10m
