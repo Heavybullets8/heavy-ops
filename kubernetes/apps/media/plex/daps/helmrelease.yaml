@@ -65,6 +65,10 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
+      config:
+        type: emptyDir
+        globalMounts:
+          - path: /config
 
       config-file:
         type: secret
