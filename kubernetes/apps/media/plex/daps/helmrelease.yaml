@@ -60,7 +60,7 @@ spec:
         type: secret
         name: daps-secret
         globalMounts:
-          - path: /config/config.yaml
+          - path: /config/config.yml
             subPath: config.yaml
             readOnly: true
 
