@@ -48,7 +48,7 @@ spec:
               - |
                 python3 main.py
             env:
-              TZ: *timeZone
+              TZ: ${TIMEZONE}
             resources:
               requests:
                 cpu: 10m
