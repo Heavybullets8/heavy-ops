@@ -56,7 +56,7 @@ spec:
                 cpu: 10m
                 memory: 150Mi
               limits:
-                memory: 4Gi
+                memory: 10Gi
     persistence:
       config:
         type: secret
@@ -80,7 +80,16 @@ spec:
         globalMounts:
           - path: /config/assets
 
+      input:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: iscsi
+        size: 10Gi
+        globalMounts:
+          - path: /config/input
+
       process:
         type: emptyDir
+        medium: Memory
         globalMounts:
           - path: /config/process
