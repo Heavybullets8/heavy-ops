@@ -60,12 +60,13 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
-        runAsUser: 100
-        runAsGroup: 99
+        runAsUser: 568
+        runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
-      config:
+
+      config-file:
         type: secret
         name: daps-secret
         globalMounts:
