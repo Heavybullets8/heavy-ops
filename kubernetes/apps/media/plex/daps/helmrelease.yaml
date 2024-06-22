@@ -46,7 +46,7 @@ spec:
               - -c
             args:
               - |
-                python3 /config/main.py
+                python3 main.py
             env:
               TZ: *timeZone
             resources:
