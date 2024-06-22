@@ -29,27 +29,30 @@ spec:
   values:
     controllers:
       daps:
+        type: cronjob
         annotations:
           reloader.stakater.com/auto: "true"
+        cronjob:
+          schedule: "*/5 * * * *"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
         containers:
           app:
             image:
               repository: ghcr.io/drazzilb08/daps
               tag: v1.2.1@sha256:705dde3a14764660869441d1382aba4f4f63b5a7bf5d362c7df06d76eba2e39c
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                python3 /config/main.py
             resources:
               requests:
                 cpu: 10m
                 memory: 150Mi
               limits:
                 memory: 4Gi
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-
     persistence:
       config:
         type: secret
