@@ -60,7 +60,7 @@ spec:
         type: secret
         name: daps-secret
         globalMounts:
-          - path: /app/config/config.yaml
+          - path: /config/config.yaml
             subPath: config.yaml
             readOnly: true
 
@@ -68,7 +68,7 @@ spec:
         type: secret
         name: daps-sa-secret
         globalMounts:
-          - path: /app/config/sa.json
+          - path: /config/sa.json
             subPath: sa.json
             readOnly: true
 
@@ -76,9 +76,9 @@ spec:
         type: persistentVolumeClaim
         existingClaim: kometa-assets
         globalMounts:
-          - path: /app/config/assets
+          - path: /config/assets
 
       process:
         type: emptyDir
         globalMounts:
-          - path: /app/config/process
+          - path: /config/process
