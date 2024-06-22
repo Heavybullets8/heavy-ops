@@ -59,9 +59,9 @@ spec:
                 memory: 10Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
+        runAsNonRoot: false
+        runAsUser: 100
+        runAsGroup: 99
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
