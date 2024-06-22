@@ -47,14 +47,28 @@ spec:
               - -c
             args:
               - |
-                mkdir -p /config/assets/anime /config/assets/awards /config/assets/decades /config/assets/genres /config/assets/holidays /config/assets/networks /config/assets/suggestions &&
+                mkdir -p /config/assets/anime \
+                        /config/assets/awards \
+                        /config/assets/decades \
+                        /config/assets/genres \
+                        /config/assets/holidays \
+                        /config/assets/networks \
+                        /config/assets/suggestions \
+                        /config/assets/posters &&
+                chown -R 568:568 /config/assets/anime \
+                                /config/assets/awards \
+                                /config/assets/decades \
+                                /config/assets/genres \
+                                /config/assets/holidays \
+                                /config/assets/networks \
+                                /config/assets/suggestions \
+                                /config/assets/posters &&
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
                 python3 kometa.py --run --read-only-config --run-libraries "Movies" &
                 python3 kometa.py --run --read-only-config --run-libraries "Series" &
                 wait
             env:
-
               TZ: *timeZone
               KOMETA_CONFIG: /config/config.yaml
             envFrom:
