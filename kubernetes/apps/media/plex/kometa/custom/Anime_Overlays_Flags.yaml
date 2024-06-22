@@ -1,9 +1,10 @@
+overlays:
 ######################################################
 #                  Language Flags                    #
 ######################################################
-overlays:
-  languages:
-    - default: languages
+  flags-series:
+    overlay:
+      name: languages
       template_variables:
         languages:
           - en
@@ -17,7 +18,9 @@ overlays:
 ######################################################
 #                Language Flags (Episodes)           #
 ######################################################
-    - default: languages
+  flags-episodes:
+    overlay:
+      name: languages
       template_variables:
         languages:
           - en
