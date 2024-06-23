@@ -4,6 +4,13 @@ authentication:
   username: "{{ .AUTOSCAN_WEBHOOK_USER }}"
   password: "{{ .AUTOSCAN_WEBHOOK_PASS }}"
 
+triggers:
+  sonarr:
+    - name: sonarr
+
+  radarr:
+    - name: radarr
+
 targets:
   plex:
     - url: http://plex.media.svc.cluster.local:32400
