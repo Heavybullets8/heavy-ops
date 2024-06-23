@@ -7,17 +7,20 @@ authentication:
 triggers:
   sonarr:
     - name: sonarr
+      rewrite:
+        - from: ^/media/library/(.*)$
+          to: /library/\1
 
   radarr:
     - name: radarr
+      rewrite:
+        - from: ^/media/library/(.*)$
+          to: /library/\1
 
 targets:
   plex:
     - url: http://plex.media.svc.cluster.local:32400
       token: "{{ .PLEX_PLEX_TOKEN }}"
-      rewrite:
-        - from: ^/media/library/(.*)$
-          to: /library/\1
 
   # jellyfin:
   #   - url: http://jellyfin.media.svc.cluster.local:8096
