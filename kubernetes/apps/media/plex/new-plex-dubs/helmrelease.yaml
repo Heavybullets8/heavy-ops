@@ -30,6 +30,7 @@ spec:
               PLEX_URL: http://plex.media.svc.cluster.local:32400
               PLEX_ANIME_SERIES: Anime Series
               PLEX_ANIME_MOVIES: Anime Movies
+              PORT: &port 9432
             envFrom:
               - secretRef:
                   name: new-plex-dubs-secret
