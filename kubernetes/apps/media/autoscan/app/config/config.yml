@@ -1,0 +1,20 @@
+minimum-age: 25s
+
+authentication:
+  username: "{{ .AUTOSCAN_WEBHOOK_USER }}"
+  password: "{{ .AUTOSCAN_WEBHOOK_PASS }}"
+
+targets:
+  plex:
+    - url: http://plex.media.svc.cluster.local:32400
+      token: "{{ .PLEX_PLEX_TOKEN }}"
+      rewrite:
+        - from: ^/media/library/(.*)$
+          to: /library/\1
+
+  # jellyfin:
+  #   - url: http://jellyfin.media.svc.cluster.local:8096
+  #     token: XXXX
+  #     rewrite:
+  #       - from: ^/media/library/(.*)$
+  #         to: /library/\1
