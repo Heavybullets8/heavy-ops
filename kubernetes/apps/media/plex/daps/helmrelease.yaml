@@ -34,6 +34,7 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "0 4,15 * * *"
+          timeZone: &timeZone ${TIMEZONE}
           successfulJobsHistory: 1
           failedJobsHistory: 1
         containers:
@@ -49,7 +50,7 @@ spec:
                 python3 /app/main.py poster_renamerr
                 python3 /app/main.py health_checkarr
             env:
-              TZ: ${TIMEZONE}
+              TZ: *timeZone
               PUID: 568
               PGID: 568
             resources:
