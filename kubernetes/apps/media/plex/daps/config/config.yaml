@@ -2,6 +2,7 @@
 
 schedule:
   # poster_renamerr runs border_replacerr and unmatched_assets
+  # Also the cronjob manages running these specific scripts, so we dont define them here
   sync_gdrive:
   border_replacerr:
   poster_renamerr:
