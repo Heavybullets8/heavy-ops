@@ -4,9 +4,9 @@ schedule:
   # poster_renamerr runs border_replacerr and unmatched_assets
   sync_gdrive:
   border_replacerr:
-  poster_renamerr: run
-  health_checkarr: run
-  unmatched_assets: run
+  poster_renamerr:
+  health_checkarr:
+  unmatched_assets:
 
 instances:
   radarr:

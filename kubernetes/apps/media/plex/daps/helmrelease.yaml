@@ -46,7 +46,8 @@ spec:
               - -c
             args:
               - |
-                python3 /app/main.py
+                python3 /app/main.py poster_renamerr
+                python3 /app/main.py health_checkarr
             env:
               TZ: ${TIMEZONE}
               PUID: 568
