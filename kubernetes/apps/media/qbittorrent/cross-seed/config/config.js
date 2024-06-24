@@ -1,15 +1,15 @@
 module.exports = {
     delay: 10,
     torznab: [
-      `http://prowlarr.media.svc.cluster.local:9696/19/api?apikey=$${process.env.PROWLARR_API_KEY}`,
+      `http://prowlarr.media.svc.cluster.local/19/api?apikey=$${process.env.PROWLARR_API_KEY}`,
 
-      `http://prowlarr.media.svc.cluster.local:9696/31/api?apikey=$${process.env.PROWLARR_API_KEY}`,
+      `http://prowlarr.media.svc.cluster.local/31/api?apikey=$${process.env.PROWLARR_API_KEY}`,
 
-      `http://prowlarr.media.svc.cluster.local:9696/20/api?apikey=$${process.env.PROWLARR_API_KEY}`,
+      `http://prowlarr.media.svc.cluster.local/20/api?apikey=$${process.env.PROWLARR_API_KEY}`,
 
-      `http://prowlarr.media.svc.cluster.local:9696/28/api?apikey=$${process.env.PROWLARR_API_KEY}`,
+      `http://prowlarr.media.svc.cluster.local/28/api?apikey=$${process.env.PROWLARR_API_KEY}`,
 
-      `http://prowlarr.media.svc.cluster.local:9696/21/api?apikey=$${process.env.PROWLARR_API_KEY}`
+      `http://prowlarr.media.svc.cluster.local/21/api?apikey=$${process.env.PROWLARR_API_KEY}`
     ],
     qbittorrentUrl: "http://qbittorrent.downloads.svc.cluster.local",
     matchMode: "safe",
