@@ -26,19 +26,39 @@ spec:
       VOLSYNC_CAPACITY: 5Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
 ---
-#TODO: ADD QBITMANAGE
+yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app cross-seed
+  namespace: flux-system
+spec:
+  targetNamespace: media
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/main/apps/default/qbittorrent/cross-seed
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+# ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 # apiVersion: kustomize.toolkit.fluxcd.io/v1
 # kind: Kustomization
 # metadata:
-#   name: &app qbittorrent-tools
+#   name: &app cross-seed
 #   namespace: flux-system
 # spec:
 #   targetNamespace: media
 #   commonMetadata:
 #     labels:
 #       app.kubernetes.io/name: *app
-#   path: ./kubernetes/main/apps/default/qbittorrent/tools
+#   path: ./kubernetes/main/apps/default/qbittorrent/cross-seed
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository

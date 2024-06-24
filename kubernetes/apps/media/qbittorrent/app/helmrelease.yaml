@@ -130,13 +130,6 @@ spec:
             app:
               - path: /config
 
-      empty-config:
-        type: emptyDir
-        advancedMounts:
-          qbittorrent:
-            port-forward:
-              - path: /config
-
       media:
         type: nfs
         server: ${SECRET_TRUENAS_IP}
