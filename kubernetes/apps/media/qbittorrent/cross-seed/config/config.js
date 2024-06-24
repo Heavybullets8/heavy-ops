@@ -22,7 +22,6 @@ module.exports = {
     action: "inject",
     duplicateCategories: true,
     notificationWebhookUrl: `$${process.env.CROSS_SEED_WEBHOOK_URL}`,
-    port: 2468,
     rssCadence: "60min",
     searchCadence: "7d",
 };

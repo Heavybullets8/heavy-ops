@@ -71,7 +71,7 @@ spec:
         controller: cross-seed
         ports:
           http:
-            port: *port
+            port: 2468
 
     persistence:
       config:
