@@ -4,6 +4,7 @@ libraries:
     settings:
       asset_directory:
         - config/assets/anime
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -40,6 +41,7 @@ libraries:
     settings:
       asset_directory:
         - config/assets/anime
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -65,6 +67,7 @@ libraries:
     settings:
       asset_directory:
         - config/assets/standard_movies
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -86,6 +89,7 @@ libraries:
     settings:
       asset_directory:
         - config/assets/standard_series
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -150,7 +154,6 @@ libraries:
 settings:
   cache: true
   cache_expiration: 60
-  asset_directory: config/assets/posters
   asset_folders: true
   asset_depth: 3
   create_asset_folders: true
