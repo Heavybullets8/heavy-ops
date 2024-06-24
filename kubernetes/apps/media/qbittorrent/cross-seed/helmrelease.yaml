@@ -40,8 +40,6 @@ spec:
               tag: 6.0.0-15@sha256:21a310b8807cf40005aa7f90e3784314163e42e1323a19261c19211d2ce44e7a
             args:
               - daemon
-            env:
-              CROSSSEED_PORT: &port 2468
             envFrom:
               - secretRef:
                   name: cross-seed-secret
