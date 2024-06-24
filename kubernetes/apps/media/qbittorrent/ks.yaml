@@ -37,7 +37,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/main/apps/default/qbittorrent/cross-seed
+  path: ./kubernetes/apps/media/qbittorrent/cross-seed
   prune: true
   sourceRef:
     kind: GitRepository
