@@ -11,7 +11,7 @@ module.exports = {
 
       `http://prowlarr.media.svc.cluster.local/21/api?apikey=$${process.env.PROWLARR_API_KEY}`
     ],
-    qbittorrentUrl: "http://qbittorrent.downloads.svc.cluster.local",
+    qbittorrentUrl: "http://qbittorrent.media.svc.cluster.local",
     matchMode: "safe",
     apiAuth: false,
     outputDir: "/config",
