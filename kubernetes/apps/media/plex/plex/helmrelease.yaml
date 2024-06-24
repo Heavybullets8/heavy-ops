@@ -71,8 +71,8 @@ spec:
                 memory: 100Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 568
+        runAsNonRoot: false
+        runAsUser: 0
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
