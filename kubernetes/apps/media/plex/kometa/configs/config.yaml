@@ -1,19 +1,17 @@
 ---
 libraries:
   Anime Series:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
-    collection_files:
-      - file: config/Anime_Collections_All.yaml
-        asset_directory: config/assets/anime
+    settings:
+      asset_directory:
+        - config/assets/anime
     operations:
       split_duplicates: false
       assets_for_all: true
       delete_collections:
         less: 1
+    collection_files:
+      - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -37,25 +35,19 @@ libraries:
           vertical_position: top
           builder_level: episode
         asset_directory: config/assets/anime
+
+  Anime Movies:
     settings:
       asset_directory:
         - config/assets/anime
-        - config/assets/posters
-
-  Anime Movies:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
-    collection_files:
-      - file: config/Anime_Collections_All.yaml
-        asset_directory: config/assets/anime
     operations:
       split_duplicates: false
       assets_for_all: true
       delete_collections:
         less: 1
+    collection_files:
+      - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -68,17 +60,16 @@ libraries:
           horizontal_position: left
           vertical_position: top
         asset_directory: config/assets/anime
-    settings:
-      asset_directory:
-        - config/assets/anime
-        - config/assets/posters
 
   Movies:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
+    settings:
+      asset_directory:
+        - config/assets/standard_movies
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
     collection_files:
       - file: config/Movies_Collections_Awards.yaml
         asset_directory: config/assets/awards
@@ -90,26 +81,11 @@ libraries:
         asset_directory: config/assets/holidays
       - file: config/Movies_Collections_Suggestions.yaml
         asset_directory: config/assets/suggestions
-    operations:
-      split_duplicates: false
-      assets_for_all: true
-      delete_collections:
-        less: 1
-    settings:
-      asset_directory:
-        - config/assets/standard_movies
-        - config/assets/posters
 
   Series:
-    run_order:
-      - collections
-      - metadata
-      - operations
-      - overlays
     settings:
       asset_directory:
         - config/assets/standard_series
-        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -171,13 +147,13 @@ libraries:
           url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network-top-left/<<key>>.png
           back_color: 00
 
-settings: # Can be individually specified per library as well
+settings:
   cache: true
   cache_expiration: 60
+  asset_directory: config/assets/posters
   asset_folders: true
   asset_depth: 3
   create_asset_folders: true
-  create_asset_directories: true
   dimensional_asset_rename: true
   sync_mode: sync
   delete_below_minimum: true
@@ -190,29 +166,24 @@ settings: # Can be individually specified per library as well
   show_missing: false
   show_missing_assets: false
   show_missing_season_assets: false
+  show_missing_episode_assets: false
   save_missing: false
   tvdb_language: eng
-  ignore_ids:
-  ignore_imdb_ids:
   minimum_items: 1
-  default_collection_order:
   download_url_assets: true
   verify_ssl: true
   item_refresh_delay: 0
   missing_path: config/missing
   playlist_sync_to_users: all
-  show_missing_episode_assets: true
   show_asset_not_needed: true
-  custom_repo:
   prioritize_assets: false
   playlist_report: true
   check_nightly: false
   run_order:
-  - operations
-  - metadata
-  - collections
-  - overlays
-  asset_directory:
+    - operations
+    - metadata
+    - collections
+    - overlays
   run_again_delay: 0
   show_unconfigured: true
   playlist_exclude_users:
