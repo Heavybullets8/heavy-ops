@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app requestrr
+  namespace: media
+
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  driftDetection:
+    mode: enabled
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
+  values:
+
+    controllers:
+      requestrr:
+        enabled: true
+        type: deployment
+        annotations: {}
+        labels: {}
+        replicas: 1
+
+        containers:
+          app:
+            nameOverride: *app
+            image:
+              repository: thomst08/requestrr
+              tag: v2.1.6@sha256:9d9d64d3cc33b79210c543c60f6b9b20824df00303e53954b4133372dc787ab8
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: ${TIMEZONE}
+
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
+
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 4545
+
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: "https://auth-dev.${SECRET_DOMAIN}/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth-dev.${SECRET_DOMAIN}/?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+        hosts:
+          - host: "{{ .Release.Name }}-dev.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /root/config
