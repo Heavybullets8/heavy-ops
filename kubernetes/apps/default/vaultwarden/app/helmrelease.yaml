@@ -50,7 +50,7 @@ spec:
               ICON_CACHE_FOLDER: data/icon_cache
               ATTACHMENTS_FOLDER: data/attachments
               DOMAIN: "https://bit.${SECRET_DOMAIN}"
-              SIGNUPS_ALLOWED: "true" # TODO: Set to false after initial setup
+              SIGNUPS_ALLOWED: "false"
               SMTP_HOST: smtp.gmail.com
               SMTP_FROM: support@${SECRET_DOMAIN}
               SMTP_FROM_NAME: vaultwarden
@@ -78,7 +78,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         className: external
         hosts:
-          - host: "bit.${SECRET_DOMAIN}"
+          - host: "vault.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:

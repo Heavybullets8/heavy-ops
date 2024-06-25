@@ -28,4 +28,4 @@ spec:
       APP: *app
       VOLSYNC_CAPACITY: 10Gi
       VOLSYNC_STORAGECLASS: iscsi
-      GATUS_SUBDOMAIN: bit
+      GATUS_SUBDOMAIN: vault
