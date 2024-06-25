@@ -22,6 +22,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: requestrr-dev
+      GATUS_SUBDOMAIN: *app
       VOLSYNC_CAPACITY: 5Gi
       VOLSYNC_STORAGECLASS: iscsi
