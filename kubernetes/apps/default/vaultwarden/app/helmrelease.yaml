@@ -58,6 +58,7 @@ spec:
               SMTP_SECURITY: starttls
               SIGNUPS_VERIFY: "true"
               EMAIL_CHANGE_ALLOWED: "true"
+              EMAIL_2FA_AUTO_FALLBACK: "true"
             envFrom: *envFrom
             resources:
               requests:
