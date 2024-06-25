@@ -50,7 +50,7 @@ spec:
               ICON_CACHE_FOLDER: data/icon_cache
               ATTACHMENTS_FOLDER: data/attachments
               DOMAIN: "https://bit.${SECRET_DOMAIN}"
-              SIGNUPS_ALLOWED: "false"
+              SIGNUPS_ALLOWED: "true" # TODO: Set to false after initial setup
               SMTP_HOST: smtp.gmail.com
               SMTP_FROM: support@${SECRET_DOMAIN}
               SMTP_FROM_NAME: vaultwarden
