@@ -32,7 +32,7 @@ spec:
         - hard
         - noatime
         - nodiratime
-        - nolock
+        - local_lock=all
       secrets:
         provisioner-secret:
         controller-publish-secret:
