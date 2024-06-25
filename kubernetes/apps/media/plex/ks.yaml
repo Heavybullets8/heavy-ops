@@ -26,9 +26,9 @@ spec:
       APP: *app
       GATUS_PATH: /web/index.html
       GATUS_SUBDOMAIN: plex
-      VOLSYNC_CAPACITY: 300Gi
-      VOLSYNC_ACCESSMODES: ReadWriteMany
-      VOLSYNC_STORAGECLASS: nfs
+      VOLSYNC_CAPACITY: 350Gi
+      VOLSYNC_ACCESSMODES: ReadWriteOnce
+      VOLSYNC_STORAGECLASS: iscsi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
