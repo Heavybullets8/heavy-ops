@@ -24,6 +24,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: notifiarr-dev
+      GATUS_SUBDOMAIN: notifiarr
       VOLSYNC_CAPACITY: 3Gi
       VOLSYNC_STORAGECLASS: iscsi
