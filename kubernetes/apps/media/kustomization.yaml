@@ -16,3 +16,4 @@ resources:
   - ./prowlarr/ks.yaml
   - ./tautulli/ks.yaml
   - ./overseerr/ks.yaml
+  - ./wizarr/ks.yaml
