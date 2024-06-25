@@ -27,7 +27,7 @@ spec:
       namespace: volsync-system
   values:
     controllers:
-      overseerr:
+      notifiarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
