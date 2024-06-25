@@ -43,6 +43,9 @@ spec:
               DN_SONARR_0_URL: http://sonarr.media.svc.cluster.local
               DN_PLEX_URL: http://plex.media.svc.cluster.local:32400
               DN_TAUTULLI_URL: http://tautulli.media.svc.cluster.local
+            envFrom:
+              - secretRef:
+                  name: notifiarr-secret
 
             probes:
               liveness:
