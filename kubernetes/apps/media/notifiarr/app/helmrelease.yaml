@@ -109,6 +109,14 @@ spec:
         type: emptyDir
         medium: Memory
 
+      machine-id-file:
+        type: secret
+        name: daps-id-secret
+        globalMounts:
+          - path: /etc/machine-id
+            subPath: machine-id
+            readOnly: true
+
       utmp-file:
         type: secret
         name: daps-utmp-secret
