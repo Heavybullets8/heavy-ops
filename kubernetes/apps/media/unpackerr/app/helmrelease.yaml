@@ -42,6 +42,10 @@ spec:
               UN_SONARR_0_PATHS_0: /media/download/torrent/complete/series
               UN_RADARR_0_URL: http://radarr.media.svc.cluster.local
               UN_RADARR_0_PATHS_0: /media/download/torrent/complete/movies
+              UN_WEBHOOK_0_NAME: notifiarr
+              UN_WEBHOOK_0_IGNORE_SSL: "false"
+              UN_WEBHOOK_0_SILENT: "false"
+              UN_WEBHOOK_0_EVENTS_0: 0
             envFrom:
               - secretRef:
                   name: unpackerr-secret
