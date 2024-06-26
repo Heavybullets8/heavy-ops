@@ -51,8 +51,6 @@ spec:
               ENABLE_CROSSPLAY: 1
               PUBLIC: 1
               TYPE: BepInExFull
-              PGID: 568
-              PUID: 568
             envFrom:
               - secretRef:
                   name: valheim-secret
