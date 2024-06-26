@@ -89,6 +89,11 @@ spec:
         globalMounts:
           - path: /config/assets
 
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+
       input:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
