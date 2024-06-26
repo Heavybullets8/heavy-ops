@@ -123,4 +123,3 @@ spec:
         globalMounts:
           - path: config/notifiarr.conf
             subPath: notifiarr.conf
-
