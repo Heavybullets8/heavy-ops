@@ -5,9 +5,9 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  TIMEZONE: "America/Denver"
   CLUSTER_NAME: heavy-cluster
-
+  TIMEZONE: "America/Denver"
+  CLUSTER_CLOUDFLARE_TUNNEL_ID: 7ef045bc-4f17-41fc-950f-9113413da56a
   K8S_GATEWAY_IP:     192.168.201.110
   NGINX_INTERNAL_IP:  192.168.201.120
   NGINX_EXTERNAL_IP:  192.168.201.130
