@@ -106,7 +106,7 @@ spec:
         type: configMap
         name: daps-rclone
         globalMounts:
-          - path: /config/.rclone.conf
+          - path: /.rclone.conf
             subPath: .rclone.conf
             readOnly: true
 
