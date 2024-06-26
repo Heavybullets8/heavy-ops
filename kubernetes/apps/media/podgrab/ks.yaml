@@ -22,7 +22,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: podgrab-dev
+      GATUS_SUBDOMAIN: podgrab
       VOLSYNC_CAPACITY: 3Gi
       VOLSYNC_ACCESSMODES: ReadWriteOnce
       VOLSYNC_STORAGECLASS: nfs
