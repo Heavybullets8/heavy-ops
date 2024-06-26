@@ -47,6 +47,7 @@ spec:
               - -c
             args:
               - |
+                export RCLONE_CONFIG="/config/rclone.conf"
                 python3 /app/main.py poster_renamerr
                 python3 /app/main.py health_checkarr
             env:
@@ -67,7 +68,7 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
-      config:
+      config-file:
         type: secret
         name: daps-secret
         globalMounts:
@@ -89,26 +90,26 @@ spec:
         globalMounts:
           - path: /config/assets
 
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /config/logs
+      # logs:
+      #   type: emptyDir
+      #   globalMounts:
+      #     - path: /config/logs
 
-      input:
+      config:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         storageClass: iscsi
         size: 50Gi
         globalMounts:
-          - path: /config/input
+          - path: /config
 
-      rclone-config:
-        type: configMap
-        name: daps-rclone
-        globalMounts:
-          - path: /.rclone.conf
-            subPath: .rclone.conf
-            readOnly: true
+      # rclone-config:
+      #   type: configMap
+      #   name: daps-rclone
+      #   globalMounts:
+      #     - path: /.rclone.conf
+      #       subPath: .rclone.conf
+      #       readOnly: true
 
       process:
         type: emptyDir
