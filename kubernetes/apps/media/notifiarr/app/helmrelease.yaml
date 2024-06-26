@@ -75,9 +75,7 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
-    podTemplate:
-      spec:
-        hostname: notifiarr-talos
+
     service:
       app:
         controller: *app
@@ -113,16 +111,16 @@ spec:
 
       machine-id-file:
         type: secret
-        name: daps-id-secret
+        name: notifiarr-id-secret
         globalMounts:
           - path: /etc/machine-id
             subPath: machine-id
             readOnly: true
 
-      utmp-file:
+      config-file:
         type: secret
-        name: daps-utmp-secret
+        name: notifiarr-conf-secret
         globalMounts:
-          - path: /var/run/utmp
-            subPath: utmp
-            readOnly: true
+          - path: config/notifiarr.conf
+            subPath: notifiarr.conf
+
