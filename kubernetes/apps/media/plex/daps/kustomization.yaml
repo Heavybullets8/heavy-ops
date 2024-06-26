@@ -11,6 +11,6 @@ configMapGenerator:
       - config.yaml=./config/config.yaml
   - name: daps-rclone
     files:
-      - rclone.conf=./config/.rclone.conf
+      - .rclone.conf=./config/rclone.conf
 generatorOptions:
   disableNameSuffixHash: true
