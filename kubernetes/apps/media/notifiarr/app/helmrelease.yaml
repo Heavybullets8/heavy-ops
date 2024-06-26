@@ -67,7 +67,9 @@ spec:
                 cpu: 10m
               limits:
                 memory: 3Gi
+
     defaultPodOptions:
+      hostname: notifiarr-talos
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
@@ -105,13 +107,13 @@ spec:
       config:
         existingClaim: *app
 
-      machine-id-file:
-        type: secret
-        name: notifiarr-id-secret
-        globalMounts:
-          - path: /etc/machine-id
-            subPath: machine-id
-            readOnly: true
+      # machine-id-file:
+      #   type: secret
+      #   name: notifiarr-id-secret
+      #   globalMounts:
+      #     - path: /etc/machine-id
+      #       subPath: machine-id
+      #       readOnly: true
 
       tmp:
         type: emptyDir
