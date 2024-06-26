@@ -22,5 +22,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 10Gi
       GATUS_SUBDOMAIN: tautulli
+      VOLSYNC_CAPACITY: 500Mi
+      VOLSYNC_ACCESSMODES: ReadWriteOnce
+      VOLSYNC_STORAGECLASS: iscsi
