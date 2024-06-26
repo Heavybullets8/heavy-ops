@@ -75,7 +75,9 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
-
+    podTemplate:
+      spec:
+        hostname: notifiarr-talos
     service:
       app:
         controller: *app
