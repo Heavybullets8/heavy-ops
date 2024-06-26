@@ -102,6 +102,14 @@ spec:
         globalMounts:
           - path: /config/input
 
+      rclone-config:
+        type: configMap
+        name: daps-rclone
+        globalMounts:
+          - path: /config/.rclone.conf
+            subPath: rclone.conf
+            readOnly: true
+
       process:
         type: emptyDir
         medium: Memory
