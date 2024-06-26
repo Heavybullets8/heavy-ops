@@ -45,6 +45,7 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: {drop: [ALL]}
+              seccompProfile: { type: RuntimeDefault }
     serviceAccount:
       create: true
       name: "capacitor"
