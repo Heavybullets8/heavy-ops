@@ -26,4 +26,4 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: auth-dev
+      GATUS_SUBDOMAIN: auth
