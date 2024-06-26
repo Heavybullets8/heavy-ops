@@ -105,9 +105,12 @@ spec:
       config:
         existingClaim: *app
 
-      tmp:
-        type: emptyDir
-        medium: Memory
+      config-file:
+        type: secret
+        name: notifiarr-conf-secret
+        globalMounts:
+          - path: /config/notifiarr.conf
+            subPath: notifiarr.conf
 
       machine-id-file:
         type: secret
@@ -117,9 +120,6 @@ spec:
             subPath: machine-id
             readOnly: true
 
-      config-file:
-        type: secret
-        name: notifiarr-conf-secret
-        globalMounts:
-          - path: config/notifiarr.conf
-            subPath: notifiarr.conf
+      tmp:
+        type: emptyDir
+        medium: Memory
