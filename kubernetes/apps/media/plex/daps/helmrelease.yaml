@@ -68,6 +68,20 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: Always
     persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: iscsi
+        size: 50Gi
+        globalMounts:
+          - path: /config
+
+      assets:
+        type: persistentVolumeClaim
+        existingClaim: kometa-assets
+        globalMounts:
+          - path: /config/assets
+
       config-file:
         type: secret
         name: daps-secret
@@ -83,33 +97,6 @@ spec:
           - path: /config/sa.json
             subPath: sa.json
             readOnly: true
-
-      assets:
-        type: persistentVolumeClaim
-        existingClaim: kometa-assets
-        globalMounts:
-          - path: /config/assets
-
-      # logs:
-      #   type: emptyDir
-      #   globalMounts:
-      #     - path: /config/logs
-
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        storageClass: iscsi
-        size: 50Gi
-        globalMounts:
-          - path: /config
-
-      # rclone-config:
-      #   type: configMap
-      #   name: daps-rclone
-      #   globalMounts:
-      #     - path: /.rclone.conf
-      #       subPath: .rclone.conf
-      #       readOnly: true
 
       process:
         type: emptyDir
