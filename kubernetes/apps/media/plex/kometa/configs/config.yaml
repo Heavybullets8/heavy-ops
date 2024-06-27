@@ -6,10 +6,9 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-    # TODO: Uncomment
-    # collection_files:
-    #   - file: config/Anime_Collections_All.yaml
-    #     asset_directory: config/assets/anime
+    collection_files:
+      - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -147,8 +146,8 @@ settings:
   show_unmanaged: true
   show_filtered: true
   show_options: true
-  show_missing: true # TODO: False
-  show_missing_assets: true # TODO: False
+  show_missing: false
+  show_missing_assets: false
   show_missing_season_assets: false
   show_missing_episode_assets: false
   tvdb_language: en

@@ -56,11 +56,11 @@ spec:
                         /config/assets/suggestions \
                         /config/assets/posters &&
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
+                python3 kometa.py --run --read-only-config --run-libraries "Movies" &
+                python3 kometa.py --run --read-only-config --run-libraries "Series" &
                 wait
             env:
-                # python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
-                # python3 kometa.py --run --read-only-config --run-libraries "Movies" &
-                # python3 kometa.py --run --read-only-config --run-libraries "Series" &
               TZ: *timeZone
               KOMETA_CONFIG: /config/config.yaml
             envFrom:

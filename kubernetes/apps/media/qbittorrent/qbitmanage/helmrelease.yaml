@@ -36,7 +36,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         cronjob:
-          schedule: "0 16,5 * * *"
+          schedule: "*/30 * * * *"
           timeZone: &timeZone ${TIMEZONE}
           concurrencyPolicy: Forbid
           successfulJobsHistory: 1
@@ -59,8 +59,8 @@ spec:
               QBT_CAT_UPDATE: false
               QBT_CROSS_SEED: false
               QBT_DIVIDER: '='
-              QBT_DRY_RUN: true # TODO: Change to false
-              QBT_LOG_LEVEL: DEBUG # TODO: Change to INFO
+              QBT_DRY_RUN: false
+              QBT_LOG_LEVEL: INFO
               QBT_RECHECK: true
               QBT_REM_ORPHANED: true
               QBT_REM_UNREGISTERED: true
