@@ -64,21 +64,13 @@ spec:
               QBT_RECHECK: true
               QBT_REM_ORPHANED: true
               QBT_REM_UNREGISTERED: true
-              QBT_SCHEDULE: 30
               QBT_SHARE_LIMITS: false
               QBT_SKIP_CLEANUP: false
               QBT_SKIP_QB_VERSION_CHECK: true
               QBT_TAG_NOHARDLINKS: true
-              QBT_TAG_TRACKER_ERROR: false
+              QBT_TAG_TRACKER_ERROR: true
               QBT_TAG_UPDATE: true
               QBT_WIDTH: 100
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
             resources:
               requests:
                 cpu: 10m
@@ -112,12 +104,12 @@ spec:
             subPath: config.yaml
             readOnly: true
 
-      data:
+      media:
         type: nfs
         server: ${SECRET_TRUENAS_IP}
         path: /mnt/tank/media/download/torrent
         globalMounts:
-          - path: /data
+          - path: /media
 
       qbittorrent:
         existingClaim: qbittorrent
