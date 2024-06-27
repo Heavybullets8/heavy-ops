@@ -172,10 +172,10 @@ settings:
   show_asset_not_needed: true
   prioritize_assets: false
   run_order:
-    - operations
-    - metadata
-    - collections
-    - overlays
+  - operations
+  - metadata
+  - collections
+  - overlays
   show_unconfigured: true
 
 anidb:
