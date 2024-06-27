@@ -33,6 +33,11 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
+          init:
+            image:
+              repository: busybox
+              tag: stable
+            command: ['sh', '-c', 'cp /secret/config.yaml /config/config.yaml']
           app:
             image:
               repository: bobokun/qbit_manage
@@ -85,9 +90,9 @@ spec:
         type: secret
         name: qbitmanage-secret
         globalMounts:
-          - path: /config/config.yaml
+          - path: /secret/config.yaml
             subPath: config.yaml
-            readOnly: false
+            readOnly: true
 
       data:
         type: nfs
