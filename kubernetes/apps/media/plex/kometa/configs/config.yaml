@@ -5,7 +5,6 @@ libraries:
       asset_directory:
         - config/assets/anime
         - config/assets/posters
-        - config/assets/anime
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -64,12 +63,12 @@ libraries:
     settings:
       asset_directory:
         - config/assets/standard_movies
-        - config/assets/posters
         - config/assets/awards
         - config/assets/decades
         - config/assets/genres
         - config/assets/holidays
         - config/assets/suggestions
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -86,9 +85,9 @@ libraries:
     settings:
       asset_directory:
         - config/assets/standard_series
-        - config/assets/posters
         - config/assets/networks
         - config/assets/suggestions
+        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
