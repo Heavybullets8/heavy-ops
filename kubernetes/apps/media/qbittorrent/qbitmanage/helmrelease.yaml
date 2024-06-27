@@ -82,8 +82,8 @@ spec:
         type: emptyDir
 
       config-file:
-        type: configMap
-        name: qbitmanage-configmap
+        type: secret
+        name: qbitmanage-secret
         globalMounts:
           - path: /config/config.yaml
             subPath: config.yaml
