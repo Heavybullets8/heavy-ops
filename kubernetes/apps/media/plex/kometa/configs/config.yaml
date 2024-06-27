@@ -12,6 +12,7 @@ libraries:
         less: 1
     collection_files:
       - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -34,6 +35,7 @@ libraries:
           horizontal_position: left
           vertical_position: top
           builder_level: episode
+        asset_directory: config/assets/anime
 
   Anime Movies:
     settings:
@@ -47,6 +49,7 @@ libraries:
         less: 1
     collection_files:
       - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -58,16 +61,12 @@ libraries:
           style: square
           horizontal_position: left
           vertical_position: top
+        asset_directory: config/assets/anime
 
   Movies:
     settings:
       asset_directory:
         - config/assets/standard_movies
-        - config/assets/awards
-        - config/assets/decades
-        - config/assets/genres
-        - config/assets/holidays
-        - config/assets/suggestions
         - config/assets/posters
     operations:
       split_duplicates: false
@@ -76,17 +75,20 @@ libraries:
         less: 1
     collection_files:
       - file: config/Movies_Collections_Awards.yaml
+        asset_directory: config/assets/awards
       - file: config/Movies_Collections_Decades.yaml
+        asset_directory: config/assets/decades
       - file: config/Movies_Collections_Genres.yaml
+        asset_directory: config/assets/genres
       - file: config/Movies_Collections_Holidays.yaml
+        asset_directory: config/assets/holidays
       - file: config/Movies_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
 
   Series:
     settings:
       asset_directory:
         - config/assets/standard_series
-        - config/assets/networks
-        - config/assets/suggestions
         - config/assets/posters
     operations:
       split_duplicates: false
@@ -95,7 +97,9 @@ libraries:
         less: 1
     collection_files:
       - file: config/Series_Collections_Networks.yaml
+        asset_directory: config/assets/networks
       - file: config/Series_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
       - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/collection_files/better_new_and_old_tv_shows_releases.yml
 
     overlay_files:
@@ -115,8 +119,8 @@ libraries:
           vertical_align: top
           vertical_offset: 0
           font_size: 1
-          font_color: '#00000000'
-          back_color: '#00000000'
+          font_color: "#00000000"
+          back_color: "#00000000"
           back_width_airing: 1000
           back_width_returning: 1000
           back_width_ended: 1000
@@ -171,10 +175,10 @@ settings:
   show_asset_not_needed: true
   prioritize_assets: false
   run_order:
-  - operations
-  - metadata
-  - collections
-  - overlays
+    - operations
+    - metadata
+    - collections
+    - overlays
   show_unconfigured: true
 
 anidb:
