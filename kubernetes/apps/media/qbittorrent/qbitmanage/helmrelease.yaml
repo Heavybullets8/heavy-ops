@@ -51,7 +51,7 @@ spec:
               - -c
             args:
               - |
-                cp /secret/config.yaml /config/config.yaml'
+                cp /secret/config.yaml /config/config.yaml
                 python3 qbit_manage.py --run
             env:
               TZ: *timeZone
