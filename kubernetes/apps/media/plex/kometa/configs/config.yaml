@@ -1,9 +1,6 @@
 ---
 libraries:
   Anime Series:
-    settings:
-      asset_directory:
-        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -37,9 +34,6 @@ libraries:
         asset_directory: config/assets/anime
 
   Anime Movies:
-    settings:
-      asset_directory:
-        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -62,9 +56,6 @@ libraries:
         asset_directory: config/assets/anime
 
   Movies:
-    settings:
-      asset_directory:
-        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -83,9 +74,6 @@ libraries:
         asset_directory: config/assets/suggestions
 
   Series:
-    settings:
-      asset_directory:
-        - config/assets/posters
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -152,7 +140,6 @@ settings:
   asset_folders: true
   asset_depth: 3
   create_asset_folders: true
-  dimensional_asset_rename: true
   sync_mode: sync
   delete_below_minimum: true
   missing_only_released: true
@@ -169,7 +156,8 @@ settings:
   verify_ssl: true
   playlist_sync_to_users: all
   show_asset_not_needed: true
-  prioritize_assets: true
+  prioritize_assets: false
+  asset_directory: config/assets/posters
   run_order:
     - operations
     - metadata
