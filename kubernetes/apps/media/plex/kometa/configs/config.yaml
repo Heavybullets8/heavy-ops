@@ -163,8 +163,8 @@ settings:
   show_unmanaged: true
   show_filtered: true
   show_options: true
-  show_missing: false
-  show_missing_assets: false
+  show_missing: true # TODO: False
+  show_missing_assets: true # TODO: False
   show_missing_season_assets: false
   show_missing_episode_assets: false
   tvdb_language: en
