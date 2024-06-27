@@ -87,6 +87,7 @@ spec:
         globalMounts:
           - path: /config/config.yaml
             subPath: config.yaml
+            readOnly: false
 
       data:
         type: nfs
