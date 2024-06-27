@@ -3,7 +3,6 @@ libraries:
   Anime Series:
     settings:
       asset_directory:
-        - config/assets/anime
         - config/assets/posters
     operations:
       split_duplicates: false
@@ -40,7 +39,6 @@ libraries:
   Anime Movies:
     settings:
       asset_directory:
-        - config/assets/anime
         - config/assets/posters
     operations:
       split_duplicates: false
@@ -66,7 +64,6 @@ libraries:
   Movies:
     settings:
       asset_directory:
-        - config/assets/standard_movies
         - config/assets/posters
     operations:
       split_duplicates: false
@@ -88,7 +85,6 @@ libraries:
   Series:
     settings:
       asset_directory:
-        - config/assets/standard_series
         - config/assets/posters
     operations:
       split_duplicates: false

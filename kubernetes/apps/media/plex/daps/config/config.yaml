@@ -173,17 +173,19 @@ unmatched_assets:
 
 poster_cleanarr:
   log_level: info
-  dry_run: true
+  dry_run: false
   instances:
-    - plex_1
-    - radarr_1
-    - sonarr_1
-    - sonarr_anime
+    - plex
+    - sonarr
+    - radarr
   library_names:
     - Movies
     - Anime Movies
+    - Series
+    - Anime Series
   ignore_collections:
-    - "Random Collection in assets you want to keep"
+    - "Latest Dubs"
+    - "Christianity"
   source_dirs:
     - /config/assets/posters
     - /config/assets/posters/tmp
