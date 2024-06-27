@@ -78,6 +78,9 @@ spec:
                   - ALL
 
     persistence:
+      config:
+        type: emptyDir
+
       config-file:
         type: configMap
         name: qbitmanage-configmap
