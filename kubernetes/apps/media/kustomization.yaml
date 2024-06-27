@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 
-  # - ./autoscan/ks.yaml
   - ./flaresolverr/ks.yaml
   - ./komga/ks.yaml
   - ./notifiarr/ks.yaml
