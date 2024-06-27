@@ -5,6 +5,7 @@ libraries:
       asset_directory:
         - config/assets/anime
         - config/assets/posters
+        - config/assets/anime
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -12,7 +13,6 @@ libraries:
         less: 1
     collection_files:
       - file: config/Anime_Collections_All.yaml
-        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -35,7 +35,6 @@ libraries:
           horizontal_position: left
           vertical_position: top
           builder_level: episode
-        asset_directory: config/assets/anime
 
   Anime Movies:
     settings:
@@ -49,7 +48,6 @@ libraries:
         less: 1
     collection_files:
       - file: config/Anime_Collections_All.yaml
-        asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
@@ -61,13 +59,17 @@ libraries:
           style: square
           horizontal_position: left
           vertical_position: top
-        asset_directory: config/assets/anime
 
   Movies:
     settings:
       asset_directory:
         - config/assets/standard_movies
         - config/assets/posters
+        - config/assets/awards
+        - config/assets/decades
+        - config/assets/genres
+        - config/assets/holidays
+        - config/assets/suggestions
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -75,21 +77,18 @@ libraries:
         less: 1
     collection_files:
       - file: config/Movies_Collections_Awards.yaml
-        asset_directory: config/assets/awards
       - file: config/Movies_Collections_Decades.yaml
-        asset_directory: config/assets/decades
       - file: config/Movies_Collections_Genres.yaml
-        asset_directory: config/assets/genres
       - file: config/Movies_Collections_Holidays.yaml
-        asset_directory: config/assets/holidays
       - file: config/Movies_Collections_Suggestions.yaml
-        asset_directory: config/assets/suggestions
 
   Series:
     settings:
       asset_directory:
         - config/assets/standard_series
         - config/assets/posters
+        - config/assets/networks
+        - config/assets/suggestions
     operations:
       split_duplicates: false
       assets_for_all: true
@@ -97,9 +96,7 @@ libraries:
         less: 1
     collection_files:
       - file: config/Series_Collections_Networks.yaml
-        asset_directory: config/assets/networks
       - file: config/Series_Collections_Suggestions.yaml
-        asset_directory: config/assets/suggestions
       - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/collection_files/better_new_and_old_tv_shows_releases.yml
 
     overlay_files:
@@ -152,7 +149,6 @@ libraries:
           back_color: 00
 
 settings:
-  cache: true
   cache_expiration: 60
   asset_folders: true
   asset_depth: 3
@@ -160,9 +156,7 @@ settings:
   dimensional_asset_rename: true
   sync_mode: sync
   delete_below_minimum: true
-  delete_not_scheduled: false
   missing_only_released: true
-  only_filter_missing: false
   show_unmanaged: true
   show_filtered: true
   show_options: true
@@ -170,33 +164,27 @@ settings:
   show_missing_assets: false
   show_missing_season_assets: false
   show_missing_episode_assets: false
-  save_missing: false
-  tvdb_language: eng
+  tvdb_language: en
   minimum_items: 1
   download_url_assets: true
   verify_ssl: true
-  item_refresh_delay: 0
-  missing_path: config/missing
   playlist_sync_to_users: all
   show_asset_not_needed: true
   prioritize_assets: false
-  playlist_report: true
-  check_nightly: false
   run_order:
     - operations
     - metadata
     - collections
     - overlays
-  run_again_delay: 0
   show_unconfigured: true
-  playlist_exclude_users:
-  overlay_artwork_filetype: jpg
-  overlay_artwork_quality:
 
 anidb:
+  client: talos
+  version: 1
   username: <<ANIDB_USERNAME>>
   password: <<ANIDB_PASSWORD>>
   language: en
+  cache_expiration: 60
 
 mal:
   client_id: <<MYANIMELIST_CLIENT_ID>>
@@ -221,11 +209,11 @@ plex:
   url: http://plex.media.svc.cluster.local:32400
   token: <<PLEX_API_KEY>>
   timeout: 60
-  clean_bundles: false
-  empty_trash: false
+  clean_bundles: true
+  empty_trash: true
   optimize: false
   verify_ssl:
-  db_cache: 5120
+  db_cache: 80
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local
@@ -235,7 +223,7 @@ tmdb:
   apikey: <<TMDB_API_KEY>>
   language: en
   cache_expiration: 60
-  region:
+  region: US
 
 trakt:
   client_id: <<TRAKT_CLIENT_ID>>
