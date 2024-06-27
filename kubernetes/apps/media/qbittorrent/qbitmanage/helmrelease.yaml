@@ -81,7 +81,7 @@ spec:
       config:
         type: emptyDir
         globalMounts:
-          - path: /config
+          - path: /app/config
 
       config-file:
         type: configMap
