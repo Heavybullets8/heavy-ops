@@ -69,7 +69,7 @@ notifiarr:
   instance:
 
 webhooks:
-  error: https://mywebhookurl.com/qbt_manage
+  error: notifiarr
   run_start: notifiarr
   run_end: notifiarr
   function:

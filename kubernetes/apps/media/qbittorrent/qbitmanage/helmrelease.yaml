@@ -10,40 +10,51 @@ spec:
     spec:
       chart: app-template
       version: 3.2.1
-      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
   dependsOn:
     - name: qbittorrent
       namespace: media
+
   values:
     controllers:
       qbitmanage:
+        type: cronjob
         annotations:
           reloader.stakater.com/auto: "true"
-
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: "OnRootMismatch"
-
+        cronjob:
+          schedule: "0 16,5 * * *"
+          timeZone: &timeZone ${TIMEZONE}
+          concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
         containers:
-          init:
-            image:
-              repository: busybox
-              tag: stable
-            command: ['sh', '-c', 'cp /secret/config.yaml /config/config.yaml']
           app:
             image:
               repository: bobokun/qbit_manage
               tag: 4.1.6@sha256:31e4954321bd22f6fe64b03b583026cd642524f4b6d86a0d8864b68d978fcdde
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                cp /secret/config.yaml /config/config.yaml'
+                python3 qbit_manage.py --run
             env:
-              TZ: "${TIMEZONE}"
+              TZ: *timeZone
               QBT_CONFIG: "/config/config.yaml"
               QBT_CAT_UPDATE: false
               QBT_CROSS_SEED: false
@@ -53,7 +64,6 @@ spec:
               QBT_RECHECK: true
               QBT_REM_ORPHANED: true
               QBT_REM_UNREGISTERED: true
-              QBT_RUN: true # TODO: Change to false, or switch to cronjob. idk
               QBT_SCHEDULE: 30
               QBT_SHARE_LIMITS: false
               QBT_SKIP_CLEANUP: false
@@ -81,6 +91,14 @@ spec:
               capabilities:
                 drop:
                   - ALL
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
 
     persistence:
       config:
