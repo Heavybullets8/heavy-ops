@@ -80,8 +80,6 @@ spec:
     persistence:
       config:
         type: emptyDir
-        globalMounts:
-          - path: /app/config
 
       config-file:
         type: configMap
