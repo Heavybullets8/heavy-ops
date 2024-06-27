@@ -6,9 +6,10 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-    collection_files:
-      - file: config/Anime_Collections_All.yaml
-        asset_directory: config/assets/anime
+    # TODO: Uncomment
+    # collection_files:
+    #   - file: config/Anime_Collections_All.yaml
+    #     asset_directory: config/assets/anime
     overlay_files:
       - default: languages
         template_variables:
