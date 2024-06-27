@@ -109,7 +109,7 @@ spec:
         server: ${SECRET_TRUENAS_IP}
         path: /mnt/tank/media/download/torrent
         globalMounts:
-          - path: /media
+          - path: /media/download/torrent
 
       qbittorrent:
         existingClaim: qbittorrent
