@@ -21,9 +21,9 @@ settings:
 directory:
   root_dir: /media/download/torrent
   remote_dir:
-  recycle_bin: /media/.RecycleBin
+  recycle_bin:
   torrents_dir: /qbittorrent/qBittorrent/BT_backup
-  orphaned_dir: /media/.orphaned_data
+  orphaned_dir:
   cross_seed:
 
 cat:
