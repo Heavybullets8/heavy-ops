@@ -173,7 +173,7 @@ settings:
   verify_ssl: true
   playlist_sync_to_users: all
   show_asset_not_needed: true
-  prioritize_assets: false
+  prioritize_assets: true
   run_order:
     - operations
     - metadata
