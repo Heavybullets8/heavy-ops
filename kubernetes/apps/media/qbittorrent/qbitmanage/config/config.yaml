@@ -37,7 +37,7 @@ cat:
   movies.cross-seed: /data/complete/cross-seed
   series.cross-seed: /data/complete/cross-seed
 
-tracker: {{ .QBITMANAGE_TRACKERS | nindent 2 | trim }}
+tracker: {{ .QBITMANAGE_TRACKERS | nindent 2 }}
 
 
 nohardlinks:
