@@ -55,7 +55,7 @@ spec:
                         /config/assets/networks \
                         /config/assets/suggestions \
                         /config/assets/posters &&
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
+                python3 kometa.py --run --read-only-config --overlays-only --run-libraries "Anime Series" &
                 wait
             env:
                 # python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
