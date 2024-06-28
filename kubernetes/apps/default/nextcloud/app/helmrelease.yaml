@@ -39,7 +39,7 @@ spec:
             - secretRef:
                 name: nextcloud-secret
 
-      datadir: /cloud
+      datadir: /var/www/data
 
       extraEnv:
         - name: REDIS_HOST
@@ -55,7 +55,8 @@ spec:
 
       extraVolumeMounts:
         - name: nextcloud-data
-          mountPath: /cloud
+          mountPath: /var/www/data
+          subPath: nextcloud-data
 
       existingSecret:
         enabled: true
