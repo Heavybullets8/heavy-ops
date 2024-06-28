@@ -131,16 +131,16 @@ spec:
         enabled: true
         existingClaim: nextcloud-pvc
 
-    cronjob:
-      enabled: true
+    # cronjob:
+    #   enabled: true
 
-    startupProbe:
-      enabled: true
-      initialDelaySeconds: 60
-      periodSeconds: 30
-      timeoutSeconds: 10
-      failureThreshold: 10
-      successThreshold: 1
+    # startupProbe:
+    #   enabled: true
+    #   initialDelaySeconds: 60
+    #   periodSeconds: 30
+    #   timeoutSeconds: 10
+    #   failureThreshold: 10
+    #   successThreshold: 1
 
     resources:
       requests:
