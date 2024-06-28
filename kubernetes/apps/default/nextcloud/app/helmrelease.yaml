@@ -53,6 +53,7 @@ spec:
         passwordKey: NEXTCLOUD_PASSWORD
         smtpUsernameKey: SMTP_USERNAME
         smtpPasswordKey: SMTP_PASSWORD
+        smtpHostKey: SMTP_HOST
 
       host: &host cloud.${SECRET_DOMAIN}
 
