@@ -79,7 +79,7 @@ spec:
     externalDatabase:
       enabled: true
       type: postgresql
-      host: postgres-rw.database.svc.cluster.local:5432
+      host: postgres16-rw.database.svc.cluster.local:5432
       database: nextcloud
       existingSecret:
         enabled: true
