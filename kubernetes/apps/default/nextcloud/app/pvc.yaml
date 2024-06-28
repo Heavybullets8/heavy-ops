@@ -19,6 +19,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: nextcloud-pvc
 spec:
+  storageClassName: nextcloud-nfs
   accessModes:
     - ReadWriteMany
   resources:
