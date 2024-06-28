@@ -60,7 +60,7 @@ orphaned:
   - '**/.DS_Store'
   - '**/Thumbs.db'
   - '**/@eaDir'
-  - /data/temp/**
+  - /media/temp/**
   - '**/*.!qB'
   - '**/*_unpackerred'
 
