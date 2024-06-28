@@ -63,28 +63,6 @@ spec:
         check_for_updates: false
         check_for_plugin_updates: false
         reporting_enabled: false
-      # auth:
-      #   oauth_auto_login: true
-      #   oauth_allow_insecure_email_lookup: true
-      # auth.generic_oauth:
-      #   enabled: true
-      #   name: Authelia
-      #   icon: signin
-      #   scopes: openid profile email groups
-      #   empty_scopes: false
-      #   login_attribute_path: preferred_username
-      #   groups_attribute_path: groups
-      #   name_attribute_path: name
-      #   use_pkce: true
-      # auth.generic_oauth.group_mapping:
-      #   org_id: 1
-      #   role_attribute_path: contains(groups[*], 'admins') && 'Admin' || 'Viewer'
-      # auth.basic:
-      #   enabled: false
-      # auth.anonymous:
-      #   enabled: false
-      # news:
-      #   news_feed_enabled: false
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
