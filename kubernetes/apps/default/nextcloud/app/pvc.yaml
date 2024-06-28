@@ -4,10 +4,12 @@ kind: PersistentVolume
 metadata:
   name: nextcloud-pv
 spec:
+  storageClassName: nextcloud-nfs
   capacity:
     storage: 300Gi
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /mnt/tank/cloud
     server: ${SECRET_TRUENAS_IP}
