@@ -33,8 +33,7 @@ spec:
 
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init
-          tag: 16
+          image: ghcr.io/onedr0p/postgres-init:16
           envFrom:
             - secretRef:
                 name: nextcloud-secret
