@@ -132,13 +132,19 @@ spec:
     # cronjob:
     #   enabled: true
 
-    # startupProbe:
-    #   enabled: true
+    startupProbe:
+      enabled: false
     #   initialDelaySeconds: 60
     #   periodSeconds: 30
     #   timeoutSeconds: 10
     #   failureThreshold: 10
     #   successThreshold: 1
+
+    livenessProbe:
+      enabled: false
+
+    readinessProbe:
+      enabled: false
 
     resources:
       requests:
