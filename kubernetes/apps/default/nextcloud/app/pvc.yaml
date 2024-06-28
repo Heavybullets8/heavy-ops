@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextcloud-pv
+spec:
+  capacity:
+    storage: 300Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/tank/cloud
+    server: ${SECRET_TRUENAS_IP}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 300Gi

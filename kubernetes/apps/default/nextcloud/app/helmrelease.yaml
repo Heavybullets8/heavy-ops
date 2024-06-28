@@ -47,17 +47,6 @@ spec:
         - name: REDIS_HOST_PORT
           value: "6379"
 
-      extraVolumes:
-        - name: nextcloud-data
-          nfs:
-            server: ${SECRET_TRUENAS_IP}
-            path: /mnt/tank/cloud
-
-      extraVolumeMounts:
-        - name: nextcloud-data
-          mountPath: /var/www/data
-          subPath: nextcloud-data
-
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
@@ -140,7 +129,8 @@ spec:
       existingClaim: *app
 
       nextcloudData:
-        enabled: false
+        enabled: true
+        existingClaim: nextcloud-pvc
 
     cronjob:
       enabled: true
