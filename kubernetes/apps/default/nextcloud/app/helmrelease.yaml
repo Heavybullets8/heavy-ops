@@ -55,7 +55,7 @@ spec:
         smtpPasswordKey: SMTP_PASSWORD
         smtpHostKey: SMTP_HOST
 
-      host: &host cloud.${SECRET_DOMAIN}
+      host: cloud.${SECRET_DOMAIN}
 
       mail:
         enabled: true
@@ -100,7 +100,7 @@ spec:
       enabled: true
       className: external
       annotations:
-        external-dns.alpha.kubernetes.io/target: external.${CLUSTER_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         nginx.ingress.kubernetes.io/proxy-body-size: "10G"
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
