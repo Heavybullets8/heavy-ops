@@ -103,7 +103,7 @@ identity_providers:
         algorithm: 'RS256'
     clients:
       - client_id: "{{ .grafana_OAUTH_CLIENT_ID }}"
-        client_secret: '{{ .grafana_OAUTH_CLIENT_SECRET_ENC }}'
+        client_secret: {{ .grafana_OAUTH_CLIENT_SECRET_ENC }}
         client_name: Grafana
         public: false
         authorization_policy: two_factor
