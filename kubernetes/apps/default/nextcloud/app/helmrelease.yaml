@@ -72,6 +72,16 @@ spec:
         runAsGroup: 568
         runAsNonRoot: true
 
+      configs:
+        logging.config.php: |-
+          <?php
+          $CONFIG = array (
+            'log_type' => 'file',
+            'logfile' => 'nextcloud.log',
+            'loglevel' => 0,
+            'logdateformat' => 'F d, Y H:i:s'
+            );
+
     internalDatabase:
       enabled: false
 
