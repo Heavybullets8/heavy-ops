@@ -93,7 +93,7 @@ libraries:
       delete_collections:
         less: 1
       mass_added_at_update:
-        - tvdb
+        # - tvdb
         - omdb
         - mdb
         - mdb_digital
