@@ -6,6 +6,10 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
+      mass_added_at_update:
+        - anidb
+        - mal
+        - tvdb
     collection_files:
       - file: config/Anime_Collections_All.yaml
         asset_directory: config/assets/anime
@@ -39,6 +43,10 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
+      mass_added_at_update:
+        - anidb
+        - mal
+        - tmdb
     collection_files:
       - file: config/Anime_Collections_All.yaml
         asset_directory: config/assets/anime
@@ -61,7 +69,6 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-      # TODO: REMOVE THIS
       mass_added_at_update:
         - tmdb
         - omdb
@@ -85,11 +92,9 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-      # TODO: REMOVE THIS
       mass_added_at_update:
         - tvdb
         - omdb
-        - reset
     collection_files:
       - file: config/Series_Collections_Networks.yaml
         asset_directory: config/assets/networks
@@ -128,8 +133,6 @@ libraries:
           back_height: 1500
           back_padding: 0
           back_line_width: 1000
-          final_horizontal_offset: 0
-          final_vertical_offset: 0
 
       # Fallback Network logo which is overwritten by pmm: network if it finds an image for the network. Must run before pmm: network.
       - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network_fallback.yml
