@@ -67,11 +67,11 @@ spec:
           authtype: LOGIN
           secure: ssl
 
-      securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        runAsNonRoot: true
+      # securityContext:
+      #   runAsUser: 568
+      #   runAsGroup: 568
+      #   fsGroup: 568
+      #   runAsNonRoot: true
 
       configs:
         logging.config.php: |-
