@@ -48,7 +48,7 @@ jobs:
         run: brew install jo yq
 
       - name: Gather Images in Default Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
+        uses: docker://ghcr.io/allenporter/flux-local:v5.4.0
         with:
           args: >-
             get cluster
@@ -58,7 +58,7 @@ jobs:
             --output-file default.yaml
 
       - name: Gather Images in Pull Request Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
+        uses: docker://ghcr.io/allenporter/flux-local:v5.4.0
         with:
           args: >-
             get cluster
