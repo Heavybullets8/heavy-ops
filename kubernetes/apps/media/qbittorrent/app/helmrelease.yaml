@@ -152,3 +152,8 @@ spec:
         path: /mnt/tank/media/download/torrent
         globalMounts:
           - path: /media/download/torrent
+
+      addons:
+        type: emptyDir
+        globalMounts:
+          - path: /addons
