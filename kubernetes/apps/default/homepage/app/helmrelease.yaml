@@ -82,18 +82,9 @@ spec:
                   port: http
 
     persistence:
-      config-secret:
+      config:
         type: secret
         name: homepage-secret
-        globalMounts:
-          - subPath: services.yaml
-            path: /app/config/services.yaml
-          - subPath: widgets.yaml
-            path: /app/config/widgets.yaml
-
-      config-configmap:
-        type: configMap
-        name: homepage-configmap
         globalMounts:
           - subPath: bookmarks.yaml
             path: /app/config/bookmarks.yaml
@@ -101,5 +92,9 @@ spec:
             path: /app/config/docker.yaml
           - subPath: kubernetes.yaml
             path: /app/config/kubernetes.yaml
+          - subPath: services.yaml
+            path: /app/config/services.yaml
           - subPath: settings.yaml
             path: /app/config/settings.yaml
+          - subPath: widgets.yaml
+            path: /app/config/widgets.yaml

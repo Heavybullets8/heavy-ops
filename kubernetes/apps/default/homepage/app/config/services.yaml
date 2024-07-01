@@ -83,7 +83,7 @@
         widget:
           type: truenas
           url: http://${SECRET_TRUENAS_IP}:81
-          key: "{{ .TRUENAS_truenas-api }}"
+          key: "${SECRET_TRUENAS_API}"
           nasType: scale
           enablePools: true
 
