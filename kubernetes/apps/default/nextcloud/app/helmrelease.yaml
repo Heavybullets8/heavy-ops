@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 5.0.2
+      version: 5.1.0
       sourceRef:
         kind: HelmRepository
         name: nextcloud
@@ -67,11 +67,11 @@ spec:
           authtype: LOGIN
           secure: ssl
 
-      # securityContext:
-      #   runAsUser: 568
-      #   runAsGroup: 568
-      #   fsGroup: 568
-      #   runAsNonRoot: true
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        runAsNonRoot: true
 
       configs:
         logging.config.php: |-
@@ -135,6 +135,10 @@ spec:
     persistence:
       enabled: true
       existingClaim: *app
+
+      nextcloudData:
+        enabled: true
+        existingClaim: nextcloud-pvc
 
     cronjob:
       enabled: true
