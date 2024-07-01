@@ -30,7 +30,6 @@ spec:
   values:
     controllers:
       homepage:
-        replicas: 2
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
