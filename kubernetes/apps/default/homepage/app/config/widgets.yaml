@@ -1,0 +1,16 @@
+---
+#- logo:
+#    icon: https://raw.githubusercontent.com/LilDrunkenSmurf/k3s-home-cluster/main/icons/lds-transparent.png
+- kubernetes:
+    cluster:
+      cpu: true
+      label: cluster
+      memory: true
+      show: true
+      showLabel: true
+    nodes:
+      cpu: true
+      memory: true
+      show: false
+      showLabel: true
+

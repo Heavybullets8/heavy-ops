@@ -8,5 +8,6 @@ resources:
   # Flux-Kustomizations
   - ./authelia/ks.yaml
   - ./glauth/ks.yaml
+  - ./homepage/ks.yaml
   # - ./nextcloud/ks.yaml
   - ./vaultwarden/ks.yaml

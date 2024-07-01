@@ -1,0 +1,111 @@
+---
+- Media:
+    - Plex:
+        icon: plex.png
+        href: https://plex.${SECRET_DOMAIN}
+        description: Media Server
+        widget:
+          type: tautulli
+          url: http://tautulli.media.svc.cluster.local
+          key: "{{ .TAUTULLI_TAUTULLI_API_KEY }}"
+          enableUser: true
+          showEpisodeNumber: true
+          expandOneStreamToTwoRows: false
+
+    - Sonarr:
+        href: https://sonarr.${SECRET_DOMAIN}
+        icon: sonarr.png
+        description: Series
+        widget:
+            type: sonarr
+            url: http://sonarr.media.svc.cluster.local
+            key: "{{ .SONARR_SONARR__AUTH__APIKEY }}"
+
+    - Radarr:
+        href: https://radarr.${SECRET_DOMAIN}
+        icon: radarr.png
+        description: Movies
+        widget:
+            type: radarr
+            url: http://radarr.media.svc.cluster.local
+            key: "{{ .RADARR_RADARR__AUTH__APIKEY }}"
+
+    - Prowlarr:
+        href: https://prowlarr.${SECRET_DOMAIN}
+        icon: prowlarr.png
+        description: Indexer
+        widget:
+            type: prowlarr
+            url: http://prowlarr.media.svc.cluster.local
+            key: "{{ .PROWLARR_PROWLARR__AUTH__APIKEY }}"
+
+    - qBittorrent:
+        href: https://qbit.${SECRET_DOMAIN}
+        icon: qbittorrent.png
+        description: Torrents
+        widget:
+            type: qbittorrent
+            url: http://qbittorrent.media.svc.cluster.local
+
+    - Sabnzbd:
+        href: https://nzb.${SECRET_DOMAIN}
+        icon: sabnzbd.png
+        description: Usenet
+        widget:
+            type: sabnzbd
+            url: http://sabnzbd.media.svc.cluster.local
+            key: "{{ .SABNZBD_SABNZBD_API_KEY }}"
+
+    - Overseerr:
+        href: https://overseerr.${SECRET_DOMAIN}
+        icon: overseerr.png
+        description: Requests
+        widget:
+            type: overseerr
+            url: http://overseerr.media.svc.cluster.local
+            key: "{{ .OVERSEERR_APIKEY }}"
+
+    - Komga:
+        href: https://komga.${SECRET_DOMAIN}
+        icon: komga.png
+        description: Manga
+        widget:
+            type: komga
+            url: http://komga.media.svc.cluster.local
+            username: "{{ .KOMGA_USERNAME }}"
+            password: "{{ .KOMGA_PASSWORD }}"
+
+- Storage:
+    - TrueNAS:
+        icon: truenas.png
+        href: http://${SECRET_TRUENAS_IP}:81
+        description: Storage
+        widget:
+          type: truenas
+          url: http://${SECRET_TRUENAS_IP}:81
+          key: "{{ .TRUENAS_truenas-api }}"
+          nasType: scale
+          enablePools: true
+
+- Observability:
+    - Gatus:
+        icon: gatus.png
+        href: https://status.${SECRET_DOMAIN}
+        description: Health Checks
+        widget:
+          type: gatus
+          url: http://gatus.observability.svc.cluster.local
+
+- Calendar:
+    - Agenda:
+        widget:
+          type: calendar
+          view: agenda
+          maxEvents: 5
+          integrations:
+            - type: sonarr
+              service_group: Media
+              service_name: Sonarr
+            - type: radarr
+              service_group: Media
+              service_name: Radarr
