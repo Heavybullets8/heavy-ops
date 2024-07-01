@@ -44,8 +44,8 @@ spec:
         containers:
           app:
             image:
-              repository: bobokun/qbit_manage
-              tag: 4.1.6@sha256:df3340ef68b1d2c1ce85240e4f11f07ab37a40ba194d5fe431ecb92e22bc374b
+              repository: ghcr.io/stuffanthings/qbit_manage
+              tag: 4.1.6@sha256:31e4954321bd22f6fe64b03b583026cd642524f4b6d86a0d8864b68d978fcdde
             command:
               - /bin/sh
               - -c
