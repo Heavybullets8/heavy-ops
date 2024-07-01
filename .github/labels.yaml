@@ -13,7 +13,7 @@
 - name: area/terraform
   color: "0e8a16"
 # Clusters
-- name: cluster/talos
+- name: cluster/heavy-cluster
   color: "ffc300"
 # Renovate Types
 - name: renovate/ansible

@@ -7,7 +7,7 @@ on:
     inputs:
       clusterName:
         description: Cluster Name
-        default: talos
+        default: heavy-cluster
         required: true
       helmRepoNamespace:
         description: Helm Repository Namespace
