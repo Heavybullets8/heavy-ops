@@ -243,6 +243,9 @@ trakt:
     created_at: <<TRAKT_CREATED_AT>>
   pin:
 
+notifiarr:
+  apikey: <<NOTIFIARR_API_KEY>>
+
 webhooks:
   error: notifiarr
   run_start: notifiarr
