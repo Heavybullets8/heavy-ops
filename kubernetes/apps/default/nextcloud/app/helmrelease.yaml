@@ -59,7 +59,7 @@ spec:
 
       mail:
         enabled: true
-        fromAddress: Support@${SECRET_DOMAIN}
+        fromAddress: Support
         domain: ${SECRET_DOMAIN}
         smtp:
           host: smtp.gmail.com
@@ -79,7 +79,7 @@ spec:
           $CONFIG = array (
             'log_type' => 'file',
             'logfile' => 'nextcloud.log',
-            'loglevel' => 0,
+            'loglevel' => 1,
             'logdateformat' => 'F d, Y H:i:s'
             );
 
