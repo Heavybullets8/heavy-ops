@@ -63,7 +63,7 @@
         widget:
             type: overseerr
             url: http://overseerr.media.svc.cluster.local
-            key: "{{ .OVERSEERR_APIKEY }}"
+            key: "{{ .OVERSEERR_API_KEY }}"
 
     - Komga:
         href: https://komga.${SECRET_DOMAIN}
