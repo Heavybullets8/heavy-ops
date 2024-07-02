@@ -2,65 +2,18 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
 
-x-vars: &vars
-  TALOS_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  TALOS_SCHEMATIC_ID:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  CONTROLLER:
-    sh: talosctl --context {{.cluster}} config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
-
 tasks:
-
-  bootstrap:
-    desc: Bootstrap Talos
-    prompt: Bootstrap Talos on the '{{.cluster}}' cluster ... continue?
-    cmds:
-      - task: bootstrap-etcd
-        vars: { cluster: "{{.cluster}}" }
-      - task: fetch-kubeconfig
-        vars: { cluster: "{{.cluster}}" }
-      - task: bootstrap-apps
-        vars: { cluster: "{{.cluster}}" }
-    requires:
-      vars: ["cluster"]
-
-  bootstrap-etcd:
-    desc: Bootstrap Etcd
-    cmd: until talosctl --context {{.cluster}} --nodes {{.CONTROLLER}} bootstrap; do sleep 10; done
-    vars: *vars
-    requires:
-      vars: ["cluster"]
-    preconditions:
-      - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-
-  bootstrap-apps:
-    desc: Bootstrap core apps needed for Talos
-    cmds:
-      - until kubectl --context {{.cluster}} wait --for=condition=Ready=False nodes --all --timeout=10m; do sleep 10; done
-      - helmfile --quiet --kube-context {{.cluster}} --file {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff
-      - until kubectl --context {{.cluster}} wait --for=condition=Ready nodes --all --timeout=10m; do sleep 10; done
-    requires:
-      vars: ["cluster"]
-    preconditions:
-      - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - test -f {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml
 
   fetch-kubeconfig:
     desc: Fetch kubeconfig from Talos controllers
     cmd: |
-      talosctl --context {{.cluster}} kubeconfig --nodes {{.CONTROLLER}} \
-          --force --force-context-name {{.cluster}} {{.KUBERNETES_DIR}}
-    vars: *vars
+      talosctl --context {{.CLUSTER}} kubeconfig --nodes {{.CONTROLLER}} \
+          --force --force-context-name {{.CLUSTER}} {{.KUBERNETES_DIR}}
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
 
   install:
     desc: Install Talos configuration to a node
@@ -69,80 +22,75 @@ tasks:
         ip: IP address of the Talos node (required)
     cmds:
       - |
-        sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml | \
-        envsubst | \
+        sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml | \
+        $GOPATH/bin/envsubst | \
         talosctl -n {{.ip}} apply-config --insecure --file /dev/stdin
-    env: *vars
     requires:
       vars: ["ip"]
     preconditions:
-      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml
-      - sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
+      - sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
 
   apply-config:
     desc: Apply Talos configuration to a node
     cmd: |
-      sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml | \
-          envsubst | \
-              talosctl --context {{.cluster}} apply-config --mode={{.mode}} --nodes heavy-control --file /dev/stdin
-    env: *vars
+      sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml | \
+          $GOPATH/bin/envsubst | \
+              talosctl --context {{.CLUSTER}} apply-config --mode={{.mode}} --nodes {{.NODE}} --file /dev/stdin
     vars:
       mode: '{{.mode | default "no-reboot"}}'
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/heavy-cluster.secret.sops.yaml
-      - talosctl --context {{.cluster}} --nodes heavy-control get machineconfig >/dev/null 2>&1
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
 
   upgrade:
     desc: Upgrade Talos on a node
     cmds:
-      # - until kubectl --context {{.cluster}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
-      - talosctl --context {{.cluster}} --nodes {{.hostname}} upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}" --wait=true --timeout=10m --preserve=true
-      - talosctl --context {{.cluster}} --nodes {{.hostname}} health --wait-timeout=10m --server=false
-    vars: *vars
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}" --wait=true --timeout=10m --preserve=true
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} health --wait-timeout=10m --server=false
     requires:
-      vars: ["cluster", "hostname"]
+      vars: ["CLUSTER", "NODE"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - talosctl --context {{.cluster}} --nodes {{.hostname}} get machineconfig >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
 
   upgrade-k8s:
     desc: Upgrade Kubernetes
     cmds:
-      - until kubectl --context {{.cluster}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
-      - talosctl --context {{.cluster}} --nodes {{.CONTROLLER}} upgrade-k8s --to {{.KUBERNETES_VERSION}}
-    vars: *vars
+      - until kubectl --context {{.CLUSTER}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
+      - talosctl --context {{.CLUSTER}} --nodes {{.CONTROLLER}} upgrade-k8s --to {{.KUBERNETES_VERSION}}
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - talosctl --context {{.cluster}} --nodes {{.CONTROLLER}} get machineconfig >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.CONTROLLER}} get machineconfig >/dev/null 2>&1
 
   reset-node:
     desc: Reset a Talos node and shut it down
-    prompt: Reset Talos 'heavy-control' node on the '{{.cluster}}' cluster ... continue?
-    cmd: talosctl --context {{.cluster}} reset --nodes heavy-control --graceful=false
+    prompt: Reset Talos '{{.NODE}}' node on the '{{.CLUSTER}}' cluster ... continue?
+    cmd: talosctl --context {{.CLUSTER}} reset --nodes {{.NODE}} --graceful=false
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - talosctl --context {{.cluster}} --nodes heavy-control get machineconfig >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
 
   reset-cluster:
     desc: Reset all the Talos nodes and shut 'em down
-    prompt: Reset Talos on the '{{.cluster}}' cluster ... continue?
-    cmd: talosctl --context {{.cluster}} reset --nodes {{.nodes}} --graceful=false
+    prompt: Reset Talos on the '{{.CLUSTER}}' cluster ... continue?
+    cmd: talosctl --context {{.CLUSTER}} reset --nodes {{.nodes}} --graceful=false
     vars:
       nodes:
-        sh: talosctl --context {{.cluster}} config info --output json | jq --join-output '[.nodes[]] | join(",")'
+        sh: talosctl --context {{.CLUSTER}} config info --output json | jq --join-output '[.nodes[]] | join(",")'
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/talosconfig
-      - talosctl --context {{.cluster}} config info >/dev/null 2>&1
-      - talosctl --context {{.cluster}} --nodes {{.nodes}} get machineconfig >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.nodes}} get machineconfig >/dev/null 2>&1

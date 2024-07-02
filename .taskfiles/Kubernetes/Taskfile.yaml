@@ -8,33 +8,28 @@ tasks:
     desc: Browse PersistentVolumeClaims
     summary: |
       Args:
-        cluster: Cluster to run command against (required)
         ns: Namespace to browse PersistentVolumeClaims in (default: default)
         claim: PersistentVolumeClaim to browse (required)
     interactive: true
-    cmd: kubectl browse-pvc --context heavy-cluster --namespace {{.ns}} {{.claim}}
+    cmd: kubectl browse-pvc --context {{.CLUSTER}} --namespace {{.ns}} {{.claim}}
     vars:
       ns: '{{.ns | default "default"}}'
     requires:
-      vars: ["cluster", "claim"]
+      vars: ["CLUSTER", "claim"]
 
   drain:
     desc: Drain a node
     summary: |
       Args:
-        cluster: Cluster to run command against (required)
         node: Node to drain (required)
-    cmd: kubectl --context heavy-cluster drain {{.node}} --ignore-daemonsets --delete-local-data --force
+    cmd: kubectl --context {{.CLUSTER}} drain {{.node}} --ignore-daemonsets --delete-local-data --force
     requires:
-      vars: ["cluster", "node"]
+      vars: ["CLUSTER", "node"]
 
   delete-failed-pods:
-    desc: Deletes pods with a fucked status
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
+    desc: Deletes pods with a failed status
     cmds:
       - for: ["Evicted", "Failed", "Succeeded"]
-        cmd: kubectl --context heavy-cluster delete pods --field-selector status.phase={{.ITEM}} -A --ignore-not-found=true
+        cmd: kubectl --context {{.CLUSTER}} delete pods --field-selector status.phase={{.ITEM}} -A --ignore-not-found=true
     requires:
-      vars: ["cluster"]
+      vars: ["CLUSTER"]
