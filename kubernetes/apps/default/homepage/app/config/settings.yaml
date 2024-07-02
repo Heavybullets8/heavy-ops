@@ -4,5 +4,8 @@ favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homepage.png
 theme: dark
 color: slate
 headerStyle: clean
-style: rows
-columns: 3
+
+layout:
+  Media:
+    style: row
+    columns: 4
