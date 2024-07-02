@@ -5,3 +5,4 @@ theme: dark
 color: slate
 headerStyle: clean
 style: rows
+columns: 3
