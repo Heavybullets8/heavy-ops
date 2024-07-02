@@ -7,7 +7,7 @@
         widget:
           type: tautulli
           url: http://tautulli.media.svc.cluster.local
-          key: "{{ .TAUTULLI_TAUTULLI_API_KEY }}"
+          key: "{{ .TAUTULLI_API_KEY }}"
           enableUser: true
           showEpisodeNumber: true
           expandOneStreamToTwoRows: false
@@ -19,7 +19,7 @@
         widget:
             type: sonarr
             url: http://sonarr.media.svc.cluster.local
-            key: "{{ .SONARR_SONARR__AUTH__APIKEY }}"
+            key: "{{ .SONARR_API_KEY }}"
 
     - Radarr:
         href: https://radarr.${SECRET_DOMAIN}
@@ -28,7 +28,7 @@
         widget:
             type: radarr
             url: http://radarr.media.svc.cluster.local
-            key: "{{ .RADARR_RADARR__AUTH__APIKEY }}"
+            key: "{{ .RADARR_API_KEY }}"
 
     - Prowlarr:
         href: https://prowlarr.${SECRET_DOMAIN}
@@ -37,7 +37,7 @@
         widget:
             type: prowlarr
             url: http://prowlarr.media.svc.cluster.local
-            key: "{{ .PROWLARR_PROWLARR__AUTH__APIKEY }}"
+            key: "{{ .PROWLARR_API_KEY }}"
 
     - qBittorrent:
         href: https://qbit.${SECRET_DOMAIN}
@@ -54,7 +54,7 @@
         widget:
             type: sabnzbd
             url: http://sabnzbd.media.svc.cluster.local
-            key: "{{ .SABNZBD_SABNZBD_API_KEY }}"
+            key: "{{ .SABNZBD_API_KEY }}"
 
     - Overseerr:
         href: https://overseerr.${SECRET_DOMAIN}

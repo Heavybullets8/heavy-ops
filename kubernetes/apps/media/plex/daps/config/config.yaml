@@ -13,15 +13,15 @@ instances:
   radarr:
     radarr:
       url: http://radarr.media.svc.cluster.local
-      api: "{{ .RADARR_RADARR__AUTH__APIKEY }}"
+      api: "{{ .RADARR_API_KEY }}"
   sonarr:
     sonarr:
       url: http://sonarr.media.svc.cluster.local
-      api: "{{ .SONARR_SONARR__AUTH__APIKEY }}"
+      api: "{{ .SONARR_API_KEY }}"
   plex:
     plex:
       url: http://plex.media.svc.cluster.local:32400
-      api: "{{ .PLEX_PLEX_TOKEN }}"
+      api: "{{ .PLEX_TOKEN }}"
 
 discord:
   notifiarr_webhook: "{{ .NOTIFIARR_DAPS_WEBHOOK_URL }}"

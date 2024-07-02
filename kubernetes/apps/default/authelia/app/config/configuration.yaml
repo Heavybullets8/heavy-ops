@@ -9,13 +9,13 @@ authentication_backend:
     implementation: custom
     timeout: 5s
     start_tls: false
-    base_dn: "{{ .glauth_base_dn }}"
+    base_dn: "{{ .GLAUTH_BASE_DN }}"
     additional_users_dn: ou=people,ou=users
     users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
     additional_groups_dn: ou=users
     groups_filter: (&(uniqueMember={dn})(objectClass=posixGroup))
-    user: "{{ .glauth_user }}"
-    password: "{{ .glauth_search_password }}"
+    user: "{{ .GLAUTH_SEARCH_USER }}"
+    password: "{{ .GLAUTH_SEARCH_PASSWORD_PLAIN }}"
     attributes:
       username: uid
       display_name: givenName
@@ -27,7 +27,7 @@ authentication_backend:
   refresh_interval: 1m
 
 session:
-  secret: "{{ .authelia_session_secret }}"
+  secret: "{{ .AUTHELIA_SESSION_SECRET }}"
   same_site: lax
   inactivity: 5m
   expiration: 1h
@@ -42,13 +42,13 @@ session:
     host: dragonfly.database.svc.cluster.local
 
 storage:
-  encryption_key: "{{ .authelia_storage_enc_key }}"
+  encryption_key: "{{ .AUTHELIA_STORAGE_ENC_KEY }}"
 
 notifier:
   disable_startup_check: true
   smtp:
-    username: "{{ .smtp_user }}"
-    password: "{{ .smtp_pass }}"
+    username: "{{ .SMTP_USER }}"
+    password: "{{ .SMTP_PASS }}"
     disable_html_emails: false
     disable_require_tls: false
     address: smtp.gmail.com:587
@@ -71,9 +71,9 @@ webauthn:
 
 duo_api:
   disable: false
-  hostname: "{{ .duo_hostname }}"
-  integration_key: "{{ .duo_integration_key }}"
-  secret_key: "{{ .duo_secret_key }}"
+  hostname: "{{ .DUO_HOSTNAME }}"
+  integration_key: "{{ .DUO_INTEGRATION_KEY }}"
+  secret_key: "{{ .DUO_SECRET_KEY }}"
   enable_self_enrollment: true
 
 access_control:
@@ -89,21 +89,21 @@ access_control:
 
 identity_validation:
   reset_password:
-    jwt_secret: "{{ .authelia_jwt_reset_secret }}"
+    jwt_secret: "{{ .AUTHELIA_JWT_RESET_SECRET }}"
 
 identity_providers:
   oidc:
-    hmac_secret: "{{ .authelia_hmac_secret }}"
+    hmac_secret: "{{ .AUTHELIA_HMAC_SECRET }}"
     cors:
       endpoints: ["authorization", "token", "revocation", "introspection"]
       allowed_origins_from_client_redirect_uris: true
     jwks:
       - key: |-
-          {{- .authelia_jwks_priv_key | nindent 10 }}
+          {{- .AUTHELIA_JWKS_PRIV_KEY | nindent 10 }}
         algorithm: 'RS256'
     clients:
-      - client_id: "{{ .grafana_OAUTH_CLIENT_ID }}"
-        client_secret: "{{ .grafana_OAUTH_CLIENT_SECRET_ENC }}"
+      - client_id: "{{ .GRAFANA_OAUTH_CLIENT_ID }}"
+        client_secret: "{{ .GRAFANA_OAUTH_CLIENT_SECRET_ENC }}"
         client_name: Grafana
         public: false
         require_pkce: true
