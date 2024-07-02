@@ -101,7 +101,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Test Images
-        run: docker pull ${{ matrix.images }}
+        run: docker buildx imagetools inspect ${{ matrix.images }}
 
   test-images-success:
     if: ${{ always() }}
