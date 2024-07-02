@@ -100,7 +100,7 @@ jobs:
       max-parallel: 4
       fail-fast: false
     steps:
-      - name: Test Images
+      - name: Inspect Image
         run: docker buildx imagetools inspect ${{ matrix.images }}
 
   test-images-success:
