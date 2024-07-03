@@ -32,8 +32,8 @@ spec:
       homepage:
         strategy: RollingUpdate
         annotations:
-          secret.reloader.stakater.com/reload: homepage-secret
           configmap.reloader.stakater.com/reload: homepage-configmap
+          secret.reloader.stakater.com/reload: homepage-secret
         containers:
           app:
             image:
