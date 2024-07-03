@@ -4,7 +4,8 @@
         icon: plex.png
         href: https://plex.${SECRET_DOMAIN}
         description: Media Server
-        showStats: true
+        namespace: media
+        app: plex
         widget:
           type: tautulli
           url: http://tautulli.media.svc.cluster.local
@@ -18,7 +19,8 @@
         href: https://qbit.${SECRET_DOMAIN}
         icon: qbittorrent.png
         description: Torrents
-        showStats: true
+        namespace: media
+        app: qbittorrent
         widget:
             type: qbittorrent
             url: http://qbittorrent.media.svc.cluster.local
@@ -27,7 +29,8 @@
         href: https://nzb.${SECRET_DOMAIN}
         icon: sabnzbd.png
         description: Usenet
-        showStats: true
+        namespace: media
+        app: sabnzbd
         widget:
             type: sabnzbd
             url: http://sabnzbd.media.svc.cluster.local
@@ -38,7 +41,8 @@
         href: https://sonarr.${SECRET_DOMAIN}
         icon: sonarr.png
         description: Series
-        showStats: true
+        namespace: media
+        app: sonarr
         widget:
             type: sonarr
             url: http://sonarr.media.svc.cluster.local
@@ -48,6 +52,8 @@
         href: https://radarr.${SECRET_DOMAIN}
         icon: radarr.png
         description: Movies
+        namespace: media
+        app: radarr
         widget:
             type: radarr
             url: http://radarr.media.svc.cluster.local
@@ -57,6 +63,8 @@
         href: https://prowlarr.${SECRET_DOMAIN}
         icon: prowlarr.png
         description: Indexer
+        namespace: media
+        app: prowlarr
         widget:
             type: prowlarr
             url: http://prowlarr.media.svc.cluster.local
@@ -66,6 +74,8 @@
         href: https://overseerr.${SECRET_DOMAIN}
         icon: overseerr.png
         description: Requests
+        namespace: media
+        app: overseerr
         widget:
             type: overseerr
             url: http://overseerr.media.svc.cluster.local
@@ -76,6 +86,8 @@
         href: https://komga.${SECRET_DOMAIN}
         icon: komga.png
         description: Manga
+        namespace: media
+        app: komga
         widget:
             type: komga
             url: http://komga.media.svc.cluster.local
