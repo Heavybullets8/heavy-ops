@@ -6,6 +6,14 @@ color: slate
 headerStyle: clean
 
 layout:
+  Streaming:
+    style: row
+    columns: 1
+
+  Downloads:
+    style: row
+    columns: 2
+
   Media:
     style: row
-    columns: 3
+    columns: 4

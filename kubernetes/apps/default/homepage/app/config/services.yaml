@@ -1,5 +1,5 @@
 ---
-- Media:
+- Streaming:
     - Plex:
         icon: plex.png
         href: https://plex.${SECRET_DOMAIN}
@@ -10,8 +10,27 @@
           key: "{{ .TAUTULLI_API_KEY }}"
           enableUser: true
           showEpisodeNumber: true
-          expandOneStreamToTwoRows: false
+          expandOneStreamToTwoRows: true
 
+- Downloads:
+    - qBittorrent:
+        href: https://qbit.${SECRET_DOMAIN}
+        icon: qbittorrent.png
+        description: Torrents
+        widget:
+            type: qbittorrent
+            url: http://qbittorrent.media.svc.cluster.local
+
+    - Sabnzbd:
+        href: https://nzb.${SECRET_DOMAIN}
+        icon: sabnzbd.png
+        description: Usenet
+        widget:
+            type: sabnzbd
+            url: http://sabnzbd.media.svc.cluster.local
+            key: "{{ .SABNZBD_API_KEY }}"
+
+- Media:
     - Sonarr:
         href: https://sonarr.${SECRET_DOMAIN}
         icon: sonarr.png
@@ -39,23 +58,6 @@
             url: http://prowlarr.media.svc.cluster.local
             key: "{{ .PROWLARR_API_KEY }}"
 
-    - qBittorrent:
-        href: https://qbit.${SECRET_DOMAIN}
-        icon: qbittorrent.png
-        description: Torrents
-        widget:
-            type: qbittorrent
-            url: http://qbittorrent.media.svc.cluster.local
-
-    - Sabnzbd:
-        href: https://nzb.${SECRET_DOMAIN}
-        icon: sabnzbd.png
-        description: Usenet
-        widget:
-            type: sabnzbd
-            url: http://sabnzbd.media.svc.cluster.local
-            key: "{{ .SABNZBD_API_KEY }}"
-
     - Overseerr:
         href: https://overseerr.${SECRET_DOMAIN}
         icon: overseerr.png
@@ -65,6 +67,7 @@
             url: http://overseerr.media.svc.cluster.local
             key: "{{ .OVERSEERR_API_KEY }}"
 
+- Reading:
     - Komga:
         href: https://komga.${SECRET_DOMAIN}
         icon: komga.png
