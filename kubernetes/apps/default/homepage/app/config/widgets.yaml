@@ -8,9 +8,18 @@
       memory: true
       show: true
       showLabel: true
-    nodes:
-      cpu: true
-      memory: true
-      show: false
-      showLabel: true
 
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: long
+      timeStyle: short
+      hourCycle: h23
+
+- openweathermap: {{ .OPENWEATHERMAP_SETTINGS | nindent 4 }}
+
+- search:
+    provider: duckduckgo
+    focus: false
+    showSearchSuggestions: true
+    target: _blank
