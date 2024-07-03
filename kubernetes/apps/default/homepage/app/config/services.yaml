@@ -111,6 +111,8 @@
         icon: gatus.png
         href: https://status.${SECRET_DOMAIN}
         description: Health Checks
+        namespace: observability
+        app: gatus
         widget:
           type: gatus
           url: http://gatus.observability.svc.cluster.local
