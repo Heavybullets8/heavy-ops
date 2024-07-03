@@ -26,7 +26,7 @@ spec:
       APP: *app
       GATUS_PATH: /web/index.html
       GATUS_SUBDOMAIN: plex
-      VOLSYNC_CAPACITY: 350Gi
+      VOLSYNC_CAPACITY: 400Gi
       VOLSYNC_ACCESSMODES: ReadWriteOnce
       VOLSYNC_STORAGECLASS: iscsi
 ---
