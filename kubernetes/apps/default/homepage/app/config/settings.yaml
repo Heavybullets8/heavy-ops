@@ -1,11 +1,27 @@
 ---
-title: Dashboard
+title: ${SECRET_DOMAIN%.com}
 favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homepage.png
 theme: dark
 color: slate
 headerStyle: clean
+base: https://home.${SECRET_DOMAIN}
+language: en
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: duckduckgo
+
+hideVersion: true
+
+showStats: true
 
 layout:
+  disableCollapse: true
+  useEqualHeights: true
+
   Streaming:
     style: row
     columns: 1
@@ -16,4 +32,4 @@ layout:
 
   Media:
     style: row
-    columns: 4
+    columns: 3

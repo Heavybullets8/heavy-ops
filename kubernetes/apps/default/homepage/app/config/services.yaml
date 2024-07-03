@@ -10,7 +10,7 @@
           key: "{{ .TAUTULLI_API_KEY }}"
           enableUser: true
           showEpisodeNumber: true
-          expandOneStreamToTwoRows: true
+          expandOneStreamToTwoRows: false
 
 - Downloads:
     - qBittorrent:
