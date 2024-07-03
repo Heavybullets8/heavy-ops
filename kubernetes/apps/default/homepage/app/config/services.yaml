@@ -4,7 +4,7 @@
         icon: plex.png
         href: https://plex.${SECRET_DOMAIN}
         description: Media Server
-        #showStats: true
+        showStats: true
         widget:
           type: tautulli
           url: http://tautulli.media.svc.cluster.local
@@ -18,7 +18,7 @@
         href: https://qbit.${SECRET_DOMAIN}
         icon: qbittorrent.png
         description: Torrents
-        #showStats: true
+        showStats: true
         widget:
             type: qbittorrent
             url: http://qbittorrent.media.svc.cluster.local
@@ -27,7 +27,7 @@
         href: https://nzb.${SECRET_DOMAIN}
         icon: sabnzbd.png
         description: Usenet
-        #showStats: true
+        showStats: true
         widget:
             type: sabnzbd
             url: http://sabnzbd.media.svc.cluster.local
@@ -38,7 +38,7 @@
         href: https://sonarr.${SECRET_DOMAIN}
         icon: sonarr.png
         description: Series
-        #showStats: true
+        showStats: true
         widget:
             type: sonarr
             url: http://sonarr.media.svc.cluster.local

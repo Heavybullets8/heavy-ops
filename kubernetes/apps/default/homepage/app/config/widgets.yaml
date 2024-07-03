@@ -8,6 +8,11 @@
       memory: true
       show: true
       showLabel: true
+    nodes:
+      cpu: true
+      memory: true
+      show: false
+      showLabel: true
 
 - datetime:
     text_size: xl
