@@ -4,7 +4,7 @@ version: "3"
 
 vars:
   CLUSTER: "heavy-cluster"
-  NODE: "heavy-controller"
+  NODE: "heavy-control"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   TALOS_VERSION:
     sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
