@@ -87,6 +87,11 @@ access_control:
         - "^/api/system/status$"
       policy: bypass
 
+    - domain: "theme-park.${SECRET_DOMAIN}"
+      resources:
+        - "^/css/(addons|base)/.*\\.css$"
+      policy: bypass
+
 identity_validation:
   reset_password:
     jwt_secret: "{{ .AUTHELIA_JWT_RESET_SECRET }}"
