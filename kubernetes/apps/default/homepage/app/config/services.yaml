@@ -76,6 +76,7 @@
         description: Requests
         namespace: media
         app: overseerr
+        fields: ["available", "processing"]
         widget:
             type: overseerr
             url: http://overseerr.media.svc.cluster.local
