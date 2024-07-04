@@ -1,20 +1,23 @@
 ---
-title: ${SECRET_DOMAIN%.com}
-favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homepage.png
-theme: dark
-color: stone
-headerStyle: boxed
-base: https://home.${SECRET_DOMAIN}
-language: en
 disableCollapse: true
+hideVersion: true
+showStats: true
 useEqualHeights: true
+
+base: https://home.${SECRET_DOMAIN}
+color: stone
+favicon: https://cdn.shopify.com/s/files/1/0585/5834/9490/collections/Berserk_Logo.png
+headerStyle: boxedWidgets
+language: en
+theme: dark
+title: ${SECRET_DOMAIN%.com}
 
 background:
   image: https://cdnb.artstation.com/p/assets/images/images/061/375/853/large/nolva-novaes-mao-de-deus.jpg
   blur: xl
   saturate: 150
   brightness: 25
-  opacity: 30
+  opacity: 60
 
 quicklaunch:
   searchDescriptions: true
@@ -23,12 +26,8 @@ quicklaunch:
   hideVisitURL: true
   provider: duckduckgo
 
-hideVersion: true
-
-showStats: true
 
 layout:
-
   Streaming:
     style: row
     columns: 1
