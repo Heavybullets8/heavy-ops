@@ -58,6 +58,7 @@
             type: radarr
             url: http://radarr.media.svc.cluster.local
             key: "{{ .RADARR_API_KEY }}"
+            fields: ["wanted", "queued", "movies"]
 
     - Prowlarr:
         href: https://prowlarr.${SECRET_DOMAIN}
@@ -69,6 +70,7 @@
             type: prowlarr
             url: http://prowlarr.media.svc.cluster.local
             key: "{{ .PROWLARR_API_KEY }}"
+            fields: ["numberOfGrabs", "numberOfFailGrabs", "numberOfFailQueries"]
 
     - Overseerr:
         href: https://overseerr.${SECRET_DOMAIN}
@@ -76,11 +78,11 @@
         description: Requests
         namespace: media
         app: overseerr
-        fields: ["available", "processing"]
         widget:
             type: overseerr
             url: http://overseerr.media.svc.cluster.local
             key: "{{ .OVERSEERR_API_KEY }}"
+            fields: ["available", "processing"]
 
 - Reading:
     - Komga:

@@ -9,6 +9,13 @@ language: en
 disableCollapse: true
 useEqualHeights: true
 
+background:
+  image: https://cdnb.artstation.com/p/assets/images/images/061/375/853/large/nolva-novaes-mao-de-deus.jpg
+  blur: xl
+  saturate: 150
+  brightness: 25
+  opacity: 30
+
 quicklaunch:
   searchDescriptions: true
   hideInternetSearch: true
