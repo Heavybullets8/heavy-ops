@@ -17,7 +17,7 @@ background:
   blur: xl
   saturate: 150
   brightness: 10
-  opacity: 70
+  opacity: 20
 
 quicklaunch:
   searchDescriptions: true
