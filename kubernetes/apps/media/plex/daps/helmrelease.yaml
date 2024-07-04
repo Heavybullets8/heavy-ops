@@ -31,7 +31,7 @@ spec:
       daps:
         type: cronjob
         annotations:
-          secret.reloader.stakater.com/reload: "daps-secret,daps-sa-secret"
+          reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "0 4,15 * * *"
           timeZone: &timeZone ${TIMEZONE}

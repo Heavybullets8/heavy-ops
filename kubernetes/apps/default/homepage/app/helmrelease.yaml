@@ -32,7 +32,7 @@ spec:
       homepage:
         strategy: RollingUpdate
         annotations:
-          secret.reloader.stakater.com/reload: "homepage-secret"
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:

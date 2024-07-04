@@ -83,6 +83,10 @@ spec:
             'logdateformat' => 'F d, Y H:i:s'
             );
 
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+
+
     internalDatabase:
       enabled: false
 
