@@ -29,8 +29,6 @@ spec:
     controllers:
       kometa:
         type: cronjob
-        annotations:
-          reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "0 16,5 * * *"
           timeZone: &timeZone ${TIMEZONE}

@@ -30,8 +30,6 @@ spec:
     controllers:
       daps:
         type: cronjob
-        annotations:
-          reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "0 4,15 * * *"
           timeZone: &timeZone ${TIMEZONE}

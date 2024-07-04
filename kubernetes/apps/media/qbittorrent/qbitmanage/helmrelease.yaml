@@ -33,8 +33,6 @@ spec:
     controllers:
       qbitmanage:
         type: cronjob
-        annotations:
-          reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "*/30 * * * *"
           timeZone: &timeZone ${TIMEZONE}
