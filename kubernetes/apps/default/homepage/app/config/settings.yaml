@@ -5,7 +5,7 @@ showStats: true
 useEqualHeights: true
 
 base: https://home.${SECRET_DOMAIN}
-color: stone
+color: Slate
 favicon: https://cdn.shopify.com/s/files/1/0585/5834/9490/collections/Berserk_Logo.png
 headerStyle: boxedWidgets
 language: en
@@ -16,8 +16,8 @@ background:
   image: https://cdnb.artstation.com/p/assets/images/images/061/375/853/large/nolva-novaes-mao-de-deus.jpg
   blur: xl
   saturate: 150
-  brightness: 25
-  opacity: 60
+  brightness: 10
+  opacity: 30
 
 quicklaunch:
   searchDescriptions: true
