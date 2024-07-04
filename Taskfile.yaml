@@ -6,19 +6,24 @@ vars:
   CLUSTER: "heavy-cluster"
   NODE: "heavy-control"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  TALOS_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  TALOS_SCHEMATIC_ID:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  CONTROLLER:
-    sh: talosctl --context {{.CLUSTER}} config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
   KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
 
 env:
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
   KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  TALOS_VERSION:
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
+  TALOS_SCHEMATIC_ID:
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
+  TALOS_SCHEMATIC_ID_PART_0:
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml | cut -c1-32
+  TALOS_SCHEMATIC_ID_PART_1:
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml | cut -c33-
+  KUBERNETES_VERSION:
+    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
+  CONTROLLER:
+    sh: talosctl --context {{.CLUSTER}} config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
 
 includes:
   bootstrap: .taskfiles/Bootstrap
