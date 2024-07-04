@@ -68,9 +68,6 @@ collections:
   Animation:
     template: {name: Dynamic, collection: Animation, poster: 213126}
     summary: Animated films are a collection of illustrations that are photographed frame-by-frame and then played in a quick succession. Since its inception, animation has had a creative and imaginative tendency. Being able to bring animals and objects to life, this genre has catered towards fairy tales and children’s stories. However, animation has long been a genre enjoyed by all ages. As of recent, there has even been an influx of animation geared towards adults. Animation is commonly thought of as a technique, thus it’s ability to span over many different genres.
-  Anime:
-    template: {name: Dynamic, collection: Anime, poster: 213614}
-    summary: As a type of animation, anime is an art form that comprises of many genres found in other mediums.
   Children:
     template: {name: Dynamic, collection: Children, poster: 241751}
     summary: A children's film, or family film, is a film genre that contains children or relates to them in the context of home and family. Children's films are made specifically for children and not necessarily for the general audience, while family films are made for a wider appeal with a general audience in mind.
@@ -101,11 +98,9 @@ collections:
   Martial Arts:
     template: {name: Dynamic, collection: Martial Arts, poster: 213140}
     summary: Martial Arts films are a sub-genre of action films that feature numerous martial arts combat between characters. These combats are usually the films' primary appeal and entertainment value, and often are a method of storytelling and character expression and development. Martial Arts are frequently featured in training scenes and other sequences in addition to fights. Martial Arts films commonly include other types of action, such as hand-to-hand combat, stuntwork, chases, and gunfights.
-
   Music:
     template: {name: Dynamic, collection: Music, poster: 213098}
     summary: Music films are genre that revolves around music being an integral part of the characters lives.
-
   Musical:
     template: {name: Dynamic, collection: Musical, poster: 213095}
     summary: A Musical interweaves vocal and dance performances into the narrative of the film. The songs of a film can either be used to further the story or simply enhance the experience of the audience. These films are often done on a grand scale and incorporate lavish costumes and sets. Traditional musicals center on a well-known star, famous for their dancing or singing skills (i.e. Fred Astaire, Gene Kelly, Judy Garland). These films explore concepts such are love and success, allowing the audience to escape from reality.
@@ -147,38 +142,11 @@ collections:
       type: movie
       genre: Film-Noir
     summary: "Film noir is a cinematic term used primarily to describe stylish Hollywood crime dramas, particularly those that emphasize cynical attitudes and sexual motivations. Many of the prototypical stories and much of the attitude of classic noir derive from the hardboiled school of crime fiction that emerged in the United States during the Great Depression."
-  Reality: #Added IMDB Genre
-    template: {name: Genre, genre: Reality, poster: 213345}
-    imdb_search:
-      type: movie
-      genre: Reality-TV
-    summary: "Reality is a type of television programming that aims to show how ordinary people behave in everyday life, or in situations, often created by the program makers, which are intended to represent everyday life."
-  Talk Show: #Added IMDB Genre
-    template: {name: Genre, genre: Talk Show, poster: 213344}
-    imdb_search:
-      type: movie
-      genre: Talk-Show
-    summary: "A talk show (or chat show in British English) is a television programming or radio programming genre structured around the act of spontaneous conversation."
 
 ############################################
 ##       Special Genre Collections        ##
 ############################################
 
-  ## Gangster is a static collection list ##
-  Gangster:
-    template: {name: Special Genre, poster: 213102}
-    sort_title: ++++++++_Gangster
-    trakt_list:
-      - https://trakt.tv/users/jjjonesjr33/lists/the-complete-list-of-mafia-gangsters-movies
-      - https://trakt.tv/users/jjjonesjr33/lists/the-top-250-greatest-organized-crime-gangster-movies-of-all-time
-    summary: Gangster films are a sub-genre of crime films that center on organized crime or the mafia. Often the plot revolves around the rise and fall of an organized crime leader. Many Gangster films explore the destructive nature of organized crime, while others attempt to show the humanity of the individual characters.
-  ## Pandemic is a static collection list ##
-  Pandemic:
-    template: {name: Special Genre, poster: 213077}
-    sort_title: ++++++++_Pandemic
-    trakt_list:
-      - https://trakt.tv/users/jjjonesjr33/lists/pandemic-virus-survival-guide
-    summary: A Pandemic film resolves around widespread viruses, plagues, and diseases.
   ## The Stand Up Commedey collection is auto updated ##
   Stand Up Comedy:
     template: {name: Special Genre, poster: 213081}
@@ -186,13 +154,6 @@ collections:
     trakt_list:
       - https://trakt.tv/users/jjjonesjr33/lists/stand-up-comedy
     summary: Stand-up comedy is a comedic style in which a comedian performs in front of a live audience, speaking directly to them through a microphone. Comedians give the illusion that they are dialoguing, but in actuality, they are monologuing a grouping of humorous stories, jokes and one-liners, typically called a shtick, routine, act, or set. Some stand-up comedians use props, music or magic tricks to enhance their acts. Stand-up comedians perform quasi-autobiographical and fictionalized extensions of their offstage selves.
-  ## Sword & Sorcery is a static collection list ##
-  Sword & Sorcery:
-    template: {name: Special Genre, poster: 213143}
-    sort_title: ++++++++_Sword_&_Sorcery
-    trakt_list:
-      - https://trakt.tv/users/jjjonesjr33/lists/sword-and-sorcery-movies
-    summary: Sword and Sorcery films are a sub-genre of Fantasy that tend to be more plot-driven. These films rely on heavy action and battle scenes. Common themes in Sword and Sorcery films include a rescue mission, saving a princess, and battling a fantastical monster. The worlds and characters in these films are often much less developed than in other fantasy sub-genres. Of all the Fantasy sub-genres, Sword and Sorcery is most likely to be geared towards a younger audience, as many of these films are animated.
   ## Christian is a static collection list ##
   Christian:
     template: {name: Special Genre}
