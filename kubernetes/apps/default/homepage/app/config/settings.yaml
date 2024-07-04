@@ -5,7 +5,7 @@ showStats: true
 useEqualHeights: true
 
 base: https://home.${SECRET_DOMAIN}
-color: Slate
+color: slate
 favicon: https://cdn.shopify.com/s/files/1/0585/5834/9490/collections/Berserk_Logo.png
 headerStyle: boxedWidgets
 language: en
