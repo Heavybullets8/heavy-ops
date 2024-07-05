@@ -67,7 +67,11 @@ totp:
   issuer: authelia.com
 
 webauthn:
-  disable: true
+  disable: false
+  display_name: 'Authelia'
+  attestation_conveyance_preference: 'indirect'
+  user_verification: 'preferred'
+  timeout: '60s'
 
 duo_api:
   disable: false
