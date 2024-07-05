@@ -27,4 +27,4 @@ spec:
       GATUS_SUBDOMAIN: valheim
       VOLSYNC_CAPACITY: 10Gi
       VOLSYNC_ACCESSMODES: ReadWriteOnce
-      VOLSYNC_STORAGECLASS: nfs
+      VOLSYNC_STORAGECLASS: iscsi

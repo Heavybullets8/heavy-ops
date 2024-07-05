@@ -25,4 +25,4 @@ spec:
       GATUS_SUBDOMAIN: podgrab
       VOLSYNC_CAPACITY: 3Gi
       VOLSYNC_ACCESSMODES: ReadWriteOnce
-      VOLSYNC_STORAGECLASS: nfs
+      VOLSYNC_STORAGECLASS: iscsi
