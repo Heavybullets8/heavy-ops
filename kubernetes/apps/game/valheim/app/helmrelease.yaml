@@ -45,7 +45,7 @@ spec:
               AUTO_UPDATE_PAUSE_WITH_PLAYERS: 1
               ENABLE_CROSSPLAY: 1
               PUBLIC: 1
-              TYPE: BepInExFull
+              TYPE: BepInEx
             envFrom:
               - secretRef:
                   name: valheim-secret
