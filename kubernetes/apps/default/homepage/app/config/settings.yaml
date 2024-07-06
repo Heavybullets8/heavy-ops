@@ -1,0 +1,40 @@
+---
+disableCollapse: true
+hideVersion: true
+showStats: true
+useEqualHeights: true
+
+base: https://home.${SECRET_DOMAIN}
+color: slate
+favicon: https://cdn.shopify.com/s/files/1/0585/5834/9490/collections/Berserk_Logo.png
+headerStyle: boxedWidgets
+language: en
+theme: dark
+title: ${SECRET_DOMAIN%.com}
+
+background:
+  image: https://cdnb.artstation.com/p/assets/images/images/061/375/853/large/nolva-novaes-mao-de-deus.jpg
+  blur: xl
+  saturate: 150
+  brightness: 10
+  opacity: 20
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: duckduckgo
+
+layout:
+  Streaming:
+    style: row
+    columns: 1
+
+  Downloads:
+    style: row
+    columns: 2
+
+  Media:
+    style: row
+    columns: 4

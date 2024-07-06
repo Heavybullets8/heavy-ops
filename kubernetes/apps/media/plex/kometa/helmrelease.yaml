@@ -1,0 +1,140 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app kometa
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
+  values:
+    controllers:
+      kometa:
+        type: cronjob
+        cronjob:
+          schedule: "0 16,5 * * *"
+          timeZone: &timeZone ${TIMEZONE}
+          concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+        containers:
+          app:
+            image:
+              repository: kometateam/kometa
+              tag: develop@sha256:0dd590a5735e3f6b371d0e0c4c64aa0acf9591991802ca947890ce0f8bb62592
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                mkdir -p /config/assets/anime \
+                        /config/assets/awards \
+                        /config/assets/decades \
+                        /config/assets/genres \
+                        /config/assets/holidays \
+                        /config/assets/networks \
+                        /config/assets/suggestions \
+                        /config/assets/posters &&
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
+                python3 kometa.py --run --read-only-config --run-libraries "Movies" &
+                python3 kometa.py --run --read-only-config --run-libraries "Series" &
+                wait
+            env:
+              TZ: *timeZone
+              KOMETA_CONFIG: /config/config.yaml
+            envFrom:
+              - secretRef:
+                  name: kometa-secret
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10M
+              limits:
+                memory: 8192M
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: Always
+
+    persistence:
+      assets:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteMany
+        size: 75Gi
+        storageClass: nfs
+        globalMounts:
+          - path: /config/assets
+
+      config:
+        existingClaim: *app
+
+      config-file:
+        type: configMap
+        name: kometa-configmap
+        globalMounts:
+          - path: /config/config.yaml
+            subPath: config.yaml
+            readOnly: true
+
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+
+      custom-configs:
+        type: configMap
+        name: kometa-custom-configs
+        globalMounts:
+          - path: /config/Anime_Collections_All.yaml
+            subPath: Anime_Collections_All.yaml
+            readOnly: true
+          - path: /config/Movies_Collections_Awards.yaml
+            subPath: Movies_Collections_Awards.yaml
+            readOnly: true
+          - path: /config/Movies_Collections_Decades.yaml
+            subPath: Movies_Collections_Decades.yaml
+            readOnly: true
+          - path: /config/Movies_Collections_Genres.yaml
+            subPath: Movies_Collections_Genres.yaml
+            readOnly: true
+          - path: /config/Movies_Collections_Holidays.yaml
+            subPath: Movies_Collections_Holidays.yaml
+            readOnly: true
+          - path: /config/Movies_Collections_Suggestions.yaml
+            subPath: Movies_Collections_Suggestions.yaml
+            readOnly: true
+          - path: /config/Series_Collections_Networks.yaml
+            subPath: Series_Collections_Networks.yaml
+            readOnly: true
+          - path: /config/Series_Collections_Suggestions.yaml
+            subPath: Series_Collections_Suggestions.yaml
+            readOnly: true

@@ -1,0 +1,45 @@
+##############################################################
+##               Movie Awards Collections                   ##
+##                Created by JJJonesJr33                    ##
+##                      Version 2.0                         ##
+##############################################################
+##############################################################
+##                                                          ##
+##            User/Config Credits - Special Thanks          ##
+##                                                          ##
+##               Yozora, Bullmoose20, & Sohjiro             ##
+##   Glasti1, Hiren-Z, OhMyBahGosh, tuxpeople, cpt-kuesel   ##
+##      meisnate12, TheUnchainedZebra, Evil Tacctician      ##
+##                                                          ##
+##############################################################
+
+#######################
+##     Templates     ##
+#######################
+
+templates:
+  Awards:
+    sort_title: +++++++++_<<collection_name>>
+    url_poster: https://theposterdb.com/api/assets/<<poster>>
+    collection_mode: hide
+    collection_order: release.desc
+    sync_mode: sync
+
+#############################
+##       Collections       ##
+#############################
+
+collections:
+  Award Winning Movies:
+    template: { name: Awards, poster: 213569 }
+    imdb_search:
+      - type: movie,short
+        event.winning: emmy
+        sort_by: year.desc
+      - type: movie,short
+        event.winning: oscar
+        sort_by: year.desc
+      - type: movie,short
+        event.winning: golden
+        sort_by: year.desc
+    summary: "A collection of winning movies from the Emmys, Oscars and Golden Globe award ceremonies over the years"
