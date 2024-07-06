@@ -13,7 +13,7 @@ resources:
   - ./sonarr/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./radarr/ks.yaml
-  - ./recyclarr/ks.yaml
+  # - ./recyclarr/ks.yaml
   - ./requestrr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./tautulli/ks.yaml
