@@ -42,7 +42,7 @@ spec:
         instance_id:
         httpConnection:
           protocol: http
-          host: ${SECRET_TRUENAS_IP}
+          host: ${TRUENAS_IP}
           port: 81
           allowInsecure: true
           apiKey: ${SECRET_TRUENAS_API}
@@ -54,7 +54,7 @@ spec:
           zvolEnableReservation: false
           zvolBlocksize:
         iscsi:
-          targetPortal: "${SECRET_TRUENAS_IP}:3260"
+          targetPortal: "${TRUENAS_IP}:3260"
           interface:
           namePrefix: csi-
           nameSuffix: "-talos"

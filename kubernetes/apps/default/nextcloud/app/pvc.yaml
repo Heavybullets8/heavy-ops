@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /mnt/tank/cloud
-    server: ${SECRET_TRUENAS_IP}
+    server: ${TRUENAS_IP}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

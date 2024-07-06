@@ -148,7 +148,7 @@ spec:
 
       media:
         type: nfs
-        server: ${SECRET_TRUENAS_IP}
+        server: ${TRUENAS_IP}
         path: /mnt/tank/media/download/torrent
         globalMounts:
           - path: /media/download/torrent

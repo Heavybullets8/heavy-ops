@@ -103,7 +103,7 @@ spec:
 
       assets:
         type: nfs
-        server: ${SECRET_TRUENAS_IP}
+        server: ${TRUENAS_IP}
         path: /mnt/tank/media/library/podcast
         globalMounts:
           - path: /assets

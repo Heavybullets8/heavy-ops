@@ -49,7 +49,7 @@ spec:
         instance_id:
         httpConnection:
           protocol: http
-          host: ${SECRET_TRUENAS_IP}
+          host: ${TRUENAS_IP}
           port: 81
           apiKey: ${SECRET_TRUENAS_API}
           allowInsecure: true
@@ -62,7 +62,7 @@ spec:
           datasetPermissionsUser: 0
           datasetPermissionsGroup: 0
         nfs:
-          shareHost: ${SECRET_TRUENAS_IP}
+          shareHost: ${TRUENAS_IP}
           shareAlldirs: false
           shareAllowedHosts: []
           shareAllowedNetworks: []

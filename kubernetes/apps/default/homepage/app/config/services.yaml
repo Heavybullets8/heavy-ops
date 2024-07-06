@@ -100,11 +100,11 @@
 - Storage:
     - TrueNAS:
         icon: truenas.png
-        href: http://${SECRET_TRUENAS_IP}:81
+        href: http://${TRUENAS_IP}:81
         description: Storage
         widget:
           type: truenas
-          url: http://${SECRET_TRUENAS_IP}:81
+          url: http://${TRUENAS_IP}:81
           key: "${SECRET_TRUENAS_API}"
           nasType: scale
           enablePools: true
