@@ -67,6 +67,9 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     persistence:
       config:
+        existingClaim: *app
+
+      config-files:
         type: configMap
         name: recyclarr-configmap
         globalMounts:
