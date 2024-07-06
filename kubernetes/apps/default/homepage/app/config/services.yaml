@@ -22,8 +22,8 @@
         namespace: media
         app: qbittorrent
         widget:
-            type: qbittorrent
-            url: http://qbittorrent.media.svc.cluster.local
+          type: qbittorrent
+          url: http://qbittorrent.media.svc.cluster.local
 
     - Sabnzbd:
         href: https://nzb.${SECRET_DOMAIN}
@@ -32,9 +32,9 @@
         namespace: media
         app: sabnzbd
         widget:
-            type: sabnzbd
-            url: http://sabnzbd.media.svc.cluster.local
-            key: "{{ .SABNZBD_API_KEY }}"
+          type: sabnzbd
+          url: http://sabnzbd.media.svc.cluster.local
+          key: "{{ .SABNZBD_API_KEY }}"
 
 - Media:
     - Sonarr:
@@ -44,9 +44,9 @@
         namespace: media
         app: sonarr
         widget:
-            type: sonarr
-            url: http://sonarr.media.svc.cluster.local
-            key: "{{ .SONARR_API_KEY }}"
+          type: sonarr
+          url: http://sonarr.media.svc.cluster.local
+          key: "{{ .SONARR_API_KEY }}"
 
     - Radarr:
         href: https://radarr.${SECRET_DOMAIN}
@@ -55,10 +55,10 @@
         namespace: media
         app: radarr
         widget:
-            type: radarr
-            url: http://radarr.media.svc.cluster.local
-            key: "{{ .RADARR_API_KEY }}"
-            fields: ["wanted", "queued", "movies"]
+          type: radarr
+          url: http://radarr.media.svc.cluster.local
+          key: "{{ .RADARR_API_KEY }}"
+          fields: ["wanted", "queued", "movies"]
 
     - Prowlarr:
         href: https://prowlarr.${SECRET_DOMAIN}
@@ -67,10 +67,10 @@
         namespace: media
         app: prowlarr
         widget:
-            type: prowlarr
-            url: http://prowlarr.media.svc.cluster.local
-            key: "{{ .PROWLARR_API_KEY }}"
-            fields: ["numberOfGrabs", "numberOfFailGrabs", "numberOfFailQueries"]
+          type: prowlarr
+          url: http://prowlarr.media.svc.cluster.local
+          key: "{{ .PROWLARR_API_KEY }}"
+          fields: ["numberOfGrabs", "numberOfFailGrabs", "numberOfFailQueries"]
 
     - Overseerr:
         href: https://overseerr.${SECRET_DOMAIN}
@@ -79,10 +79,10 @@
         namespace: media
         app: overseerr
         widget:
-            type: overseerr
-            url: http://overseerr.media.svc.cluster.local
-            key: "{{ .OVERSEERR_API_KEY }}"
-            fields: ["available", "processing"]
+          type: overseerr
+          url: http://overseerr.media.svc.cluster.local
+          key: "{{ .OVERSEERR_API_KEY }}"
+          fields: ["available", "processing"]
 
 - Reading:
     - Komga:
@@ -92,10 +92,10 @@
         namespace: media
         app: komga
         widget:
-            type: komga
-            url: http://komga.media.svc.cluster.local
-            username: "{{ .KOMGA_USERNAME }}"
-            password: "{{ .KOMGA_PASSWORD }}"
+          type: komga
+          url: http://komga.media.svc.cluster.local
+          username: "{{ .KOMGA_USERNAME }}"
+          password: "{{ .KOMGA_PASSWORD }}"
 
 - Storage:
     - TrueNAS:

@@ -17,23 +17,21 @@
 ##     Templates     ##
 #######################
 
-
 templates:
-    Awards:
-      sort_title: +++++++++_<<collection_name>>
-      url_poster: https://theposterdb.com/api/assets/<<poster>>
-      collection_mode: hide
-      collection_order: release.desc
-      sync_mode: sync
+  Awards:
+    sort_title: +++++++++_<<collection_name>>
+    url_poster: https://theposterdb.com/api/assets/<<poster>>
+    collection_mode: hide
+    collection_order: release.desc
+    sync_mode: sync
 
 #############################
 ##       Collections       ##
 #############################
 
 collections:
-
   Award Winning Movies:
-    template: {name: Awards, poster: 213569}
+    template: { name: Awards, poster: 213569 }
     imdb_search:
       - type: movie,short
         event.winning: emmy

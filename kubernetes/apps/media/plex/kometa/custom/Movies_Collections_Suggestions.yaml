@@ -38,25 +38,24 @@ templates:
 #############################
 
 collections:
-
-#################
-##    Trakt    ##
-#################
+  #################
+  ##    Trakt    ##
+  #################
 
   Trending:
-    template: {name: Suggestion, poster: 213570}
+    template: { name: Suggestion, poster: 213570 }
     trakt_list:
       - https://trakt.tv/users/jjjonesjr33/lists/trakt-trending
     summary: "Movies Trending across the internet"
 
   Popular:
-    template: {name: Suggestion, poster: 213575}
+    template: { name: Suggestion, poster: 213575 }
     trakt_list:
       - https://trakt.tv/users/jjjonesjr33/lists/trakt-top-weekly
     summary: "A collection of the most watched movies over the past week."
 
   Recommended:
-    template: {name: Suggestion, poster: 213604}
+    template: { name: Suggestion, poster: 213604 }
     trakt_list:
       - https://trakt.tv/users/jjjonesjr33/lists/top-20-movies-of-the-week
     visible_home: range(01/01-12/31)
@@ -76,12 +75,12 @@ collections:
   #   visible_shared: range(01/01-12/31)
   #   summary: "A collection of newly-released movies in cinema and on streaming services."
 
-##################
-##     IMDb     ##
-##################
+  ##################
+  ##     IMDb     ##
+  ##################
 
   Top Rated:
-    template: {name: Suggestion, poster: 213605}
+    template: { name: Suggestion, poster: 213605 }
     imdb_search:
       type: movie
       release.after: 1990-01-01
@@ -91,12 +90,12 @@ collections:
       limit: 250
     summary: Top Rated Movies
 
-######################
-##     Tautulli     ##
-######################
+  ######################
+  ##     Tautulli     ##
+  ######################
 
   People Watching:
-    template: {name: Tautulli, poster: 213600}
+    template: { name: Tautulli, poster: 213600 }
     tautulli_watched:
       list_days: 30
       list_size: 10

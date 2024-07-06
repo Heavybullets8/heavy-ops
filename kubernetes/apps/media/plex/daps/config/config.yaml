@@ -89,7 +89,6 @@ sync_gdrive:
       location: /config/input/lion
 
 poster_renamerr:
-
   log_level: info
   dry_run: false
   sync_posters: true

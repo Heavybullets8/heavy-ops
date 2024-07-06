@@ -129,4 +129,3 @@ spec:
         path: /mnt/tank/media/download/usenet
         globalMounts:
           - path: /media/download/usenet
-

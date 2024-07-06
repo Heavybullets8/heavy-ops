@@ -15,4 +15,3 @@ area/taskfile:
 cluster/heavy-cluster:
   - changed-files:
       - any-glob-to-any-file: "kubernetes/**/*"
-

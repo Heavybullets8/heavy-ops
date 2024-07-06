@@ -26,7 +26,6 @@ quicklaunch:
   hideVisitURL: true
   provider: duckduckgo
 
-
 layout:
   Streaming:
     style: row

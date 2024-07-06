@@ -84,4 +84,3 @@ spec:
         globalMounts:
           - path: /home/steam/.config/unity3d/IronGate/Valheim/
           - path: /home/steam/valheim/
-

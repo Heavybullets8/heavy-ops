@@ -30,7 +30,6 @@ spec:
       enabled: true
 
     nextcloud:
-
       extraInitContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:16
@@ -85,7 +84,6 @@ spec:
 
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
-
 
     internalDatabase:
       enabled: false

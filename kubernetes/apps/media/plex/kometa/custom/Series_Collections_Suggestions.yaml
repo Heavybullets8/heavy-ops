@@ -35,13 +35,12 @@ templates:
 #############################
 
 collections:
-
-################
-##    Plex    ##
-################
+  ################
+  ##    Plex    ##
+  ################
 
   Recently Aired:
-    template: { name: suggestion, poster: 213602}
+    template: { name: suggestion, poster: 213602 }
     smart_filter:
       all:
         episode_air_date: 7
@@ -49,7 +48,7 @@ collections:
     summary: Episodes that have aired within the last week.
 
   New Episodes:
-    template: { name: suggestion, poster: 213598}
+    template: { name: suggestion, poster: 213598 }
     smart_filter:
       all:
         episode_added: 7
@@ -57,20 +56,19 @@ collections:
     summary: Episodes that have been added within the last week.
 
   Recently Added:
-    template: { name: suggestion, poster: 213601}
+    template: { name: suggestion, poster: 213601 }
     smart_filter:
       all:
         added: 7
       sort_by: added.desc
     summary: Shows that have been added within the last week.
 
-
-######################
-##     Tautulli     ##
-######################
+  ######################
+  ##     Tautulli     ##
+  ######################
 
   People Watching:
-    template: {name: Tautulli, poster: 213600}
+    template: { name: Tautulli, poster: 213600 }
     tautulli_watched:
       list_days: 30
       list_size: 10

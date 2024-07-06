@@ -17,32 +17,32 @@ spec:
     csiDriver:
       name: "nfs"
     storageClasses:
-    - name: nfs
-      defaultClass: false
-      reclaimPolicy: Delete
-      volumeBindingMode: Immediate
-      allowVolumeExpansion: true
-      parameters:
-        fsType: nfs
-        detachedVolumesFromSnapshots: "false"
-      mountOptions:
-        - nfsvers=4.2
-        - nconnect=8
-        - tcp
-        - hard
-        - noatime
-        - nodiratime
-        - local_lock=all
-      secrets:
-        provisioner-secret:
-        controller-publish-secret:
-        node-stage-secret:
-        node-publish-secret:
-        controller-expand-secret:
+      - name: nfs
+        defaultClass: false
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        parameters:
+          fsType: nfs
+          detachedVolumesFromSnapshots: "false"
+        mountOptions:
+          - nfsvers=4.2
+          - nconnect=8
+          - tcp
+          - hard
+          - noatime
+          - nodiratime
+          - local_lock=all
+        secrets:
+          provisioner-secret:
+          controller-publish-secret:
+          node-stage-secret:
+          node-publish-secret:
+          controller-expand-secret:
     volumeSnapshotClasses:
-    - name: nfs
-      parameters:
-        detachedSnapshots: "true"
+      - name: nfs
+        parameters:
+          detachedSnapshots: "true"
     driver:
       config:
         driver: freenas-api-nfs

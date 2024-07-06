@@ -17,25 +17,25 @@ spec:
     csiDriver:
       name: "iscsi"
     storageClasses:
-    - name: iscsi
-      defaultClass: true
-      reclaimPolicy: Delete
-      volumeBindingMode: Immediate
-      allowVolumeExpansion: true
-      parameters:
-        fsType: ext4
-        detachedVolumesFromSnapshots: "false"
-      mountOptions: []
-      secrets:
-        provisioner-secret:
-        controller-publish-secret:
-        node-stage-secret:
-        node-publish-secret:
-        controller-expand-secret:
+      - name: iscsi
+        defaultClass: true
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        parameters:
+          fsType: ext4
+          detachedVolumesFromSnapshots: "false"
+        mountOptions: []
+        secrets:
+          provisioner-secret:
+          controller-publish-secret:
+          node-stage-secret:
+          node-publish-secret:
+          controller-expand-secret:
     volumeSnapshotClasses:
-    - name: iscsi
-      parameters:
-        detachedSnapshots: "true"
+      - name: iscsi
+        parameters:
+          detachedSnapshots: "true"
     driver:
       config:
         driver: freenas-api-iscsi

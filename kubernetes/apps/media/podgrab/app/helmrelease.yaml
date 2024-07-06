@@ -107,4 +107,3 @@ spec:
         path: /mnt/tank/media/library/podcast
         globalMounts:
           - path: /assets
-

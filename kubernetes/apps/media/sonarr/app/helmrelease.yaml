@@ -43,7 +43,7 @@ spec:
     controllers:
       sonarr:
         annotations:
-          reloader.stakater.com/auto: 'true'
+          reloader.stakater.com/auto: "true"
 
         containers:
           app:
@@ -58,7 +58,7 @@ spec:
               SONARR__SERVER__PORT: &port 80
               SONARR__LOG__LEVEL: info
               SONARR__APP__THEME: dark
-              SONARR__LOG__ANALYTICS_ENABLED: 'false'
+              SONARR__LOG__ANALYTICS_ENABLED: "false"
               SONARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
 

@@ -65,4 +65,3 @@ spec:
     storageClassName: "${VOLSYNC_STORAGECLASS:-nfs}"
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     capacity: "${VOLSYNC_CAPACITY}"
-

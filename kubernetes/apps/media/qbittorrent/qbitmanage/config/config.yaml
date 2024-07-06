@@ -7,9 +7,9 @@ settings:
   nohardlinks_tag: noHL
   share_limits_tag: ~share_limit
   ignoreTags_OnUpdate:
-  - noHL
-  - issue
-  - cross-seed
+    - noHL
+    - issue
+    - cross-seed
   share_limits_min_seeding_time_tag: MinSeedTimeNotReached
   share_limits_min_num_seeds_tag: MinSeedsNotMet
   share_limits_last_active_tag: LastActiveLimitNotReached
@@ -41,12 +41,12 @@ tracker: {{ .QBITMANAGE_TRACKERS | nindent 2 }}
 
 
 nohardlinks:
-- movies:
-    exclude_tags:
-    - MaM
-- series:
-    exclude_tags:
-    - MaM
+  - movies:
+      exclude_tags:
+        - MaM
+  - series:
+      exclude_tags:
+        - MaM
 
 recyclebin:
   enabled: true
@@ -82,4 +82,3 @@ webhooks:
     tag_nohardlinks: notifiarr
     share_limits: notifiarr
     cleanup_dirs: notifiarr
-
