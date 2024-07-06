@@ -10,13 +10,13 @@ configMapGenerator:
   - name: recyclarr-configmap
     files:
       - recyclarr.yaml=./config/recyclarr.yaml
-      - Radarr_Anime_Quality_Profiles.yaml=./configs/Radarr_Anime_Quality_Profiles.yaml
-      - Radarr_Anime_Custom_Formats.yaml=./configs/Radarr_Anime_Custom_Formats.yaml
-      - Radarr_Standard_Quality_Profiles.yaml=./configs/Radarr_Standard_Quality_Profiles.yaml
-      - Radarr_Standard_Custom_Formats.yaml=./configs/Radarr_Standard_Custom_Formats.yaml
-      - Sonarr_Anime_Quality_Profiles.yaml=./configs/Sonarr_Anime_Quality_Profiles.yaml
-      - Sonarr_Anime_Custom_Formats.yaml=./configs/Sonarr_Anime_Custom_Formats.yaml
-      - Sonarr_Standard_Quality_Profiles.yaml=./configs/Sonarr_Standard_Quality_Profiles.yaml
-      - Sonarr_Standard_Custom_Formats.yaml=./configs/Sonarr_Standard_Custom_Formats.yaml
+      - Radarr_Anime_Quality_Profiles.yaml=./includes/Radarr_Anime_Quality_Profiles.yaml
+      - Radarr_Anime_Custom_Formats.yaml=./includes/Radarr_Anime_Custom_Formats.yaml
+      - Radarr_Standard_Quality_Profiles.yaml=./includes/Radarr_Standard_Quality_Profiles.yaml
+      - Radarr_Standard_Custom_Formats.yaml=./includes/Radarr_Standard_Custom_Formats.yaml
+      - Sonarr_Anime_Quality_Profiles.yaml=./includes/Sonarr_Anime_Quality_Profiles.yaml
+      - Sonarr_Anime_Custom_Formats.yaml=./includes/Sonarr_Anime_Custom_Formats.yaml
+      - Sonarr_Standard_Quality_Profiles.yaml=./includes/Sonarr_Standard_Quality_Profiles.yaml
+      - Sonarr_Standard_Custom_Formats.yaml=./includes/Sonarr_Standard_Custom_Formats.yaml
 generatorOptions:
   disableNameSuffixHash: true
