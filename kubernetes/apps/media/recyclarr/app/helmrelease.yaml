@@ -75,27 +75,27 @@ spec:
           - path: /config/recyclarr.yaml
             subPath: recyclarr.yaml
             readOnly: true
-          - path: /config/Radarr_Anime_Quality_Profiles.yaml
+          - path: /configs/Radarr_Anime_Quality_Profiles.yaml
             subPath: Radarr_Anime_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/Radarr_Anime_Custom_Formats.yaml
+          - path: /configs/Radarr_Anime_Custom_Formats.yaml
             subPath: Radarr_Anime_Custom_Formats.yaml
             readOnly: true
-          - path: /config/Radarr_Standard_Quality_Profiles.yaml
+          - path: /configs/Radarr_Standard_Quality_Profiles.yaml
             subPath: Radarr_Standard_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/Radarr_Standard_Custom_Formats.yaml
+          - path: /configs/Radarr_Standard_Custom_Formats.yaml
             subPath: Radarr_Standard_Custom_Formats.yaml
             readOnly: true
-          - path: /config/Sonarr_Anime_Quality_Profiles.yaml
+          - path: /configs/Sonarr_Anime_Quality_Profiles.yaml
             subPath: Sonarr_Anime_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/Sonarr_Anime_Custom_Formats.yaml
+          - path: /configs/Sonarr_Anime_Custom_Formats.yaml
             subPath: Sonarr_Anime_Custom_Formats.yaml
             readOnly: true
-          - path: /config/Sonarr_Standard_Quality_Profiles.yaml
+          - path: /configs/Sonarr_Standard_Quality_Profiles.yaml
             subPath: Sonarr_Standard_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/Sonarr_Standard_Custom_Formats.yaml
+          - path: /configs/Sonarr_Standard_Custom_Formats.yaml
             subPath: Sonarr_Standard_Custom_Formats.yaml
             readOnly: true
