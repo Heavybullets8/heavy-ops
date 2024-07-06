@@ -10,5 +10,13 @@ configMapGenerator:
   - name: recyclarr-configmap
     files:
       - recyclarr.yaml=./resources/recyclarr.yaml
+      - radarr/Anime_Quality_Profiles.yaml=./resources/radarr/Anime_Quality_Profiles.yaml
+      - radarr/Anime_Custom_Formats.yaml=./resources/radarr/Anime_Custom_Formats.yaml
+      - radarr/Standard_Quality_Profiles.yaml=./resources/radarr/Standard_Quality_Profiles.yaml
+      - radarr/Standard_Custom_Formats.yaml=./resources/radarr/Standard_Custom_Formats.yaml
+      - sonarr/Anime_Quality_Profiles.yaml=./resources/sonarr/Anime_Quality_Profiles.yaml
+      - sonarr/Anime_Custom_Formats.yaml=./resources/sonarr/Anime_Custom_Formats.yaml
+      - sonarr/Standard_Quality_Profiles.yaml=./resources/sonarr/Standard_Quality_Profiles.yaml
+      - sonarr/Standard_Custom_Formats.yaml=./resources/sonarr/Standard_Custom_Formats.yaml
 generatorOptions:
   disableNameSuffixHash: true
