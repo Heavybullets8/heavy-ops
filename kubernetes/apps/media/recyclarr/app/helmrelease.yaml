@@ -75,27 +75,27 @@ spec:
           - path: /config/recyclarr.yaml
             subPath: recyclarr.yaml
             readOnly: true
-          - path: /config/radarr/Anime_Quality_Profiles.yaml
-            subPath: radarr/Anime_Quality_Profiles.yaml
+          - path: /config/Radarr_Anime_Quality_Profiles.yaml
+            subPath: Radarr_Anime_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/radarr/Anime_Custom_Formats.yaml
-            subPath: radarr/Anime_Custom_Formats.yaml
+          - path: /config/Radarr_Anime_Custom_Formats.yaml
+            subPath: Radarr_Anime_Custom_Formats.yaml
             readOnly: true
-          - path: /config/radarr/Standard_Quality_Profiles.yaml
-            subPath: radarr/Standard_Quality_Profiles.yaml
+          - path: /config/Radarr_Standard_Quality_Profiles.yaml
+            subPath: Radarr_Standard_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/radarr/Standard_Custom_Formats.yaml
-            subPath: radarr/Standard_Custom_Formats.yaml
+          - path: /config/Radarr_Standard_Custom_Formats.yaml
+            subPath: Radarr_Standard_Custom_Formats.yaml
             readOnly: true
-          - path: /config/sonarr/Anime_Quality_Profiles.yaml
-            subPath: sonarr/Anime_Quality_Profiles.yaml
+          - path: /config/Sonarr_Anime_Quality_Profiles.yaml
+            subPath: Sonarr_Anime_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/sonarr/Anime_Custom_Formats.yaml
-            subPath: sonarr/Anime_Custom_Formats.yaml
+          - path: /config/Sonarr_Anime_Custom_Formats.yaml
+            subPath: Sonarr_Anime_Custom_Formats.yaml
             readOnly: true
-          - path: /config/sonarr/Standard_Quality_Profiles.yaml
-            subPath: sonarr/Standard_Quality_Profiles.yaml
+          - path: /config/Sonarr_Standard_Quality_Profiles.yaml
+            subPath: Sonarr_Standard_Quality_Profiles.yaml
             readOnly: true
-          - path: /config/sonarr/Standard_Custom_Formats.yaml
-            subPath: sonarr/Standard_Custom_Formats.yaml
+          - path: /config/Sonarr_Standard_Custom_Formats.yaml
+            subPath: Sonarr_Standard_Custom_Formats.yaml
             readOnly: true

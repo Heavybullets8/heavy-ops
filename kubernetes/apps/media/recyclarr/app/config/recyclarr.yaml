@@ -22,10 +22,10 @@ sonarr:
     replace_existing_custom_formats: true
 
     include:
-      - config: sonarr/Anime_Quality_Profiles.yaml
-      - config: sonarr/Anime_Custom_Formats.yaml
-      - config: sonarr/Standard_Quality_Profiles.yaml
-      - config: sonarr/Standard_Custom_Formats.yaml
+      - config: Sonarr_Anime_Quality_Profiles.yaml
+      - config: Sonarr_Anime_Custom_Formats.yaml
+      - config: Sonarr_Standard_Quality_Profiles.yaml
+      - config: Sonarr_Standard_Custom_Formats.yaml
 
 radarr:
   radarr:
@@ -45,7 +45,7 @@ radarr:
     replace_existing_custom_formats: true
 
     include:
-      - config: radarr/Anime_Quality_Profiles.yaml
-      - config: radarr/Anime_Custom_Formats.yaml
-      - config: radarr/Standard_Quality_Profiles.yaml
-      - config: radarr/Standard_Custom_Formats.yaml
+      - config: Radarr_Anime_Quality_Profiles.yaml
+      - config: Radarr_Anime_Custom_Formats.yaml
+      - config: Radarr_Standard_Quality_Profiles.yaml
+      - config: Radarr_Standard_Custom_Formats.yaml
