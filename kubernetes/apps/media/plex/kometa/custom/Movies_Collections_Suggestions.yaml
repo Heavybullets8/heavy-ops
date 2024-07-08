@@ -38,6 +38,22 @@ templates:
 #############################
 
 collections:
+  ###############
+  ##   Smart   ##
+  ###############
+
+  Newly Released:
+    template: { name: Suggestion, poster: 213599 }
+    url_poster: https://theposterdb.com/api/assets/213599
+    smart_filter:
+      all:
+        added: 60
+        release: 120
+      limit: 15
+      sort_by: added.desc
+      validate: true
+    summary: "A collection of newly-released movies in cinema and on streaming services."
+
   #################
   ##    Trakt    ##
   #################
@@ -61,19 +77,6 @@ collections:
     visible_home: range(01/01-12/31)
     visible_shared: range(01/01-12/31)
     summary: "Recommended Top Movies of the Week"
-
-  ##############################
-  # Broken as of 09 April 2024 #
-  ##############################
-
-  # Newly Released:
-  #   template: {name: Suggestion, poster: 213599}
-  #   url_poster: https://theposterdb.com/api/assets/213599
-  #   trakt_list:
-  #     - https://trakt.tv/users/jjjonesjr33/lists/newly-released
-  #   visible_home: range(01/01-12/31)
-  #   visible_shared: range(01/01-12/31)
-  #   summary: "A collection of newly-released movies in cinema and on streaming services."
 
   ##################
   ##     IMDb     ##
