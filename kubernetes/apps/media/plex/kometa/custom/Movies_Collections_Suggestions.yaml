@@ -38,22 +38,6 @@ templates:
 #############################
 
 collections:
-  ###############
-  ##   Smart   ##
-  ###############
-
-  Newly Released:
-    template: { name: Suggestion, poster: 213599 }
-    url_poster: https://theposterdb.com/api/assets/213599
-    smart_filter:
-      all:
-        added: 60
-        release: 120
-      limit: 15
-      sort_by: added.desc
-      validate: true
-    summary: "A collection of newly-released movies in cinema and on streaming services."
-
   #################
   ##    Trakt    ##
   #################
