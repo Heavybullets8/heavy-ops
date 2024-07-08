@@ -41,7 +41,7 @@ spec:
   values:
     nameOverride: gha-runner-scale-set
     runnerScaleSetName: gha-runner-scale-set
-    githubConfigUrl: https://github.com/uofirob/TalosHomelab
+    githubConfigUrl: https://github.com/Heavybullets8/talos
     minRunners: 1
     maxRunners: 6
     containerMode:
