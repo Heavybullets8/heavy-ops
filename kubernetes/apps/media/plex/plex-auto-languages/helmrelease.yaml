@@ -48,7 +48,7 @@ spec:
                   httpGet:
                     path: /health
                     port: 9880
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 120
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
@@ -59,7 +59,7 @@ spec:
                   httpGet:
                     path: /ready
                     port: 9880
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 60
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
