@@ -27,7 +27,7 @@ spec:
 
   values:
     controllers:
-      kometa-anime-series:
+      anime-series:
         type: &type cronjob
         cronjob: &cronjob-common
           schedule: "0 16,5 * * *"
@@ -66,7 +66,7 @@ spec:
                 drop:
                   - "ALL"
 
-      kometa-anime-movies:
+      anime-movies:
         type: *type
         cronjob:
           <<: *cronjob-common
@@ -79,7 +79,7 @@ spec:
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Movies"
 
-      kometa-standard-series:
+      standard-series:
         type: *type
         cronjob:
           <<: *cronjob-common
@@ -92,7 +92,7 @@ spec:
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Series"
 
-      kometa-standard-movies:
+      standard-movies:
         type: *type
         cronjob:
           <<: *cronjob-common
