@@ -105,6 +105,19 @@ spec:
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Movies"
 
+      anime-overlays:
+        type: *type
+        cronjob:
+          <<: *cronjob-common
+          schedule: "0 8-14,17-23,0-2 * * *"
+        containers:
+          app:
+            <<: *app-common
+            args:
+              - |
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
+                python3 kometa.py --run --read-only-config --operations-only "Anime Series"
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true

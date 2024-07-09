@@ -6,10 +6,6 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-      mass_added_at_update:
-        - anidb
-        - mal
-        - tvdb
     collection_files:
       - file: config/Anime_Collections_All.yaml
         asset_directory: config/assets/anime
@@ -85,12 +81,6 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-      mass_added_at_update:
-        - tmdb
-        - tvdb
-        - omdb
-        - mdb
-        - mdb_digital
     collection_files:
       - file: config/Series_Collections_Networks.yaml
         asset_directory: config/assets/networks
