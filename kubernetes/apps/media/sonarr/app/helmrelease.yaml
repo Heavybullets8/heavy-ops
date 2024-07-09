@@ -112,6 +112,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
           nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
           nginx.ingress.kubernetes.io/configuration-snippet: |-
             proxy_set_header Accept-Encoding "";
             sub_filter
