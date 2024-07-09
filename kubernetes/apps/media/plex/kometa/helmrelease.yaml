@@ -67,31 +67,31 @@ spec:
                   - "ALL"
 
       kometa-anime-movies:
-        <<: *common
         containers:
           app:
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Anime Movies"
+        <<: *common
 
       kometa-standard-series:
-        <<: *common
         containers:
           app:
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Series"
+        <<: *common
 
       kometa-standard-movies:
-        <<: *common
         containers:
           app:
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
                 python3 kometa.py --run --read-only-config --run-libraries "Movies"
+        <<: *common
 
     defaultPodOptions:
       securityContext:
