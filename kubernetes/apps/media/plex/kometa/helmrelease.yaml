@@ -27,7 +27,7 @@ spec:
 
   values:
     controllers:
-      kometa:
+      kometa-anime-series: &common
         type: cronjob
         cronjob:
           schedule: "0 16,5 * * *"
@@ -45,19 +45,8 @@ spec:
               - -c
             args:
               - |
-                mkdir -p /config/assets/anime \
-                        /config/assets/awards \
-                        /config/assets/decades \
-                        /config/assets/genres \
-                        /config/assets/holidays \
-                        /config/assets/networks \
-                        /config/assets/suggestions \
-                        /config/assets/posters &&
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Series" &
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Movies" &
-                python3 kometa.py --run --read-only-config --run-libraries "Series" &
-                wait
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Series"
             env:
               TZ: *timeZone
               KOMETA_CONFIG: /config/config.yaml
@@ -69,13 +58,40 @@ spec:
                 cpu: 10m
                 memory: 10M
               limits:
-                memory: 8192M
+                memory: 5120M
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities:
                 drop:
-                  - ALL
+                  - "ALL"
+
+      kometa-anime-movies:
+        <<: *common
+        containers:
+          app:
+            args:
+              - |
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies"
+
+      kometa-standard-series:
+        <<: *common
+        containers:
+          app:
+            args:
+              - |
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
+                python3 kometa.py --run --read-only-config --run-libraries "Series"
+
+      kometa-standard-movies:
+        <<: *common
+        containers:
+          app:
+            args:
+              - |
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
+                python3 kometa.py --run --read-only-config --run-libraries "Movies"
 
     defaultPodOptions:
       securityContext:
