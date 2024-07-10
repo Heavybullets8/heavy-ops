@@ -9,9 +9,9 @@ resources:
   - ./notifiarr/ks.yaml
   - ./plex/ks.yaml
   - ./podgrab/ks.yaml
-  # - ./sabnzbd/ks.yaml
+  - ./sabnzbd/ks.yaml
   - ./sonarr/ks.yaml
-  # - ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
   - ./radarr/ks.yaml
   - ./recyclarr/ks.yaml
   - ./requestrr/ks.yaml
