@@ -116,7 +116,7 @@ spec:
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
-                python3 kometa.py --run --read-only-config --operations-only "Anime Series"
+                python3 kometa.py --run --read-only-config --overlays-only --operations-only "Anime Series"
 
     defaultPodOptions:
       securityContext:
