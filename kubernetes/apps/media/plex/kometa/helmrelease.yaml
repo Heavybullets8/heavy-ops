@@ -115,8 +115,9 @@ spec:
             <<: *app-common
             args:
               - |
-                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
-                python3 kometa.py --run --read-only-config --overlays-only --operations-only --run-libraries "Anime Series"
+                mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters}
+                python3 kometa.py --run --read-only-config --operations-only --run-libraries "Anime Series"
+                python3 kometa.py --run --read-only-config --overlays-only --run-libraries "Anime Series"
 
     defaultPodOptions:
       securityContext:
