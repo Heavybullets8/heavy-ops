@@ -27,7 +27,7 @@ spec:
       repository: nvcr.io/nvidia/k8s-device-plugin
       tag: v0.15.1
     runtimeClassName: nvidia
-    selectorLabelsOverride: {}
+    affinity: {}
     config:
       map:
         default: |-
