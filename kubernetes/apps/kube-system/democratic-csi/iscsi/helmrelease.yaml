@@ -24,7 +24,7 @@ spec:
         allowVolumeExpansion: true
         parameters:
           fsType: ext4
-          detachedVolumesFromSnapshots: "false"
+          detachedVolumesFromSnapshots: "true"
         mountOptions: []
         secrets:
           provisioner-secret:
@@ -49,7 +49,7 @@ spec:
           apiKey: ${SECRET_TRUENAS_API}
         zfs:
           datasetParentName: speed/talos/iscsi/volumes
-          detachedSnapshotsDatasetParentName: speed/talos/iscsi/snapshots
+          detachedSnapshotsDatasetParentName: tank/talos/iscsi/snapshots
           zvolCompression:
           zvolDedup:
           zvolEnableReservation: false

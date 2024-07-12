@@ -24,7 +24,7 @@ spec:
         allowVolumeExpansion: true
         parameters:
           fsType: nfs
-          detachedVolumesFromSnapshots: "false"
+          detachedVolumesFromSnapshots: "true"
         mountOptions:
           - nfsvers=4.2
           - nconnect=8
@@ -56,7 +56,7 @@ spec:
           allowInsecure: true
         zfs:
           datasetParentName: speed/talos/nfs/volumes
-          detachedSnapshotsDatasetParentName: speed/talos/nfs/snapshots
+          detachedSnapshotsDatasetParentName: tank/talos/nfs/snapshots
           datasetEnableQuotas: true
           datasetEnableReservation: false
           datasetPermissionsMode: "0777"
