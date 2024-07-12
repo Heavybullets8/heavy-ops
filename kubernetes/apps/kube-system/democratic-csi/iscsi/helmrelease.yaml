@@ -37,6 +37,7 @@ spec:
         parameters:
           detachedSnapshots: "true"
     driver:
+      logLevel: debug
       config:
         driver: freenas-api-iscsi
         instance_id:
@@ -72,6 +73,7 @@ spec:
     node:
       hostPID: true
       driver:
+        logLevel: debug
         extraEnv:
           - name: ISCSIADM_HOST_STRATEGY
             value: nsenter

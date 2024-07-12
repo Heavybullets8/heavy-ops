@@ -44,6 +44,7 @@ spec:
         parameters:
           detachedSnapshots: "true"
     driver:
+      logLevel: debug
       config:
         driver: freenas-api-nfs
         instance_id:

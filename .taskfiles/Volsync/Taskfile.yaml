@@ -19,7 +19,7 @@ x-env-vars: &env-vars
   puid: "{{.puid}}"
 
 vars:
-  VOLSYNC_RESOURCES_DIR: "{{.ROOT_DIR}}/.taskfiles/volsync/resources"
+  VOLSYNC_RESOURCES_DIR: "{{.ROOT_DIR}}/.taskfiles/Volsync/resources"
 
 tasks:
 
@@ -97,7 +97,7 @@ tasks:
       ns: Namespace the PVC is in (default: default)
       app: Application to snapshot (required)
     cmds:
-      - kubectl --context {{.cluster}} -n {{.ns}} patch replicationsources {{.app}} --type merge -p '{"spec":{"trigger":{"manual":"{{.now}}"}}}'
+      - kubectl --context {{.cluster}} -n {{.ns}} patch replicationsources {{.app}}-r2 --type merge -p '{"spec":{"trigger":{"manual":"{{.now}}"}}}'
       - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
       - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=120m
     env: *env-vars
@@ -112,7 +112,7 @@ tasks:
     preconditions:
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/which-controller.sh
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
-      - kubectl --context {{.cluster}} -n {{.ns}} get replicationsources {{.app}}
+      - kubectl --context {{.cluster}} -n {{.ns}} get replicationsources {{.app}}-r2
 
   # To run restore jobs in parallel for all replicationdestinations:
   #    - kubectl get replicationsources --all-namespaces --no-headers | awk '{print $2, $1}' | xargs --max-procs=4 -l bash -c 'task volsync:restore app=$0 ns=$1'
