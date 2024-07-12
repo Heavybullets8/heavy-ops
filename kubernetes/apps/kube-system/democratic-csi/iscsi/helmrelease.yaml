@@ -70,6 +70,12 @@ spec:
           extentBlocksize: 512
           extentRpm: "SSD"
           extentAvailThreshold: 0
+    controller:
+      driver:
+      externalProvisioner:
+        extraArgs:
+          - --v=5
+          - --timeout=13m
     node:
       hostPID: true
       driver:
