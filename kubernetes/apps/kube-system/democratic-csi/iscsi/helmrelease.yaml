@@ -35,7 +35,7 @@ spec:
     volumeSnapshotClasses:
       - name: iscsi
         parameters:
-          detachedSnapshots: "true"
+          detachedSnapshots: "false"
     driver:
       logLevel: debug
       config:
