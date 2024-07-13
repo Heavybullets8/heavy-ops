@@ -25,7 +25,17 @@ spec:
           - --leader-election
           - --leader-election-namespace={{ .Release.Namespace }}
           - --timeout=15m
-          - --worker-threads=18
+          - --worker-threads=15
+          - --csi-address=/csi-data/csi.sock
+
+      externalProvisioner:
+        args:
+          - --v=5
+          - --leader-election
+          - --leader-election-namespace={{ .Release.Namespace }}
+          - --timeout=15m
+          - --worker-threads=15
+          - --extra-create-metadata
           - --csi-address=/csi-data/csi.sock
 
     storageClasses:
