@@ -13,9 +13,11 @@ spec:
         kind: HelmRepository
         name: democratic-csi
         namespace: flux-system
+
   values:
     csiDriver:
       name: "nfs"
+
     storageClasses:
       - name: nfs
         defaultClass: false
@@ -39,10 +41,12 @@ spec:
           node-stage-secret:
           node-publish-secret:
           controller-expand-secret:
+
     volumeSnapshotClasses:
       - name: nfs
         parameters:
           detachedSnapshots: "true"
+
     driver:
       logLevel: debug
       config:
