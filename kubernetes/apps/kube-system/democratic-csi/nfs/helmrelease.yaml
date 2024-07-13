@@ -24,7 +24,7 @@ spec:
         allowVolumeExpansion: true
         parameters:
           fsType: nfs
-          detachedVolumesFromSnapshots: "true"
+          detachedVolumesFromSnapshots: "false"
         mountOptions:
           - nfsvers=4.2
           - nconnect=8
