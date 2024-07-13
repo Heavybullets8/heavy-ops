@@ -13,9 +13,19 @@ spec:
         kind: HelmRepository
         name: democratic-csi
         namespace: flux-system
+
   values:
     csiDriver:
       name: "iscsi"
+
+    controller:
+      externalSnapshotter:
+        args:
+          - --v=5
+          - --leader-election
+          - --leader-election-namespace={{ .Release.Namespace }}
+          - --timeout=12m
+
     storageClasses:
       - name: iscsi
         defaultClass: true
@@ -32,10 +42,12 @@ spec:
           node-stage-secret:
           node-publish-secret:
           controller-expand-secret:
+
     volumeSnapshotClasses:
       - name: iscsi
         parameters:
           detachedSnapshots: "false"
+
     driver:
       logLevel: debug
       config:
@@ -70,12 +82,7 @@ spec:
           extentBlocksize: 512
           extentRpm: "SSD"
           extentAvailThreshold: 0
-    controller:
-      driver:
-      externalProvisioner:
-        extraArgs:
-          - --v=5
-          - --timeout=13m
+
     node:
       hostPID: true
       driver:
