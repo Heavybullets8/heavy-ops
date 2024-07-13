@@ -21,12 +21,12 @@ spec:
     controller:
       externalSnapshotter:
         args:
-          --v=5
-          --leader-election
-          --leader-election-namespace={{ .Release.Namespace }}
-          --timeout=15m
-          --worker-threads=18
-          --csi-address=/csi-data/csi.sock
+          - --v=5
+          - --leader-election
+          - --leader-election-namespace={{ .Release.Namespace }}
+          - --timeout=15m
+          - --worker-threads=18
+          - --csi-address=/csi-data/csi.sock
 
     storageClasses:
       - name: iscsi
