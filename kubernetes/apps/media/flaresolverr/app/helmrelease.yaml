@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: flaresolverr
+  name: &app flaresolverr
 spec:
   interval: 30m
   chart:
@@ -41,7 +41,7 @@ spec:
                 memory: 500Mi
     service:
       app:
-        controller: flaresolverr
+        controller: *app
         ports:
           http:
             port: 8191

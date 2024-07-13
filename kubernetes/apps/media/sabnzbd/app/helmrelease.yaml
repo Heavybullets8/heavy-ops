@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: &app sabnzbd
 spec:
   interval: 30m
   chart:
@@ -82,7 +82,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: sabnzbd
+        controller: *app
         ports:
           http:
             port: *port
@@ -112,7 +112,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: sabnzbd
+        existingClaim: *app
 
       logs:
         type: emptyDir

@@ -92,7 +92,7 @@ spec:
       enabled: true
       type: postgresql
       host: postgres16-rw.database.svc.cluster.local:5432
-      database: nextcloud
+      database: *app
       existingSecret:
         enabled: true
         secretName: nextcloud-secret

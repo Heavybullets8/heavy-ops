@@ -87,13 +87,13 @@ spec:
               app.kubernetes.io/name: *app
     service:
       app:
-        controller: cloudflared
+        controller: *app
         ports:
           http:
             port: *port
     serviceMonitor:
       app:
-        serviceName: cloudflared
+        serviceName: *app
         endpoints:
           - port: http
             scheme: http

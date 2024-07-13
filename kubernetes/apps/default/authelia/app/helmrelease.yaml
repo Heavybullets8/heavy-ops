@@ -91,7 +91,7 @@ spec:
               app.kubernetes.io/name: *app
     service:
       app:
-        controller: authelia
+        controller: *app
         ports:
           http:
             port: *port
@@ -99,7 +99,7 @@ spec:
             port: 8080
     serviceMonitor:
       app:
-        serviceName: authelia
+        serviceName: *app
         endpoints:
           - port: metrics
             scheme: http
