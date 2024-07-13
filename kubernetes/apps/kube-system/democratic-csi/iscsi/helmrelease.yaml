@@ -24,7 +24,7 @@ spec:
           - --v=5
           - --leader-election
           - --leader-election-namespace={{ .Release.Namespace }}
-          - --timeout=15m
+          - --timeout=18m
           - --worker-threads=15
           - --csi-address=/csi-data/csi.sock
 
@@ -33,7 +33,7 @@ spec:
           - --v=5
           - --leader-election
           - --leader-election-namespace={{ .Release.Namespace }}
-          - --timeout=15m
+          - --timeout=18m
           - --worker-threads=15
           - --extra-create-metadata
           - --csi-address=/csi-data/csi.sock
@@ -46,7 +46,7 @@ spec:
         allowVolumeExpansion: true
         parameters:
           fsType: ext4
-          detachedVolumesFromSnapshots: "true"
+          detachedVolumesFromSnapshots: "false"
         mountOptions: []
         secrets:
           provisioner-secret:
@@ -58,7 +58,7 @@ spec:
     volumeSnapshotClasses:
       - name: iscsi
         parameters:
-          detachedSnapshots: "false"
+          detachedSnapshots: "true"
 
     driver:
       logLevel: debug
@@ -73,7 +73,7 @@ spec:
           apiKey: ${SECRET_TRUENAS_API}
         zfs:
           datasetParentName: speed/talos/iscsi/volumes
-          detachedSnapshotsDatasetParentName: tank/talos/iscsi/snapshots
+          detachedSnapshotsDatasetParentName: speed/talos/iscsi/snapshots
           zvolCompression:
           zvolDedup:
           zvolEnableReservation: false

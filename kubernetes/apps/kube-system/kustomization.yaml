@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  - ./democratic-csi/ks.yaml
+  # - ./democratic-csi/ks.yaml
   - ./descheduler/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./metrics-server/ks.yaml
