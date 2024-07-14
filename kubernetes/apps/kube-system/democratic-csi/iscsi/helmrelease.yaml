@@ -18,6 +18,26 @@ spec:
     csiDriver:
       name: "iscsi"
 
+    controller:
+      externalSnapshotter:
+        args:
+          - --v=5
+          - --leader-election
+          - --leader-election-namespace={{ .Release.Namespace }}
+          - --timeout=18m
+          - --worker-threads=15
+          - --csi-address=/csi-data/csi.sock
+
+      externalProvisioner:
+        args:
+          - --v=5
+          - --leader-election
+          - --leader-election-namespace={{ .Release.Namespace }}
+          - --timeout=18m
+          - --worker-threads=15
+          - --extra-create-metadata
+          - --csi-address=/csi-data/csi.sock
+
     storageClasses:
       - name: iscsi
         defaultClass: true
@@ -43,7 +63,7 @@ spec:
     driver:
       logLevel: debug
       config:
-        driver: freenas-iscsi
+        driver: freenas-api-iscsi
         instance_id:
         httpConnection:
           protocol: http
@@ -51,11 +71,6 @@ spec:
           port: 81
           allowInsecure: true
           apiKey: ${SECRET_TRUENAS_API}
-        sshConnection:
-          host: ${TRUENAS_IP}
-          port: 22
-          username: root
-          password: ${SECRET_TRUENAS_PASS}
         zfs:
           datasetParentName: speed/talos/iscsi/volumes
           detachedSnapshotsDatasetParentName: speed/talos/iscsi/snapshots
