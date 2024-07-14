@@ -198,8 +198,8 @@ plex:
   url: http://plex.media.svc.cluster.local:32400
   token: <<PLEX_API_KEY>>
   timeout: 60
-  clean_bundles: true
-  empty_trash: true
+  clean_bundles: false
+  empty_trash: false
   optimize: false
   verify_ssl:
   db_cache: 80
