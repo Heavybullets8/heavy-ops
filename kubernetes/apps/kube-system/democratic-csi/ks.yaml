@@ -5,7 +5,7 @@ metadata:
   name: iscsi
   namespace: flux-system
 spec:
-  path: ./kkubernetes/apps/kube-system/democratic-csi/app
+  path: ./kubernetes/apps/kube-system/democratic-csi/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
