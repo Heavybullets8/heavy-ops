@@ -43,7 +43,7 @@ spec:
     driver:
       logLevel: debug
       config:
-        driver: freenas-api-iscsi
+        driver: freenas-iscsi
         instance_id:
         httpConnection:
           protocol: http
@@ -51,6 +51,11 @@ spec:
           port: 81
           allowInsecure: true
           apiKey: ${SECRET_TRUENAS_API}
+        sshConnection:
+          host: ${TRUENAS_IP}
+          port: 22
+          username: root
+          password: ${SECRET_TRUENAS_PASS}
         zfs:
           datasetParentName: speed/talos/iscsi/volumes
           detachedSnapshotsDatasetParentName: speed/talos/iscsi/snapshots
