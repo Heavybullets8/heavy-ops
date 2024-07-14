@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 
-  - ./valheim/ks.yaml
+  # TODO: Uncomment
+  # - ./valheim/ks.yaml

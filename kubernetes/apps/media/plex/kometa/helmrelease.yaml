@@ -114,9 +114,9 @@ spec:
     persistence:
       assets:
         type: persistentVolumeClaim
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         size: 75Gi
-        storageClass: nfs
+        storageClass: iscsi
         globalMounts:
           - path: /config/assets
 

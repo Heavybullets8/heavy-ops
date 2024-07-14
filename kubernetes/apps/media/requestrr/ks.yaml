@@ -24,4 +24,3 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: *app
       VOLSYNC_CAPACITY: 5Gi
-      VOLSYNC_STORAGECLASS: iscsi

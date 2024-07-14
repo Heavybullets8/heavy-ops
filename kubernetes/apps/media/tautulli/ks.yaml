@@ -24,5 +24,3 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: tautulli
       VOLSYNC_CAPACITY: 2Gi
-      VOLSYNC_ACCESSMODES: ReadWriteOnce
-      VOLSYNC_STORAGECLASS: iscsi

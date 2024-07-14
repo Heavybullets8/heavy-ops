@@ -26,5 +26,3 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: prowlarr
       VOLSYNC_CAPACITY: 500Mi
-      VOLSYNC_ACCESSMODES: ReadWriteOnce
-      VOLSYNC_STORAGECLASS: iscsi

@@ -24,7 +24,7 @@ spec:
           - --v=5
           - --leader-election
           - --leader-election-namespace={{ .Release.Namespace }}
-          - --timeout=18m
+          - --timeout=180s
           - --worker-threads=15
           - --csi-address=/csi-data/csi.sock
 
@@ -33,7 +33,7 @@ spec:
           - --v=5
           - --leader-election
           - --leader-election-namespace={{ .Release.Namespace }}
-          - --timeout=18m
+          - --timeout=180s
           - --worker-threads=15
           - --extra-create-metadata
           - --csi-address=/csi-data/csi.sock

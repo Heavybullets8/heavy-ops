@@ -26,4 +26,3 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: notifiarr
       VOLSYNC_CAPACITY: 3Gi
-      VOLSYNC_STORAGECLASS: iscsi

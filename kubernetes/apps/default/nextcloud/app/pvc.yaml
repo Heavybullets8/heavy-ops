@@ -4,11 +4,11 @@ kind: PersistentVolume
 metadata:
   name: nextcloud-pv
 spec:
-  storageClassName: nextcloud-nfs
+  storageClassName: nextcloud-data
   capacity:
     storage: 300Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /mnt/tank/cloud
@@ -19,9 +19,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: nextcloud-pvc
 spec:
-  storageClassName: nextcloud-nfs
+  storageClassName: nextcloud-data
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 300Gi
