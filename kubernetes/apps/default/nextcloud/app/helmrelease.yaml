@@ -52,7 +52,7 @@ spec:
         smtpPasswordKey: SMTP_PASSWORD
         smtpHostKey: SMTP_HOST
 
-      host: cloud.${SECRET_DOMAIN}
+      host: &host cloud.${SECRET_DOMAIN}
 
       mail:
         enabled: true
@@ -73,6 +73,15 @@ spec:
             'loglevel' => 1,
             'logdateformat' => 'F d, Y H:i:s'
             );
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array (
+            'trusted_proxies' => array(
+              0 => '127.0.0.1',
+              1 => '10.96.0.0/16',
+            ),
+            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+          );
 
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
@@ -99,6 +108,8 @@ spec:
         nginx.ingress.kubernetes.io/proxy-body-size: "10G"
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/enable-cors: "true"
+        nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
         nginx.ingress.kubernetes.io/server-snippet: |-
           server_tokens off;
           proxy_hide_header X-Powered-By;
@@ -125,6 +136,10 @@ spec:
           }
       path: /
       pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "${SECRET_DOMAIN//./-}-tls"
 
     persistence:
       enabled: true
