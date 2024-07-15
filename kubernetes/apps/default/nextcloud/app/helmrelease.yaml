@@ -86,7 +86,18 @@ spec:
             ),
             'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
           );
-
+        ingress.config.php: |-
+          <?php
+          $CONFIG = array (
+            'default_phone_region' => 'US',
+            'overwrite.cli.url' => 'https://cloud.${SECRET_DOMAIN}',
+            'overwriteprotocol' => 'https',
+          );
+        misc.config.php: |-
+          <?php
+          $CONFIG = array (
+            'default_phone_region' => 'US',
+          );
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
 
