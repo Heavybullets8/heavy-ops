@@ -52,7 +52,11 @@ spec:
         smtpPasswordKey: SMTP_PASSWORD
         smtpHostKey: SMTP_HOST
 
-      host: &host cloud.${SECRET_DOMAIN}
+      host: cloud.${SECRET_DOMAIN}
+
+      phpClientHttpsFix:
+        enabled: true
+        protocol: https
 
       mail:
         enabled: true
