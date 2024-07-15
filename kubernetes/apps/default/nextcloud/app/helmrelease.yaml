@@ -136,10 +136,6 @@ spec:
           }
       path: /
       pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: "${SECRET_DOMAIN//./-}-tls"
 
     persistence:
       enabled: true
