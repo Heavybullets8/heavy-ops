@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/recyclarr/recyclarr/master/schemas/config-schema.json
+
+sonarr:
+  sonarr:
+    base_url: http://sonarr.media.svc.cluster.local
+    api_key: !env_var SONARR_API_KEY
+
+    quality_definition:
+      type: anime
+
+    media_naming:
+      series: jellyfin
+      season: default
+      episodes:
+        rename: true
+        standard: default
+        daily: default
+        anime: default
+
+    delete_old_custom_formats: true
+    replace_existing_custom_formats: true
+
+    include:
+      - config: Sonarr_Anime_Quality_Profiles.yaml
+      - config: Sonarr_Anime_Custom_Formats.yaml
+      - config: Sonarr_Standard_Quality_Profiles.yaml
+      - config: Sonarr_Standard_Custom_Formats.yaml
+
+radarr:
+  radarr:
+    base_url: http://radarr.media.svc.cluster.local
+    api_key: !env_var RADARR_API_KEY
+
+    quality_definition:
+      type: movie
+
+    media_naming:
+      folder: jellyfin
+      movie:
+        rename: true
+        standard: anime-jellyfin
+
+    delete_old_custom_formats: true
+    replace_existing_custom_formats: true
+
+    include:
+      - config: Radarr_Anime_Quality_Profiles.yaml
+      - config: Radarr_Anime_Custom_Formats.yaml
+      - config: Radarr_Standard_Quality_Profiles.yaml
+      - config: Radarr_Standard_Custom_Formats.yaml

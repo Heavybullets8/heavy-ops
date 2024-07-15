@@ -1,0 +1,17 @@
+---
+# Areas
+area/github:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**/*"
+area/kubernetes:
+  - changed-files:
+      - any-glob-to-any-file: "kubernetes/**/*"
+area/taskfile:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".taskfiles/**/*"
+          - "Taskfile.yaml"
+# Clusters
+cluster/heavy-cluster:
+  - changed-files:
+      - any-glob-to-any-file: "kubernetes/**/*"

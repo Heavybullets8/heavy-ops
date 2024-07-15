@@ -1,0 +1,238 @@
+---
+libraries:
+  Anime Series:
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    collection_files:
+      - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
+    overlay_files:
+      - default: languages
+        template_variables:
+          languages:
+            - en
+            - zh
+            - ja
+            - ko
+          style: square
+          horizontal_position: left
+          vertical_position: top
+      - default: languages
+        template_variables:
+          languages:
+            - en
+            - zh
+            - ja
+            - ko
+          style: square
+          horizontal_position: left
+          vertical_position: top
+          builder_level: episode
+        asset_directory: config/assets/anime
+
+  Anime Movies:
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    collection_files:
+      - file: config/Anime_Collections_All.yaml
+        asset_directory: config/assets/anime
+    overlay_files:
+      - default: languages
+        template_variables:
+          languages:
+            - en
+            - zh
+            - ja
+            - ko
+          style: square
+          horizontal_position: left
+          vertical_position: top
+        asset_directory: config/assets/anime
+
+  Movies:
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+      mass_originally_available_update:
+        - mdb_digital
+    collection_files:
+      - file: config/Movies_Collections_Awards.yaml
+        asset_directory: config/assets/awards
+      - file: config/Movies_Collections_Decades.yaml
+        asset_directory: config/assets/decades
+      - file: config/Movies_Collections_Genres.yaml
+        asset_directory: config/assets/genres
+      - file: config/Movies_Collections_Holidays.yaml
+        asset_directory: config/assets/holidays
+      - file: config/Movies_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
+
+  Series:
+    operations:
+      split_duplicates: false
+      assets_for_all: true
+      delete_collections:
+        less: 1
+    collection_files:
+      - file: config/Series_Collections_Networks.yaml
+        asset_directory: config/assets/networks
+      - file: config/Series_Collections_Suggestions.yaml
+        asset_directory: config/assets/suggestions
+      - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/collection_files/better_new_and_old_tv_shows_releases.yml
+
+    overlay_files:
+      # Status in the top left corner
+      - default: status
+        template_variables:
+          text_airing: .
+          url_airing: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/status-top-left/airing.png
+          text_returning: .
+          url_returning: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/status-top-left/returning.png
+          text_canceled: .
+          url_canceled: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/status-top-left/cancelled.png
+          text_ended: .
+          url_ended: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/status-top-left/ended.png
+          horizontal_align: left
+          horizontal_offset: 25
+          vertical_align: top
+          vertical_offset: 0
+          font_size: 1
+          font_color: "#00000000"
+          back_color: "#00000000"
+          back_width_airing: 1000
+          back_width_returning: 1000
+          back_width_ended: 1000
+          back_width_cancelled: 1000
+          back_width: 1000
+          back_height_airing: 1500
+          back_height_returning: 1500
+          back_height_ended: 1500
+          back_height_cancelled: 1500
+          back_height: 1500
+          back_padding: 0
+          back_line_width: 1000
+          final_horizontal_offset: 0
+          final_vertical_offset: 0
+
+      # Fallback Network logo which is overwritten by pmm: network if it finds an image for the network. Must run before pmm: network.
+      - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network_fallback.yml
+
+      # Uses the default PMM network but replaces the image with custom ones
+      - default: network
+        template_variables:
+          horizontal_align: left
+          horizontal_offset: 0
+          vertical_offset: 0
+          vertical_align: top
+          back_width: 1000
+          back_height: 1500
+          url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/overlays/network-top-left/<<key>>.png
+          back_color: 00
+
+settings:
+  cache_expiration: 60
+  asset_folders: true
+  asset_depth: 3
+  create_asset_folders: true
+  sync_mode: sync
+  delete_below_minimum: true
+  missing_only_released: true
+  show_unmanaged: true
+  show_filtered: true
+  show_options: true
+  show_missing: false
+  show_missing_assets: false
+  show_missing_season_assets: false
+  show_missing_episode_assets: false
+  tvdb_language: en
+  minimum_items: 1
+  download_url_assets: true
+  verify_ssl: true
+  playlist_sync_to_users: all
+  show_asset_not_needed: true
+  prioritize_assets: false
+  asset_directory: config/assets/posters
+  run_order:
+    - operations
+    - metadata
+    - collections
+    - overlays
+  show_unconfigured: true
+
+anidb:
+  client: talos
+  version: 1
+  username: <<ANIDB_USERNAME>>
+  password: <<ANIDB_PASSWORD>>
+  language: en
+  cache_expiration: 60
+
+mal:
+  client_id: <<MYANIMELIST_CLIENT_ID>>
+  client_secret: <<MYANIMELIST_CLIENT_SECRET>>
+  localhost_url: <<MYANIMELIST_LOCALHOST_URL>>
+  authorization:
+    access_token: <<MYANIMELIST_ACCESS_TOKEN>>
+    token_type: Bearer
+    expires_in: <<MYANIMELIST_EXPIRES_IN>>
+    refresh_token: <<MYANIMELIST_REFRESH_TOKEN>>
+  cache_expiration: 60
+
+mdblist:
+  apikey: <<MDBLIST_API_KEY>>
+  cache_expiration: 60
+
+omdb:
+  apikey: <<OMDB_API_KEY>>
+  cache_expiration: 60
+
+plex:
+  url: http://plex.media.svc.cluster.local:32400
+  token: <<PLEX_API_KEY>>
+  timeout: 60
+  clean_bundles: false
+  empty_trash: false
+  optimize: false
+  verify_ssl:
+  db_cache: 80
+
+tautulli:
+  url: http://tautulli.media.svc.cluster.local
+  apikey: <<TAUTULLI_API_KEY>>
+
+tmdb:
+  apikey: <<TMDB_API_KEY>>
+  language: en
+  cache_expiration: 60
+  region: US
+
+trakt:
+  client_id: <<TRAKT_CLIENT_ID>>
+  client_secret: <<TRAKT_CLIENT_SECRET>>
+  authorization:
+    access_token: <<TRAKT_ACCESS_TOKEN>>
+    token_type: Bearer
+    expires_in: <<TRAKT_EXPIRES_IN>>
+    refresh_token: <<TRAKT_REFRESH_TOKEN>>
+    scope: public
+    created_at: <<TRAKT_CREATED_AT>>
+  pin:
+
+notifiarr:
+  apikey: <<NOTIFIARR_API_KEY>>
+
+webhooks:
+  error: notifiarr
+  run_start: notifiarr
+  run_end: notifiarr
+  changes: notifiarr
+  version:
+  delete:
