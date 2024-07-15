@@ -52,7 +52,7 @@ spec:
         smtpPasswordKey: SMTP_PASSWORD
         smtpHostKey: SMTP_HOST
 
-      host: &host cloud.${SECRET_DOMAIN}
+      host: cloud.${SECRET_DOMAIN}
 
       mail:
         enabled: true
@@ -93,6 +93,7 @@ spec:
           $CONFIG = array (
             'default_phone_region' => 'US',
           );
+
     deploymentAnnotations:
       reloader.stakater.com/auto: "true"
 
