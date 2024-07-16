@@ -79,6 +79,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN//./-}-tls"
+        v: "5"
       terminationGracePeriodSeconds: 120
       resources:
         requests:
