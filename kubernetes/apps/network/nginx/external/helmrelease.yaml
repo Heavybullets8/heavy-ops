@@ -51,6 +51,7 @@ spec:
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
+        disable-ipv6: "true"
         disable-ipv6-dns: "true"
         enable-brotli: "true"
         enable-ocsp: "true"
