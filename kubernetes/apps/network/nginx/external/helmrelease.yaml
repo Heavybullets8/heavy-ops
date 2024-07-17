@@ -80,6 +80,7 @@ spec:
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN//./-}-tls"
         v: "5"
+        disable-ipv6-dns: "true"
       terminationGracePeriodSeconds: 120
       resources:
         requests:
