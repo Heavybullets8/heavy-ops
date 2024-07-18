@@ -7,7 +7,7 @@ subsets:
       - ip: 192.168.200.200
     ports:
       - port: 444
-        name: http
+        name: https
 ---
 apiVersion: v1
 kind: Service
@@ -17,7 +17,7 @@ spec:
   ports:
     - port: 80
       targetPort: 444
-      name: http
+      name: https
   clusterIP: None
   type: ClusterIP
 ---
@@ -32,13 +32,14 @@ metadata:
     nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/?rm=$request_method"
     nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
     nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: external
   rules:
   - host: scale.${SECRET_DOMAIN}
     http:
       paths:
-      - path: /(.*)
+      - path: /
         pathType: Prefix
         backend:
           service:
