@@ -29,14 +29,14 @@ spec:
     controllers:
       anime-series:
         type: &type cronjob
-        cronjob: &cronjob-common
+        cronjob: &cronjob
           schedule: "0 16,5 * * *"
           timeZone: &timeZone ${TIMEZONE}
           concurrencyPolicy: Forbid
           successfulJobsHistory: 1
           failedJobsHistory: 1
         containers:
-          app: &app-common
+          app: &container_app
             image:
               repository: kometateam/kometa
               tag: develop@sha256:0dd590a5735e3f6b371d0e0c4c64aa0acf9591991802ca947890ce0f8bb62592
@@ -67,11 +67,11 @@ spec:
       anime-movies:
         type: *type
         cronjob:
-          <<: *cronjob-common
+          <<: *cronjob
           schedule: "5 16,5 * * *"
         containers:
           app:
-            <<: *app-common
+            <<: *container_app
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
@@ -80,11 +80,11 @@ spec:
       standard-series:
         type: *type
         cronjob:
-          <<: *cronjob-common
+          <<: *cronjob
           schedule: "10 5,16 * * *"
         containers:
           app:
-            <<: *app-common
+            <<: *container_app
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&
@@ -93,11 +93,11 @@ spec:
       standard-movies:
         type: *type
         cronjob:
-          <<: *cronjob-common
+          <<: *cronjob
           schedule: "20 5,16 * * *"
         containers:
           app:
-            <<: *app-common
+            <<: *container_app
             args:
               - |
                 mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters} &&

@@ -41,30 +41,28 @@ spec:
               - secretRef:
                   name: plex-auto-languages-secret
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
                 custom: true
-                spec:
+                spec: &probes_spec
                   httpGet:
-                    path: /health
+                    path: /ready
                     port: 9880
-                  initialDelaySeconds: 120
+                  initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness:
-                enabled: true
-                custom: true
+                <<: *probes
                 spec:
-                  httpGet:
-                    path: /ready
-                    port: 9880
-                  initialDelaySeconds: 60
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                  <<: *probes_spec
+                  initialDelaySeconds: 0
               startup:
-                enabled: false
+                <<: *probes
+                spec:
+                  <<: *probes_spec
+                  initialDelaySeconds: 0
+                  failureThreshold: 30
             resources:
               requests:
                 cpu: 5m
