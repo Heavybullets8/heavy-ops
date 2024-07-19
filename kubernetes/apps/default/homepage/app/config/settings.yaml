@@ -10,7 +10,7 @@ favicon: https://cdn.shopify.com/s/files/1/0585/5834/9490/collections/Berserk_Lo
 headerStyle: boxedWidgets
 language: en
 theme: dark
-title: ${SECRET_DOMAIN%.com}
+title: ${SECRET_DOMAIN%.live}
 
 background:
   image: https://cdnb.artstation.com/p/assets/images/images/061/375/853/large/nolva-novaes-mao-de-deus.jpg
