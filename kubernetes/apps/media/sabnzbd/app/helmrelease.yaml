@@ -129,3 +129,14 @@ spec:
         path: /mnt/tank/media/download/usenet
         globalMounts:
           - path: /media/download/usenet
+
+      scripts:
+        type: configMap
+        name: sabnzbd-configmap
+        globalMounts:
+          - path: /scripts/replace_for.py
+            subPath: replace_for.py
+            readOnly: true
+          - path: /scripts/clean.py
+            subPath: clean.py
+            readOnly: true

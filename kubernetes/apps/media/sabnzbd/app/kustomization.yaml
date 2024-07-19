@@ -7,3 +7,10 @@ resources:
   - ./helmrelease.yaml
   - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
+configMapGenerator:
+  - name: sabnzbd-configmap
+    files:
+      - clean.py=./scripts/clean.py
+      - replace_for.py=./scripts/replace_for.py
+generatorOptions:
+  disableNameSuffixHash: true
