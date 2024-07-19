@@ -56,7 +56,7 @@ spec:
 
       mail:
         enabled: true
-        fromAddress: Support
+        fromAddress: Nextcloud
         domain: ${SECRET_DOMAIN}
         smtp:
           host: smtp.migadu.com
