@@ -59,8 +59,8 @@ spec:
         fromAddress: Support
         domain: ${SECRET_DOMAIN}
         smtp:
-          host: smtp.gmail.com
-          port: 587
+          host: smtp.migadu.com
+          port: 465
           authtype: LOGIN
           secure: ssl
 

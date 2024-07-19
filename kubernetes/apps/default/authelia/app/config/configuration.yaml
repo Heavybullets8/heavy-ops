@@ -47,13 +47,13 @@ storage:
 notifier:
   disable_startup_check: true
   smtp:
-    username: "{{ .SMTP_USER }}"
-    password: "{{ .SMTP_PASS }}"
+    username: "{{ .SMTP_AUTHELIA_USER }}"
+    password: "{{ .SMTP_AUTHELIA_PASS }}"
     disable_html_emails: false
     disable_require_tls: false
-    address: smtp.gmail.com:587
+    address: smtp.migadu.com:465
     identifier: localhost
-    sender: "support@${SECRET_DOMAIN}"
+    sender: "Authelia@${SECRET_DOMAIN}"
     startup_check_address: test@authelia.com
     subject: "[Authelia] {title}"
     timeout: 5s
