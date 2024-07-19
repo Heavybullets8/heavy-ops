@@ -40,6 +40,7 @@ spec:
               - -c
             args:
               - |
+                mkdir -p /config/scripts
                 cp /scripts/*.py /config/scripts/
                 chmod +x /config/scripts/*.py
                 /entrypoint.sh
