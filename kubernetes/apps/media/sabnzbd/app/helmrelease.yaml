@@ -35,6 +35,14 @@ spec:
             image:
               repository: ghcr.io/onedr0p/sabnzbd
               tag: 4.3.2@sha256:8e70a877c77805dfe93ce30a8da3362fbddf221ef806951d4e4634bb80dc87b5
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                chmod +x /scripts/replace_for.py
+                chmod +x /scripts/clean.py
+                /entrypoint.sh
             env:
               TZ: ${TIMEZONE}
               SABNZBD__PORT: &port 80
@@ -71,11 +79,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 140Gi
-
-            lifecycle:
-              postStart:
-                exec:
-                  command: ["/bin/sh", "-c", "chmod +x /scripts/*.py"]
 
     defaultPodOptions:
       securityContext:
