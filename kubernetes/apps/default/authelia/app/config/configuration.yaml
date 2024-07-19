@@ -53,7 +53,7 @@ notifier:
     disable_require_tls: false
     address: smtp.migadu.com:465
     identifier: localhost
-    sender: "Authelia@${SECRET_DOMAIN}"
+    sender: "Auth@${SECRET_DOMAIN}"
     startup_check_address: test@authelia.com
     subject: "[Authelia] {title}"
     timeout: 5s
