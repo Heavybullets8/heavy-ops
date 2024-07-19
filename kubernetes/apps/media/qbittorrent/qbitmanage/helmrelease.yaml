@@ -44,13 +44,6 @@ spec:
             image:
               repository: ghcr.io/stuffanthings/qbit_manage
               tag: v4.1.7@sha256:b39f123a686d1426f6ed2d8d162ada967278ee5a0203a0920f596863b60bf9c7
-            command:
-              - /bin/sh
-              - -c
-            args:
-              - |
-                cp /secret/config.yaml /config/config.yaml
-                python3 qbit_manage.py --run
             env:
               TZ: *timeZone
               QBT_CONFIG: "/config/config.yaml"
@@ -62,6 +55,7 @@ spec:
               QBT_RECHECK: true
               QBT_REM_ORPHANED: true
               QBT_REM_UNREGISTERED: true
+              QBT_RUN: true
               QBT_SHARE_LIMITS: false
               QBT_SKIP_CLEANUP: false
               QBT_SKIP_QB_VERSION_CHECK: true
@@ -78,9 +72,11 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities:
-                drop:
-                  - ALL
+              capabilities: { drop: ["ALL"] }
+            lifecycle:
+              postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "cp /secret/config.yaml /config/config.yaml"]
 
     defaultPodOptions:
       securityContext:
