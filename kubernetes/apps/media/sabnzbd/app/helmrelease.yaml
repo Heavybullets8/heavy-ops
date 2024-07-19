@@ -145,7 +145,7 @@ spec:
         globalMounts:
           - path: /scripts/replace_for.py
             subPath: replace_for.py
-            readOnly: true
+            readOnly: false
           - path: /scripts/clean.py
             subPath: clean.py
-            readOnly: true
+            readOnly: false
