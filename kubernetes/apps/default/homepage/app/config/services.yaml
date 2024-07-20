@@ -73,7 +73,7 @@
           fields: ["numberOfGrabs", "numberOfFailGrabs", "numberOfFailQueries"]
 
     - Overseerr:
-        href: https://overseerr.${SECRET_DOMAIN}
+        href: https://request.${SECRET_DOMAIN}
         icon: overseerr.png
         description: Requests
         namespace: media
