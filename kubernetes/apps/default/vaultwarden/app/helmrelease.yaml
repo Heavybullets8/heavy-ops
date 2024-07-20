@@ -49,7 +49,7 @@ spec:
               DATA_FOLDER: data
               ICON_CACHE_FOLDER: data/icon_cache
               ATTACHMENTS_FOLDER: data/attachments
-              DOMAIN: "https://bit.${SECRET_DOMAIN}"
+              DOMAIN: "https://vault.${SECRET_DOMAIN}"
               SIGNUPS_ALLOWED: "false"
               SMTP_HOST: smtp.migadu.com
               SMTP_FROM: Vault@${SECRET_DOMAIN}
