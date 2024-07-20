@@ -100,7 +100,7 @@
 - Storage:
     - TrueNAS:
         icon: truenas.png
-        href: http://${TRUENAS_IP}:81
+        href: https://scale.${SECRET_DOMAIN}
         description: Storage
         widget:
           type: truenas
