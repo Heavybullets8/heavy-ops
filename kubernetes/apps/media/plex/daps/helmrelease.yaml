@@ -69,7 +69,7 @@ spec:
       config:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        storageClass: iscsi
+        storageClass: openebs-zfs
         size: 50Gi
         globalMounts:
           - path: /config
