@@ -9,6 +9,9 @@ resources:
   - ./kubelet-csr-approver/ks.yaml
   - ./metrics-server/ks.yaml
   - ./node-feature-discovery/ks.yaml
+  # TODO: Enable nvidia once Talos 1.8 is released
+  # Also update "kubernetes/apps/media/plex/plex/helmrelease.yaml" to use the nvidia-plugin
+  # The ZFS and NVIDIA plugins are incompatible until Talos 1.8
   # - ./nvidia-plugin/ks.yaml
   - ./reloader/ks.yaml
   - ./spegel/ks.yaml
