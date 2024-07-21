@@ -26,3 +26,4 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: sonarr
       VOLSYNC_CAPACITY: 6Gi
+      VOLSYNC_STORAGECLASS: openebs-zfs
