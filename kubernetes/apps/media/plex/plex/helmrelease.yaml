@@ -41,8 +41,8 @@ spec:
               PLEX_NO_AUTH_NETWORKS: 192.168.200.0/23
               PLEX_UID: 568
               PLEX_GID: 568
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
+              # NVIDIA_VISIBLE_DEVICES: all
+              # NVIDIA_DRIVER_CAPABILITIES: all
             probes:
               liveness: &probes
                 enabled: true
@@ -71,7 +71,7 @@ spec:
                 memory: 500Mi
               limits:
                 memory: 100Gi
-                nvidia.com/gpu: 1
+                # nvidia.com/gpu: 1
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -81,7 +81,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44, 10000]
         seccompProfile: { type: RuntimeDefault }
-      runtimeClassName: nvidia
+      # runtimeClassName: nvidia
     service:
       app:
         controller: *app
