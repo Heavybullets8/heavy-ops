@@ -60,10 +60,9 @@ spec:
           - path: /config
 
       config-file:
-        enabled: true
         type: secret
         name: autoscan-secret
         globalMounts:
           - path: /config/config.yaml
+            subPath: config.yaml
             readOnly: true
-            subPath: config.yml
