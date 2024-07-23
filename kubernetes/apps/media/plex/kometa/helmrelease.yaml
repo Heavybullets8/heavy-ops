@@ -24,7 +24,9 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-
+  dependsOn:
+    - name: plex
+      namespace: media
   values:
     controllers:
       anime-series:
