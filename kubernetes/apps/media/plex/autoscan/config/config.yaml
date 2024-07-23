@@ -1,0 +1,16 @@
+minimum-age: 30s
+port: 3030
+
+triggers:
+  sonarr:
+    - name: sonarr
+  radarr:
+    - name: radarr
+
+targets:
+  plex:
+    - url: http://plex.media.svc.cluster.local:32400
+      token: "{{ .PLEX_TOKEN }}"
+      rewrite:
+        - from: ^/media/library/
+          to: /media/
