@@ -20,7 +20,7 @@ spec:
       namespace: media
   values:
     controllers:
-      plex-auto-languages:
+      autoscan:
         annotations:
           reloader.stakater.com/auto: "true"
 
