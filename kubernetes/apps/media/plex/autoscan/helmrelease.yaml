@@ -32,25 +32,23 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
+              AUTOSCAN_CONFIG: /config/config.yaml
+              # AUTOSCAN_DATABASE: /config/autoscan.db
+              # AUTOSCAN_LOG: /config/activity.log
+              # AUTOSCAN_VERBOSITY: 0
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
               limits:
-                memory: 128Mi
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
+                memory: 512Mi
             lifecycle:
               postStart:
                 exec:
-                  command: ["/bin/sh", "-c", "cp /secret/config.yml /config/config.yml"]
+                  command: ["/bin/sh", "-c", "cp /secret/config.yaml /config"]
 
     service:
       app:
@@ -70,6 +68,6 @@ spec:
         type: secret
         name: autoscan-secret
         globalMounts:
-          - path: /secret/config.yml
+          - path: /config/config.yaml
             readOnly: true
             subPath: config.yml
