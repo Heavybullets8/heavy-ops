@@ -45,10 +45,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 512Mi
-            lifecycle:
-              postStart:
-                exec:
-                  command: ["/bin/sh", "-c", "cp /secret/config.yaml /config"]
 
     service:
       app:
