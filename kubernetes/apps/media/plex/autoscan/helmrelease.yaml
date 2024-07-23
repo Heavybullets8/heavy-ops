@@ -26,7 +26,6 @@ spec:
 
         containers:
           app:
-            nameOverride: *name
             image:
               repository: ghcr.io/hotio/autoscan
               tag: release-1.4.0@sha256:5a4d9f2bc369e088f7a8335e16b0364536a82f61745e822329df9518cc8791d5
