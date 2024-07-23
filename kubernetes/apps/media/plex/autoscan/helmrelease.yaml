@@ -62,6 +62,8 @@ spec:
     persistence:
       config:
         type: emptyDir
+        globalMounts:
+          - path: /config
 
       config-file:
         enabled: true
