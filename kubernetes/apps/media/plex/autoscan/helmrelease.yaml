@@ -32,7 +32,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
-              AUTOSCAN_CONFIG: /config/config.yaml
+              AUTOSCAN_CONFIG: /config/config.yml
               # AUTOSCAN_DATABASE: /config/autoscan.db
               # AUTOSCAN_LOG: /config/activity.log
               # AUTOSCAN_VERBOSITY: 0
@@ -59,6 +59,6 @@ spec:
         type: secret
         name: autoscan-secret
         globalMounts:
-          - path: /config/config.yaml
-            subPath: config.yaml
+          - path: /config/config.yml
+            subPath: config.yml
             readOnly: true
