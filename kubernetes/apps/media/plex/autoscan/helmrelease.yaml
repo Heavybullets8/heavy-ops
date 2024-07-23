@@ -54,12 +54,8 @@ spec:
             port: 3030
 
     persistence:
-      config:
-        type: emptyDir
-        globalMounts:
-          - path: /config
 
-      config-file:
+      config:
         type: secret
         name: autoscan-secret
         globalMounts:
