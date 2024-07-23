@@ -47,6 +47,10 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
+            lifecycle:
+              postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "cp /secret/config.yml /config/config.yml"]
 
     service:
       app:
@@ -56,12 +60,14 @@ spec:
             port: 3030
 
     persistence:
+      config:
+        type: emptyDir
 
       config-file:
         enabled: true
         type: secret
         name: autoscan-secret
         globalMounts:
-          - path: /config/config.yml
+          - path: /secret/config.yml
             readOnly: true
             subPath: config.yml
