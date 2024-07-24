@@ -6,6 +6,9 @@ bandwidthManager:
 bpf:
   masquerade: true
   tproxy: true
+  # TODO: uncomment once on kernel 6.8 or greater
+  # https://docs.cilium.io/en/stable/operations/performance/tuning/#netkit-device-mode
+  # datapathMode: netkit
 cgroup:
   automount:
     enabled: false
@@ -13,12 +16,8 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-cni:
-  exclusive: false
-enableRuntimeDeviceDetection: true
+devices: enx+
 endpointRoutes:
-  enabled: true
-externalIPs:
   enabled: true
 hubble:
   enabled: false
@@ -34,7 +33,6 @@ l2announcements:
 loadBalancer:
   algorithm: maglev
   mode: dsr
-  dsrDispatch: opt
 localRedirectPolicy: true
 operator:
   rollOutPods: true
