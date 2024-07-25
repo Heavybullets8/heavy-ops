@@ -49,7 +49,7 @@ notifier:
   smtp:
     username: "{{ .SMTP_USER }}"
     password: "{{ .SMTP_PASS }}"
-    address: smtp.migadu.com:465
+    address: "submissions://smtp.migadu.com:465"
     sender: "Auth@${SECRET_DOMAIN}"
     startup_check_address: test@authelia.com
     subject: "[Authelia] {title}"
