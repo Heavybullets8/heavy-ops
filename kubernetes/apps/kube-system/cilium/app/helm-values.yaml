@@ -16,7 +16,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-devices: enx+
+devices: enx00a0984598e6
 endpointRoutes:
   enabled: true
 hubble:
