@@ -45,7 +45,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     retain:
-      daily: 7
+      daily: 14
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationdestination_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
