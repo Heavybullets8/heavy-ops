@@ -52,7 +52,7 @@ spec:
               DOMAIN: "https://vault.${SECRET_DOMAIN}"
               SIGNUPS_ALLOWED: "false"
               SMTP_HOST: smtp.migadu.com
-              SMTP_FROM: Vault@${SECRET_DOMAIN}
+              SMTP_FROM: vault@${SECRET_DOMAIN}
               SMTP_FROM_NAME: Vaultwarden
               SMTP_PORT: 465
               SMTP_SECURITY: force_tls

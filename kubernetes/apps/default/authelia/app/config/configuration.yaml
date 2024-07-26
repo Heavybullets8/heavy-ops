@@ -50,7 +50,7 @@ notifier:
     username: "{{ .SMTP_USER }}"
     password: "{{ .SMTP_PASS }}"
     address: "submissions://smtp.migadu.com:465"
-    sender: "Auth@${SECRET_DOMAIN}"
+    sender: "auth@${SECRET_DOMAIN}"
     startup_check_address: test@authelia.com
     subject: "[Authelia] {title}"
     timeout: 5s
