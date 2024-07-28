@@ -10,7 +10,6 @@ resources:
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./democratic-csi.yaml
-  - ./descheduler.yaml
   - ./grafana.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
