@@ -48,26 +48,26 @@ custom_formats:
       - 0e99e7cc719a8a73b2668c3a0c3fe10c # U-NEXT
       - 93c9d1e566dca8b34d57f5efbbf85f28 # VIU
 
-    quality_profiles:
+    assign_scores_to:
       - name: Anime
 
   # Dual Audio
   - trash_ids:
       - 418f50b10f1907201b6cfdf881f467b7 # Anime Dual Audio
-    quality_profiles:
+    assign_scores_to:
       - name: Anime
         score: 2000
 
   # Dubs Only
   - trash_ids:
       - 9c14d194486c4014d422adc64092d794 # Dubs Only
-    quality_profiles:
+    assign_scores_to:
       - name: Anime
         score: 1900
 
   # Only French Subs
   - trash_ids:
       - 07a32f77690263bb9fda1842db7e273f # VOSTFR
-    quality_profiles:
+    assign_scores_to:
       - name: Anime
         score: -10000
