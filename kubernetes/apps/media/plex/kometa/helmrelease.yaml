@@ -29,10 +29,10 @@ spec:
       namespace: media
   values:
     controllers:
-      anime-series:
+      anime:
         type: &type cronjob
         cronjob: &cronjob
-          schedule: "0 16,5 * * *"
+          schedule: "30 4 * * *"
           timeZone: &timeZone ${TIMEZONE}
           concurrencyPolicy: Forbid
           successfulJobsHistory: 1
@@ -41,13 +41,13 @@ spec:
           app: &container_app
             image:
               repository: kometateam/kometa
-              tag: nightly@sha256:6a5e0a2999f8f729068b6a1ea9460f23d06c24517a852817462acf9b14cf3879
+              tag: develop@sha256:0dd590a5735e3f6b371d0e0c4c64aa0acf9591991802ca947890ce0f8bb62592
             command:
               - /bin/sh
               - -c
             args:
               - |
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Series"
+                python3 kometa.py --run --read-only-config --run-libraries "Anime Series|Anime Movies"
             env:
               TZ: *timeZone
               KOMETA_CONFIG: /config/config.yaml
@@ -69,23 +69,23 @@ spec:
                 exec:
                   command: ["/bin/bash", "-c", "mkdir -p /config/assets/{anime,awards,decades,genres,holidays,networks,suggestions,posters}"]
 
-      anime-movies:
+      anime-overlays:
         type: *type
         cronjob:
           <<: *cronjob
-          schedule: "5 16,5 * * *"
+          schedule: "0 12,18 * * *"
         containers:
           app:
             <<: *container_app
             args:
               - |
-                python3 kometa.py --run --read-only-config --run-libraries "Anime Movies"
+                python3 kometa.py --run --read-only-config --overlays-only --run-libraries "Anime Series|Anime Movies"
 
       standard-series:
         type: *type
         cronjob:
           <<: *cronjob
-          schedule: "10 5,16 * * *"
+          schedule: "10 4,16 * * *"
         containers:
           app:
             <<: *container_app
@@ -97,7 +97,7 @@ spec:
         type: *type
         cronjob:
           <<: *cronjob
-          schedule: "20 5,16 * * *"
+          schedule: "20 4,16 * * *"
         containers:
           app:
             <<: *container_app
