@@ -85,7 +85,6 @@ custom_formats:
 
       # Misc
       - 4aee45b0868229c4fbd8bad3e315f1d0 # MPEG2
-      - 7ba05c6e0e14e793538174c679126996 # Multi
       - eb3d5cc0a2be0db205fb823640db6a3c # Repack v2
       - 44e7c4de10ae50265753082e5dc76047 # Repack v3
       - ec8fa7296b64e8cd390a1600981f3923 # Repack/Proper
@@ -141,3 +140,11 @@ custom_formats:
 
     assign_scores_to:
       - name: Non-Anime
+
+  # Multi
+  - trash_ids:
+      - 7ba05c6e0e14e793538174c679126996 # Multi
+    assign_scores_to:
+      - name: Non-Anime
+        score: -10000
+
