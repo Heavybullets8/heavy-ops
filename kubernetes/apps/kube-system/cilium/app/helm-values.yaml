@@ -1,0 +1,63 @@
+---
+autoDirectNodeRoutes: true
+bandwidthManager:
+  enabled: true
+  bbr: true
+bpf:
+  masquerade: true
+  tproxy: true
+  # TODO: uncomment once on kernel 6.8 or greater
+  # https://docs.cilium.io/en/stable/operations/performance/tuning/#netkit-device-mode
+  # datapathMode: netkit
+cgroup:
+  automount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+cluster:
+  id: 1
+  name: heavy-cluster
+devices: enx00a0984598e6
+endpointRoutes:
+  enabled: true
+hubble:
+  enabled: false
+ipam:
+  mode: kubernetes
+ipv4NativeRoutingCIDR: 10.69.0.0/16
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 7445
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+l2announcements:
+  enabled: true
+loadBalancer:
+  algorithm: maglev
+  mode: dsr
+localRedirectPolicy: true
+operator:
+  rollOutPods: true
+  replicas: 1
+dashboards:
+  enabled: true
+  annotations:
+    grafana_folder: Cilium
+rollOutCiliumPods: true
+routingMode: native
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - IPC_LOCK
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE

@@ -1,0 +1,96 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+
+  fetch-kubeconfig:
+    desc: Fetch kubeconfig from Talos controllers
+    cmd: |
+      talosctl --context {{.CLUSTER}} kubeconfig --nodes {{.CONTROLLER}} \
+          --force --force-context-name {{.CLUSTER}} {{.KUBERNETES_DIR}}
+    requires:
+      vars: ["CLUSTER"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+
+  install:
+    desc: Install Talos configuration to a node
+    summary: |
+      Args:
+        ip: IP address of the Talos node (required)
+    cmds:
+      - |
+        sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml | \
+        $GOPATH/bin/envsubst | \
+        talosctl -n {{.ip}} apply-config --insecure --file /dev/stdin
+    requires:
+      vars: ["ip"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
+      - sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
+
+  apply-config:
+    desc: Apply Talos configuration to a node
+    cmd: |
+      sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml | \
+          $GOPATH/bin/envsubst | \
+              talosctl --context {{.CLUSTER}} apply-config --mode={{.mode}} --nodes {{.NODE}} --file /dev/stdin
+    vars:
+      mode: '{{.mode | default "no-reboot"}}'
+    requires:
+      vars: ["CLUSTER"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - test -f {{.KUBERNETES_DIR}}/bootstrap/talos/{{.CLUSTER}}.secret.sops.yaml
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
+
+  upgrade:
+    desc: Upgrade Talos on a node
+    cmds:
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:{{.TALOS_VERSION}}" --wait=true --timeout=10m --preserve=true
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} health --wait-timeout=10m --server=false
+    requires:
+      vars: ["CLUSTER", "NODE"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
+
+  upgrade-k8s:
+    desc: Upgrade Kubernetes
+    cmds:
+      - until kubectl --context {{.CLUSTER}} wait --timeout=5m --for=condition=Complete jobs --all --all-namespaces; do sleep 10; done
+      - talosctl --context {{.CLUSTER}} --nodes {{.CONTROLLER}} upgrade-k8s --to {{.KUBERNETES_VERSION}}
+    requires:
+      vars: ["CLUSTER"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.CONTROLLER}} get machineconfig >/dev/null 2>&1
+
+  reset-node:
+    desc: Reset a Talos node and shut it down
+    prompt: Reset Talos '{{.NODE}}' node on the '{{.CLUSTER}}' cluster ... continue?
+    cmd: talosctl --context {{.CLUSTER}} reset --nodes {{.NODE}} --graceful=false
+    requires:
+      vars: ["CLUSTER"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.NODE}} get machineconfig >/dev/null 2>&1
+
+  reset-cluster:
+    desc: Reset all the Talos nodes and shut 'em down
+    prompt: Reset Talos on the '{{.CLUSTER}}' cluster ... continue?
+    cmd: talosctl --context {{.CLUSTER}} reset --nodes {{.nodes}} --graceful=false
+    vars:
+      nodes:
+        sh: talosctl --context {{.CLUSTER}} config info --output json | jq --join-output '[.nodes[]] | join(",")'
+    requires:
+      vars: ["CLUSTER"]
+    preconditions:
+      - test -f {{.KUBERNETES_DIR}}/talosconfig
+      - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
+      - talosctl --context {{.CLUSTER}} --nodes {{.nodes}} get machineconfig >/dev/null 2>&1

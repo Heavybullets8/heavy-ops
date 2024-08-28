@@ -1,0 +1,40 @@
+---
+disableCollapse: true
+hideVersion: true
+showStats: true
+useEqualHeights: true
+
+base: https://home.${SECRET_DOMAIN}
+color: slate
+favicon: https://cloud.${SECRET_DOMAIN}/core/preview?fileId=74737&x=2668&y=1494&a=true&etag=b8fa339f330929a19a52e9e1fa94548b
+headerStyle: boxedWidgets
+language: en
+theme: dark
+title: HomeLab
+
+background:
+  image: https://cloud.${SECRET_DOMAIN}/apps/files_sharing/publicpreview/QkHcEJLjCJSYxKG?file=/&fileId=74747&x=2668&y=1494&a=true&etag=a9870fc6a5b1382f61778655c7ad7693
+  blur: xl
+  saturate: 150
+  brightness: 10
+  opacity: 20
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: duckduckgo
+
+layout:
+  Streaming:
+    style: row
+    columns: 1
+
+  Downloads:
+    style: row
+    columns: 2
+
+  Media:
+    style: row
+    columns: 4

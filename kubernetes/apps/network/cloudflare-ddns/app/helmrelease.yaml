@@ -1,0 +1,56 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflare-ddns
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 30m
+  values:
+    controllers:
+      new-plex-dubs:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/hotio/cloudflareddns
+              tag: latest@sha256:2d923fd67649613c6e981e320e7ff5a2beea0c76b1cbcc3c8e262c3971fc4e28
+            env:
+              TZ: ${TIMEZONE}
+              PUID: 568
+              PGID: 568
+              INTERVAL: 300
+              DETECTION_MODE: dig-whoami.cloudflare
+              CF_HOSTS: ${SECRET_DOMAIN}
+              CF_ZONES: ${SECRET_DOMAIN}
+              CF_RECORDTYPES: A
+            envFrom:
+              - secretRef:
+                  name: cloudflare-ddns-secret
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 5m
+                memory: 10Mi
+              limits:
+                memory: 1Gi
+
+    persistence:
+      config:
+        type: emptyDir

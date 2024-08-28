@@ -1,0 +1,312 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Drazzilb08/daps/master/schemas/config-schema.json# Options:
+
+schedule:
+  # poster_renamerr runs border_replacerr and unmatched_assets
+  # Also the cronjob manages running these specific scripts, so we dont define them here
+  sync_gdrive:
+  border_replacerr:
+  poster_renamerr:
+  health_checkarr:
+  unmatched_assets:
+
+instances:
+  radarr:
+    radarr:
+      url: http://radarr.media.svc.cluster.local
+      api: "{{ .RADARR_API_KEY }}"
+  sonarr:
+    sonarr:
+      url: http://sonarr.media.svc.cluster.local
+      api: "{{ .SONARR_API_KEY }}"
+  plex:
+    plex:
+      url: http://plex.media.svc.cluster.local:32400
+      api: "{{ .PLEX_TOKEN }}"
+
+discord:
+  notifiarr_webhook: "{{ .NOTIFIARR_DAPS_WEBHOOK_URL }}"
+  main:
+    discord_webhook:
+    channel_id: "{{ .DISCORD_DAPS_CHANNEL_ID }}"
+  renameinatorr:
+    discord_webhook:
+    channel_id:
+  upgradinatorr:
+    discord_webhook:
+    channel_id:
+  poster_renamerr:
+    discord_webhook:
+    channel_id: "{{ .DISCORD_DAPS_CHANNEL_ID }}"
+  nohl:
+    discord_webhook:
+    channel_id:
+  labelarr:
+    # Will notify if a label has been added/removed to a movie or series
+    discord_webhook:
+    channel_id:
+  nohl_bash:
+    # Will notify if a non-hardlinked file has been found
+    discord_webhook:
+    channel_id:
+  jduparr:
+    # Will notify if a duplicate file has been found and relinked
+    discord_webhook:
+    channel_id:
+
+sync_gdrive:
+  log_level: info
+  client_id: "{{ .GDRIVE_CLIENT_ID }}"
+  client_secret: "{{ .GDRIVE_CLIENT_SECRET }}"
+  gdrive_sa_location: /config/sa.json
+  gdrive_sync:
+    # -- Collection of others (Lowest priority)
+    - id: 1zWY-ORtJkOLcQChV--oHquxW3JCow1zm # Solen (#2)
+      location: /config/input/solen2
+
+    - id: 1-WhCVwRLfV6hxyKF7W5IuzIHIYicCdAv # IamSpartacus (#2)
+      location: /config/input/iamspartacus2
+
+    - id: 15sNlcFZmeDox2OQJyGjVxRwtigtd82Ru # MajorGiant (#2)
+      location: /config/input/majorgiant2
+
+    - id: 1oBzEOXXrTHGq6sUY_4RMtzMTt4VHyeJp # Chris DC
+      location: /config/input/chrisdc
+
+    # - Homemade (Low priority)
+    - id: 1hEY9qEdXVDzIbnQ4z9Vpo0SVXXuZBZR- # Mareau
+      location: /config/input/mareau
+
+    # + Homemade (Medium priority)
+    - id: 1G77TLQvgs_R7HdMWkMcwHL6vd_96cMp7 # Quafley
+      location: /config/input/quafley
+
+    - id: 1bBbK_3JeXCy3ElqTwkFHaNoNxYgqtLug # Stupifier
+      location: /config/input/stupifierr
+
+    - id: 1KnwxzwBUQzQyKF1e24q_wlFqcER9xYHM # Sahara
+      location: /config/input/sahara
+
+    - id: 1alseEnUBjH6CjXh77b5L4R-ZDGdtOMFr # Lion City Gaming
+      location: /config/input/lion
+
+    - id: 1aRngLdC9yO93gvSrTI2LQ_I9BSoGD-7o # IamSpartacus (#1)
+      location: /config/input/iamspartacus
+
+    - id: 1ZfvUgN0qz4lJYkC_iMRjhH-fZ0rDN_Yu # MajorGiant (#1)
+      location: /config/input/majorgiant
+
+    - id: 1Xg9Huh7THDbmjeanW0KyRbEm6mGn_jm8 # BZ
+      location: /config/input/bz
+
+    - id: 1YEuS1pulJAfhKm4L8U9z5-EMtGl-d2s7 # Solen (#1)
+      location: /config/input/solen
+
+    - id: 1wOhY88zc0wdQU-QQmhm4FzHL9QiCQnpu # Zarox
+      location: /config/input/zarox
+
+    # ++ Drazzilb drive (High priority)
+    - id: 1VeeQ_frBFpp6AZLimaJSSr0Qsrl6Tb7z # Drazzilb
+      location: /config/input/Drazz
+
+poster_renamerr:
+  log_level: info
+  dry_run: false
+  sync_posters: true
+  action_type: copy
+  asset_folders: true
+  print_only_renames: false
+  border_replacerr: true
+
+  library_names:
+    - Movies
+    - Anime Movies
+    - Series
+    - Anime Series
+
+  source_dirs:
+    # -- Collection of others (Lowest priority)
+    - /config/input/solen2
+    - /config/input/iamspartacus2
+    - /config/input/majorgiant2
+    - /config/input/chrisdc
+    # - Homemade (Low priority)
+    - /config/input/mareau
+    # + Homemade (Medium priority)
+    - /config/input/quafley
+    - /config/input/stupifierr
+    - /config/input/sahara
+    - /config/input/lion
+    - /config/input/iamspartacus
+    - /config/input/majorgiant
+    - /config/input/bz
+    - /config/input/solen
+    - /config/input/zarox
+    # ++ Drazzilb drive (High priority)
+    - /config/input/Drazz
+  destination_dir: /config/assets/posters
+  instances:
+    - plex
+    - radarr
+    - sonarr
+
+border_replacerr:
+  log_level: info
+  dry_run: false
+  source_dirs:
+    - /config/process
+  destination_dir: /config/assets/posters
+  border_width: 26
+  skip: false
+  border_colors:
+  schedule:
+    christmas:
+      schedule: range(12/01-12/31)
+      color:
+        - "#FF0000"
+        - "#00FF00"
+    halloween:
+      schedule: range(10/01-10/31)
+      color: "#FFA500"
+    thanksgiving:
+      schedule: range(11/01-11/30)
+      color: "#FFA500"
+    valentine:
+      schedule: range(2/5-2/15)
+      color:
+        - "#D41F3A"
+
+unmatched_assets:
+  log_level: info
+  instances:
+    - plex
+    - radarr
+    - sonarr
+  ignore_root_folders:
+    # - anime movies
+    # - /data/Kids Shows
+  # Libraries are ONLY used for collections
+  library_names:
+    - Movies
+    - Anime Movies
+    - Series
+    - Anime Series
+  ignore_collections:
+    - "Christianity"
+  source_dirs:
+    - /config/assets/posters
+
+poster_cleanarr:
+  log_level: info
+  dry_run: false
+  instances:
+    - plex
+    - sonarr
+    - radarr
+  library_names:
+    - Movies
+    - Anime Movies
+    - Series
+    - Anime Series
+  ignore_collections:
+    - "Latest Dubs"
+    - "Christianity"
+  source_dirs:
+    - /config/assets/posters
+    - /config/assets/posters/tmp
+
+upgradinatorr:
+  log_level: info
+  dry_run: false
+  instances:
+    radarr_1:
+      count: 3
+      tag_name: checked
+      unattended: true
+    radarr_2:
+      count: 10
+      tag_name: checked
+      unattended: true
+    sonarr_1:
+      count: 1
+      tag_name: checked
+      unattended: true
+    sonarr_anime:
+      count: 1
+      tag_name: checked
+      unattended: true
+    sonarr_3:
+      count: 20
+      tag_name: checked
+      unattended: true
+
+renameinatorr:
+  log_level: info
+  dry_run: false
+  rename_folders: true
+  count: 10
+  tag_name: renamed
+  instances:
+    - radarr_2
+    - sonarr_3
+
+nohl:
+  dry_run: true
+  log_level: info
+  maximum_searches: 10
+  print_files: false
+  instances:
+    - radarr_1
+    - sonarr_1
+  paths:
+    - /path/to/media/movies
+    - /path/to/media/series
+  filters:
+    exclude_profiles: test3, test4
+    exclude_movies:
+      - "The Matrix"
+      - "The Matrix Reloaded"
+      - "The Matrix Revolutions"
+    exclude_series:
+      - Diners, Drive-ins and Dives
+      - Marvel's Spider-Man
+      - M*A*S*H
+
+labelarr:
+  dry_run: true
+  log_level: info
+  instances:
+    radarr_2:
+      library_names:
+        - Movies
+      plex_instances:
+        - plex_1
+      labels:
+        - kids
+    sonarr_3:
+      library_names:
+        - Animated Series
+        - Childrens Series
+      plex_instances:
+        - plex_1
+      labels:
+        - kids
+
+health_checkarr:
+  log_level: info
+  dry_run: false
+  instances:
+    - radarr
+    - sonarr
+
+bash_scripts:
+  log_level: info
+  nohl_bash:
+    source:
+    include:
+    exclude:
+  jduparr:
+    data_dir:
+    silent: false
+
+main:
+  log_level: info
