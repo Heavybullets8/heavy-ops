@@ -104,6 +104,7 @@ spec:
             args:
               - |
                 python3 kometa.py --run --read-only-config --run-libraries "Movies"
+                python3 kometa.py --read-only-config --run-files "Movies_Metadata.yaml"
 
     defaultPodOptions:
       securityContext:
