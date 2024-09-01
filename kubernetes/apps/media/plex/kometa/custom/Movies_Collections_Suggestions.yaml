@@ -32,6 +32,11 @@ templates:
     collection_mode: hide
     collection_order: alpha
     sync_mode: sync
+  Smart:
+    url_poster: https://theposterdb.com/api/assets/<<poster>>
+    sort_title: ++++++++++_<<collection_name>>
+    collection_mode: hide
+    sync_mode: sync
 
 #############################
 ##       Collections       ##
@@ -88,6 +93,30 @@ collections:
       list_size: 10
       list_buffer: 20
     summary: Most Watched Movies from all the users on Plex
+
+  #################
+  ##    Smart    ##
+  #################
+
+  Recently Released:
+    template: { name: Smart, poster: 213603 }
+    smart_filter:
+      limit: 20
+      sort_by: added.desc
+      visible_home: true
+      visible_shared: true
+      all:
+        release: 180
+
+  Recently Added:
+    template: { name: Smart, poster: 213601 }
+    smart_filter:
+      limit: 20
+      sort_by: added.desc
+      visible_home: true
+      visible_shared: true
+      all:
+        collection.not: "Recently Released"
 
     # New Episodes
     # url_poster: https://theposterdb.com/api/assets/213598
