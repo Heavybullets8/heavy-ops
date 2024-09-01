@@ -117,8 +117,8 @@ collections:
       visible_home: true
       visible_shared: true
       all:
-        release.not: 180
-    summary: Movies added to the library, released over 180 days ago
+        collection.not: "Recently Released"
+    summary: Movies added to the library, not within "Recently Released"
 
     # New Episodes
     # url_poster: https://theposterdb.com/api/assets/213598
