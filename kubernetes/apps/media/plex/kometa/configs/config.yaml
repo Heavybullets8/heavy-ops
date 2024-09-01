@@ -61,9 +61,8 @@ libraries:
       assets_for_all: true
       delete_collections:
         less: 1
-      # TODO: Find replacement, probably a custom collection to replace newly released and recently added
-      # mass_originally_available_update:
-      #   - mdb_digital
+      mass_originally_available_update:
+        - mdb_digital
     collection_files:
       - file: config/Movies_Collections_Awards.yaml
         asset_directory: config/assets/awards

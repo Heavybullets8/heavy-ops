@@ -100,25 +100,24 @@ collections:
 
   Recently Released:
     template: { name: Smart, poster: 213603 }
+    visible_home: true
+    visible_shared: true
     smart_filter:
-      limit: 30
       sort_by: added.desc
-      visible_home: true
-      visible_shared: true
       all:
-        release: 180
-    summary: Movies released to digital platforms or theaters within the last 180 days
+        release: 40
+    summary: Movies released to digital platforms or from theaters within the last 40 days
 
   Recently Added:
     template: { name: Smart, poster: 213601 }
+    visible_home: true
+    visible_shared: true
     smart_filter:
-      limit: 30
+      limit: 25
       sort_by: added.desc
-      visible_home: true
-      visible_shared: true
       all:
-        collection.not: "Recently Released"
-    summary: Movies added to the library, not within "Recently Released"
+        release.not: 40
+    summary: Movies added to the library, not released within 40 days
 
     # New Episodes
     # url_poster: https://theposterdb.com/api/assets/213598
