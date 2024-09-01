@@ -73,6 +73,10 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+            lifecycle:
+              postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "cp /secret/config.yaml /config/config.yaml"]
 
     defaultPodOptions:
       securityContext:
@@ -89,11 +93,10 @@ spec:
       config-file:
         type: secret
         name: qbitmanage-secret
-        defaultMode: 0775
         globalMounts:
-          - path: /config/config.yaml
+          - path: /secret/config.yaml
             subPath: config.yaml
-            readOnly: false
+            readOnly: true
 
       media:
         type: nfs
