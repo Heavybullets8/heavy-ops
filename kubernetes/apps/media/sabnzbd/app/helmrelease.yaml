@@ -71,10 +71,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 140Gi
-            lifecycle:
-              postStart:
-                exec:
-                  command: ["/bin/sh", "-c", "mkdir -p /config/scripts && cp /scripts/*.py /config/scripts/ && chmod +x /config/scripts/*.py"]
 
     defaultPodOptions:
       securityContext:
@@ -141,10 +137,11 @@ spec:
       scripts:
         type: configMap
         name: sabnzbd-configmap
+        defaultMode: 0555
         globalMounts:
-          - path: /scripts/replace_for.py
+          - path: /config/scripts/replace_for.py
             subPath: replace_for.py
             readOnly: true
-          - path: /scripts/clean.py
+          - path: /config/scripts/clean.py
             subPath: clean.py
             readOnly: true
