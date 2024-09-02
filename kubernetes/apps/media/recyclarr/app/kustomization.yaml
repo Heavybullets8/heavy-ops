@@ -9,8 +9,8 @@ resources:
 configMapGenerator:
   - name: recyclarr-configmap
     files:
-      - ./config/recyclarr.yml
-      - ./config/settings.yml
+      - ./config/recyclarr.yaml
+      - ./config/settings.yaml
       - ./includes/Radarr_Anime_Quality_Profiles.yaml
       - ./includes/Radarr_Anime_Custom_Formats.yaml
       - ./includes/Radarr_Standard_Quality_Profiles.yaml

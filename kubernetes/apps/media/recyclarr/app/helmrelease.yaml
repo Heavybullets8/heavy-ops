@@ -60,7 +60,7 @@ spec:
             lifecycle:
               postStart:
                 exec:
-                  command: ["/bin/sh", "-c", "rm /config/settings.y*ml && cp /custom/settings.yml /config/settings.yaml"]
+                  command: ["/bin/sh", "-c", "rm /config/settings.yml && rm /config/config.yml"]
 
     defaultPodOptions:
       securityContext:
@@ -78,11 +78,11 @@ spec:
         type: configMap
         name: recyclarr-configmap
         globalMounts:
-          - path: /config/recyclarr.yml
-            subPath: recyclarr.yml
+          - path: /config/recyclarr.yaml
+            subPath: recyclarr.yaml
             readOnly: true
-          - path: /custom/settings.yml
-            subPath: settings.yml
+          - path: /config/settings.yaml
+            subPath: settings.yaml
             readOnly: true
           - path: /config/includes/Radarr_Anime_Quality_Profiles.yaml
             subPath: Radarr_Anime_Quality_Profiles.yaml
