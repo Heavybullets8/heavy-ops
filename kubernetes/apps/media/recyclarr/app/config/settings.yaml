@@ -4,4 +4,4 @@ repositories:
   trash_guides:
       clone_url: https://github.com/Heavybullets8/custom-formats
       branch: master
-      sha1: 5f8f17dd9cdaf378148628e87bd7c8ab17ef83ab
+      sha1: 981bff60ff340429f6792028c81562b903a26373
