@@ -57,6 +57,11 @@ spec:
                 cpu: 10m
               limits:
                 memory: 128Mi
+            lifecycle:
+              postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "cp /custom/settings.yml /config/settings.yml"]
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -76,7 +81,7 @@ spec:
           - path: /config/recyclarr.yml
             subPath: recyclarr.yml
             readOnly: true
-          - path: /config/settings.yml
+          - path: /custom/settings.yml
             subPath: settings.yml
             readOnly: true
           - path: /config/includes/Radarr_Anime_Quality_Profiles.yaml
