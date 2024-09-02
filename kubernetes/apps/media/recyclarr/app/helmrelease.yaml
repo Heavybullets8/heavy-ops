@@ -57,10 +57,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 128Mi
-            lifecycle:
-              postStart:
-                exec:
-                  command: ["/bin/sh", "-c", "rm /config/settings.yml | true && rm /config/config.yml | true"]
 
     defaultPodOptions:
       securityContext:
