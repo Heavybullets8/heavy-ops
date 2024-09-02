@@ -36,6 +36,9 @@ templates:
     url_poster: https://theposterdb.com/api/assets/<<poster>>
     sort_title: ++++++++++_<<collection_name>>
     collection_mode: hide
+    visible_home: true
+    visible_shared: true
+    visible_library: true
     sync_mode: sync
 
 #############################
@@ -100,8 +103,6 @@ collections:
 
   Recently Released:
     template: { name: Smart, poster: 213603 }
-    visible_home: true
-    visible_shared: true
     smart_filter:
       sort_by: added.desc
       all:
@@ -110,8 +111,6 @@ collections:
 
   Recently Added:
     template: { name: Smart, poster: 213601 }
-    visible_home: true
-    visible_shared: true
     smart_filter:
       limit: 25
       sort_by: added.desc
