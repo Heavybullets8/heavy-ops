@@ -32,14 +32,14 @@ spec:
   values:
     controllers:
       daps:
-        type: cronjob
-        cronjob:
+        type: &type cronjob
+        cronjob: &cronjob
           schedule: "0 4,15 * * *"
           timeZone: &timeZone ${TIMEZONE}
           successfulJobsHistory: 1
           failedJobsHistory: 1
         containers:
-          app:
+          app: &container_app
             image:
               repository: ghcr.io/drazzilb08/daps
               tag: v1.2.2@sha256:b67ede342e6dbbca9cfb68a532b7b4b5eb7a43d6ef2d7d58e393c74d0aa51f83
@@ -61,6 +61,20 @@ spec:
                 memory: 150Mi
               limits:
                 memory: 10Gi
+
+      unmatched-assets:
+        type: *type
+        cronjob:
+          <<: *cronjob
+          schedule: "0 12 * * 0"
+        containers:
+          app:
+            <<: *container_app
+            args:
+              - |
+                export RCLONE_CONFIG="/config/rclone.conf"
+                python3 /app/main.py unmatched_assets
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true

@@ -191,7 +191,7 @@ unmatched_assets:
     - Series
     - Anime Series
   ignore_collections:
-    - "Christianity"
+    # - "Christianity"
   source_dirs:
     - /config/assets/posters
 
