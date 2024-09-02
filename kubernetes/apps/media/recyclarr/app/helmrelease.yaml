@@ -60,7 +60,7 @@ spec:
             lifecycle:
               postStart:
                 exec:
-                  command: ["/bin/sh", "-c", "cp /custom/settings.yml /config/settings.yaml"]
+                  command: ["/bin/sh", "-c", "rm /config/settings.y*ml && cp /custom/settings.yml /config/settings.yaml"]
 
     defaultPodOptions:
       securityContext:
