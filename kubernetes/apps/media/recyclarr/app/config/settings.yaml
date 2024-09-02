@@ -4,4 +4,5 @@ repositories:
   trash_guides:
       clone_url: https://github.com/Heavybullets8/custom-formats
       branch: master
+      # TODO: Remove sha1 after confirmation everything is syncing correctly.
       sha1: 3ee4a826e668d12c7b1abc97c073a46d8635097b
