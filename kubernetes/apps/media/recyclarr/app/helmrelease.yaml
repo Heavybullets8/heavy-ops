@@ -73,11 +73,11 @@ spec:
         type: configMap
         name: recyclarr-configmap
         globalMounts:
-          - path: /config/recyclarr.yaml
-            subPath: recyclarr.yaml
+          - path: /config/recyclarr.yml
+            subPath: recyclarr.yml
             readOnly: true
-          - path: /config/settings.yaml
-            subPath: settings.yaml
+          - path: /config/settings.yml
+            subPath: settings.yml
             readOnly: true
           - path: /config/includes/Radarr_Anime_Quality_Profiles.yaml
             subPath: Radarr_Anime_Quality_Profiles.yaml
