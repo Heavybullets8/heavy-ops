@@ -25,6 +25,10 @@ spec:
   dependsOn:
     - name: volsync
       namespace: volsync-system
+    - name: sonarr
+      namespace: media
+    - name: radarr
+      namespace: media
   values:
     controllers:
       recyclarr:
