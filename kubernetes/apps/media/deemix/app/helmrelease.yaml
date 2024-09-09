@@ -36,7 +36,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
-              PGUID: 568
+              PUID: 568
               PGID: 568
               DEEMIX_SINGLE_USER: true
             resources:
