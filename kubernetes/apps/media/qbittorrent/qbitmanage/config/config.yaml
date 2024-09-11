@@ -5,6 +5,8 @@ qbt:
 
 settings:
   force_auto_tmm_ignore_tags:
+    - Upload
+    - cross-seed
   force_auto_tmm: false
   tracker_error_tag: issue
   nohardlinks_tag: noHL
