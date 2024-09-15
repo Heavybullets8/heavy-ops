@@ -86,6 +86,9 @@ spec:
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               WIREGUARD_MTU: 8900
+            envFrom:
+              - secretRef:
+                  name: torguard-secret
             probes:
               liveness:
                 enabled: true
@@ -104,9 +107,6 @@ spec:
                   initialDelaySeconds: 10
                   periodSeconds: 10
                   failureThreshold: 5
-            envFrom:
-              - secretRef:
-                  name: torguard-secret
             securityContext:
               capabilities:
                 add:
