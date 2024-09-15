@@ -35,11 +35,13 @@ spec:
             env:
               UMASK: "022"
               QBITTORRENT__PORT: &port 80
+              QBT_BitTorrent__Session__Port: 52885
+              QBT_BitTorrent__Session__Interface: tun0
+              QBT_BitTorrent__Session__InterfaceName: tun0
               QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
               QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
                 10.69.0.0/16, 10.96.0.0/16, 192.168.200.0/23
               QBT_Preferences__WebUI__LocalHostAuth: false
-              QBT_BitTorrent__Session__Port: 52885
               QBT_Preferences__WebUI__AlternativeUIEnabled: true
               QBT_Preferences__WebUI__RootFolder: /addons/VueTorrent
             probes:
@@ -65,6 +67,52 @@ spec:
                 drop:
                   - ALL
 
+        initContainers:
+          gluetun:
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.39.0
+            env:
+              DNS_KEEP_NAMESERVER: "on"
+              DOT: "off"
+              FIREWALL_VPN_INPUT_PORTS: 52885
+              FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
+              FIREWALL_INPUT_PORTS: 80,8888
+              HTTPPROXY: "on"
+              HTTPPROXY_LISTENING_ADDRESS: :8888
+              HEALTH_SERVER_ADDRESS: :9999
+              HTTPPROXY_LOG: "on"
+              VPN_TYPE: wireguard
+              VPN_INTERFACE: tun0
+              VPN_SERVICE_PROVIDER: custom
+              WIREGUARD_MTU: 8900
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  failureThreshold: 5
+            envFrom:
+              - secretRef:
+                  name: torguard-secret
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+              allowPrivilegeEscalation: false
+
           vuetorrent:
             dependsOn: app
             image:
@@ -79,32 +127,6 @@ spec:
               requests:
                 cpu: 10m
                 memory: 25Mi
-
-          gluetun:
-            image:
-              repository: ghcr.io/qdm12/gluetun
-              tag: v3.39.0
-            env:
-              DNS_KEEP_NAMESERVER: "on"
-              DOT: "off"
-              FIREWALL_VPN_INPUT_PORTS: 52885
-              FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_INPUT_PORTS: 80,8888
-              HTTPPROXY: "on"
-              HTTPPROXY_LISTENING_ADDRESS: :8888
-              HTTPPROXY_LOG: "on"
-              VPN_TYPE: wireguard
-              VPN_INTERFACE: tun0
-              VPN_SERVICE_PROVIDER: custom
-              WIREGUARD_MTU: 8900
-            envFrom:
-              - secretRef:
-                  name: torguard-secret
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
-              allowPrivilegeEscalation: false
 
     service:
       app:
