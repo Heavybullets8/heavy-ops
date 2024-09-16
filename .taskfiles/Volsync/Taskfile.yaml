@@ -46,7 +46,7 @@ tasks:
       ns: Namespace the PVC is in (default: default)
       app: Application to list snapshots for (required)
     cmds:
-      - $GOPATH/bin/envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/list.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
+      - envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/list.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
       - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
       - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=1m
       - kubectl --context {{.cluster}} -n {{.ns}} logs job/{{.job}} --container main
@@ -58,7 +58,7 @@ tasks:
       ns: '{{.ns | default "default"}}'
       job: volsync-list-{{.app}}
     preconditions:
-      - test -f $GOPATH/bin/envsubst
+      - test -f envsubst
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/list.tmpl.yaml
     silent: true
@@ -70,7 +70,7 @@ tasks:
       ns: Namespace the PVC is in (default: default)
       app: Application to unlock (required)
     cmds:
-      - $GOPATH/bin/envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/unlock.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
+      - envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/unlock.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
       - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
       - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=1m
       - kubectl --context {{.cluster}} -n {{.ns}} logs job/{{.job}} --container r2
@@ -82,7 +82,7 @@ tasks:
       ns: '{{.ns | default "default"}}'
       job: volsync-unlock-{{.app}}
     preconditions:
-      - test -f $GOPATH/bin/envsubst
+      - test -f envsubst
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/unlock.tmpl.yaml
     silent: true
@@ -187,7 +187,7 @@ tasks:
   .wipe:
     internal: true
     cmds:
-      - $GOPATH/bin/envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/wipe.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
+      - envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/wipe.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
       - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
       - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=120m
       - kubectl --context {{.cluster}} -n {{.ns}} logs job/{{.job}} --container main
@@ -196,7 +196,7 @@ tasks:
     vars:
       job: volsync-wipe-{{.app}}
     preconditions:
-      - test -f $GOPATH/bin/envsubst
+      - test -f envsubst
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wipe.tmpl.yaml
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
 
@@ -204,7 +204,7 @@ tasks:
   .restore:
     internal: true
     cmds:
-      - $GOPATH/bin/envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/replicationdestination.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
+      - envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/replicationdestination.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
       - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
       - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=120m
       - kubectl --context {{.cluster}} -n {{.ns}} delete replicationdestination {{.job}}
@@ -212,7 +212,7 @@ tasks:
     vars:
       job: volsync-dst-{{.app}}
     preconditions:
-      - test -f $GOPATH/bin/envsubst
+      - test -f envsubst
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/replicationdestination.tmpl.yaml
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
 
