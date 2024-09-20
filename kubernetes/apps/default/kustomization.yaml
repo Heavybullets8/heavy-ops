@@ -10,5 +10,6 @@ resources:
   - ./glauth/ks.yaml
   - ./homepage/ks.yaml
   - ./nextcloud/ks.yaml
+  - ./stirling-pdf/ks.yaml
   - ./theme-park/ks.yaml
   - ./vaultwarden/ks.yaml
