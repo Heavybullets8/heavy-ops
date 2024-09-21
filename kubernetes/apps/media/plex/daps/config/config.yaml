@@ -118,7 +118,7 @@ poster_renamerr:
   log_level: info
   dry_run: false
   sync_posters: true # Run sync_gdrive
-  action_type: copy
+  action_type: hardlink
   asset_folders: true
   print_only_renames: false
   border_replacerr: true # Run border_replacerr

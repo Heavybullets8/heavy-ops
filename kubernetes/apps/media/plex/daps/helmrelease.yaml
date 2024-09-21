@@ -60,7 +60,7 @@ spec:
                 cpu: 10m
                 memory: 150Mi
               limits:
-                memory: 50Gi
+                memory: 5Gi
 
       # unmatched-assets:
       #   type: *type
@@ -113,9 +113,3 @@ spec:
           - path: /config/sa.json
             subPath: sa.json
             readOnly: true
-
-      process:
-        type: emptyDir
-        medium: Memory
-        globalMounts:
-          - path: /config/assets/posters/tmp
