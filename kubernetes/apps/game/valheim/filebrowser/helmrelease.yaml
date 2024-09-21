@@ -36,7 +36,7 @@ spec:
             env:
               TZ: ${TIMEZONE}
               FB_DATABASE: /config/filebrowser.db
-              FB_ROOT: /eros
+              FB_ROOT: /valheim/valheim/BepInEx/plugins
               FB_LOG: stdout
               FB_NOAUTH: true
             probes:
@@ -99,4 +99,7 @@ spec:
 
     persistence:
       config:
+        type: emptyDir
+
+      valheim:
         existingClaim: valheim
