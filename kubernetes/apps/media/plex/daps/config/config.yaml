@@ -1,13 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Drazzilb08/daps/master/schemas/config-schema.json# Options:
 
 schedule:
-  # poster_renamerr runs border_replacerr and unmatched_assets
-  # Also the cronjob manages running these specific scripts, so we dont define them here
+  # No in-script schedules since we run these with a cronjob
   sync_gdrive:
   border_replacerr:
   poster_renamerr:
   health_checkarr:
   unmatched_assets:
+  jduparr:
+  labelarr:
+  nohl:
+  nohl_bash:
+  poster_cleanarr:
+  renameinatorr:
+  upgradinatorr:
 
 instances:
   radarr:
@@ -28,35 +34,34 @@ discord:
   main:
     discord_webhook:
     channel_id: "{{ .DISCORD_DAPS_CHANNEL_ID }}"
+  poster_renamerr:
+    discord_webhook:
+    channel_id: "{{ .DISCORD_DAPS_CHANNEL_ID }}"
   renameinatorr:
     discord_webhook:
     channel_id:
   upgradinatorr:
     discord_webhook:
     channel_id:
-  poster_renamerr:
-    discord_webhook:
-    channel_id: "{{ .DISCORD_DAPS_CHANNEL_ID }}"
   nohl:
     discord_webhook:
     channel_id:
   labelarr:
-    # Will notify if a label has been added/removed to a movie or series
     discord_webhook:
     channel_id:
   nohl_bash:
-    # Will notify if a non-hardlinked file has been found
     discord_webhook:
     channel_id:
   jduparr:
-    # Will notify if a duplicate file has been found and relinked
     discord_webhook:
     channel_id:
 
+# Syncs posters from multiple users Google Drives to a local directory
 sync_gdrive:
   log_level: info
   client_id: "{{ .GDRIVE_CLIENT_ID }}"
   client_secret: "{{ .GDRIVE_CLIENT_SECRET }}"
+  token: {}
   gdrive_sa_location: /config/sa.json
   gdrive_sync:
     # -- Collection of others (Lowest priority)
@@ -108,19 +113,20 @@ sync_gdrive:
     - id: 1VeeQ_frBFpp6AZLimaJSSr0Qsrl6Tb7z # Drazzilb
       location: /config/input/Drazz
 
+# Rename posters to match what Kometa expects
 poster_renamerr:
   log_level: info
   dry_run: false
-  sync_posters: true
+  sync_posters: true # Run sync_gdrive
   action_type: copy
   asset_folders: true
   print_only_renames: false
-  border_replacerr: true
+  border_replacerr: true # Run border_replacerr
 
   library_names:
     - Movies
-    - Anime Movies
     - Series
+    - Anime Movies
     - Anime Series
 
   source_dirs:
@@ -149,12 +155,13 @@ poster_renamerr:
     - radarr
     - sonarr
 
+# Replace or remove borders from posters
 border_replacerr:
   log_level: info
   dry_run: false
   source_dirs:
-    - /config/process
-  destination_dir: /config/assets/posters
+    - /config/process # Ignored when running poster_renamerr
+  destination_dir: /config/assets/posters # Ignored when running poster_renamerr
   border_width: 26
   skip: false
   border_colors:
@@ -175,6 +182,7 @@ border_replacerr:
       color:
         - "#D41F3A"
 
+# Prints out assets without matched posters
 unmatched_assets:
   log_level: info
   instances:
@@ -182,19 +190,16 @@ unmatched_assets:
     - radarr
     - sonarr
   ignore_root_folders:
-    # - anime movies
-    # - /data/Kids Shows
-  # Libraries are ONLY used for collections
   library_names:
     - Movies
     - Anime Movies
     - Series
     - Anime Series
   ignore_collections:
-    # - "Christianity"
   source_dirs:
     - /config/assets/posters
 
+# Remove any posters from kometa assets directory that are not in use
 poster_cleanarr:
   log_level: info
   dry_run: false
