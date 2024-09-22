@@ -66,52 +66,52 @@ sync_gdrive:
   gdrive_sync:
     # -- Collection of others (Lowest priority)
     - id: 1zWY-ORtJkOLcQChV--oHquxW3JCow1zm # Solen (#2)
-      location: /config/input/solen2
+      location: /config/assets/.inputs/solen2
 
     - id: 1-WhCVwRLfV6hxyKF7W5IuzIHIYicCdAv # IamSpartacus (#2)
-      location: /config/input/iamspartacus2
+      location: /config/assets/.inputs/iamspartacus2
 
     - id: 15sNlcFZmeDox2OQJyGjVxRwtigtd82Ru # MajorGiant (#2)
-      location: /config/input/majorgiant2
+      location: /config/assets/.inputs/majorgiant2
 
     - id: 1oBzEOXXrTHGq6sUY_4RMtzMTt4VHyeJp # Chris DC
-      location: /config/input/chrisdc
+      location: /config/assets/.inputs/chrisdc
 
     # - Homemade (Low priority)
     - id: 1hEY9qEdXVDzIbnQ4z9Vpo0SVXXuZBZR- # Mareau
-      location: /config/input/mareau
+      location: /config/assets/.inputs/mareau
 
     # + Homemade (Medium priority)
     - id: 1G77TLQvgs_R7HdMWkMcwHL6vd_96cMp7 # Quafley
-      location: /config/input/quafley
+      location: /config/assets/.inputs/quafley
 
     - id: 1bBbK_3JeXCy3ElqTwkFHaNoNxYgqtLug # Stupifier
-      location: /config/input/stupifierr
+      location: /config/assets/.inputs/stupifierr
 
     - id: 1KnwxzwBUQzQyKF1e24q_wlFqcER9xYHM # Sahara
-      location: /config/input/sahara
+      location: /config/assets/.inputs/sahara
 
     - id: 1alseEnUBjH6CjXh77b5L4R-ZDGdtOMFr # Lion City Gaming
-      location: /config/input/lion
+      location: /config/assets/.inputs/lion
 
     - id: 1aRngLdC9yO93gvSrTI2LQ_I9BSoGD-7o # IamSpartacus (#1)
-      location: /config/input/iamspartacus
+      location: /config/assets/.inputs/iamspartacus
 
     - id: 1ZfvUgN0qz4lJYkC_iMRjhH-fZ0rDN_Yu # MajorGiant (#1)
-      location: /config/input/majorgiant
+      location: /config/assets/.inputs/majorgiant
 
     - id: 1Xg9Huh7THDbmjeanW0KyRbEm6mGn_jm8 # BZ
-      location: /config/input/bz
+      location: /config/assets/.inputs/bz
 
     - id: 1YEuS1pulJAfhKm4L8U9z5-EMtGl-d2s7 # Solen (#1)
-      location: /config/input/solen
+      location: /config/assets/.inputs/solen
 
     - id: 1wOhY88zc0wdQU-QQmhm4FzHL9QiCQnpu # Zarox
-      location: /config/input/zarox
+      location: /config/assets/.inputs/zarox
 
     # ++ Drazzilb drive (High priority)
     - id: 1VeeQ_frBFpp6AZLimaJSSr0Qsrl6Tb7z # Drazzilb
-      location: /config/input/Drazz
+      location: /config/assets/.inputs/Drazz
 
 # Rename posters to match what Kometa expects
 poster_renamerr:
@@ -131,24 +131,24 @@ poster_renamerr:
 
   source_dirs:
     # -- Collection of others (Lowest priority)
-    - /config/input/solen2
-    - /config/input/iamspartacus2
-    - /config/input/majorgiant2
-    - /config/input/chrisdc
+    - /config/assets/.inputs/solen2
+    - /config/assets/.inputs/iamspartacus2
+    - /config/assets/.inputs/majorgiant2
+    - /config/assets/.inputs/chrisdc
     # - Homemade (Low priority)
-    - /config/input/mareau
+    - /config/assets/.inputs/mareau
     # + Homemade (Medium priority)
-    - /config/input/quafley
-    - /config/input/stupifierr
-    - /config/input/sahara
-    - /config/input/lion
-    - /config/input/iamspartacus
-    - /config/input/majorgiant
-    - /config/input/bz
-    - /config/input/solen
-    - /config/input/zarox
+    - /config/assets/.inputs/quafley
+    - /config/assets/.inputs/stupifierr
+    - /config/assets/.inputs/sahara
+    - /config/assets/.inputs/lion
+    - /config/assets/.inputs/iamspartacus
+    - /config/assets/.inputs/majorgiant
+    - /config/assets/.inputs/bz
+    - /config/assets/.inputs/solen
+    - /config/assets/.inputs/zarox
     # ++ Drazzilb drive (High priority)
-    - /config/input/Drazz
+    - /config/assets/.inputs/Drazz
   destination_dir: /config/assets/posters
   instances:
     - plex
