@@ -86,7 +86,7 @@ spec:
     persistence:
       config:
         type: emptyDir
-        medium: memory
+        medium: Memory
         globalMounts:
           - path: /config
 
