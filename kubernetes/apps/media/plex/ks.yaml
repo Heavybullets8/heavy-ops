@@ -102,6 +102,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
     - name: plex
+    - name: kometa
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
