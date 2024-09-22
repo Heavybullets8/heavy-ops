@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Drazzilb08/daps/master/schemas/config-schema.json# Options:
 
 schedule:
-  # No in-script schedules since we run these with a cronjob
+  # No in-script schedules since we run these manually with a cronjob
   sync_gdrive:
   border_replacerr:
   poster_renamerr:
@@ -57,6 +57,7 @@ discord:
     channel_id:
 
 # Syncs posters from multiple users Google Drives to a local directory
+# gdrive list pulled from: https://github.com/christophedc0/Dump/blob/main/DAPS/gdrives.md
 sync_gdrive:
   log_level: info
   client_id: "{{ .GDRIVE_CLIENT_ID }}"
@@ -114,12 +115,13 @@ sync_gdrive:
       location: /config/assets/.inputs/Drazz
 
 # Rename posters to match what Kometa expects
+# Also runs "sync_posters", and "border_replacerr", meaning we only need to run this script
 poster_renamerr:
   log_level: info
   dry_run: false
   sync_posters: true # Run sync_gdrive
-  action_type: hardlink
-  asset_folders: true
+  action_type: hardlink # "hardlink" is valid, just not supported. Use same PVC as Kometa
+  asset_folders: true # Using "asset_folders" within Kometa, so matching that setting here
   print_only_renames: false
   border_replacerr: true # Run border_replacerr
 
@@ -164,7 +166,7 @@ border_replacerr:
   destination_dir: /config/assets/posters # Ignored when running poster_renamerr
   border_width: 26
   skip: false
-  border_colors:
+  border_colors: # Set to nothing, removing the white borders around posters
   schedule:
     christmas:
       schedule: range(12/01-12/31)
@@ -182,7 +184,7 @@ border_replacerr:
       color:
         - "#D41F3A"
 
-# Prints out assets without matched posters
+# Prints out assets (Collections, Series, Movies) without matching posters
 unmatched_assets:
   log_level: info
   instances:
@@ -198,6 +200,14 @@ unmatched_assets:
   ignore_collections:
   source_dirs:
     - /config/assets/posters
+
+# Deletes any shows from the instances that were deleted from TMDB or TVDB.
+health_checkarr:
+  log_level: info
+  dry_run: false
+  instances:
+    - radarr
+    - sonarr
 
 # Remove any posters from kometa assets directory that are not in use
 poster_cleanarr:
@@ -219,6 +229,9 @@ poster_cleanarr:
     - /config/assets/posters
     - /config/assets/posters/tmp
 
+##############################################
+## I do not use anything below this comment ##
+##############################################
 upgradinatorr:
   log_level: info
   dry_run: false
@@ -295,13 +308,6 @@ labelarr:
         - plex_1
       labels:
         - kids
-
-health_checkarr:
-  log_level: info
-  dry_run: false
-  instances:
-    - radarr
-    - sonarr
 
 bash_scripts:
   log_level: info
