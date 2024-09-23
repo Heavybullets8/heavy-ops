@@ -184,6 +184,7 @@ spec:
 
       tun-device:
         type: hostPath
+        hostPath: /dev/net
         advancedMounts:
           qbittorrent:
             gluetun:
