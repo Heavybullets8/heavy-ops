@@ -181,3 +181,8 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /addons
+
+      tun-device:
+        type: hostPath
+        globalMounts:
+          - /dev/net
