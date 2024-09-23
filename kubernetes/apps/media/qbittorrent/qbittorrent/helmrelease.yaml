@@ -182,10 +182,18 @@ spec:
         globalMounts:
           - path: /addons
 
-      tun-device:
+      dev-net:
         type: hostPath
         hostPath: /dev/net
         advancedMounts:
           qbittorrent:
             gluetun:
               - path: /dev/net
+
+      dev-net-tun:
+        type: hostPath
+        hostPath: /dev/net/tun
+        advancedMounts:
+          qbittorrent:
+            gluetun:
+              - path: /dev/net/tun
