@@ -128,6 +128,9 @@ spec:
                 add:
                   - NET_ADMIN
               allowPrivilegeEscalation: false
+            resources:
+              limits:
+                squat.ai/tun: 1
 
     service:
       app:
@@ -181,20 +184,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /addons
-
-      dev-net:
-        type: hostPath
-        hostPath: /dev/net
-        advancedMounts:
-          qbittorrent:
-            gluetun:
-              - path: /dev/net
-
-      dev-net-tun:
-        type: hostPath
-        hostPath: /dev/net/tun
-        advancedMounts:
-          qbittorrent:
-            gluetun:
-              - path: /dev/net/tun
-                subPath: tun
