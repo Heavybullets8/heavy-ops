@@ -130,7 +130,7 @@ spec:
               allowPrivilegeEscalation: false
             resources:
               limits:
-                squat.ai/tun: 1
+                kernel.org/tun: 1
 
     service:
       app:
