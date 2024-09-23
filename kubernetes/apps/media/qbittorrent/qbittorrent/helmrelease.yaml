@@ -197,3 +197,4 @@ spec:
           qbittorrent:
             gluetun:
               - path: /dev/net/tun
+                subPath: tun
