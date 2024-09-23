@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/notifiarr/notifiarr
-              tag: v0.8.1@sha256:61dd7629dc94421c10effa436e6ab93e5f94ba203a2e44e3a687c80a0beb0bde
+              tag: v0.8.2@sha256:513c795c39a42d61d04408c8796a2e59f50b56f9b2a035168d50fd32191a746a
             env:
               TZ: ${TIMEZONE}
               DN_UPSTREAMS_0: "[10.96.0.0/16,10.69.0.0/16]"
