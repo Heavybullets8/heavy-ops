@@ -89,6 +89,7 @@ spec:
               tag: v3.39.0
             env:
               DNS_KEEP_NAMESERVER: "on"
+              DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
               FIREWALL_VPN_INPUT_PORTS: 52885
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
@@ -131,6 +132,11 @@ spec:
             resources:
               limits:
                 kernel.org/tun: 1
+
+          dnsdist:
+            image:
+              repository: docker.io/powerdns/dnsdist-19
+              tag: 1.9.6
 
     service:
       app:
@@ -184,3 +190,13 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /addons
+
+      dnsdist:
+        type: configMap
+        name: qbittorrent-dnsdist
+        advancedMounts:
+          qbittorrent:
+            dnsdist:
+              - path: /etc/dnsdist/dnsdist.conf
+                subPath: dnsdist.conf
+                readOnly: true
