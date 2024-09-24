@@ -88,7 +88,6 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.39.0
             env:
-              DNS_KEEP_NAMESERVER: "on"
               DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
               FIREWALL_VPN_INPUT_PORTS: 52885
