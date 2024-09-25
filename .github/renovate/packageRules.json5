@@ -10,7 +10,7 @@
     {
       "description": ["Custom schedule for frequently updated packages"],
       "matchDataSources": ["docker", "helm"],
-      "matchPackagePatterns": ["reloader"],
+      "matchPackagePatterns": ["reloader", "postgresql"],
       "schedule": ["on the first day of the month"]
     },
     {
