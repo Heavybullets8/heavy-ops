@@ -26,9 +26,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: plex
-      namespace: media
   values:
     controllers:
       daps:
