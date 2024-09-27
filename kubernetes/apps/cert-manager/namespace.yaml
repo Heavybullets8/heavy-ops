@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: cert-manager
   annotations:
-    kustomize.toolkit.fluxcd.io/prune: disabled
+    # kustomize.toolkit.fluxcd.io/prune: disabled
     volsync.backube/privileged-movers: "true"
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/notification.toolkit.fluxcd.io/provider_v1beta3.json
