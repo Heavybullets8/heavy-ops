@@ -9,7 +9,7 @@ spec:
   privateKey:
     rotationPolicy: Always
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-productions
     kind: ClusterIssuer
   commonName: "${SECRET_DOMAIN}"
   dnsNames:
