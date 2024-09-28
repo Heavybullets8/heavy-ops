@@ -9,5 +9,8 @@ configMapGenerator:
   - name: daps-configmap
     files:
       - config.yaml=./config/config.yaml
+  - name: poster-renamerr
+    files:
+      - poster_renamerr.py=./overwrite/poster_renamerr.py
 generatorOptions:
   disableNameSuffixHash: true
