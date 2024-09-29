@@ -1,5 +1,5 @@
 quality_profiles:
-  - name: Non-Anime
+  - name: Standard
     upgrade:
       allowed: true
       until_quality: WEB 1080p

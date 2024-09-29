@@ -148,12 +148,12 @@ custom_formats:
       - br3sw43roitosvons30zbdiwo2nmbpne # (CUSTOM) Release Title: Dubbed
 
     assign_scores_to:
-      - name: Non-Anime
+      - name: Standard
 
 
   # Multi
   - trash_ids:
       - 4b900e171accbfb172729b63323ea8ca # Multi
     assign_scores_to:
-      - name: Non-Anime
+      - name: Standard
         score: -10000
