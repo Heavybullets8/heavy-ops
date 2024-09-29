@@ -316,7 +316,7 @@ def rename_files(matched_assets, script_config, logger):
                     if os.path.lexists(new_file_path):
                         existing_file = os.path.join(dest_dir, new_file_name)
                         try:
-                            if not filecmp.cmp(file, existing_file, shallow=False):
+                            if not filecmp.cmp(file, existing_file):
                                 if file_name != new_file_name:
                                     messages.append(f"{file_name} -renamed-> {new_file_name}")
                                     discord_messages.append(f"{new_file_name}")
