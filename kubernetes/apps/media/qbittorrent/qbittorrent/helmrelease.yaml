@@ -86,7 +86,7 @@ spec:
           gluetun:
             image:
               repository: ghcr.io/qdm12/gluetun
-              tag: v3.39.0
+              tag: v3.39.1
             env:
               DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
