@@ -28,7 +28,7 @@ quality_profiles:
 
       - name: Bluray SD
         qualities:
-          - Blueray-576p
+          - Bluray-576p
           - Bluray-480p
 
       - name: DVD
