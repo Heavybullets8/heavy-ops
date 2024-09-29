@@ -8,21 +8,34 @@ quality_profiles:
     quality_sort: top
     qualities:
       - name: Bluray-1080p
+
       - name: WEB 1080p
         qualities:
           - WEBDL-1080p
           - WEBRip-1080p
+
       - name: Bluray-720p
+
       - name: WEB 720p
         qualities:
           - WEBDL-720p
           - WEBRip-720p
-      - name: HDTV-1080p
-      - name: HDTV-720p
-      - name: Bluray-480p
+
+      - name: HDTV
+        qualities:
+          - HDTV-1080p
+          - HDTV-720p
+
+      - name: Bluray SD
+        qualities:
+          - Blueray-576p
+          - Bluray-480p
+
       - name: DVD
-      - name: WEB 480p
+
+      - name: WEB SD
         qualities:
           - WEBDL-480p
           - WEBRip-480p
+
       - name: SDTV
