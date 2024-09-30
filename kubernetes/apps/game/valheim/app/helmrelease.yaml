@@ -62,7 +62,7 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: "${VALHEIM_IP}"
+          lbipam.cilium.io/ips: "${VALHEIM_IP}"
         ports:
           http:
             port: 80

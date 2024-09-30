@@ -87,7 +87,7 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: "${PLEX_IP}"
+          lbipam.cilium.io/ips: "${PLEX_IP}"
         ports:
           http:
             port: 32400
