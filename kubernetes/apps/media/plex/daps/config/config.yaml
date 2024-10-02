@@ -167,21 +167,7 @@ border_replacerr:
   border_width: 26
   skip: false
   border_colors: # Set to nothing, removing the white borders around posters
-  schedule:
-    christmas:
-      schedule: 12/25
-      color:
-        - "#FF0000"
-        - "#00FF00"
-    halloween:
-      schedule: 10/31
-      color:
-        - "#FFA500"
-        - "#000000"
-    valentine:
-      schedule: 2/14
-      color:
-        - "#D41F3A"
+  schedule: {}
 
 # Prints out assets (Collections, Series, Movies) without matching posters
 unmatched_assets:
@@ -234,27 +220,7 @@ poster_cleanarr:
 upgradinatorr:
   log_level: info
   dry_run: false
-  instances:
-    radarr_1:
-      count: 3
-      tag_name: checked
-      unattended: true
-    radarr_2:
-      count: 10
-      tag_name: checked
-      unattended: true
-    sonarr_1:
-      count: 1
-      tag_name: checked
-      unattended: true
-    sonarr_anime:
-      count: 1
-      tag_name: checked
-      unattended: true
-    sonarr_3:
-      count: 20
-      tag_name: checked
-      unattended: true
+  instances: {}
 
 renameinatorr:
   log_level: info
@@ -262,51 +228,24 @@ renameinatorr:
   rename_folders: true
   count: 10
   tag_name: renamed
-  instances:
-    - radarr_2
-    - sonarr_3
+  instances: []
 
 nohl:
   dry_run: true
   log_level: info
   maximum_searches: 10
   print_files: false
-  instances:
-    - radarr_1
-    - sonarr_1
-  paths:
-    - /path/to/media/movies
-    - /path/to/media/series
+  instances: {}
+  paths: []
   filters:
-    exclude_profiles: test3, test4
-    exclude_movies:
-      - "The Matrix"
-      - "The Matrix Reloaded"
-      - "The Matrix Revolutions"
-    exclude_series:
-      - Diners, Drive-ins and Dives
-      - Marvel's Spider-Man
-      - M*A*S*H
+    exclude_profiles: ""
+    exclude_movies: []
+    exclude_series: []
 
 labelarr:
   dry_run: true
   log_level: info
-  instances:
-    radarr_2:
-      library_names:
-        - Movies
-      plex_instances:
-        - plex_1
-      labels:
-        - kids
-    sonarr_3:
-      library_names:
-        - Animated Series
-        - Childrens Series
-      plex_instances:
-        - plex_1
-      labels:
-        - kids
+  instances: {}
 
 bash_scripts:
   log_level: info
