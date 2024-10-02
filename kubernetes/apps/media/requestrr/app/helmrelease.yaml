@@ -5,7 +5,6 @@ kind: HelmRelease
 metadata:
   name: &app requestrr
   namespace: media
-
 spec:
   interval: 15m
   chart:
@@ -16,9 +15,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
-  driftDetection:
-    mode: enabled
   maxHistory: 3
   install:
     remediation:
@@ -32,12 +28,6 @@ spec:
   values:
     controllers:
       requestrr:
-        enabled: true
-        type: deployment
-        annotations: {}
-        labels: {}
-        replicas: 1
-
         containers:
           app:
             nameOverride: *app
@@ -45,16 +35,13 @@ spec:
               repository: thomst08/requestrr
               tag: v2.1.7@sha256:6de400daa5c78d3e79188ff7ebb50df8e8ed15b781f3145a07ecb46b41b12380
               pullPolicy: IfNotPresent
-
             env:
               TZ: ${TIMEZONE}
-
             resources:
               requests:
                 cpu: 10m
               limits:
                 memory: 1Gi
-
             probes:
               liveness:
                 enabled: true

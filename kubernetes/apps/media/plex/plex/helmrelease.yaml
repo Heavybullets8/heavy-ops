@@ -22,9 +22,7 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: volsync
-      namespace: volsync-system
+
   values:
     controllers:
       plex:
@@ -72,6 +70,7 @@ spec:
               limits:
                 memory: 100Gi
                 nvidia.com/gpu: 1
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -82,6 +81,7 @@ spec:
         supplementalGroups: [44, 10000]
         seccompProfile: { type: RuntimeDefault }
       runtimeClassName: nvidia
+
     service:
       app:
         controller: *app
@@ -91,6 +91,7 @@ spec:
         ports:
           http:
             port: 32400
+
     ingress:
       app:
         className: external
@@ -103,6 +104,7 @@ spec:
                 service:
                   identifier: app
                   port: http
+
     persistence:
       config:
         existingClaim: *app

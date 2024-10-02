@@ -22,9 +22,7 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: volsync
-      namespace: volsync-system
+
   values:
     controllers:
       notifiarr:
@@ -46,7 +44,6 @@ spec:
             envFrom:
               - secretRef:
                   name: notifiarr-secret
-
             probes:
               liveness:
                 enabled: true
@@ -57,7 +54,6 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

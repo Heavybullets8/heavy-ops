@@ -15,9 +15,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
-  driftDetection:
-    mode: enabled
   maxHistory: 3
   install:
     remediation:
@@ -29,28 +26,15 @@ spec:
       retries: 3
 
   values:
-    defaultPodOptions:
-      automountServiceAccountToken: false
-      enableServiceLinks: false
-      securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        runAsNonRoot: true
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: { type: RuntimeDefault }
-
     controllers:
       radarr:
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           app:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
               tag: 5.12.0.9255@sha256:87c788eb150218172c951e8f37ec60dbc5a3033c909f1467c3bbee88e5a51f3b
-
             env:
               RADARR__APP__INSTANCENAME: Radarr
               RADARR__APP__THEME: dark
@@ -60,11 +44,9 @@ spec:
               RADARR__SERVER__PORT: &port 80
               RADARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
-
             envFrom:
               - secretRef:
                   name: radarr-secret
-
             probes:
               liveness: &probes
                 enabled: true
@@ -78,7 +60,6 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
-
             resources:
               limits:
                 cpu: 2
@@ -86,11 +67,21 @@ spec:
               requests:
                 cpu: 10m
                 memory: 256Mi
-
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        runAsNonRoot: true
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
 
     service:
       app:

@@ -12,13 +12,15 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-    # - name: nvidia-plugin
+    - name: nvidia-plugin
+    - name: openebs
+    - name: volsync
+  wait: true
   path: ./kubernetes/apps/media/plex/plex
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
@@ -26,7 +28,6 @@ spec:
     substitute:
       APP: *app
       GATUS_PATH: /web/index.html
-      GATUS_SUBDOMAIN: plex
       VOLSYNC_CAPACITY: 600Gi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -40,16 +41,15 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 10m
+  dependsOn:
+    - name: plex
+  wait: true
   path: kubernetes/apps/media/plex/plex-auto-languages
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
-  dependsOn:
-    - name: external-secrets-stores
-    - name: plex
+  interval: 10m
   postBuild:
     substitute:
       APP: *app
@@ -65,21 +65,19 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 10m
+  dependsOn:
+    - name: plex
+  wait: true
   path: kubernetes/apps/media/plex/kometa
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
-  dependsOn:
-    - name: external-secrets-stores
-    - name: plex
+  interval: 10m
   postBuild:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 10Gi
-      VOLSYNC_ACCESSMODES: ReadWriteOnce
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -92,17 +90,19 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 10m
+  dependsOn:
+    - name: plex
+    - name: kometa
+  wait: true
   path: kubernetes/apps/media/plex/daps
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
-  dependsOn:
-    - name: external-secrets-stores
-    - name: plex
-    - name: kometa
+  interval: 10m
+  postBuild:
+    substitute:
+      APP: *app
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -115,16 +115,18 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 10m
+  dependsOn:
+    - name: plex
+  wait: true
   path: kubernetes/apps/media/plex/new-plex-dubs
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
-  dependsOn:
-    - name: external-secrets-stores
-    - name: plex
+  interval: 10m
+  postBuild:
+    substitute:
+      APP: *app
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -137,13 +139,43 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 10m
+  dependsOn:
+    - name: plex
+  wait: true
   path: kubernetes/apps/media/plex/plex-image-cleanup
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
+  interval: 10m
+  postBuild:
+    substitute:
+      APP: *app
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app tautulli
+  namespace: flux-system
+spec:
+  targetNamespace: media
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   dependsOn:
-    - name: external-secrets-stores
     - name: plex
+  wait: true
+  path: ./kubernetes/apps/media/tautulli/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_CAPACITY: 2Gi
+

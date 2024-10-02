@@ -15,9 +15,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
-  driftDetection:
-    mode: enabled
   maxHistory: 3
   install:
     remediation:
@@ -44,13 +41,11 @@ spec:
       prowlarr:
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           app:
             image:
               repository: ghcr.io/onedr0p/prowlarr-develop
               tag: 1.24.3.4754@sha256:9c88257656e4ac893d692abf38a784c80ef1638eb99fae376bdb48f75498ce52
-
             env:
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__APP__THEME: dark
@@ -60,11 +55,9 @@ spec:
               PROWLARR__SERVER__PORT: &port 80
               PROWLARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
-
             envFrom:
               - secretRef:
                   name: prowlarr-secret
-
             probes:
               liveness: &probes
                 enabled: true
@@ -78,7 +71,6 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
-
             resources:
               limits:
                 cpu: 2
@@ -86,7 +78,6 @@ spec:
               requests:
                 cpu: 10m
                 memory: 256Mi
-
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

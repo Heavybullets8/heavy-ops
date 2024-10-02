@@ -7,6 +7,13 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: media
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  dependsOn:
+    - name: openebs
+    - name: volsync
+  wait: true
   path: ./kubernetes/apps/media/wizarr/app
   prune: true
   sourceRef:
@@ -15,7 +22,6 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  wait: false
   postBuild:
     substitute:
       APP: *app

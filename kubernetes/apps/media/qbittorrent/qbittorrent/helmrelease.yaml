@@ -20,7 +20,6 @@ spec:
       qbittorrent:
         annotations:
           reloader.stakater.com/auto: "true"
-
         pod:
           securityContext:
             fsGroup: 568

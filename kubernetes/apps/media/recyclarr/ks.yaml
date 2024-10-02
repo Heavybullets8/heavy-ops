@@ -12,12 +12,16 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
+    - name: openebs
+    - name: volsync
+    - name: radarr
+    - name: sonarr
+  wait: true
   path: ./kubernetes/apps/media/recyclarr/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m

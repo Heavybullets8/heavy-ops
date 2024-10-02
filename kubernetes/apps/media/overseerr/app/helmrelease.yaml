@@ -22,9 +22,7 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: volsync
-      namespace: volsync-system
+
   values:
     controllers:
       overseerr:
@@ -61,6 +59,7 @@ spec:
                 cpu: 10m
               limits:
                 memory: 5Gi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true

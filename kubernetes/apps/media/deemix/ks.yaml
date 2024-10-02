@@ -10,12 +10,15 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: volsync
+    - name: openebs
+  wait: true
   path: ./kubernetes/apps/media/deemix/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
@@ -23,4 +26,3 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 5Gi
-      VOLSYNC_ACCESSMODES: ReadWriteOnce
