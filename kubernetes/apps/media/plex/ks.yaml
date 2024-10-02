@@ -16,7 +16,7 @@ spec:
     - name: openebs
     - name: volsync
   wait: true
-  path: ./kubernetes/apps/media/plex/plex
+  path: kubernetes/apps/media/plex/plex
   prune: true
   sourceRef:
     kind: GitRepository
@@ -166,7 +166,7 @@ spec:
   dependsOn:
     - name: plex
   wait: true
-  path: ./kubernetes/apps/media/tautulli/app
+  path: kubernetes/apps/media/plex/tautulli
   prune: true
   sourceRef:
     kind: GitRepository
