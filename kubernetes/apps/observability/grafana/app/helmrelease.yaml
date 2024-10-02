@@ -39,6 +39,8 @@ spec:
     replicas: 1
     env:
       GF_AUTH_GENERIC_OAUTH_ENABLED: true
+      GF_AUTH_GENERIC_OAUTH_AUTO_LOGIN: true
+      GF_AUTH_GENERIC_OAUTH_ICON: signin
       GF_AUTH_GENERIC_OAUTH_SCOPES: openid profile email groups
       GF_AUTH_GENERIC_OAUTH_NAME: Authelia
       GF_AUTH_GENERIC_OAUTH_EMPTY_SCOPES: false
@@ -49,7 +51,9 @@ spec:
       GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
       GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
       GF_AUTH_GENERIC_OAUTH_USE_PKCE: true
-      GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP: true
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: contains(groups, 'admin') && 'Admin' || 'Viewer'
+      # GF_AUTH_GENERIC_OAUTH_SKIP_ORG_ROLE_SYNC: true
+      # GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP: true
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_EXPLORE_ENABLED: true
       GF_FEATURE_TOGGLES_ENABLE: publicDashboards
