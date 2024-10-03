@@ -83,6 +83,7 @@ spec:
     persistence:
       config:
         type: emptyDir
+        medium: Memory
 
       config-file:
         type: secret
