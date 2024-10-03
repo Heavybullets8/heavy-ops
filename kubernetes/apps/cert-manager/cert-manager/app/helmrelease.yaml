@@ -30,8 +30,8 @@ spec:
       enabled: true
       servicemonitor:
         enabled: true
-    featureGates: "ServerSideApply,WatchListClient"
+    featureGates: "ServerSideApply=true,WatchListClient=true"
     webhook:
-      featureGates: "WatchListClient"
+      featureGates: "WatchListClient=true"
     cainjector:
-      featureGates: "WatchListClient"
+      featureGates: "WatchListClient=true"
