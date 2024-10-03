@@ -30,8 +30,15 @@ spec:
       enabled: true
       servicemonitor:
         enabled: true
-    featureGates: "ServerSideApply=true,WatchListClient=true"
+    featureGates: "ServerSideApply=true"
+    extraEnv:
+      - name: KUBE_FEATURE_WatchListClient
+        value: "true"
     webhook:
-      featureGates: "WatchListClient=true"
+      extraEnv:
+        - name: KUBE_FEATURE_WatchListClient
+          value: "true"
     cainjector:
-      featureGates: "WatchListClient=true"
+      extraEnv:
+        - name: KUBE_FEATURE_WatchListClient
+          value: "true"
