@@ -109,12 +109,3 @@ spec:
           - path: /config/sa.json
             subPath: sa.json
             readOnly: true
-
-      # Temp testing new poster_renamerr.py script
-      poster-renamerr:
-        type: configMap
-        name: poster-renamerr
-        globalMounts:
-          - path: /app/modules/poster_renamerr.py
-            subPath: poster_renamerr.py
-            readOnly: true
