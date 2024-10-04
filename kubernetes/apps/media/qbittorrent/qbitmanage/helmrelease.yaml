@@ -85,7 +85,7 @@ spec:
         type: emptyDir
         medium: Memory
         globalMounts:
-          - path: /app
+          - path: /app/config/logs
           - path: /config
 
       config-file:
@@ -107,3 +107,4 @@ spec:
         existingClaim: qbittorrent
         globalMounts:
           - path: /qbittorrent
+            readOnly: true
