@@ -40,7 +40,7 @@ spec:
           app: &container_app
             image:
               repository: ghcr.io/drazzilb08/daps
-              tag: v1.2.2@sha256:b67ede342e6dbbca9cfb68a532b7b4b5eb7a43d6ef2d7d58e393c74d0aa51f83
+              tag: v1.2.3@sha256:ebb7657bd80324e258f00d65fd0eda34ec3e27563b4b4c5a41e117635c68cc7d
             command:
               - /bin/sh
               - -c
