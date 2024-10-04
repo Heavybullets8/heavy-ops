@@ -85,7 +85,7 @@ spec:
         type: emptyDir
         medium: Memory
         globalMounts:
-          - path: /app/config/logs
+          - path: /app/config
           - path: /config
 
       config-file:
