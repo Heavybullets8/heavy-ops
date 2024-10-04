@@ -81,9 +81,12 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
 
     persistence:
-      config:
+      app:
         type: emptyDir
         medium: Memory
+        globalMounts:
+          - path: /app
+          - path: /config
 
       config-file:
         type: secret
