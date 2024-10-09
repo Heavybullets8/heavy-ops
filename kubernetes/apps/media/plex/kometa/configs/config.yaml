@@ -140,34 +140,47 @@ libraries:
           back_color: 00
 
 settings:
-  cache_expiration: 60
-  asset_folders: true
   asset_depth: 3
-  create_asset_folders: true
-  sync_mode: sync
-  delete_below_minimum: true
-  missing_only_released: true
-  show_unmanaged: true
-  show_filtered: true
-  show_options: true
-  show_missing: false
-  show_missing_assets: false
-  show_missing_season_assets: false
-  show_missing_episode_assets: false
-  tvdb_language: en
-  minimum_items: 1
-  download_url_assets: true
-  verify_ssl: true
-  playlist_sync_to_users: all
-  show_asset_not_needed: true
-  prioritize_assets: false
   asset_directory: config/assets/posters
+  asset_folders: true
+  cache: true
+  cache_expiration: 60
+  create_asset_folders: true
+  custom_repo: ""
+  default_collection_order: ""
+  delete_below_minimum: true
+  delete_not_scheduled: false
+  dimensional_asset_rename: true
+  download_url_assets: true
+  item_refresh_delay: 0
+  minimum_items: 1
+  missing_only_released: true
+  only_filter_missing: false
+  overlay_artwork_filetype: jpg
+  overlay_artwork_quality: ""
+  playlist_exclude_users: ""
+  playlist_report: false
+  playlist_sync_to_users: all
+  prioritize_assets: false
+  run_again_delay: 0
   run_order:
     - operations
     - metadata
     - collections
     - overlays
+  save_report: false
+  show_asset_not_needed: true
+  show_filtered: true
+  show_missing: false
+  show_missing_assets: false
+  show_missing_episode_assets: false
+  show_missing_season_assets: false
+  show_options: true
   show_unconfigured: true
+  show_unmanaged: true
+  sync_mode: sync
+  tvdb_language: en
+  verify_ssl: true
 
 anidb:
   client: talos
