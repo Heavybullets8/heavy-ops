@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/themepark-dev/theme.park
-              tag: 1.19.0@sha256:c67d8e5b25bf8cba554072c019d5108ea75749e69db839b8cfe14d208dd34ed8
+              tag: 1.19.1@sha256:3ee4d452be87ec0275bc737ad4d87df2af3d3e72f6f3ece00f3fff589916df45
             resources:
               requests:
                 cpu: 15m
