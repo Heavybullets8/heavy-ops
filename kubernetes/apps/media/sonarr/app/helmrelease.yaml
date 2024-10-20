@@ -54,6 +54,7 @@ spec:
               SONARR__APP__THEME: dark
               SONARR__LOG__ANALYTICS_ENABLED: "false"
               SONARR__UPDATE__BRANCH: develop
+              SONARR__LOG__DBENABLED: "False"
               TZ: ${TIMEZONE}
             envFrom: *envFrom
             probes:
