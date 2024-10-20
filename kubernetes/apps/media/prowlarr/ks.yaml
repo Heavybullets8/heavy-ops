@@ -25,5 +25,3 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: prowlarr
-      VOLSYNC_CAPACITY: 500Mi
