@@ -1,3 +1,20 @@
+# TODO: Uncomment this when server is not being used
+# ---
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: "openebs-zfs-${VOLSYNC_RECORD_SIZE:-128k}"
+# allowVolumeExpansion: true
+# parameters:
+#   fstype: zfs
+#   poolname: speed
+#   recordsize: "${VOLSYNC_RECORD_SIZE:-128k}"
+#   compression: lz4
+#   dedup: off
+#   thinprovision: "no"
+#   shared: "yes"
+# provisioner: zfs.csi.openebs.io
+# volumeBindingMode: Immediate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -12,4 +29,6 @@ spec:
   resources:
     requests:
       storage: "${VOLSYNC_CAPACITY}"
+  # TODO: Switch to this after uncommenting above
+  # storageClassName: "openebs-zfs-${VOLSYNC_RECORD_SIZE:-128k}"
   storageClassName: "${VOLSYNC_STORAGECLASS:-openebs-zfs}"
