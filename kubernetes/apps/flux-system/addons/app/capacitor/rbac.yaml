@@ -25,12 +25,14 @@ rules:
       - source.toolkit.fluxcd.io
       - kustomize.toolkit.fluxcd.io
       - helm.toolkit.fluxcd.io
+      - infra.contrib.fluxcd.io
     resources:
       - gitrepositories
       - helmrepositories
       - helmcharts
       - ocirepositories
       - buckets
+      - terraforms
       - kustomizations
       - helmreleases
     verbs:
