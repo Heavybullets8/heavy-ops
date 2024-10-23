@@ -109,5 +109,5 @@ spec:
         type: emptyDir
         medium: Memory
         globalMounts:
-          - /tmp
-          - /.cache/yarn
+          - path: /tmp
+          - path: /.cache
