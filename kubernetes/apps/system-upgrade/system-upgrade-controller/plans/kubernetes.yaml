@@ -42,5 +42,4 @@ spec:
     args:
       - --nodes=$(NODE_IP)
       - upgrade-k8s
-      - --mode=reboot
       - --to=$(SYSTEM_UPGRADE_PLAN_LATEST_VERSION)
