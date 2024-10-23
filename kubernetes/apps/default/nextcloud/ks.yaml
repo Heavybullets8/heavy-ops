@@ -26,4 +26,4 @@ spec:
       APP: *app
       VOLSYNC_CAPACITY: 275Gi
       GATUS_SUBDOMAIN: cloud
-      VOLSYNC_RECORD_SIZE: 1M
+      VOLSYNC_RECORD_SIZE: 1m

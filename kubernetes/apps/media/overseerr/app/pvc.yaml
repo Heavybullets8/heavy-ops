@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 15Gi
-  storageClassName: openebs-zfs-1M
+  storageClassName: openebs-zfs-1m
