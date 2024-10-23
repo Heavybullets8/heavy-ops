@@ -10,7 +10,7 @@ parameters:
   recordsize: 64k
   compression: lz4
   dedup: off
-  thinprovision: "no"
+  thinprovision: "yes"
   shared: "yes"
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: Immediate
@@ -26,7 +26,7 @@ parameters:
   recordsize: 128k
   compression: lz4
   dedup: off
-  thinprovision: "no"
+  thinprovision: "yes"
   shared: "yes"
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: Immediate
@@ -42,7 +42,7 @@ parameters:
   recordsize: 1M
   compression: lz4
   dedup: off
-  thinprovision: "no"
+  thinprovision: "yes"
   shared: "yes"
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: Immediate
