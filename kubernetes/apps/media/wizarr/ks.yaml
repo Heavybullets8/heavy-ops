@@ -26,5 +26,4 @@ spec:
       APP: *app
       VOLSYNC_CAPACITY: 5Gi
       GATUS_SUBDOMAIN: invite
-      # TODO: Enable when ready
-      # VOLSYNC_RECORD_SIZE: 64k
+      VOLSYNC_RECORD_SIZE: 64k

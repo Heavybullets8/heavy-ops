@@ -27,5 +27,4 @@ spec:
       GATUS_SUBDOMAIN: request
       GATUS_PATH: /api/v1/status
       VOLSYNC_CAPACITY: 500Mi
-      # TODO: Uncomment when ready
-      # VOLSYNC_RECORD_SIZE: 64k
+      VOLSYNC_RECORD_SIZE: 64k

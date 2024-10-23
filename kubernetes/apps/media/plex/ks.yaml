@@ -28,8 +28,7 @@ spec:
       APP: *app
       GATUS_PATH: /web/index.html
       VOLSYNC_CAPACITY: 600Gi
-      # TODO: Uncomment when ready
-      # VOLSYNC_RECORD_SIZE: 64k
+      VOLSYNC_RECORD_SIZE: 64k
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -79,8 +78,7 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 10Gi
-      # TODO: Uncomment when ready
-      # VOLSYNC_RECORD_SIZE: 1M
+      VOLSYNC_RECORD_SIZE: 1M
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -180,5 +178,4 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 2Gi
-      # TODO: Uncomment when ready
-      # VOLSYNC_RECORD_SIZE: 64k
+      VOLSYNC_RECORD_SIZE: 64k

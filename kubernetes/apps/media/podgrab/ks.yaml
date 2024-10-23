@@ -25,5 +25,4 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 3Gi
-      # TODO: Uncomment when ready
-      # VOLSYNC_RECORD_SIZE: 64k
+      VOLSYNC_RECORD_SIZE: 64k

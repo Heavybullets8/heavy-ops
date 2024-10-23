@@ -8,6 +8,4 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: openebs-zfs
-  # TODO: Come back to this
-  # storageClassName: openebs-zfs-256k
+  storageClassName: openebs-zfs-1M
