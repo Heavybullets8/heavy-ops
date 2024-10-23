@@ -49,8 +49,3 @@ spec:
     name: home-kubernetes
   interval: 30m
   timeout: 5m
-  postBuild:
-    substitute:
-      APP: *app
-      VOLSYNC_CAPACITY: 5Gi
-

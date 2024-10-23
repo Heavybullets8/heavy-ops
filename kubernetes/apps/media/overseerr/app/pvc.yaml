@@ -9,4 +9,6 @@ spec:
   resources:
     requests:
       storage: 15Gi
+  # TODO: Come back to this
+  # storageClassName: openebs-zfs-1M
   storageClassName: openebs-zfs

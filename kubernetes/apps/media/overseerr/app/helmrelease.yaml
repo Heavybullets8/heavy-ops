@@ -108,3 +108,6 @@ spec:
       tmp:
         type: emptyDir
         medium: Memory
+        globalMounts:
+          - /tmp
+          - /.cache/yarn

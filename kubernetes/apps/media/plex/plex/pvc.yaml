@@ -9,3 +9,5 @@ spec:
     requests:
       storage: 100Gi
   storageClassName: openebs-zfs
+  # TODO: Come back to this
+  # storageClassName: openebs-zfs-256k
