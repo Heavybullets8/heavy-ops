@@ -217,7 +217,7 @@ plex:
   empty_trash: false
   optimize: false
   verify_ssl:
-  db_cache: 80
+  db_cache: 128
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local
