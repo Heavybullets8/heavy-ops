@@ -9,7 +9,7 @@ resources:
   - ./authelia/ks.yaml
   - ./glauth/ks.yaml
   - ./homepage/ks.yaml
-  # - ./nextcloud/ks.yaml
+  - ./nextcloud/ks.yaml
   - ./stirling-pdf/ks.yaml
   - ./theme-park/ks.yaml
-  # - ./vaultwarden/ks.yaml
+  - ./vaultwarden/ks.yaml

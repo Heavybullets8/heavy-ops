@@ -1,0 +1,87 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app valheim
+spec:
+  interval: 15m
+  chart:
+    spec:
+      interval: 15m
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    controllers:
+      valheim:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: mbround18/valheim
+              tag: 3.0.5@sha256:e38d537d221aa4ba6454dbc178a5a473fb2b70eace05c825b8e8474ba48495f4
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            env:
+              TZ: ${TIMEZONE}
+              PORT: 2456
+              AUTO_UPDATE: 1
+              AUTO_UPDATE_SCHEDULE: 0 4 * * *
+              AUTO_UPDATE_PAUSE_WITH_PLAYERS: 1
+              ENABLE_CROSSPLAY: 1
+              PUBLIC: 1
+              TYPE: BepInEx
+            envFrom:
+              - secretRef:
+                  name: valheim-secret
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10M
+              limits:
+                memory: 10Gi
+
+    service:
+      app:
+        controller: *app
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: "${VALHEIM_IP}"
+        ports:
+          http:
+            port: 80
+          gameplay:
+            enabled: true
+            port: 2456
+            protocol: UDP
+          auth:
+            enabled: true
+            port: 2457
+            protocol: UDP
+          voip:
+            enabled: true
+            port: 2458
+            protocol: UDP
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /home/steam/.config/unity3d/IronGate/Valheim/
+          - path: /home/steam/valheim/
