@@ -26,26 +26,26 @@ spec:
   values:
     controllers:
       theme-park:
-        replicas: 2
-        strategy: RollingUpdate
         containers:
           app:
             image:
-              repository: ghcr.io/themepark-dev/theme.park
-              tag: 1.19.1@sha256:3ee4d452be87ec0275bc737ad4d87df2af3d3e72f6f3ece00f3fff589916df45
+              repository: ghcr.io/onedr0p/theme-park
+              tag: 1.18.0@sha256:6d6ad5a1c3b55b83f7441ba0346cbd60939c776a5038d34c7fb4ac1136bfa271
+            env:
+              TZ: ${TIMEZONE}
             resources:
               requests:
-                cpu: 15m
+                cpu: 10m
+                memory: 50Mi
               limits:
-                memory: 128Mi
+                memory: 200Mi
 
     service:
       app:
         controller: *app
         ports:
           http:
-            port: 80
-            targetPort: 8080
+            port: 8080
 
     ingress:
       app:
@@ -61,14 +61,7 @@ spec:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
                 service:
                   identifier: app
                   port: http
-
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
