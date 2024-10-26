@@ -4,9 +4,9 @@ metadata:
   name: external-truenas
 subsets:
   - addresses:
-      - ip: ${TRUENAS_IP}
+      - ip: 192.168.200.10
     ports:
-      - port: 444
+      - port: 443
         name: https
 ---
 apiVersion: v1
@@ -16,7 +16,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 444
+      targetPort: 443
       name: https
   clusterIP: None
   type: ClusterIP
