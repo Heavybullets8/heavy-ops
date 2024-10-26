@@ -16,7 +16,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-enableIPv6BIGTCP: true
+enableIPv4BIGTCP: true
 endpointRoutes:
   enabled: true
 hubble:
