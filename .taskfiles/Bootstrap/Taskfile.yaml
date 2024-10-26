@@ -30,7 +30,7 @@ tasks:
       - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
 
   apps:
-    internal: true
+    internal: false
     cmds:
       - until kubectl --context {{.CLUSTER}} wait --for=condition=Ready=False nodes --all --timeout=10m; do sleep 10; done
       - helmfile --quiet --kube-context {{.CLUSTER}} --file {{.KUBERNETES_DIR}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff
@@ -43,7 +43,7 @@ tasks:
       - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
 
   kubeconfig:
-    internal: true
+    internal: false
     cmd: |
       talosctl --context {{.CLUSTER}} kubeconfig --nodes {{.NODE}} \
           --force --force-context-name {{.CLUSTER}} {{.KUBERNETES_DIR}}
@@ -54,7 +54,7 @@ tasks:
       - talosctl --context {{.CLUSTER}} config info >/dev/null 2>&1
 
   flux:
-    internal: true
+    internal: false
     cmds:
       - kubectl --context {{.CLUSTER}} apply --server-side --kustomize {{.KUBERNETES_DIR}}/bootstrap/flux
       - sops --decrypt {{.KUBERNETES_DIR}}/bootstrap/flux/age-key.secret.sops.yaml | kubectl --context {{.CLUSTER}} apply --server-side --filename -

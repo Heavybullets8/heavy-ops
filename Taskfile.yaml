@@ -7,7 +7,7 @@ vars:
   NODE: "heavy-control"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
-  CONTROLLER: "192.168.201.100"
+  CONTROLLER: "192.168.200.16"
 
 env:
   SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
