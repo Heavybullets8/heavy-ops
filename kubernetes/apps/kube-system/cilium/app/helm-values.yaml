@@ -16,10 +16,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-# devices: enx00a0984598e6
-# TODO: uncomment once mellanox 4 is installed
-# https://docs.cilium.io/en/stable/operations/performance/tuning/#ipv4-big-tcp
-# enableIPv6BIGTCP: true
+enableIPv6BIGTCP: true
 endpointRoutes:
   enabled: true
 hubble:
