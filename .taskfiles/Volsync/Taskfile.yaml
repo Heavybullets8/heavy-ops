@@ -64,28 +64,12 @@ tasks:
     silent: true
 
   unlock:
-    desc: Unlock a Restic repository for an application
-    summary: |
-      cluster: Cluster to run command against (required)
-      ns: Namespace the PVC is in (default: default)
-      app: Application to unlock (required)
-    cmds:
-      - envsubst < <(cat {{.VOLSYNC_RESOURCES_DIR}}/unlock.tmpl.yaml) | kubectl --context {{.cluster}} apply -f -
-      - bash {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh {{.job}} {{.ns}} {{.cluster}}
-      - kubectl --context {{.cluster}} -n {{.ns}} wait job/{{.job}} --for condition=complete --timeout=1m
-      - kubectl --context {{.cluster}} -n {{.ns}} logs job/{{.job}} --container r2
-      - kubectl --context {{.cluster}} -n {{.ns}} delete job {{.job}}
-    env: *env-vars
+    desc: Unlock all Restic repos [CLUSTER=main]
+    cmd: >
+      kubectl get replicationsources --all-namespaces --no-headers -A | awk '{print $1, $2}'
+      | xargs --max-procs=2 -l bash -c 'kubectl --namespace "$0" patch --field-manager=flux-client-side-apply replicationsources "$1" --type merge --patch "{\"spec\":{\"restic\":{\"unlock\":\"{{now | unixEpoch}}\"}}}"'
     requires:
-      vars: ["cluster", "app"]
-    vars:
-      ns: '{{.ns | default "default"}}'
-      job: volsync-unlock-{{.app}}
-    preconditions:
-      - test -f envsubst
-      - test -f {{.VOLSYNC_RESOURCES_DIR}}/wait-for-job.sh
-      - test -f {{.VOLSYNC_RESOURCES_DIR}}/unlock.tmpl.yaml
-    silent: true
+      vars: [CLUSTER]
 
   # To run backup jobs in parallel for all replicationsources:
   #   - kubectl get replicationsources --all-namespaces --no-headers | awk '{print $2, $1}' | xargs --max-procs=4 -l bash -c 'task volsync:snapshot app=$0 ns=$1'
