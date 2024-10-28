@@ -31,14 +31,14 @@ spec:
       servicemonitor:
         enabled: true
     featureGates: "ServerSideApply=true"
-    # extraEnv:
-    #   - name: KUBE_FEATURE_WatchListClient
-    #     value: "true"
-    # webhook:
-    #   extraEnv:
-    #     - name: KUBE_FEATURE_WatchListClient
-    #       value: "true"
-    # cainjector:
-    #   extraEnv:
-    #     - name: KUBE_FEATURE_WatchListClient
-    #       value: "true"
+    extraEnv:
+      - name: KUBE_FEATURE_WatchListClient
+        value: "true"
+    webhook:
+      extraEnv:
+        - name: KUBE_FEATURE_WatchListClient
+          value: "true"
+    cainjector:
+      extraEnv:
+        - name: KUBE_FEATURE_WatchListClient
+          value: "true"

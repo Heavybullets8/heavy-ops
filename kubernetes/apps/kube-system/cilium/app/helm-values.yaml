@@ -16,6 +16,8 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
+# enableIPv4BIGTCP requires a supported NIC, see:
+# https://docs.cilium.io/en/stable/operations/performance/tuning/#ipv4-big-tcp
 enableIPv4BIGTCP: true
 endpointRoutes:
   enabled: true
