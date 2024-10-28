@@ -1,6 +1,9 @@
 ---
 fullnameOverride: coredns
 k8sAppLabelOverride: kube-dns
+replicaCount: 2
+rollingUpdate:
+  maxSurge: 1
 serviceAccount:
   create: true
 service:
@@ -48,10 +51,3 @@ tolerations:
   - key: node-role.kubernetes.io/control-plane
     operator: Exists
     effect: NoSchedule
-topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: coredns
