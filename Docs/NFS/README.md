@@ -54,7 +54,7 @@ Since I am using a direct connection, I chose an IP space that was not being use
 ### Network Settings
 My Mellanox has two ports, one is connected to the switch for LAN and WAN, the other is directly connected to the client (Talos) and has the following settings:
 
-<img src="tns-networking.png" alt="TrueNAS SCALE Configuration" width="35%"/>
+<img src="tns-nfs-networking.png" alt="TrueNAS SCALE Configuration" width="35%"/>
 
 ### NFS Service Configuration
 
