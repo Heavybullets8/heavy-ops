@@ -134,7 +134,6 @@ machine:
         hard=True
         noatime=True
         nodiratime=True
-        nconnect=8
         proto = rdma
         port = 20049
       permissions: 420
