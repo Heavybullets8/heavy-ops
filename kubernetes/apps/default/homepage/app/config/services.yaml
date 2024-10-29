@@ -104,7 +104,7 @@
         description: Storage
         widget:
           type: truenas
-          url: http://${TRUENAS_IP}:81
+          url: http://${TRUENAS_IP}
           key: "${SECRET_TRUENAS_API}"
           nasType: scale
           enablePools: true
