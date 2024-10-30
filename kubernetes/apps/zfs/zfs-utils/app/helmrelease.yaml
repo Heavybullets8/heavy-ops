@@ -47,4 +47,3 @@ spec:
         hostPath: /dev/zfs
         globalMounts:
           - path: /dev/zfs
-            subPath: zfs
