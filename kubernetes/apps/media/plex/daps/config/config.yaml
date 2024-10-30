@@ -79,6 +79,15 @@ sync_gdrive:
       location: /config/assets/.inputs/chrisdc
 
     # - Homemade (Low priority)
+    - id: 1qBC7p9K4zur5dOCf3F6VTyUROVvHQoSb # Jpalenz77
+      location: /config/assets/.inputs/jpalenz77
+
+    - id: 1KJlsnMz-z2RAfNxKZp7sYP_U0SD1V6lS # MiniMyself
+      location: /config/assets/.inputs/minimyself
+
+    - id: 1KJlsnMz-z2RAfNxKZp7sYP_U0SD1V6lS # TokenMinal
+      location: /config/assets/.inputs/tokenminal
+
     - id: 1hEY9qEdXVDzIbnQ4z9Vpo0SVXXuZBZR- # Mareau
       location: /config/assets/.inputs/mareau
 
@@ -92,14 +101,14 @@ sync_gdrive:
     - id: 1KnwxzwBUQzQyKF1e24q_wlFqcER9xYHM # Sahara
       location: /config/assets/.inputs/sahara
 
+    - id: 1ZfvUgN0qz4lJYkC_iMRjhH-fZ0rDN_Yu # MajorGiant (#1)
+      location: /config/assets/.inputs/majorgiant
+
     - id: 1alseEnUBjH6CjXh77b5L4R-ZDGdtOMFr # Lion City Gaming
       location: /config/assets/.inputs/lion
 
     - id: 1aRngLdC9yO93gvSrTI2LQ_I9BSoGD-7o # IamSpartacus (#1)
       location: /config/assets/.inputs/iamspartacus
-
-    - id: 1ZfvUgN0qz4lJYkC_iMRjhH-fZ0rDN_Yu # MajorGiant (#1)
-      location: /config/assets/.inputs/majorgiant
 
     - id: 1Xg9Huh7THDbmjeanW0KyRbEm6mGn_jm8 # BZ
       location: /config/assets/.inputs/bz
@@ -120,7 +129,7 @@ poster_renamerr:
   log_level: info
   dry_run: false
   sync_posters: true # Run sync_gdrive
-  action_type: hardlink # "hardlink" is valid, just not supported. Use same PVC as Kometa
+  action_type: hardlink # Use same PVC as Kometa
   asset_folders: true # Using "asset_folders" within Kometa, so matching that setting here
   print_only_renames: false
   border_replacerr: true # Run border_replacerr
@@ -138,14 +147,17 @@ poster_renamerr:
     - /config/assets/.inputs/majorgiant2
     - /config/assets/.inputs/chrisdc
     # - Homemade (Low priority)
+    - /config/assets/.inputs/tokenminal
+    - /config/assets/.inputs/minimyself
+    - /config/assets/.inputs/jpalenz77
     - /config/assets/.inputs/mareau
     # + Homemade (Medium priority)
     - /config/assets/.inputs/quafley
     - /config/assets/.inputs/stupifierr
     - /config/assets/.inputs/sahara
+    - /config/assets/.inputs/majorgiant
     - /config/assets/.inputs/lion
     - /config/assets/.inputs/iamspartacus
-    - /config/assets/.inputs/majorgiant
     - /config/assets/.inputs/bz
     - /config/assets/.inputs/solen
     - /config/assets/.inputs/zarox
