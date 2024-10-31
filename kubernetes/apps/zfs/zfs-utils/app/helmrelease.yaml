@@ -27,19 +27,23 @@ spec:
       zfs-scrub:
         type: cronjob
         cronjob:
-          schedule: "0 0 * * *"
+          schedule: "0 0 1,15 * *"
           successfulJobsHistory: 1
           failedJobsHistory: 1
+          concurrencyPolicy: Forbid
+          timeZone: ${TIMEZONE}
+          backoffLimit: 0
         containers:
           app:
             image:
               repository: ghcr.io/heavybullets8/zfs-scrubber
-              tag: 0.0.0@sha256:f2e688419e1397ceb253e3276c6ab2754fb197f49886162cca7fe54f7caf84e1
+              tag: 0.0.0@sha256:35b7b3c4e0fb06470cd7296d42207d323ccc8502fb4cd46fe4655e0b2e5d5dce
             env:
               ZFS_POOL: "speed"
-              ACTION: "cleanup"
+              ACTION: "all"
             securityContext:
               privileged: true
+            restartPolicy: Never
 
     persistence:
       dev:
