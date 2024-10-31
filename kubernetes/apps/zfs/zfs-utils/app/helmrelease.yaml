@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: ghcr.io/heavybullets8/zfs-scrubber
-              tag: 0.0.0@sha256:35b7b3c4e0fb06470cd7296d42207d323ccc8502fb4cd46fe4655e0b2e5d5dce
+              tag: 0.0.0@sha256:bff111ac67c8e3d839914c93cac8efc03559638a15846702cc562d867ff533c5
             env:
               ZFS_POOL: "speed"
               ACTION: "all"
