@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 
-  - ./zfs-utils/ks.yaml
+  - ./zfs-scrubber/ks.yaml

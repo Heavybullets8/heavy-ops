@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: zfs-scrub
+  name: zfs-scrubber
 spec:
   interval: 30m
   chart:
@@ -24,7 +24,7 @@ spec:
 
   values:
     controllers:
-      zfs-scrub:
+      zfs-scrubber:
         type: cronjob
         cronjob:
           schedule: "0 0 1,15 * *"
@@ -37,10 +37,13 @@ spec:
           app:
             image:
               repository: ghcr.io/heavybullets8/zfs-scrubber
-              tag: 0.0.0@sha256:bff111ac67c8e3d839914c93cac8efc03559638a15846702cc562d867ff533c5
+              tag: 1.0.2@sha256:4fc3282d48de0cdced37737570049a545bd7dfedc3ddc263216693a1c479557f
             env:
               ZFS_POOL: "speed"
-              ACTION: "all"
+              PUSHOVER_NOTIFICATION: true
+            envFrom:
+              - secretRef:
+                  name: zfs-scrubber-secret
             securityContext:
               privileged: true
 
