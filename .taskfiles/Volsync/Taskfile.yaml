@@ -144,7 +144,6 @@ tasks:
       - for: { var: snaps }
         cmd: |
           {{- $items := (split "/" .ITEM) }}
-          kubectl --context {{.cluster}} patch volumesnapshot -n {{ $items._0 }} {{ $items._1 }} --type=merge -p '{"metadata":{"finalizers":[]}}'
           kubectl --context {{.cluster}} delete volumesnapshot -n {{ $items._0 }} {{ $items._1 }}
     env: *env-vars
     requires:

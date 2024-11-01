@@ -129,17 +129,19 @@ Configure NFS mount options by overwriting `/etc/nfsmount.conf`:
 ```yaml
 machine:
   files:
-    - content: |
+    - op: overwrite
+      path: /etc/nfsmount.conf
+      permissions: 420
+      content: |
         [ NFSMount_Global_Options ]
         hard=True
-        noatime=True
-        nodiratime=True
         proto = rdma
         port = 20049
-      permissions: 420
-      path: /etc/nfsmount.conf
-      op: overwrite
 ```
+
+Note: Pretty much everything unlisted, such as the version, (r|w)size are all auto-negotiated to the highest value, so I ommit them from my config.
+Additionally, atime mount options have no affect on NFS.
+Ref: https://man7.org/linux/man-pages/man5/nfs.5.html
 ---
 
 ## Helm Release Usage
