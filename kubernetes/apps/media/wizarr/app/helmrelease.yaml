@@ -25,6 +25,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: plex
+      namespace: media
+    - name: openebs
+      namespace: openebs-system
+    - name: volsync
+      namespace: volsync-system
 
   values:
     controllers:

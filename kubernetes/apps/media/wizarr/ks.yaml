@@ -10,10 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: openebs
-    - name: volsync
-  wait: true
+  wait: false
   path: ./kubernetes/apps/media/wizarr/app
   prune: true
   sourceRef:

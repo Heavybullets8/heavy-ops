@@ -12,9 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-    - name: openebs
-    - name: volsync
-  wait: true
+  wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbittorrent
   prune: true
   sourceRef:
@@ -40,8 +38,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: qbittorrent
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbitmanage
   prune: true
   sourceRef:

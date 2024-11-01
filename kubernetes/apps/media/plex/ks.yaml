@@ -10,12 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-secrets-stores
-    - name: nvidia-plugin
-    - name: openebs
-    - name: volsync
-  wait: true
+  wait: false
   path: kubernetes/apps/media/plex/plex
   prune: true
   sourceRef:
@@ -42,8 +37,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: plex
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: kubernetes/apps/media/plex/plex-auto-languages
   prune: true
   sourceRef:
@@ -66,8 +61,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: plex
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: kubernetes/apps/media/plex/kometa
   prune: true
   sourceRef:
@@ -91,9 +86,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: plex
-    - name: kometa
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: kubernetes/apps/media/plex/daps
   prune: true
   sourceRef:
@@ -116,8 +110,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: plex
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: kubernetes/apps/media/plex/new-plex-dubs
   prune: true
   sourceRef:
@@ -140,8 +134,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: plex
-  wait: true
+    - name: external-secrets-stores
+  wait: false
   path: kubernetes/apps/media/plex/plex-image-cleanup
   prune: true
   sourceRef:
@@ -163,9 +157,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: plex
-  wait: true
+  wait: false
   path: kubernetes/apps/media/plex/tautulli
   prune: true
   sourceRef:

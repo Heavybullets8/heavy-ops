@@ -22,6 +22,13 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: nvidia-device-plugin
+      namespace: kube-system
+    - name: openebs
+      namespace: openebs-system
+    - name: volsync
+      namespace: volsync-system
 
   values:
     controllers:

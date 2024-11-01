@@ -22,6 +22,15 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: sonarr
+      namespace: media
+    - name: radarr
+      namespace: media
+    - name: openebs
+      namespace: openebs-system
+    - name: volsync
+      namespace: volsync-system
 
   values:
     controllers:

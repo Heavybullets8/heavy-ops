@@ -13,9 +13,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg-cluster
     - name: external-secrets-stores
-    - name: volsync
-    - name: openebs
-  wait: true
+  wait: false
   path: ./kubernetes/apps/media/radarr/app
   prune: true
   sourceRef:

@@ -24,6 +24,11 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
+    - name: volsync
+      namespace: volsync-system
 
   values:
     controllers:

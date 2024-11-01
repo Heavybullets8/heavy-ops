@@ -12,9 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-    - name: openebs
-    - name: volsync
-  wait: true
+  wait: false
   path: ./kubernetes/apps/media/requestrr/app
   prune: true
   sourceRef:

@@ -22,6 +22,17 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: plex
+      namespace: media
+    - name: sonarr
+      namespace: media
+    - name: radarr
+      namespace: media
+    - name: openebs
+      namespace: openebs-system
+    - name: volsync
+      namespace: volsync-system
 
   values:
     controllers:
