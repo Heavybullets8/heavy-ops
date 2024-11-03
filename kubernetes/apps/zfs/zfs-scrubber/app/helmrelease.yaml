@@ -37,11 +37,11 @@ spec:
           app:
             image:
               repository: ghcr.io/heavybullets8/zfs-scrubber
-              tag: 1.0.5
+              tag: 1.0.5@sha256:d977db8813026b4ba54298313c6bd535ef02106f74673fc1201248ccd174cbd2
             env:
               ZFS_POOL: "speed"
               PUSHOVER_NOTIFICATION: true
-              TALOS_VERSION: v1.8.2
+              TALOS_VERSION: ${TALOS_VERSION}
             envFrom:
               - secretRef:
                   name: zfs-scrubber-secret
