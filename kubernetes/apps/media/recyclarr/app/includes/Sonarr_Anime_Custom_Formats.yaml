@@ -6,6 +6,9 @@ custom_formats:
       - 228b8ee9aa0a609463efca874524a6b8 # v2
       - 0e5833d3af2cc5fa96a0c29cd4477feb # v3
       - 4fc15eeb8f2f9a749f918217d4234ad8 # v4
+      - eb3d5cc0a2be0db205fb823640db6a3c # Repack v2
+      - 44e7c4de10ae50265753082e5dc76047 # Repack v3
+      - ec8fa7296b64e8cd390a1600981f3923 # Repack/Proper
 
       # Anime Optional
       - b2550eb333d27b75833e25b8c2557b38 # 10bit

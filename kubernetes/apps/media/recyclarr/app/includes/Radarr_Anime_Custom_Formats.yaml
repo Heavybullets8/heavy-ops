@@ -1,5 +1,15 @@
 custom_formats:
   - trash_ids:
+      # Anime Misc
+      - c259005cbaeb5ab44c06eddb4751e70c # v0
+      - 5f400539421b8fcf71d51e6384434573 # v1
+      - 3df5e6dfef4b09bb6002f732bed5b774 # v2
+      - db92c27ba606996b146b57fbe6d09186 # v3
+      - d4e5e842fad129a3c097bdb2d20d31a0 # v4
+      - e7718d7a3ce595f289bfee26adc178f5 # Repack/Proper
+      - ae43b294509409a6a13919dedd4764c4 # Repack2
+      - 5caaaa1c08c1742aa4342d8c4cc463f2 # Repack3
+
       # Anime
       - fb3ccc5d5cc8f77c9055d4cb4561dded # Anime BD Tier 01 (Top SeaDex Muxers)
       - 66926c8fa9312bc74ab71bf69aae4f4a # Anime BD Tier 02 (SeaDex Muxers)
@@ -17,11 +27,6 @@ custom_formats:
       - 9edaeee9ea3bcd585da9b7c0ac3fc54f # Anime Web Tier 04 (Official Subs)
       - 22d953bbe897857b517928f3652b8dd3 # Anime Web Tier 05 (FanSubs)
       - a786fbc0eae05afe3bb51aee3c83a9d4 # Anime Web Tier 06 (FanSubs)
-      - c259005cbaeb5ab44c06eddb4751e70c # v0
-      - 5f400539421b8fcf71d51e6384434573 # v1
-      - 3df5e6dfef4b09bb6002f732bed5b774 # v2
-      - db92c27ba606996b146b57fbe6d09186 # v3
-      - d4e5e842fad129a3c097bdb2d20d31a0 # v4
 
       # Anime Optional
       - a5d148168c4506b55cf53984107c396e # 10bit
