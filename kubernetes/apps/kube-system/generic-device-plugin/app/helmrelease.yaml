@@ -48,6 +48,13 @@ spec:
                   - count: 1000
                     paths:
                       - path: /dev/net/tun
+              - --device
+              - |
+                name: zfs
+                groups:
+                  - count: 1
+                    paths:
+                      - path: /dev/zfs
             ports:
               - containerPort: 8080
                 name: http
