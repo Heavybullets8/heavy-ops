@@ -40,7 +40,8 @@ spec:
               tag: 5.0.1@sha256:7fc5af4f7f9c8e4998aaa18b5e2e634757c55f70c23b9bd46b40e09a4c7acda5
             env:
               UMASK: "022"
-              QBITTORRENT__PORT: &port 80
+              QBT_WEBUI_PORT: &port 80
+              QBT_TORRENTING_PORT: 52885
             probes:
               liveness: &probes
                 enabled: true
