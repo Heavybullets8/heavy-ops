@@ -42,6 +42,8 @@ spec:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
               QBT_TORRENTING_PORT: 52885
+              # NOTE: Some of these do not work. You are supposed to be able to set parameters
+              #       Via env vars like so.. But some or all may not work.
               # [BitTorrent]
               QBT_BitTorrent__Session__CheckingMemUsageSize: 512
               QBT_BitTorrent__Session__Interface: tun0
