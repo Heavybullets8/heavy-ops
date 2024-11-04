@@ -42,6 +42,27 @@ spec:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
               QBT_TORRENTING_PORT: 52885
+              # [BitTorrent]
+              QBT_BitTorrent__Session__CheckingMemUsageSize: 512
+              QBT_BitTorrent__Session__Interface: tun0
+              QBT_BitTorrent__Session__InterfaceName: tun0
+              QBT_BitTorrent__Session__AsyncIOThreadsCount: 40
+              QBT_BitTorrent__Session__BTProtocol: both
+              QBT_BitTorrent__Session__DefaultSavePath: |-
+                /media/download/torrent/complete
+              QBT_BitTorrent__Session__TempPathEnabled: true
+              QBT_BitTorrent__Session__TempPath: |-
+                /media/download/torrent/temp
+              # [Preferences]
+              QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
+              QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
+                10.69.0.0/16, 10.96.0.0/16, 192.168.200.0/23
+              QBT_Preferences__WebUI__LocalHostAuth: false
+              QBT_Preferences__WebUI__ReverseProxySupportEnabled: true
+              QBT_Preferences__WebUI__RootFolder: |-
+                /addons/VueTorrent
+              QBT_Preferences__WebUI__TrustedReverseProxiesList: |-
+                10.96.0.0/16
             probes:
               liveness: &probes
                 enabled: true
