@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg-cluster
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/media/autobrr/app
+  path: ./kubernetes/apps/media/autobrr/app
   prune: true
   sourceRef:
     kind: GitRepository
