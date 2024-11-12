@@ -8,5 +8,3 @@ resources:
   # Flux-Kustomizations
   - ./cert-manager/ks.yaml
   - ./certificates/ks.yaml
-
-  - ./testing/ks.yaml
