@@ -33,7 +33,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: certificates-import
+    # - name: certificates-import
     - name: cert-manager-issuers
     - name: external-secrets-stores
   path: ./kubernetes/apps/cert-manager/certificates/export
