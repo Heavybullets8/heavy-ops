@@ -1,0 +1,72 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app headlamp
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: *app
+      version: 0.26.0
+      sourceRef:
+        kind: HelmRepository
+        name: *app
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
+  values:
+    config:
+      pluginsDir: /build/plugins
+
+    initContainers:
+      - command:
+          - /bin/sh
+          - -c
+          - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+        image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:latest
+        imagePullPolicy: Always
+        name: headlamp-plugins
+        volumeMounts:
+          - mountPath: /build/plugins
+            name: headlamp-plugins
+
+    ingress:
+      enabled: true
+      ingressClassName: external
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        nginx.ingress.kubernetes.io/auth-method: GET
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/?rm=$request_method"
+        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+      hosts:
+        - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              type: ImplementationSpecific
+
+    persistentVolumeClaim:
+      enabled: true
+      storageClassName: openebs-hostpath
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
+
+    volumeMounts:
+      - mountPath: /build/plugins
+        name: headlamp-plugins
+
+    volumes:
+      - name: headlamp-plugins
+        persistentVolumeClaim:
+          claimName: headlamp
