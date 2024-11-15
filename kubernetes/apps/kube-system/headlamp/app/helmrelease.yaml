@@ -57,7 +57,6 @@ spec:
 
     persistentVolumeClaim:
       enabled: true
-      storageClassName: openebs-hostpath
       accessModes:
         - ReadWriteOnce
       size: 1Gi
