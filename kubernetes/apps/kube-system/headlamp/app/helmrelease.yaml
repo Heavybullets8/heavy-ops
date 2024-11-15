@@ -57,10 +57,11 @@ spec:
 
     persistentVolumeClaim:
       enabled: true
-      storageClassName: openebs-zfs-64k
+      storageClassName: "openebs-zfs-64k"
       accessModes:
         - ReadWriteOnce
       size: 1Gi
+      volumeMode: "Filesystem"
 
     volumeMounts:
       - mountPath: /build/plugins
