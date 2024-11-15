@@ -23,6 +23,18 @@ spec:
       strategy: rollback
       retries: 3
 
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: PersistentVolumeClaim
+              name: headlamp
+            patch: |
+              - op: add
+                path: /spec/storageClassName
+                value: openebs-hostpath
+
   values:
     config:
       pluginsDir: /build/plugins
@@ -57,7 +69,6 @@ spec:
 
     persistentVolumeClaim:
       enabled: true
-      storageClassName: "openebs-zfs-64k"
       accessModes:
         - ReadWriteOnce
       size: 1Gi
