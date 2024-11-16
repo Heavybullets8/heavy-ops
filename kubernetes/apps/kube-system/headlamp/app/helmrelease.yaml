@@ -45,10 +45,28 @@ spec:
   values:
     config:
       pluginsDir: /build/plugins
-      oidc:
-        secret:
-          create: false
-          name: headlamp-secret
+
+    env:
+      - name: OIDC_CLIENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: headlamp-secret
+            key: clientID
+      - name: OIDC_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: headlamp-secret
+            key: clientSecret
+      - name: OIDC_ISSUER_URL
+        valueFrom:
+          secretKeyRef:
+            name: headlamp-secret
+            key: issuerURL
+      - name: OIDC_SCOPES
+        valueFrom:
+          secretKeyRef:
+            name: headlamp-secret
+            key: scopes
 
     initContainers:
       - command:
