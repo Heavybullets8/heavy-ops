@@ -14,6 +14,9 @@ spec:
         kind: HelmRepository
         name: *app
         namespace: flux-system
+  dependsOn:
+    - name: authelia
+      namespace: default
   install:
     remediation:
       retries: 3
@@ -23,6 +26,8 @@ spec:
       strategy: rollback
       retries: 3
 
+  # TODO: Remove Once fixed: https://github.com/headlamp-k8s/headlamp/issues/2579
+  # Required if you dont have a "Default" StorageClass
   postRenderers:
     - kustomize:
         patches:
@@ -38,6 +43,12 @@ spec:
   values:
     config:
       pluginsDir: /build/plugins
+      oidc:
+        secret:
+          create: false
+        externalSecret:
+          enabled: true
+          name: headlamp-secret
 
     initContainers:
       - command:
@@ -69,6 +80,8 @@ spec:
 
     persistentVolumeClaim:
       enabled: true
+      # TODO: Uncomment once above issue is fixed
+      # storageClassName: openebs-hostpath
       accessModes:
         - ReadWriteOnce
       size: 1Gi
