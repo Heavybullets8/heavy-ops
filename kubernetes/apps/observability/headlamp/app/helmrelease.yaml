@@ -4,8 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app headlamp
-  annotations:
-    secret.reloader.stakater.com/reload: "headlamp-secret"
 spec:
   interval: 30m
   chart:
@@ -43,6 +41,13 @@ spec:
                 value: openebs-hostpath
 
   values:
+    serviceAccount:
+      create: false
+      name: "headlamp"
+    clusterRoleBinding:
+      create: false
+      name: "cluster-admin"
+
     config:
       pluginsDir: /build/plugins
       oidc:
@@ -51,6 +56,9 @@ spec:
         externalSecret:
           enabled: true
           name: headlamp-secret
+
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
 
     initContainers:
       - command:

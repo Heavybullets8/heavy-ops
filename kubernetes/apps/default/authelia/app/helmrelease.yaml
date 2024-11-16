@@ -25,14 +25,15 @@ spec:
   dependsOn:
     - name: glauth
       namespace: default
+
   values:
     controllers:
       authelia:
         replicas: 1
         strategy: RollingUpdate
-
         annotations:
           reloader.stakater.com/auto: "true"
+
         initContainers:
           init-db:
             image:
@@ -41,6 +42,7 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: authelia-db-secret
+
         containers:
           app:
             image:
@@ -76,12 +78,14 @@ spec:
                 cpu: 10m
               limits:
                 memory: 500Mi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
         runAsGroup: 65534
         seccompProfile: { type: RuntimeDefault }
+
     service:
       app:
         controller: *app
@@ -90,6 +94,7 @@ spec:
             port: *port
           metrics:
             port: 8080
+
     serviceMonitor:
       app:
         serviceName: *app
@@ -99,6 +104,7 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
+
     ingress:
       app:
         annotations:

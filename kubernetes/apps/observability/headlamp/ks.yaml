@@ -6,13 +6,13 @@ metadata:
   name: &app headlamp
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: observability
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/kube-system/headlamp/app
+  path: ./kubernetes/apps/observability/headlamp/app
   prune: true
   sourceRef:
     kind: GitRepository
