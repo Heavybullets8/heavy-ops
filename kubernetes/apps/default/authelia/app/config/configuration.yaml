@@ -120,7 +120,6 @@ identity_providers:
         client_name: Headlamp
         public: false
         require_pkce: false
-        pkce_challenge_method: "S256"
         pre_configured_consent_duration: 1y
         scopes: [openid, profile, groups, email]
         redirect_uris: ["https://headlamp.${SECRET_DOMAIN}/oidc-callback"]
