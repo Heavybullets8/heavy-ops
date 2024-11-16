@@ -26,6 +26,10 @@ authentication_backend:
     disable: true
   refresh_interval: 1m
 
+server:
+  buffers:
+    read: 8192
+
 session:
   secret: "{{ .AUTHELIA_SESSION_SECRET }}"
   same_site: lax
