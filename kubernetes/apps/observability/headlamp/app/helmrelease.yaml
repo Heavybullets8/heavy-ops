@@ -43,10 +43,9 @@ spec:
   values:
     serviceAccount:
       create: false
-      name: "headlamp"
+      name: "headlamp-sa"
     clusterRoleBinding:
       create: false
-      name: "cluster-admin"
 
     config:
       pluginsDir: /build/plugins
