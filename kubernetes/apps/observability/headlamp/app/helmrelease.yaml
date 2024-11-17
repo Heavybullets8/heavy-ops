@@ -41,12 +41,6 @@ spec:
                 value: openebs-hostpath
 
   values:
-    serviceAccount:
-      create: false
-      name: "headlamp-sa"
-    clusterRoleBinding:
-      create: false
-
     config:
       pluginsDir: /build/plugins
       oidc:
