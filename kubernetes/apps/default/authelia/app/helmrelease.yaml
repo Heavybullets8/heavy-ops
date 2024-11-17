@@ -80,6 +80,7 @@ spec:
                 memory: 500Mi
 
     defaultPodOptions:
+      enableServiceLinks: false
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
