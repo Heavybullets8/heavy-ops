@@ -88,7 +88,6 @@ libraries:
         asset_directory: config/assets/networks
       - file: config/Series_Collections_Suggestions.yaml
         asset_directory: config/assets/suggestions
-      - url: https://raw.githubusercontent.com/s0len/meta-manager-config/main/collection_files/better_new_and_old_tv_shows_releases.yml
 
     overlay_files:
       # Status in the top left corner

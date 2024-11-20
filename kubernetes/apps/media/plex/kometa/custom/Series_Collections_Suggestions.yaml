@@ -67,7 +67,7 @@ collections:
     summary: Series added to the library, not released within 60 days
 
   New Episodes:
-    template: { name: smart, poster: 213598 }
+    template: { name: Smart, poster: 213598 }
     builder_level: episode
     smart_filter:
       all:
