@@ -29,6 +29,14 @@ templates:
     collection_mode: hide
     collection_order: alpha
     sync_mode: sync
+  Smart:
+    url_poster: https://theposterdb.com/api/assets/<<poster>>
+    sort_title: ++++++++++_<<collection_name>>
+    collection_mode: hide
+    visible_home: true
+    visible_shared: true
+    visible_library: true
+    sync_mode: sync
 
 #############################
 ##       Collections       ##
@@ -39,29 +47,36 @@ collections:
   ##    Plex    ##
   ################
 
-  Recently Aired:
-    template: { name: suggestion, poster: 213602 }
+  Recently Released:
+    template: { name: Smart, poster: 213603 }
     smart_filter:
+      limit: 10
+      sort_by: added.desc
       all:
-        episode_air_date: 7
-      sort_by: episode_added.desc
-    summary: Episodes that have aired within the last week.
-
-  New Episodes:
-    template: { name: suggestion, poster: 213598 }
-    smart_filter:
-      all:
-        episode_added: 7
-      sort_by: episode_added.desc
-    summary: Episodes that have been added within the last week.
+        # added: 60
+        release: 60
+    summary: Most recently released series.
 
   Recently Added:
-    template: { name: suggestion, poster: 213601 }
+    template: { name: Smart, poster: 213601 }
+    smart_filter:
+      limit: 10
+      sort_by: added.desc
+      all:
+        release.not: 60
+    summary: Series added to the library, not released within 60 days
+
+  New Episodes:
+    template: { name: smart, poster: 213598 }
+    builder_level: episode
     smart_filter:
       all:
-        added: 7
-      sort_by: added.desc
-    summary: Shows that have been added within the last week.
+        added: 40
+        episode_air_date: 40
+        last_played: 1800
+        unplayed_episodes: true
+      sort_by: episode_added.desc
+    summary: New Episodes from a show you have watched.
 
   ######################
   ##     Tautulli     ##
