@@ -75,7 +75,7 @@ collections:
         episode_air_date: 40
         last_played: 1800
         unplayed_episodes: true
-      sort_by: episode_added.desc
+      sort_by: episode_originally_available.desc
     summary: New Episodes from a show you have watched.
 
   ######################
