@@ -37,7 +37,7 @@ While the core infrastructure is self-hosted, I utilize a few cloud services for
 | Service                                   | Purpose                                               | Cost         |
 |-------------------------------------------|-------------------------------------------------------|--------------|
 | [Migadu](https://migadu.com/)             | Email hosting                                         | ~$90/year    |
-| [Cloudflare](https://www.cloudflare.com/) | DNS and domain management                             | ~$8/month    |
+| [Cloudflare](https://www.cloudflare.com/) | DNS, domain management and R2 bucket                  | ~$8/month    |
 | [GitHub](https://github.com/)             | Repository hosting and CI/CD pipelines                | Free         |
 | [Pushover](https://pushover.net/)         | Application and system notifications                  | $5 one-time  |
 
