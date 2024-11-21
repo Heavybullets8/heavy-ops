@@ -89,7 +89,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
         className: external
         hosts:
-          - host: "qbit.${SECRET_DOMAIN}"
+          - host: "kromgo.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
