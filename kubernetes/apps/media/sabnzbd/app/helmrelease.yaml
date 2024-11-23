@@ -52,16 +52,17 @@ spec:
               - secretRef:
                   name: sabnzbd-secret
             probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
               liveness: &probes
                 enabled: true
-                custom: true
                 spec:
-                  httpGet:
-                    path: /api?mode=version
-                    port: *port
                   initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 30
+                  timeoutSeconds: 10
+                  periodSeconds: 30
                   failureThreshold: 5
               readiness: *probes
             securityContext:
