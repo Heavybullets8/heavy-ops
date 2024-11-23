@@ -61,12 +61,12 @@ spec:
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                  timeoutSeconds: 30
+                  failureThreshold: 5
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
+              readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
@@ -74,8 +74,13 @@ spec:
                 cpu: 100m
               limits:
                 memory: 140Gi
+            lifecycle:
+              preStop:
+                exec:
+                  command: ["/bin/sh", "-c", "while pgrep -f 'unrar|unzip|7z|tar|gunzip' > /dev/null; do sleep 5; done"]
 
     defaultPodOptions:
+      terminationGracePeriodSeconds: 600
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
