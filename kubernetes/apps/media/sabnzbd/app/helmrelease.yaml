@@ -78,7 +78,7 @@ spec:
             lifecycle:
               preStop:
                 exec:
-                  command: ["/bin/sh", "-c", "while pgrep -f 'unrar|unzip|7z|tar|gunzip' > /dev/null; do sleep 5; done"]
+                  command: ["/bin/sh", "-c", "while pgrep -f '/media/download/usenet' > /dev/null; do sleep 5; done"]
 
     defaultPodOptions:
       terminationGracePeriodSeconds: 600
