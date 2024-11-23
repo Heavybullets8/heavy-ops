@@ -121,14 +121,15 @@ spec:
       config:
         existingClaim: *app
 
-      logs:
+      temporary:
         type: emptyDir
         globalMounts:
           - path: /config/logs
-
-      tmp:
-        type: emptyDir
-        medium: Memory
+            subPath: config/logs
+          - path: /tmp
+            subPath: tmp
+          - path: /incomplete
+            subPath: incomplete
 
       media:
         type: nfs
