@@ -79,6 +79,7 @@ spec:
                 nvidia.com/gpu: 1
 
     defaultPodOptions:
+      terminationGracePeriodSeconds: 300
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
