@@ -17,7 +17,7 @@ resources:
   - ./recyclarr/ks.yaml
   - ./requestrr/ks.yaml
   - ./prowlarr/ks.yaml
-  # - ./nzbget/ks.yaml
+  - ./nzbget/ks.yaml
   - ./overseerr/ks.yaml
   - ./unpackerr/ks.yaml
   - ./wizarr/ks.yaml
