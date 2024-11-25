@@ -66,5 +66,5 @@ spec:
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     capacity: "${VOLSYNC_CAPACITY}"
     cleanupCachePVC: true
-    cleanupTempPVC: true
+    # cleanupTempPVC: true
     enableFileDeletion: true
