@@ -36,8 +36,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/nzbgetcom/nzbget
-              tag: v24.4@sha256:4769809d9c3806001337dedaeff84b9ec20272c3e5a3b1ea7ddaf202fb222601
+              repository: ghcr.io/heavybullets8/nzbget
+              tag: v24.4@sha256:31ac8103722baa70b34632a59c2ec7a3f1f6a017f1e25079548b622593600687
             env:
               TZ: ${TIMEZONE}
               PUID: 568
