@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: ghcr.io/heavybullets8/nzbget
-              tag: v24.4@sha256:31ac8103722baa70b34632a59c2ec7a3f1f6a017f1e25079548b622593600687
+              tag: v24.4@sha256:3527bc39cf5c9a4a5a1f89df167f0efb39dac1f2d3ba6e03cdaf1df231dcbd59
             env:
               TZ: ${TIMEZONE}
               PUID: 568
