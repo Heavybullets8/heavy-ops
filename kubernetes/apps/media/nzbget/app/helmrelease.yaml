@@ -121,7 +121,7 @@ spec:
       media:
         type: nfs
         server: ${TRUENAS_IP}
-        path: /mnt/tank/media/download/nzbget
+        path: /mnt/tank/media/download/usenet
         globalMounts:
           - path: /media/download/usenet
 
