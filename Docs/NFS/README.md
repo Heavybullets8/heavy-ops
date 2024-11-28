@@ -85,17 +85,6 @@ This is likely not needed if you are not using TrueNAS SCALE.
 
 ## Client Setup (Talos Linux)
 
-### Enable RDMA
-
-Add the `rdma_rxe` kernel module to the Talos configuration:
-
-```yaml
-machine:
-  kernel:
-    modules:
-      - name: rdma_rxe
-```
-
 ### Network Settings
 
 Configure the network interfaces in the Talos configuration:
