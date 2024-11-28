@@ -106,8 +106,8 @@ collections:
     smart_filter:
       sort_by: added.desc
       all:
-        release: 40
-    summary: Movies released to digital platforms or from theaters within the last 40 days
+        release: 90
+    summary: Movies released to digital platforms or from theaters within the last 90 days
 
   Recently Added:
     template: { name: Smart, poster: 213601 }
@@ -115,8 +115,8 @@ collections:
       limit: 25
       sort_by: added.desc
       all:
-        release.not: 40
-    summary: Movies added to the library, not released within 40 days
+        release.not: 90
+    summary: Movies added to the library, not released within 90 days
 
     # New Episodes
     # url_poster: https://theposterdb.com/api/assets/213598
