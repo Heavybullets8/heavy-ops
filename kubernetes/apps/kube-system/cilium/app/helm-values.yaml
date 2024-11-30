@@ -16,9 +16,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-# enableIPv4BIGTCP requires a supported NIC, see:
-# https://docs.cilium.io/en/stable/operations/performance/tuning/#ipv4-big-tcp
-enableIPv4BIGTCP: true
+enableIPv4BIGTCP: true # Requires compatible NIC
 endpointRoutes:
   enabled: true
 hubble:
@@ -33,6 +31,7 @@ kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l2announcements:
   enabled: true
 loadBalancer:
+  acceleration: native # Requires compatible NIC and compatible MTU
   algorithm: maglev
   mode: dsr
 localRedirectPolicy: true
