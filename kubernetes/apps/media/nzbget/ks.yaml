@@ -23,5 +23,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      GATUS_SUBDOMAIN: nzb
       VOLSYNC_CAPACITY: 5Gi
       VOLSYNC_RECORD_SIZE: 16k
