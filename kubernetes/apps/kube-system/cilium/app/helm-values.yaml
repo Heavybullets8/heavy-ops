@@ -16,7 +16,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
-devices: enp130s0f0
+devices: enp130s0f0+
 enableIPv4BIGTCP: true # Requires compatible NIC
 endpointRoutes:
   enabled: true
