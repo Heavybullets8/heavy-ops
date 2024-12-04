@@ -17,6 +17,7 @@ cgroup:
 cluster:
   id: 1
   name: heavy-cluster
+devices: enxb83fd248882e
 enableIPv4BIGTCP: true # Requires compatible NIC
 endpointRoutes:
   enabled: true
@@ -34,7 +35,7 @@ kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l2announcements:
   enabled: true
 loadBalancer:
-  acceleration: best-effort # Requires compatible NIC and compatible MTU
+  acceleration: native # Requires compatible NIC and compatible MTU
   algorithm: maglev
   mode: dsr
 localRedirectPolicy: true
