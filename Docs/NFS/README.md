@@ -163,7 +163,7 @@ spec:
   loadBalancerIPs: true
   # Specify the Non RDMA interface
   interfaces:
-    - enp130s0f0
+    - enxb83fd248882e
   nodeSelector:
     matchLabels:
       kubernetes.io/os: linux

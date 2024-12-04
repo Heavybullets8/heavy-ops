@@ -8,7 +8,7 @@ spec:
   loadBalancerIPs: true
   # NOTE: interfaces might need to be set if you have more than one active NIC on your hosts
   interfaces:
-    - enp130s0f0
+    - enxb83fd248882e
   nodeSelector:
     matchLabels:
       kubernetes.io/os: linux
