@@ -44,8 +44,6 @@ operator:
   replicas: 1
 dashboards:
   enabled: true
-  annotations:
-    grafana_folder: Cilium
 rollOutCiliumPods: true
 routingMode: native
 securityContext:
