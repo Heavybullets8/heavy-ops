@@ -24,6 +24,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 275Gi
+      VOLSYNC_CAPACITY: 300Gi
       GATUS_SUBDOMAIN: cloud
       VOLSYNC_RECORD_SIZE: 1m
