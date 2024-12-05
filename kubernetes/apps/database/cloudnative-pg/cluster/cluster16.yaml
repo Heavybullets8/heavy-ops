@@ -17,15 +17,18 @@ spec:
   postgresql:
     parameters:
       max_connections: "400"
-      shared_buffers: 256MB
+      shared_buffers: 512MB
   nodeMaintenanceWindow:
     inProgress: false
     reusePVC: true
   resources:
     requests:
       cpu: 500m
+      memory: 4Gi
+      hugepages-2Mi: 2Gi
     limits:
       memory: 4Gi
+      hugepages-2Mi: 2Gi
   monitoring:
     enablePodMonitor: true
   backup:
