@@ -18,6 +18,7 @@ spec:
     parameters:
       max_connections: "400"
       shared_buffers: 512MB
+      huge_pages: "on"
   nodeMaintenanceWindow:
     inProgress: false
     reusePVC: true
