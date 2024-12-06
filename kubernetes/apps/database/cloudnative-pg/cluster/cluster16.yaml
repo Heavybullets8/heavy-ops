@@ -28,7 +28,6 @@ spec:
       hugepages-2Mi: 2Gi
     limits:
       memory: 4Gi
-      # TODO: Enable once added kernel args
       hugepages-2Mi: 2Gi
   monitoring:
     enablePodMonitor: true
