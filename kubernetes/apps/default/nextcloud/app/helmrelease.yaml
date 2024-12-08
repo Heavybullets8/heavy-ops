@@ -70,6 +70,12 @@ spec:
           authtype: LOGIN
           secure: ssl
 
+      lifecycle:
+        postStartCommand:
+          - "/bin/sh"
+          - "-c"
+          - "su -s /bin/sh www-data -c 'php occ db:add-missing-indices' || true"
+
       configs:
         logging.config.php: |-
           <?php
