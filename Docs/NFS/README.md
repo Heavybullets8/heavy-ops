@@ -1,4 +1,4 @@
-# NFS-RDMA Setup Guide
+# NFS-RDMA Setup Guide (ARCHIVE, I No longer use RDMA, caused too many crashes at least with RoCE)
 
 This guide explains how to enable NFS over RDMA between a Talos Linux client and a TrueNAS SCALE server. RDMA (Remote Direct Memory Access) allows for high-throughput, low-latency networking.
 
