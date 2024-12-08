@@ -11,6 +11,7 @@ spec:
     server: ${TRUENAS_IP}
     path: /mnt/tank/media/download/usenet
   mountOptions:
+    - proto=tcp
     - nconnect=8
   persistentVolumeReclaimPolicy: Delete
 ---
