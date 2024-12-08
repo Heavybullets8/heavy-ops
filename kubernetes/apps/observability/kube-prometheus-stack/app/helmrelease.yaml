@@ -100,6 +100,10 @@ spec:
       thanosServiceMonitor:
         enabled: false
       prometheusSpec:
+        image:
+          registry: quay.io
+          repository: prometheus/prometheus
+          tag: v3.0.1
         podMetadata:
           annotations:
             secret.reloader.stakater.com/reload: alertmanager-secret
@@ -114,9 +118,7 @@ spec:
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
-          - auto-gomemlimit
           - memory-snapshot-on-shutdown
-          - new-service-discovery-manager
         retention: 2d
         retentionSize: 15GB
         externalLabels:
