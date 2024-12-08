@@ -3,15 +3,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./externalsecret.yaml
   - ./helmrelease.yaml
-  # - ./pvc.yaml
   - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
 configMapGenerator:
-  - name: nzbget-configmap
+  - name: sabnzbd-configmap
     files:
       - clean.py=./scripts/clean.py
-      - hash_renamer.py=./scripts/hash_renamer.py
       - replace_for.py=./scripts/replace_for.py
 generatorOptions:
   disableNameSuffixHash: true
