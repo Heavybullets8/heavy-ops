@@ -42,6 +42,12 @@ spec:
           value: dragonfly.database.svc.cluster.local.
         - name: REDIS_HOST_PORT
           value: "6379"
+        - name: PHP_MEMORY_LIMIT
+          value: "11G"
+        - name: PHP_UPLOAD_LIMIT
+          value: "10G"
+        - name: PHP_POST_MAX_SIZE
+          value: "10G"
 
       existingSecret:
         enabled: true
