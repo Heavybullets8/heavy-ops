@@ -118,9 +118,7 @@ spec:
             subPath: incomplete
 
       media:
-        type: nfs
-        server: ${TRUENAS_IP}
-        path: /mnt/tank/media/download/usenet
+        existingClaim: nzbget-nfs
         globalMounts:
           - path: /media/download/usenet
 
