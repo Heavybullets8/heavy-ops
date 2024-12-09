@@ -19,7 +19,7 @@ background:
   brightness: 10
   opacity: 20
 
-openweathermap: { { .OPENWEATHERMAP_PROVIDERS | nindent 2 } }
+openweathermap: "{{ .OPENWEATHERMAP_PROVIDERS | nindent 2 }}"
 
 quicklaunch:
   searchDescriptions: true
