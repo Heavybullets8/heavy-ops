@@ -82,6 +82,12 @@ sync_gdrive:
     - id: 1qBC7p9K4zur5dOCf3F6VTyUROVvHQoSb # Jpalenz77
       location: /config/assets/.inputs/jpalenz77
 
+    - id: 1cqDinU27cnHf5sL5rSlfO7o_T6LSxG77 # Reitenth
+      location: /config/assets/.inputs/reitenth
+
+    - id: 1TYVIGKpSwhipLyVQQn_OJHTobM6KaokB # TheOtherGuy #1
+      location: /config/assets/.inputs/theotherguy
+
     - id: 1KJlsnMz-z2RAfNxKZp7sYP_U0SD1V6lS # MiniMyself
       location: /config/assets/.inputs/minimyself
 
@@ -149,6 +155,8 @@ poster_renamerr:
     # - Homemade (Low priority)
     - /config/assets/.inputs/tokenminal
     - /config/assets/.inputs/minimyself
+    - /config/assets/.inputs/theotherguy
+    - /config/assets/.inputs/reitenth
     - /config/assets/.inputs/jpalenz77
     - /config/assets/.inputs/mareau
     # + Homemade (Medium priority)
