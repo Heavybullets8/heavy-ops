@@ -19,7 +19,8 @@ background:
   brightness: 10
   opacity: 20
 
-openweathermap: {{ .OPENWEATHERMAP_PROVIDERS | nindent 2 }}
+providers:
+  openweathermap: "{{ .OPENWEATHERMAP_API_KEY }}"
 
 quicklaunch:
   searchDescriptions: true
