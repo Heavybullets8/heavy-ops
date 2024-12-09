@@ -21,7 +21,7 @@
       timeStyle: short
       hourCycle: h23
 
-- openweathermap: "{{ .OPENWEATHERMAP_LOCATION | nindent 4 }}"
+- openweathermap: {{ .OPENWEATHERMAP_LOCATION | nindent 4 }}
 
 - search:
     provider: duckduckgo
