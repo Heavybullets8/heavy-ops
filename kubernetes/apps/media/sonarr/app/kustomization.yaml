@@ -11,6 +11,7 @@ configMapGenerator:
   - name: sonarr-configmap
     files:
       - refresh-series.sh=./scripts/refresh-series.sh
+      - xseed.sh=./scripts/xseed.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

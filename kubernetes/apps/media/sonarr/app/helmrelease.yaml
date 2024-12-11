@@ -145,6 +145,9 @@ spec:
           - path: /scripts/refresh-series.sh
             subPath: refresh-series.sh
             readOnly: true
+          - path: /scripts/xseed.sh
+            subPath: xseed.sh
+            readOnly: true
 
       tmp:
         type: emptyDir
