@@ -47,9 +47,9 @@ spec:
                     path: /api/v2/app/version
                     port: *port
                   initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                  timeoutSeconds: 10
+                  periodSeconds: 5
+                  failureThreshold: 5
               readiness: *probes
             securityContext:
               runAsUser: 568
@@ -106,6 +106,9 @@ spec:
                   httpGet:
                     path: /
                     port: 9999
+                  timeoutSeconds: 10
+                  periodSeconds: 30
+                  failureThreshold: 5
               startup:
                 enabled: true
                 custom: true
