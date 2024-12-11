@@ -36,7 +36,7 @@ XSEED_HOST=cross-seed.media.svc.cluster.local
 XSEED_PORT=80
 LOG_FILE=${LOG_FILE:-/config/xseed.log}
 LOGID_FILE=${LOGID_FILE:-/config/xseed-id.log}
-XSEED_APIKEY=${XSEED_APIKEY:-}
+CROSS_SEED_API_KEY=${CROSS_SEED_API_KEY:-}
 
 ### END OF CONFIGURATION SECTION
 
@@ -79,8 +79,8 @@ cross_seed_request() {
     local endpoint="$1"
     local data="$2"
     local headers=(-X POST "http://$XSEED_HOST:$XSEED_PORT/api/$endpoint" --data-urlencode "$data")
-    if [ -n "$XSEED_APIKEY" ]; then
-        headers+=(-H "X-Api-Key: $XSEED_APIKEY")
+    if [ -n "$CROSS_SEED_API_KEY" ]; then
+        headers+=(-H "X-Api-Key: $CROSS_SEED_API_KEY")
     fi
     response=$(curl --silent --output /dev/null --write-out "%{http_code}" "${headers[@]}")
 
