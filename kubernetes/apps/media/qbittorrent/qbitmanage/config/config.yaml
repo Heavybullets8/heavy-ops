@@ -30,18 +30,15 @@ directory:
   recycle_bin: /media/download/torrent/.RecycleBin
   torrents_dir: /qbittorrent/qBittorrent/BT_backup
   orphaned_dir: /media/download/torrent/orphaned_data
-  cross_seed:
 
 cat:
-  series: /media/complete/series
-  movies: /media/complete/movies
-  books: /media/complete/books
-  ignore: /media/complete/ignore
-  imported: /media/complete/imported
-  manga: /media/complete/manga
-  manual: /media/complete/manual
-  movies.cross-seed: /media/complete/cross-seed
-  series.cross-seed: /media/complete/cross-seed
+  series: /media/download/torrent/categories/series
+  movies: /media/download/torrent/categories/movies
+  books: /media/download/torrent/categories/books
+  imported: /media/download/torrent/categories/imported
+  manga: /media/download/torrent/categories/manga
+  manual: /media/download/torrent/categories/manual
+
 
 tracker: {{ .QBITMANAGE_TRACKERS | nindent 2 }}
 
