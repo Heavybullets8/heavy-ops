@@ -39,9 +39,9 @@ spec:
               UN_WEBSERVER_LOG_FILE: /logs/webserver.log
               UN_ACTIVITY: true
               UN_SONARR_0_URL: http://sonarr.media.svc.cluster.local
-              UN_SONARR_0_PATHS_0: /media/download/torrent/complete/series
+              UN_SONARR_0_PATHS_0: /media/download/torrent/categories/series
               UN_RADARR_0_URL: http://radarr.media.svc.cluster.local
-              UN_RADARR_0_PATHS_0: /media/download/torrent/complete/movies
+              UN_RADARR_0_PATHS_0: /media/download/torrent/categories/movies
               UN_WEBHOOK_0_NAME: notifiarr
               UN_WEBHOOK_0_IGNORE_SSL: "false"
               UN_WEBHOOK_0_SILENT: "false"
@@ -97,6 +97,6 @@ spec:
       media:
         type: nfs
         server: ${TRUENAS_IP}
-        path: /mnt/tank/media/download/torrent/complete
+        path: /mnt/tank/media/download/torrent/categories
         globalMounts:
-          - path: /media/download/torrent/complete
+          - path: /media/download/torrent/categories
