@@ -47,9 +47,9 @@ spec:
                     path: /api/v2/app/version
                     port: *port
                   initialDelaySeconds: 0
-                  timeoutSeconds: 10
-                  periodSeconds: 5
-                  failureThreshold: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
               readiness: *probes
             securityContext:
               runAsUser: 568
@@ -82,7 +82,8 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.39.1
             env:
-              DNS_ADDRESS: "127.0.0.2"
+              # TODO: Re-enable later
+              # DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
               FIREWALL_VPN_INPUT_PORTS: 52885
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
@@ -106,9 +107,6 @@ spec:
                   httpGet:
                     path: /
                     port: 9999
-                  timeoutSeconds: 10
-                  periodSeconds: 30
-                  failureThreshold: 5
               startup:
                 enabled: true
                 custom: true
@@ -129,11 +127,12 @@ spec:
               limits:
                 kernel.org/tun: 1
 
-          dnsdist:
-            image:
-              repository: docker.io/powerdns/dnsdist-19
-              tag: 1.9.7
-            restartPolicy: Always
+          # TODO: Re-enable later
+          # dnsdist:
+          #   image:
+          #     repository: docker.io/powerdns/dnsdist-19
+          #     tag: 1.9.7
+          #   restartPolicy: Always
 
     defaultPodOptions:
       terminationGracePeriodSeconds: 300
