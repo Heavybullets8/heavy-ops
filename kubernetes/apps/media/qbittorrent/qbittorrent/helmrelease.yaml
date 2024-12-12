@@ -84,7 +84,6 @@ spec:
             env:
               DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
-              FIREWALL_VPN_INPUT_PORTS: 52885
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80,8888,9999 # 80: WebUI, 8888: Proxy Connections, 9999 Kube Probes
               HTTPPROXY: "on"
