@@ -57,6 +57,13 @@ recyclebin:
   save_torrents: false
   split_by_category: false
 
+share_limits:
+  noHL:
+    include_all_tags:
+      - noHL
+    max_seeding_time: 90d
+    cleanup: true
+
 orphaned:
   empty_after_x_days: 3
   exclude_patterns:
