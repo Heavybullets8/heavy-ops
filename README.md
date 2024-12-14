@@ -74,7 +74,6 @@ My network is managed using a [UniFi Dream Machine Pro Max](https://store.ui.com
 - **RAM**: 256 GB
 - **Storage**:
   - **HDDs**: 12× 18 TB WD Red Pro (configured as 2 VDEVs in RAIDZ2)
-  - **SLOG**: 2× 2 TB WD 850x SSDs
 - **Power Supply**: FSP Twins Pro 900 W
 - **Network**:
   - Mellanox X5 ADAT 25 Gb
