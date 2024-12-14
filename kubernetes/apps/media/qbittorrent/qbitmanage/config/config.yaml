@@ -60,6 +60,7 @@ recyclebin:
   empty_after_x_days: 3
   save_torrents: false
   split_by_category: false
+  max_orphaned_files_to_delete: 50
 
 orphaned:
   empty_after_x_days: 3
