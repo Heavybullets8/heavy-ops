@@ -19,6 +19,7 @@ settings:
   share_limits_filter_completed: true
   tag_nohardlinks_filter_completed: true
   cat_update_all: true
+  disable_qbt_default_share_limits: true
 
 directory:
   root_dir: /media/download/torrent
@@ -44,9 +45,12 @@ nohardlinks:
 
 share_limits:
   noHL:
+    priority: 5
     include_all_tags:
       - noHL
-    max_seeding_time: 90d
+    min_seeding_time: 90d
+    max_seeding_time: -1
+    last_active: 2d
     cleanup: true
 
 recyclebin:
