@@ -57,7 +57,6 @@ recyclebin:
 
 orphaned:
   empty_after_x_days: 3
-  max_orphaned_files_to_delete: 50
   exclude_patterns:
   - '**/.DS_Store'
   - '**/Thumbs.db'
