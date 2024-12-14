@@ -4,26 +4,22 @@ qbt:
   pass:
 
 settings:
+  force_auto_tmm: true
   force_auto_tmm_ignore_tags:
     - Upload
     - cross-seed
-  force_auto_tmm: true
   tracker_error_tag: issue
   nohardlinks_tag: noHL
   share_limits_tag: ~share_limit
-  ignoreTags_OnUpdate:
-    - noHL
-    - issue
-    - cross-seed
   share_limits_min_seeding_time_tag: MinSeedTimeNotReached
   share_limits_min_num_seeds_tag: MinSeedsNotMet
   share_limits_last_active_tag: LastActiveLimitNotReached
   cross_seed_tag: cross-seed
-  cat_update_all: true
   cat_filter_completed: true
   share_limits_filter_completed: true
   tag_nohardlinks_filter_completed: true
-  force_retag_all: false
+  cat_update_all: true
+
 directory:
   root_dir: /media/download/torrent
   remote_dir: /media/download/torrent
@@ -39,23 +35,12 @@ cat:
   manga: /media/download/torrent/categories/manga
   manual: /media/download/torrent/categories/manual
 
-
 tracker: {{ .QBITMANAGE_TRACKERS | nindent 2 }}
 
-
 nohardlinks:
-  - movies:
+  - imported:
       exclude_tags:
         - MaM
-  - series:
-      exclude_tags:
-        - MaM
-
-recyclebin:
-  enabled: true
-  empty_after_x_days: 3
-  save_torrents: false
-  split_by_category: false
 
 share_limits:
   noHL:
@@ -63,6 +48,12 @@ share_limits:
       - noHL
     max_seeding_time: 90d
     cleanup: true
+
+recyclebin:
+  enabled: true
+  empty_after_x_days: 3
+  save_torrents: false
+  split_by_category: false
 
 orphaned:
   empty_after_x_days: 3
@@ -92,3 +83,4 @@ webhooks:
     tag_nohardlinks: notifiarr
     share_limits: notifiarr
     cleanup_dirs: notifiarr
+
