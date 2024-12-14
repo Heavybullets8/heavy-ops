@@ -50,7 +50,6 @@ share_limits:
       - noHL
     max_ratio: 10
     min_seeding_time: 90d
-    last_active: 2d
     cleanup: true
 
 recyclebin:
