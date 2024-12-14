@@ -37,7 +37,7 @@ spec:
             env:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
-              QBT_TORRENTING_PORT: 52885
+              QBT_TORRENTING_PORT: &BT-port 51749
             probes:
               liveness: &probes
                 enabled: true
@@ -86,6 +86,7 @@ spec:
               DOT: "off"
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80,8888,9999 # 80: WebUI, 8888: Proxy Connections, 9999 Kube Probes
+              FIREWALL_VPN_INPUT_PORTS: *BT-port
               HTTPPROXY: "on"
               HTTPPROXY_LISTENING_ADDRESS: :8888
               HEALTH_SERVER_ADDRESS: :9999
