@@ -70,7 +70,6 @@ orphaned:
   - '**/@eaDir'
   - '**/*.!qB'
   - '**/*_unpackerred'
-  - '/media/download/torrent/temp/**'
 
 notifiarr:
   apikey: "{{ .NOTIFIARR_QBITMANAGE_API_KEY }}"
