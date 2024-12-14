@@ -46,10 +46,12 @@ nohardlinks:
 share_limits:
   noHL:
     priority: 5
+    exclude_any_tags:
+      - other
     include_all_tags:
       - noHL
-    min_seeding_time: 90d
-    max_seeding_time: 91d
+    max_seeding_time: 90d
+    max_ratio: 10
     cleanup: true
 
 recyclebin:
