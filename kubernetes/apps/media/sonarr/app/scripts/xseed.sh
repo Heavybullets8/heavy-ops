@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# Source from: https://github.com/bakerboy448/StarrScripts/blob/main/xseed.sh
+# Radarr: Connect -> Custom Script - - On Import Complete
+# Sonarr: Connect -> Custom Script - - On File Import AND On File Upgrade
+
 ### UPDATED FOR SEASON PACK FROM USENET SUPPORT IN
 ### CROSS SEED v6 ONLY!! v5 IS NOT SUPPORTED FOR USENET
 ### SEASON PACKS AND WILL ALWAYS FAIL TO FIND MATCHES
