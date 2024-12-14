@@ -50,6 +50,7 @@ share_limits:
       - other
     include_all_tags:
       - noHL
+    last_active: 2h
     max_seeding_time: 90d
     max_ratio: 10
     cleanup: true
