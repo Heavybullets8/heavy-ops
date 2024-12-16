@@ -29,6 +29,10 @@ spec:
     nginx:
       enabled: true
 
+    phpClientHttpsFix:
+      enabled: true
+      protocol: https
+
     nextcloud:
       extraInitContainers:
         - name: init-db
@@ -59,6 +63,7 @@ spec:
         smtpHostKey: SMTP_HOST
 
       host: cloud.${SECRET_DOMAIN}
+      containerPort: 80
 
       mail:
         enabled: true
@@ -91,9 +96,14 @@ spec:
             'trusted_proxies' => array(
               0 => '127.0.0.1',
               1 => '10.96.0.0/16',
+              2 => '10.69.0.0/16',
+            ),
+            'trusted_domains' => array(
+              0 => '127.0.0.1',
+              1 => 'cloud.${SECRET_DOMAIN}',
             ),
             'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
-          );
+          ); ?>
         ingress.config.php: |-
           <?php
           $CONFIG = array (
