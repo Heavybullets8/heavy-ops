@@ -65,7 +65,9 @@ share_limits:
     cleanup: true
 
 recyclebin:
-  enabled: true
+  # TODO: Re-enable later
+  # Need disabled for now so the 'snatches' category thats on ssds, doesnt get transfered to the HDD array
+  enabled: false
   empty_after_x_days: 3
   save_torrents: false
   split_by_category: false
