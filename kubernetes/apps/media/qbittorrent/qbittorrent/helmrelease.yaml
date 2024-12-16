@@ -205,7 +205,7 @@ spec:
                 readOnly: true
 
       # TODO: Remove once snatches are sufficient
-      temp_media:
+      tempmedia:
         type: nfs
         server: ${TRUENAS_IP}
         path: /mnt/speed/snatch
