@@ -203,3 +203,11 @@ spec:
               - path: /etc/dnsdist/dnsdist.conf
                 subPath: dnsdist.conf
                 readOnly: true
+
+      # TODO: Remove once snatches are sufficient
+      temp_media:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/speed/snatch
+        globalMounts:
+          - path: /speed/snatch
