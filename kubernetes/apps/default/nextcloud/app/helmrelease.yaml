@@ -24,6 +24,8 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    image:
+      flavor: fpm-alpine
     nginx:
       enabled: true
 
