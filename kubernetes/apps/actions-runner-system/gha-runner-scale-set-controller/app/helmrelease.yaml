@@ -5,6 +5,8 @@ kind: HelmRelease
 metadata:
   name: gha-runner-scale-set-controller
 spec:
+  driftDetection:
+    mode: enabled
   interval: 30m
   chart:
     spec:
