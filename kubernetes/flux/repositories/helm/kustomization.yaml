@@ -9,6 +9,7 @@ resources:
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
+  - ./dcgm-exporter.yaml
   - ./democratic-csi.yaml
   - ./grafana.yaml
   - ./headlamp.yaml
