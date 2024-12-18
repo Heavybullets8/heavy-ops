@@ -10,7 +10,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./komga/ks.yaml
   - ./notifiarr/ks.yaml
-  - ./omegabrr/ks.yaml
+  - ./omegabrr/ks.yaml # TODO: Remove autobrr once snatches are sufficient
   - ./plex/ks.yaml
   - ./podgrab/ks.yaml
   - ./sonarr/ks.yaml
