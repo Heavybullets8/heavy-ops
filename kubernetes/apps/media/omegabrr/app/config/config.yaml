@@ -8,14 +8,14 @@ clients:
     host: http://autobrr.media.svc.cluster.local
     apikey: ${AUTOBRR_API_KEY}
   arr:
-    - name: radarr
-      type: radarr
-      host: http://radarr.media.svc.cluster.local
-      apikey: ${RADARR_API_KEY}
-      filters: [1]
+    # - name: radarr
+    #   type: radarr
+    #   host: http://radarr.media.svc.cluster.local
+    #   apikey: ${RADARR_API_KEY}
+    #   filters: [1]
     - name: sonarr
       type: sonarr
       host: http://sonarr.media.svc.cluster.local
       apikey: ${SONARR_API_KEY}
-      filters: [2]
+      filters: [3]
       excludeAlternateTitles: true
