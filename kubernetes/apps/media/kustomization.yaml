@@ -10,6 +10,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./komga/ks.yaml
   - ./notifiarr/ks.yaml
+  - ./omegabrr/ks.yaml
   - ./plex/ks.yaml
   - ./podgrab/ks.yaml
   - ./sonarr/ks.yaml
