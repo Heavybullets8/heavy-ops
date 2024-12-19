@@ -32,12 +32,11 @@ servers:
           pods insecure
           fallthrough in-addr.arpa ip6.arpa
       - name: forward
+        parameters: ". tls://1.1.1.1 tls://1.0.0.1"
         configBlock: |-
-          . tls://1.1.1.1 tls://1.0.0.1 {
-            tls_servername cloudflare-dns.com
-            health_check 5s
-            policy random
-          }
+          tls_servername cloudflare-dns.com
+          health_check 5s
+          policy random
       - name: cache
         parameters: 30
       - name: loop
