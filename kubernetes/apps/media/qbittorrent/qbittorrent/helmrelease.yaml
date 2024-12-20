@@ -154,11 +154,11 @@ spec:
         controller: *app
         nameOverride: gluetun
         ports:
-          socksudp:
+          udp:
             enabled: true
             port: 8888
             protocol: UDP
-          sockstcp:
+          tcp:
             enabled: true
             port: 8888
             protocol: TCP
