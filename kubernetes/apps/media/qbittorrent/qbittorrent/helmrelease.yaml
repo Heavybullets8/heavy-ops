@@ -76,19 +76,6 @@ spec:
                 cpu: 10m
                 memory: 25Mi
 
-          # TODO: Remove after testing
-          netshoot:
-            image:
-              repository: nicolaka/netshoot
-              tag: v0.13
-            command: ["sleep"]
-            args: ["infinity"]
-            securityContext:
-              capabilities:
-                add:
-                  - NET_RAW
-                  - NET_ADMIN
-
         initContainers:
           gluetun:
             image:
