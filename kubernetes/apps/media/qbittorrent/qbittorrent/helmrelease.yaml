@@ -85,12 +85,15 @@ spec:
               DNS_ADDRESS: "127.0.0.2"
               DOT: "off"
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_INPUT_PORTS: 80,8888,9999 # 80: WebUI, 8888: Proxy Connections, 9999 Kube Probes
+              FIREWALL_INPUT_PORTS: 80,8388,8888,9999 # 80: WebUI, 8388: Socks Proxy, 8888: HTTP Connections, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
+              HEALTH_SERVER_ADDRESS: :9999
               HTTPPROXY: "on"
               HTTPPROXY_LISTENING_ADDRESS: :8888
-              HEALTH_SERVER_ADDRESS: :9999
               HTTPPROXY_LOG: "on"
+              SHADOWSOCKS: "on"
+              SHADOWSOCKS_LOG: "on"
+              SHADOWSOCKS_LISTENING_ADDRESS: :8388
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
@@ -153,7 +156,11 @@ spec:
         controller: *app
         nameOverride: gluetun
         ports:
-          http:
+          socks-proxy:
+            enabled: true
+            port: 8388
+          http-proxy:
+            enabled: true
             port: 8888
 
     ingress:
