@@ -14,8 +14,5 @@ configMapGenerator:
     options:
       labels:
         loki_rule: "true"
-  - name: qbittorrent-dnsdist
-    files:
-      - ./config/dnsdist.conf
 generatorOptions:
   disableNameSuffixHash: true
