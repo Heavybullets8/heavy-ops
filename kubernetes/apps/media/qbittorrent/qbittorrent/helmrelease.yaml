@@ -103,7 +103,7 @@ spec:
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
-              WIREGUARD_MTU: 1390
+              WIREGUARD_MTU: 3418
             envFrom:
               - secretRef:
                   name: torguard-secret
