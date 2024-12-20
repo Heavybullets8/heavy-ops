@@ -80,6 +80,7 @@ spec:
           netshoot:
             image:
               repository: nicolaka/netshoot
+              tag: v0.13
             command: ["sleep"]
             args: ["infinity"]
             securityContext:
