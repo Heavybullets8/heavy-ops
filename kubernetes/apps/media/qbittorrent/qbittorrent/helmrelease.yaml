@@ -155,6 +155,7 @@ spec:
         nameOverride: gluetun
         ports:
           socksudp:
+            enabled: true
             port: 8888
             protocol: UDP
           # sockstcp:
