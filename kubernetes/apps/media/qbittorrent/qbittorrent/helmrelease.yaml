@@ -159,10 +159,10 @@ spec:
             enabled: true
             port: 8888
             protocol: UDP
-          tcp:
-            enabled: true
-            port: 8888
-            protocol: TCP
+          # tcp:
+          #   enabled: true
+          #   port: 8888
+          #   protocol: TCP
 
     ingress:
       app:
