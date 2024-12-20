@@ -83,6 +83,7 @@ spec:
               tag: v3.39.1
             env:
               DOT: "off"
+              DNS_ADDRESS: 10.96.0.10
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80,8388,9999 # 80: WebUI, 8388: Socks Proxy, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
