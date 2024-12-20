@@ -84,7 +84,7 @@ spec:
             env:
               DOT: "off"
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
-              FIREWALL_INPUT_PORTS: 80,8388,8888,9999 # 80: WebUI, 8388: Socks Proxy, 9999 Kube Probes
+              FIREWALL_INPUT_PORTS: 80,8388,9999 # 80: WebUI, 8388: Socks Proxy, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
               HEALTH_SERVER_ADDRESS: :9999
               VPN_TYPE: wireguard
