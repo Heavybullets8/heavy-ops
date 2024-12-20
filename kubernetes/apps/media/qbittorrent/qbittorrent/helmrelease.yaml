@@ -87,10 +87,10 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: 10.69.0.0/16,10.96.0.0/16
               FIREWALL_INPUT_PORTS: 80,8888,9999 # 80: WebUI, 8888: Proxy Connections, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
-              HTTPPROXY: "on"
-              HTTPPROXY_LISTENING_ADDRESS: :8888
+              SHADOWSOCKS: "on"
+              SHADOWSOCKS_LISTENING_ADDRESS: :8888
               HEALTH_SERVER_ADDRESS: :9999
-              HTTPPROXY_LOG: "on"
+              SHADOWSOCKS_LOG: "on"
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
