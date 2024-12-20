@@ -153,6 +153,7 @@ spec:
       gluetun:
         controller: *app
         nameOverride: gluetun
+        type: LoadBalancer
         ports:
           udp:
             enabled: true
