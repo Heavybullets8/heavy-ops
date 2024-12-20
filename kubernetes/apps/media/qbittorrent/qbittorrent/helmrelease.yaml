@@ -91,9 +91,6 @@ spec:
               HTTPPROXY: "on"
               HTTPPROXY_LISTENING_ADDRESS: :8888
               HTTPPROXY_LOG: "on"
-              SHADOWSOCKS: "on"
-              SHADOWSOCKS_LOG: "on"
-              SHADOWSOCKS_LISTENING_ADDRESS: :8388
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
@@ -133,10 +130,18 @@ spec:
                 kernel.org/tun: 1
 
           dnsdist:
+            restartPolicy: Always
             image:
               repository: docker.io/powerdns/dnsdist-19
               tag: 1.9.8
+
+          socks5:
             restartPolicy: Always
+            image:
+              repository: serjs/go-socks5-proxy
+              tag: latest@sha256:aad36c623f16850d7cea0171d1aa79d706129191db9e270b6dfd7db6b552c734
+            env:
+              PROXY_PORT: 8388
 
     defaultPodOptions:
       terminationGracePeriodSeconds: 300
