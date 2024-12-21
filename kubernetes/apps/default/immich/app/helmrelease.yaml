@@ -31,6 +31,11 @@ spec:
       # renovate: datasource=github-releases depName=immich-app/immich
       tag: "v1.123.0"
 
+    immich:
+      persistence:
+        library:
+          existingClaim: *app
+
     server:
       ingress:
         main:
@@ -43,10 +48,6 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-
-      persistence:
-        library:
-          existingClaim: *app
 
       controllers:
         server:
