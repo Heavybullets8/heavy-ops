@@ -1,0 +1,66 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: immich
+      version: 0.9.0
+      sourceRef:
+        kind: HelmRepository
+        name: immich-charts
+        namespace: flux-system
+
+  values:
+    env:
+      TZ: ${TIMEZONE}
+      IMMICH_TRUSTED_PROXIES: 10.96.0.0/16
+      PUBLIC_IMMICH_SERVER_URL: https://photos.${SECRET_DOMAIN}
+
+      REDIS_HOSTNAME: dragonfly.database.svc.cluster.local
+      REDIS_PORT: "6379"
+      REDIS_DBINDEX: "2"
+
+      envFrom: &envFrom
+        - secretRef:
+            name: immich-db-secret
+
+    image:
+      # renovate: datasource=github-releases depName=immich-app/immich
+      tag: "v1.123.0"
+
+    server:
+      ingress:
+        main:
+          ingressClassName: external
+          annotations:
+            external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+            nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          hosts:
+            - host: "photos.${SECRET_DOMAIN}"
+              paths:
+                - path: /
+                  pathType: Prefix
+
+      persistence:
+        library:
+          # existingClaim: *app
+          type: emptyDir
+          size: 10Gi
+
+      controllers:
+        server:
+          initContainers:
+            init-db:
+              image:
+                repository: ghcr.io/onedr0p/postgres-init
+                tag: "16"
+              envFrom: *envFrom
+
+  valuesFrom:
+    - kind: Secret
+      name: immich-secret
+      valuesKey: immich.yaml
+      targetPath: immich.configuration
