@@ -3,9 +3,6 @@ kind: HelmRelease
 metadata:
   name: &app immich
 spec:
-  install:
-    disableSchemaValidation: true
-
   interval: 30m
   chart:
     spec:
@@ -49,9 +46,7 @@ spec:
 
       persistence:
         library:
-          # existingClaim: *app
-          type: emptyDir
-          size: 10Gi
+          existingClaim: *app
 
       controllers:
         server:
