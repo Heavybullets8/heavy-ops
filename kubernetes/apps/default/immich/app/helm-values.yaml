@@ -68,12 +68,15 @@ server:
 
   initContainers:
     init-db:
-      image:
-        repository: ghcr.io/onedr0p/postgres-init
-        tag: "16"
+      image: ghcr.io/onedr0p/postgres-init:16
       env:
-        INIT_POSTGRES_DBNAME: *dbName
-        INIT_POSTGRES_HOST: *dbHost
-        INIT_POSTGRES_USER: *dbUser
-        INIT_POSTGRES_PASS: *dbPass
-        INIT_POSTGRES_SUPER_PASS: "{{ .CNPG_SUPER_PASS }}"
+        - name: INIT_POSTGRES_DBNAME
+          value: *dbName
+        - name: INIT_POSTGRES_HOST
+          value: *dbHost
+        - name: INIT_POSTGRES_USER
+          value: *dbUser
+        - name: INIT_POSTGRES_PASS
+          value: *dbPass
+        - name: INIT_POSTGRES_SUPER_PASS
+          value: "{{ .CNPG_SUPER_PASS }}"
