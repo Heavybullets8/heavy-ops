@@ -15,11 +15,11 @@ spec:
 
   values:
     env:
-      TZ: ${TIMEZONE}
-      IMMICH_TRUSTED_PROXIES: 10.96.0.0/16
-      PUBLIC_IMMICH_SERVER_URL: https://photos.${SECRET_DOMAIN}
+      TZ: "${TIMEZONE}"
+      IMMICH_TRUSTED_PROXIES: "10.96.0.0/16"
+      PUBLIC_IMMICH_SERVER_URL: "https://photos.${SECRET_DOMAIN}"
 
-      REDIS_HOSTNAME: dragonfly.database.svc.cluster.local
+      REDIS_HOSTNAME: "dragonfly.database.svc.cluster.local"
       REDIS_PORT: "6379"
       REDIS_DBINDEX: "2"
 
