@@ -23,9 +23,9 @@ spec:
       REDIS_PORT: "6379"
       REDIS_DBINDEX: "2"
 
-      envFrom: &envFrom
-        - secretRef:
-            name: immich-db-secret
+    envFrom: &envFrom
+      - secretRef:
+          name: immich-db-secret
 
     image:
       # renovate: datasource=github-releases depName=immich-app/immich
