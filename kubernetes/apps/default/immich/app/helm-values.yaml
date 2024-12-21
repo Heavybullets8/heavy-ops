@@ -54,7 +54,7 @@ server:
   ingress:
     main:
       enabled: true
-      className: external
+      ingressClassName: external
       annotations:
         external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
