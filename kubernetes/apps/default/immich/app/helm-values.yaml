@@ -66,16 +66,14 @@ server:
             - path: /
               pathType: Prefix
 
-  controllers:
-    server:
-      initContainers:
-        init-db:
-          image:
-            repository: ghcr.io/onedr0p/postgres-init
-            tag: "16"
-          env:
-            INIT_POSTGRES_DBNAME: *dbName
-            INIT_POSTGRES_HOST: *dbHost
-            INIT_POSTGRES_USER: *dbUser
-            INIT_POSTGRES_PASS: *dbPass
-            INIT_POSTGRES_SUPER_PASS: "{{ .CNPG_SUPER_PASS }}"
+  initContainers:
+    init-db:
+      image:
+        repository: ghcr.io/onedr0p/postgres-init
+        tag: "16"
+      env:
+        INIT_POSTGRES_DBNAME: *dbName
+        INIT_POSTGRES_HOST: *dbHost
+        INIT_POSTGRES_USER: *dbUser
+        INIT_POSTGRES_PASS: *dbPass
+        INIT_POSTGRES_SUPER_PASS: "{{ .CNPG_SUPER_PASS }}"
