@@ -26,7 +26,7 @@ immich:
       clientSecret: "{{ .IMMICH_OAUTH_CLIENT_SECRET_PLAIN }}"
       defaultStorageQuota: 0
       enabled: true
-      issuerUrl: "https://auth.${SECRET_DOMAIN}"
+      issuerUrl: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
       mobileOverrideEnabled: false
       mobileRedirectUri: "app.immich:///oauth-callback"
       scope: "openid email profile"

@@ -121,7 +121,6 @@ identity_providers:
         client_secret: "{{ .IMMICH_OAUTH_CLIENT_SECRET_ENC }}"
         client_name: 'immich'
         public: false
-        authorization_policy: 'two_factor'
         redirect_uris:
           - 'https://photos.${SECRET_DOMAIN}.com/auth/login'
           - 'https://photos.${SECRET_DOMAIN}.com/user-settings'
