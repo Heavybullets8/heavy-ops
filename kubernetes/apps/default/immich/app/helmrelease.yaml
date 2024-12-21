@@ -62,4 +62,3 @@ spec:
     - kind: Secret
       name: immich-secret
       valuesKey: immich.yaml
-      targetPath: immich.configuration
