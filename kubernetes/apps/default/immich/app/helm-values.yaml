@@ -28,7 +28,7 @@ immich:
       enabled: true
       issuerUrl: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
       mobileOverrideEnabled: false
-      mobileRedirectUri: "app.immich:///oauth-callback"
+      mobileRedirectUri: ''
       scope: "openid email profile"
       signingAlgorithm: "RS256"
       profileSigningAlgorithm: "none"
