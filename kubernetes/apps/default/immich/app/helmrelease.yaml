@@ -13,6 +13,11 @@ spec:
         name: immich
         namespace: flux-system
 
+  values:
+    image:
+      # renovate: datasource=github-releases depName=immich-app/immich
+      tag: "v1.123.0"
+
   valuesFrom:
     - kind: Secret
       name: immich-values-secret

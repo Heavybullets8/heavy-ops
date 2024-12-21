@@ -16,10 +16,6 @@ env:
   DB_PASSWORD: &dbPass "{{ .IMMICH_POSTGRES_PASS }}"
   DB_VECTOR_EXTENSION: pgvector
 
-image:
-  # renovate: datasource=github-releases depName=immich-app/immich
-  tag: "v1.123.0"
-
 immich:
   configuration:
     oauth:
