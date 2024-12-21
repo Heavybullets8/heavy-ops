@@ -15,6 +15,7 @@ env:
   DB_USERNAME: &dbUser "{{ .IMMICH_POSTGRES_USER }}"
   DB_PASSWORD: &dbPass "{{ .IMMICH_POSTGRES_PASS }}"
   DB_VECTOR_EXTENSION: pgvector
+
 image:
   # renovate: datasource=github-releases depName=immich-app/immich
   tag: "v1.123.0"
@@ -66,6 +67,11 @@ server:
             - path: /
               pathType: Prefix
 
+  # Had to run the following commands in CNPG Primary pod to get working:
+  # `psql`
+  # `\c immich`
+  # `CREATE EXTENSION vector;`
+  # `CREATE EXTENSION earthdistance CASCADE;`
   initContainers:
     init-db:
       image: ghcr.io/onedr0p/postgres-init:16
