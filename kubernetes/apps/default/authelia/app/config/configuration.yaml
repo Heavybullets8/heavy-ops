@@ -123,8 +123,8 @@ identity_providers:
         public: false
         authorization_policy: 'two_factor'
         redirect_uris:
-          - 'https://immich.${SECRET_DOMAIN}.com/auth/login'
-          - 'https://immich.${SECRET_DOMAIN}.com/user-settings'
+          - 'https://photos.${SECRET_DOMAIN}.com/auth/login'
+          - 'https://photos.${SECRET_DOMAIN}.com/user-settings'
           - 'app.immich:///oauth-callback'
         scopes:
           - 'openid'
