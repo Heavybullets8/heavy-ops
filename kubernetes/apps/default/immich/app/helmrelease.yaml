@@ -23,10 +23,6 @@ spec:
       REDIS_PORT: "6379"
       REDIS_DBINDEX: "2"
 
-    envFrom: &envFrom
-      - secretRef:
-          name: immich-db-secret
-
     image:
       # renovate: datasource=github-releases depName=immich-app/immich
       tag: "v1.123.0"
@@ -37,6 +33,9 @@ spec:
           existingClaim: *app
 
     server:
+      envFrom: &envFrom
+        - secretRef:
+            name: immich-db-secret
       ingress:
         main:
           ingressClassName: external
