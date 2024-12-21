@@ -3,6 +3,9 @@ kind: HelmRelease
 metadata:
   name: &app immich
 spec:
+  install:
+    disableSchemaValidation: true
+
   interval: 30m
   chart:
     spec:
