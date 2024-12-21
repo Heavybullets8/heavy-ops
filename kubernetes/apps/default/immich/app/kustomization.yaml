@@ -7,3 +7,9 @@ resources:
   - ./helmrelease.yaml
   - ../../../../templates/gatus/external
   - ../../../../templates/volsync
+configMapGenerator:
+  - name: immich-values-configmap
+    files:
+      - ./helm-values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
