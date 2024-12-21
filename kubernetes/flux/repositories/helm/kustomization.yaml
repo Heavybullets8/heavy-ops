@@ -13,6 +13,7 @@ resources:
   - ./democratic-csi.yaml
   - ./grafana.yaml
   - ./headlamp.yaml
+  - ./immich.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./node-feature-discovery.yaml
