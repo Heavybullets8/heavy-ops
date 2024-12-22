@@ -96,6 +96,7 @@ spec:
                   successThreshold: 1
                   timeoutSeconds: 1
 
+    applyDefaultContainerOptionsToInitContainers: true
     defaultContainerOptions:
       env:
         # General
@@ -110,7 +111,7 @@ spec:
         DB_VECTOR_EXTENSION: pgvector
       envFrom:
         - secretRef:
-            name: authelia-db-secret
+            name: immich-secret
       resources:
         requests:
           cpu: 100m
