@@ -7,7 +7,7 @@ env:
   # Redis
   REDIS_HOSTNAME: "dragonfly.database.svc.cluster.local"
   REDIS_PORT: "6379"
-  REDIS_DBINDEX: "2"
+  REDIS_DBINDEX: "1"
 
   # Database
   DB_DATABASE_NAME: &dbName "immich"
