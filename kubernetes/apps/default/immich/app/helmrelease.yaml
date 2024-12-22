@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -6,24 +7,146 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: immich
-      version: 0.9.0
+      chart: app-template
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
-        name: immich
+        name: bjw-s
         namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
 
   values:
-    image:
-      # renovate: datasource=github-releases depName=immich-app/immich
-      tag: "v1.123.0"
+    controllers:
+      app:
+        annotations:
+          reloader.stakater.com/auto: "true"
 
-    immich:
-      persistence:
-        library:
-          existingClaim: *app
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
 
-  valuesFrom:
-    - kind: Secret
-      name: immich-values-secret
-      valuesKey: helm-values.yaml
+        containers:
+          immich-server:
+            nameOverride: immich-server
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: &tag v1.123.0
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: &server-port 2283
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: *server-port
+                  failureThreshold: 30
+                  periodSeconds: 5
+                  successThreshold: 1
+                  timeoutSeconds: 1
+
+          immich-ml:
+            nameOverride: immich-ml
+            dependsOn: immich-server
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: *tag
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: &ml-port 3003
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: *ml-port
+                  failureThreshold: 30
+                  periodSeconds: 5
+                  successThreshold: 1
+                  timeoutSeconds: 1
+
+    defaultContainerOptions:
+      env:
+        # General
+        TZ: ${TIMEZONE}
+        PUBLIC_IMMICH_SERVER_URL: https://photos.${SECRET_DOMAIN}
+        IMMICH_TRUSTED_PROXIES: 10.96.0.0/16
+        IMMICH_MACHINE_LEARNING_URL: http://127.0.0.1:3003
+        # Redis
+        REDIS_HOSTNAME: dragonfly.database.svc.cluster.local
+        REDIS_DBINDEX: "2"
+        # Database
+        DB_VECTOR_EXTENSION: pgvector
+      envFrom:
+        - secretRef:
+            name: authelia-db-secret
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 4096Mi
+
+    service:
+      app:
+        controller: app
+        ports:
+          http:
+            port: *server-port
+
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        hosts:
+          - host: photos.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      library:
+        existingClaim: *app
+        globalMounts:
+          - path: /usr/src/app/upload
+
+      cache:
+        type: emptyDir
+        medium: Memory
+        globalMounts:
+          - path: /cache
