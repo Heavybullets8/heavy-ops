@@ -21,7 +21,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: request1
+      GATUS_SUBDOMAIN: request
       GATUS_PATH: /api/v1/status
       VOLSYNC_CAPACITY: 500Mi
       VOLSYNC_RECORD_SIZE: 64k
