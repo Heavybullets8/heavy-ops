@@ -77,7 +77,6 @@ spec:
           env:
             # General
             TZ: ${TIMEZONE}
-            PUBLIC_IMMICH_SERVER_URL: https://photos.${SECRET_DOMAIN}
             IMMICH_TRUSTED_PROXIES: 10.96.0.0/16
             IMMICH_MACHINE_LEARNING_URL: http://127.0.0.1:3003
             # Redis
