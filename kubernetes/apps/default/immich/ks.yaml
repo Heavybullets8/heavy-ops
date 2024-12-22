@@ -26,5 +26,5 @@ spec:
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: photos
-      VOLSYNC_CAPACITY: 10Gi
+      VOLSYNC_CAPACITY: 100Gi
       VOLSYNC_RECORD_SIZE: 1m
