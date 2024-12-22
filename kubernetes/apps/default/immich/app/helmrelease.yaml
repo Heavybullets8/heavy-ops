@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: immich
+  name: &app immich
 spec:
   interval: 30m
   chart:
@@ -17,6 +17,11 @@ spec:
     image:
       # renovate: datasource=github-releases depName=immich-app/immich
       tag: "v1.123.0"
+
+    immich:
+      persistence:
+        library:
+          existingClaim: *app
 
   valuesFrom:
     - kind: Secret

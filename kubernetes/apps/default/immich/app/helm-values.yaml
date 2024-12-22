@@ -46,10 +46,6 @@ immich:
           username: "{{ .SMTP_USER }}"
           password: "{{ .SMTP_PASS }}"
 
-  persistence:
-    library:
-      existingClaim: immich
-
 server:
   ingress:
     main:
