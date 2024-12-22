@@ -71,30 +71,6 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
               tag: *tag
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/server/ping
-                    port: &ml-port 3003
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/server/ping
-                    port: *ml-port
-                  failureThreshold: 30
-                  periodSeconds: 5
-                  successThreshold: 1
-                  timeoutSeconds: 1
 
         applyDefaultContainerOptionsToInitContainers: true
         defaultContainerOptions:
