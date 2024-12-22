@@ -25,7 +25,7 @@ immich:
       clientId: "{{ .IMMICH_OAUTH_CLIENT_ID }}"
       clientSecret: "{{ .IMMICH_OAUTH_CLIENT_SECRET_PLAIN }}"
       defaultStorageQuota: 0
-      enabled: true
+      enabled: false # This shit just doesnt work
       issuerUrl: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
       mobileOverrideEnabled: false
       mobileRedirectUri: ''
