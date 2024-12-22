@@ -72,16 +72,16 @@
           key: "{{ .PROWLARR_API_KEY }}"
           fields: ["numberOfGrabs", "numberOfFailGrabs", "numberOfFailQueries"]
 
-    - Overseerr:
+    - Jellyseerr:
         href: https://request.${SECRET_DOMAIN}
-        icon: overseerr.png
+        icon: jellyseerr.png
         description: Requests
         namespace: media
-        app: overseerr
+        app: jellyseerr
         widget:
-          type: overseerr
-          url: http://overseerr.media.svc.cluster.local
-          key: "{{ .OVERSEERR_API_KEY }}"
+          type: jellyseerr
+          url: http://jellyseerr.media.svc.cluster.local
+          key: "{{ .JELLYSEERR_API_KEY }}"
           fields: ["available", "processing"]
 
 - Reading:

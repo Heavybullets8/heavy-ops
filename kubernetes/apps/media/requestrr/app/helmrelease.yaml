@@ -25,7 +25,7 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: overseerr
+    - name: jellyseerr
       namespace: media
     - name: openebs
       namespace: openebs-system
