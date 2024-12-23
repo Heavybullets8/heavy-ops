@@ -9,7 +9,8 @@ resources:
   - ./authelia/ks.yaml
   - ./glauth/ks.yaml
   - ./homepage/ks.yaml
-  - ./immich/ks.yaml
+  # TODO: Re-enable if upload chunking is ever enabled
+  # - ./immich/ks.yaml
   - ./nextcloud/ks.yaml
   - ./stirling-pdf/ks.yaml
   - ./theme-park/ks.yaml
