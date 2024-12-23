@@ -40,6 +40,8 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.123.0
+            env:
+              IMMICH_LOG_LEVEL: verbose
             probes:
               liveness: &probes
                 enabled: true
