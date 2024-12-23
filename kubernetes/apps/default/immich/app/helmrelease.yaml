@@ -40,8 +40,6 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.123.0
-            env:
-              IMMICH_LOG_LEVEL: verbose
             probes:
               liveness: &probes
                 enabled: true
@@ -79,6 +77,7 @@ spec:
           env:
             # General
             TZ: ${TIMEZONE}
+            IMMICH_LOG_LEVEL: verbose
             IMMICH_TRUSTED_PROXIES: 10.96.0.0/16
             IMMICH_MACHINE_LEARNING_URL: http://127.0.0.1:3003
             # Redis
