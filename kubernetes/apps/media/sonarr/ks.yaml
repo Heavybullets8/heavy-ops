@@ -21,7 +21,10 @@ spec:
         name: sonarr
         namespace: media
       patch: |-
+        apiVersion: postgresql.cnpg.io/v1
+        kind: Database
         metadata:
+          name: sonarr
           namespace: database
   prune: true
   sourceRef:
