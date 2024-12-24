@@ -1,5 +1,0 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Database
-metadata:
-  name: ${APP}
-  namespace: database

@@ -5,6 +5,6 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-  - ../../../../templates/cloudnative-pg
+
   - ../../../../templates/gatus/external
   - ../../../../templates/volsync
