@@ -15,6 +15,14 @@ spec:
     - name: external-secrets-stores
   wait: false
   path: ./kubernetes/apps/media/sonarr/app
+  patches:
+    - target:
+        kind: Database
+        name: sonarr
+        namespace: media
+      patch: |-
+        metadata:
+          namespace: database
   prune: true
   sourceRef:
     kind: GitRepository
