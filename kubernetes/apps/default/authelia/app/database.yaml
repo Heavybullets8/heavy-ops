@@ -1,9 +1,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: authelia
+  name: &app authelia
 spec:
-  name: authelia
-  owner: authelia
+  name: *app
+  owner: *app
   cluster:
     name: postgres16
