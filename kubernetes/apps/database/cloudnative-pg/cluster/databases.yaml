@@ -70,3 +70,13 @@ spec:
   cluster:
     name: postgres16
 ---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: &app jellyseerr
+spec:
+  name: *app
+  owner: *app
+  cluster:
+    name: postgres16
+---

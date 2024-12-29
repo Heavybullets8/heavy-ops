@@ -10,6 +10,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: external-secrets-stores
+    - name: volsync
   wait: false
   path: ./kubernetes/apps/media/jellyseerr/app
   prune: true
