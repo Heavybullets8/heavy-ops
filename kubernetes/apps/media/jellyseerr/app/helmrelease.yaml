@@ -122,11 +122,10 @@ spec:
         globalMounts:
           - path: /app/config/cache
 
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /app/config/logs
-
       tmp:
         type: emptyDir
         medium: Memory
+        globalMounts:
+          - path: /tmp
+          - path: /app/.next/cache
+          - path: /app/config/logs
