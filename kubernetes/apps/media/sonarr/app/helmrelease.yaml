@@ -36,6 +36,15 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: sonarr-secret
+
         containers:
           app:
             image:
@@ -52,9 +61,7 @@ spec:
               SONARR__UPDATE__BRANCH: develop
               SONARR__LOG__DBENABLED: "False"
               TZ: ${TIMEZONE}
-            envFrom:
-              - secretRef:
-                  name: sonarr-secret
+            envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
