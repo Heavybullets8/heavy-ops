@@ -1,36 +1,35 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: "3"
+version: '3'
+
+set: [pipefail]
+shopt: [globstar]
 
 vars:
-  CLUSTER: "heavy-cluster"
-  NODE: "heavy-control"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
-  CONTROLLER: "192.168.200.16"
+  CLUSTER: '{{.CLUSTER | default "main"}}'
+  CLUSTER_DIR: '{{.ROOT_DIR}}/kubernetes/{{.CLUSTER}}'
 
 env:
-  SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  KUBECONFIG: "{{.KUBERNETES_DIR}}/kubeconfig"
-  TALOS_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  TALOS_SCHEMATIC_ID:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.TALOS_SCHEMATIC_ID' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  KUBERNETES_VERSION:
-    sh: yq 'select(document_index == 1).spec.postBuild.substitute.KUBERNETES_VERSION' {{.KUBERNETES_DIR}}/apps/system-upgrade/system-upgrade-controller/ks.yaml
-  CONTROLLER:
-    sh: talosctl --context {{.CLUSTER}} config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
+  KUBECONFIG: '{{.CLUSTER_DIR}}/kubeconfig'
+  MINIJINJA_CONFIG_FILE: '{{.ROOT_DIR}}/.minijinja.toml'
+  SOPS_AGE_KEY_FILE: '{{.ROOT_DIR}}/age.key'
+  TALOSCONFIG: '{{.CLUSTER_DIR}}/talosconfig'
 
 includes:
-  bootstrap: .taskfiles/Bootstrap
-  external-secrets: .taskfiles/ExternalSecrets
-  flux: .taskfiles/Flux
-  kubernetes: .taskfiles/Kubernetes
-  talos: .taskfiles/Talos
-  volsync: .taskfiles/Volsync
+  bootstrap: .taskfiles/bootstrap
+  kubernetes: .taskfiles/kubernetes
+  talos: .taskfiles/talos
+  volsync: .taskfiles/volsync
+  workstation: .taskfiles/workstation
 
 tasks:
+
   default:
+    cmd: task --list
     silent: true
-    cmd: task -l
+
+  # Ref: https://github.com/go-task/task/issues/608
+  noop:
+    internal: true
+    silent: true
+    cmd: noop() { :; }
