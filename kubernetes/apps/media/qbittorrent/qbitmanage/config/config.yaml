@@ -60,7 +60,7 @@ share_limits:
     categories:
       - snatches
     last_active: 1m
-    max_seeding_time: 7d
+    max_seeding_time: 10d
     max_ratio: 2
     cleanup: true
 
