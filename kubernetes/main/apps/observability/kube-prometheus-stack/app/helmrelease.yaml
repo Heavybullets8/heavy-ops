@@ -118,7 +118,7 @@ spec:
         retention: 2d
         retentionSize: 15GB
         externalLabels:
-          cluster: heavy-cluster
+          cluster: main
         resources:
           requests:
             cpu: 100m

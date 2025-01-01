@@ -7,7 +7,7 @@
 - name: area/taskfile
   color: "0e8a16"
 # Clusters
-- name: cluster/heavy-cluster
+- name: cluster/main
   color: "ffc300"
 # Renovate Types
 - name: renovate/container

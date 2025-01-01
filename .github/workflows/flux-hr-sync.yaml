@@ -7,7 +7,7 @@ on:
     inputs:
       clusterName:
         description: Cluster Name
-        default: heavy-cluster
+        default: main
         required: true
       helmRepoNamespace:
         description: Helm Repository Namespace
@@ -74,7 +74,7 @@ jobs:
               repo_namespace="$(yq -r '.spec.chart.spec.sourceRef.namespace' "${f}")"
               repo_name="$(yq -r '.spec.chart.spec.sourceRef.name' "${f}")"
               flux \
-                  --context admin@heavy-cluster \
+                  --context admin@main \
                   --namespace ${repo_namespace} \
                   reconcile source helm ${repo_name}
           done
@@ -86,6 +86,6 @@ jobs:
         shell: bash
         run: |
           flux \
-              --context admin@heavy-cluster \
+              --context admin@main \
               --namespace ${{ github.event.inputs.helmRepoNamespace }} \
               reconcile source helm ${{ github.event.inputs.helmRepoName }}

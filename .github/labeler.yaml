@@ -12,6 +12,6 @@ area/taskfile:
           - ".taskfiles/**/*"
           - "Taskfile.yaml"
 # Clusters
-cluster/heavy-cluster:
+cluster/main:
   - changed-files:
       - any-glob-to-any-file: "kubernetes/**/*"
