@@ -8,10 +8,8 @@ tasks:
     desc: Apply Talos config to a node [CLUSTER=main] [IP=required]
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
-      - task: down
-      - sops exec-file --input-type yaml --output-type yaml {{.CLUSTER_DIR}}/talos/{{.IP}}.sops.yaml.j2 "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --mode={{.MODE}} --file /dev/stdin
+      - sops exec-file --input-type yaml --output-type yaml {{.CLUSTER_DIR}}/talos/{{.IP}}.sops.yaml.j2 "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --dry-run --mode={{.MODE}} --file /dev/stdin
       - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
-      - task: up
     vars:
       MODE: '{{.MODE | default "auto"}}'
     requires:
@@ -27,10 +25,8 @@ tasks:
     desc: Upgrade Talos on a single node [CLUSTER=main] [IP=required]
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
-      - task: down
       - talosctl --nodes {{.IP}} upgrade --image="factory.talos.dev/installer{{if eq .TALOS_SECUREBOOT "true"}}-secureboot{{end}}/{{.TALOS_SCHEMATIC_ID}}:$TALOS_VERSION" --timeout=10m
       - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
-      - task: up
     vars:
       TALOS_SCHEMATIC_ID:
         sh: talosctl --nodes {{.IP}} get nodeannotationspecs --output json | jq --raw-output '.spec | select(.key == "extensions.talos.dev/schematic") | .value'
@@ -50,10 +46,8 @@ tasks:
     desc: Upgrade Kubernetes across the whole cluster [CLUSTER=main] [VERSION=required]
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
-      - task: down
       - talosctl --nodes {{.TALOS_CONTROLLER}} upgrade-k8s --to $KUBERNETES_VERSION
       - talosctl health --wait-timeout=10m --server=false
-      - task: up
     vars:
       TALOS_CONTROLLER:
         sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
@@ -70,10 +64,8 @@ tasks:
   reboot-node:
     desc: Reboot Talos on a single node [CLUSTER=main] [IP=required] [MODE=default]
     cmds:
-      - task: down
       - talosctl --nodes {{.IP}} reboot --mode={{.MODE}}
       - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
-      - task: up
     vars:
       MODE: '{{.MODE | default "default"}}'
     requires:
@@ -190,19 +182,3 @@ tasks:
       vars: [CLUSTER]
     preconditions:
       - which jq talosctl
-
-  down:
-    internal: true
-    cmds:
-      - until kubectl wait cephcluster --for=jsonpath=.status.ceph.health=HEALTH_OK --timeout=10m --all --all-namespaces &>/dev/null; do sleep 5; done
-      - until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
-    preconditions:
-      - which kubectl
-
-  up:
-    internal: true
-    cmds:
-      - until kubectl wait cephcluster --for=jsonpath=.status.ceph.health=HEALTH_OK --timeout=10m --all --all-namespaces &>/dev/null; do sleep 5; done
-      - until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
-    preconditions:
-      - which kubectl
