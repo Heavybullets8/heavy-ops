@@ -7,7 +7,7 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./rbac.yaml
-  # - ../../../../../shared/templates/gatus/guarded
+  - ../../../../../shared/templates/gatus/guarded
 configMapGenerator:
   - name: homepage-configmap
     files:

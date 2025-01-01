@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
-#  - ../../../../../shared/templates/gatus/external
+  - ../../../../../shared/templates/gatus/external
   - ../../../../../shared/templates/volsync
 configMapGenerator:
   - name: plex-loki-rules
