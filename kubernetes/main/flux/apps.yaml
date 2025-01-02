@@ -20,10 +20,8 @@ spec:
     substituteFrom:
       - name: cluster-settings
         kind: ConfigMap
-        optional: true
       - name: cluster-secrets
         kind: Secret
-        optional: true
   patches:
     - patch: |-
         apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -39,10 +37,8 @@ spec:
             substituteFrom:
               - name: cluster-settings
                 kind: ConfigMap
-                optional: true
               - name: cluster-secrets
                 kind: Secret
-                optional: true
       target:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
