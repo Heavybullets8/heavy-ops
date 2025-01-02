@@ -31,7 +31,6 @@ spec:
       vaultwarden:
         annotations:
           reloader.stakater.com/auto: "true"
-        # TODO: replace once i have time to change the stupid username i chose for this db
         initContainers:
           init-db:
             image:
