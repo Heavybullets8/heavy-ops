@@ -9,7 +9,6 @@ tasks:
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
       - sops exec-file --input-type yaml --output-type yaml {{.CLUSTER_DIR}}/talos/{{.IP}}.sops.yaml.j2 "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --mode={{.MODE}} --file /dev/stdin
-      - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
     vars:
       MODE: '{{.MODE | default "auto"}}'
     requires:
@@ -26,7 +25,6 @@ tasks:
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
       - talosctl --nodes {{.IP}} upgrade --image="factory.talos.dev/installer{{if eq .TALOS_SECUREBOOT "true"}}-secureboot{{end}}/{{.TALOS_SCHEMATIC_ID}}:$TALOS_VERSION" --timeout=10m
-      - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
     vars:
       TALOS_SCHEMATIC_ID:
         sh: talosctl --nodes {{.IP}} get nodeannotationspecs --output json | jq --raw-output '.spec | select(.key == "extensions.talos.dev/schematic") | .value'
@@ -47,7 +45,6 @@ tasks:
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
       - talosctl --nodes {{.TALOS_CONTROLLER}} upgrade-k8s --to $KUBERNETES_VERSION
-      - talosctl health --wait-timeout=10m --server=false
     vars:
       TALOS_CONTROLLER:
         sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
@@ -65,7 +62,6 @@ tasks:
     desc: Reboot Talos on a single node [CLUSTER=main] [IP=required] [MODE=default]
     cmds:
       - talosctl --nodes {{.IP}} reboot --mode={{.MODE}}
-      - talosctl --nodes {{.IP}} health --wait-timeout=10m --server=false
     vars:
       MODE: '{{.MODE | default "default"}}'
     requires:

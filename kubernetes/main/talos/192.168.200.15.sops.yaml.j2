@@ -97,6 +97,7 @@ machine:
         net.core.netdev_max_backlog: "250000"
         net.ipv4.tcp_timestamps: "0"
         net.ipv4.tcp_congestion_control: bbr
+        net.ipv4.tcp_fastopen: 3
         net.ipv4.tcp_max_syn_backlog: "8192"
         net.ipv4.tcp_rmem: 4096 262144 67108864
         net.ipv4.tcp_wmem: 4096 262144 67108864
@@ -262,8 +263,8 @@ sops:
             dEFneS9QRXhZOVExellFVzRqZk1rK3MKz5yH9jNqLzopMO3ATbN23i3lJSNONkwg
             +4TFzcEwW3WZ1bpE9F7lWM0I1cRGHuz01ZvzMffEkJwp5JK3KWSFsw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-01T19:32:38Z"
-    mac: ENC[AES256_GCM,data:IxB6cLlMiT23uGi32Sj6UZ4aE5CKWUx5+fBqK8LkRfvhFfzsK+o2OoXLTPB3Umbhp9Uxwp7AOwrEVHSVp0CrX5wjGewdrOhddCCEUL52pCNhuOaGu3+hvUl2kXy9DrhlV8iRBigRs8ZW1kn1neK/t3cQ4Q/6a+kdHyr/5Enn0Zo=,iv:rEV6V/ZRvKajK+nDGJwXN06BQv0X5PSf45H+ZWvE50M=,tag:8Eo7w/OMQGUcnYpRuvlmhA==,type:str]
+    lastmodified: "2025-01-02T17:46:45Z"
+    mac: ENC[AES256_GCM,data:VGjpVZ+Dup1qPuqtbziOcPymOEs8H8zp6hieBZt1O18FiEOB6gA46u+k81cA4kx64KG0ejPyoJ+ryXNDnQgeP0GB+Yp/Uf1viaWEdOUnCs+AHkMy5AjF+CiRiigDedma9ef3ylPG5Amqt9DLoDfQRNyYOuuaAxp/Al64lhwXVMc=,iv:r1Lo30kwAOZA0NnHvfDnksupOFgN38ntbnQxbJau0gs=,tag:ZYfHTbG1aGb1Y60hldBTMA==,type:str]
     pgp: []
     encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca)$
     version: 3.9.2
