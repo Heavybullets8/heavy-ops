@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cross-seed/cross-seed
-              tag: 6.6.0@sha256:9c67a3dc12beb8c4699094fbc4cc2888ebd071712a99ff252dc28d5706fcee0a
+              tag: 6.8.2@sha256:e0cc1cdd1348c8d4ed889d8b077bf0e2a18a3ff48c6c4779e2d2ae38b5d482f4
             env:
               TZ: ${TIMEZONE}
             args: ["daemon"]
