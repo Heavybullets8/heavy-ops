@@ -11,21 +11,22 @@ resources:
   - ./coredns.yaml
   - ./dcgm-exporter.yaml
   - ./democratic-csi.yaml
+  - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./fluxcd-community.yaml
   - ./grafana.yaml
   - ./headlamp.yaml
   - ./immich.yaml
+  - ./ingress-nginx.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
-  - ./node-feature-discovery.yaml
-  - ./nvidia-plugin.yaml
   - ./metrics-server.yaml
   - ./nextcloud.yaml
+  - ./node-feature-discovery.yaml
+  - ./nvidia-plugin.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
   - ./postfinance.yaml
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-dns.yaml
-  - ./external-secrets.yaml
-  - ./ingress-nginx.yaml
