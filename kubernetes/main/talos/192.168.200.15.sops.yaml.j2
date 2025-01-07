@@ -12,8 +12,6 @@ machine:
         - 127.0.0.1
     kubelet:
         image: ghcr.io/siderolabs/kubelet:{{ ENV.KUBERNETES_VERSION }}
-        extraArgs:
-            rotate-server-certificates: "true"
         extraConfig:
             maxPods: 150
         extraMounts:
@@ -263,8 +261,8 @@ sops:
             dEFneS9QRXhZOVExellFVzRqZk1rK3MKz5yH9jNqLzopMO3ATbN23i3lJSNONkwg
             +4TFzcEwW3WZ1bpE9F7lWM0I1cRGHuz01ZvzMffEkJwp5JK3KWSFsw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-02T17:46:45Z"
-    mac: ENC[AES256_GCM,data:VGjpVZ+Dup1qPuqtbziOcPymOEs8H8zp6hieBZt1O18FiEOB6gA46u+k81cA4kx64KG0ejPyoJ+ryXNDnQgeP0GB+Yp/Uf1viaWEdOUnCs+AHkMy5AjF+CiRiigDedma9ef3ylPG5Amqt9DLoDfQRNyYOuuaAxp/Al64lhwXVMc=,iv:r1Lo30kwAOZA0NnHvfDnksupOFgN38ntbnQxbJau0gs=,tag:ZYfHTbG1aGb1Y60hldBTMA==,type:str]
+    lastmodified: "2025-01-07T22:03:13Z"
+    mac: ENC[AES256_GCM,data:cLiyzg48Fr2vHF7kVRBg6NogD+ms0+aZNmpwdCcz51v8WLeddAu0tCf/tNTsLUXIaWNkYJ1/QNnDalAVetAIq2TF6mDSUZHTFdFKWT1EhwMK62VgC2O0bLFyQGt0SXRckF8bnbXnpc3eP+cYoKW/O79rK4W1kwkTVmam2ICtMAY=,iv:xqUSaREL67N+rEspbcSNnvbZztyqHQGJjXIajAhHBXE=,tag:BbBNzFgSIExdx/eyFvLJ1Q==,type:str]
     pgp: []
     encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca)$
     version: 3.9.2
