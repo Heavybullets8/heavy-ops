@@ -9,6 +9,7 @@ tasks:
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
       - sops exec-file --input-type yaml --output-type yaml {{.CLUSTER_DIR}}/talos/{{.IP}}.sops.yaml.j2 "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --mode={{.MODE}} --file /dev/stdin
+      - talosctl --nodes {{.IP}} health
     vars:
       MODE: '{{.MODE | default "auto"}}'
     requires:
@@ -24,12 +25,11 @@ tasks:
     desc: Upgrade Talos on a single node [CLUSTER=main] [IP=required]
     dotenv: ['{{.CLUSTER_DIR}}/cluster.env']
     cmds:
-      - talosctl --nodes {{.IP}} upgrade --image="factory.talos.dev/installer{{if eq .TALOS_SECUREBOOT "true"}}-secureboot{{end}}/{{.TALOS_SCHEMATIC_ID}}:$TALOS_VERSION" --timeout=10m
+      - talosctl --nodes {{.IP}} upgrade --image="factory.talos.dev/installer/{{.TALOS_SCHEMATIC_ID}}:$TALOS_VERSION" --timeout=10m
+      - talosctl --nodes {{.IP}} health
     vars:
       TALOS_SCHEMATIC_ID:
         sh: talosctl --nodes {{.IP}} get nodeannotationspecs --output json | jq --raw-output '.spec | select(.key == "extensions.talos.dev/schematic") | .value'
-      TALOS_SECUREBOOT:
-        sh: talosctl --nodes {{.IP}} get securitystate --output=jsonpath='{.spec.secureBoot}'
     requires:
       vars: [CLUSTER, IP]
     preconditions:
@@ -62,6 +62,7 @@ tasks:
     desc: Reboot Talos on a single node [CLUSTER=main] [IP=required] [MODE=default]
     cmds:
       - talosctl --nodes {{.IP}} reboot --mode={{.MODE}}
+      - talosctl --nodes {{.IP}} health
     vars:
       MODE: '{{.MODE | default "default"}}'
     requires:

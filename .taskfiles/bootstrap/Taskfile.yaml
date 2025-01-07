@@ -24,7 +24,7 @@ tasks:
     preconditions:
       - talosctl config info
       - test -f {{.CLUSTER_DIR}}/talosconfig
-      - which ls minijinja-cli sops talosctl
+      - which jq ls minijinja-cli sops talosctl
 
   apps:
     desc: Bootstrap Apps [CLUSTER=main]
@@ -43,7 +43,6 @@ tasks:
   flux:
     desc: Bootstrap Flux [CLUSTER=main]
     cmds:
-      - kubectl apply --server-side --kustomize {{.CLUSTER_DIR}}/bootstrap/apps
       - for: { var: TEMPLATES }
         cmd: op run --env-file {{.CLUSTER_DIR}}/bootstrap/bootstrap.env --no-masking -- minijinja-cli {{.ITEM}} | kubectl apply --server-side --filename -
       - kubectl apply --server-side --kustomize {{.CLUSTER_DIR}}/flux/config
@@ -58,4 +57,4 @@ tasks:
       vars: [CLUSTER]
     preconditions:
       - op user get --me
-      - which curl flux kubectl ls op
+      - which curl flux jq kubectl ls op
