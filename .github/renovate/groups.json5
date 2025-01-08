@@ -32,6 +32,16 @@
       "separateMinorPatch": true
     },
     {
+      "description": ["Immich Group"],
+      "groupName": "Immich",
+      "matchPackageNames": ["immich-app/immich"],
+      "matchDatasources": ["github-releases"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": true
+    },
+    {
       "description": ["Talos Group"],
       "groupName": "Talos",
       "matchPackagePatterns": ["siderolabs/talosctl", "siderolabs/installer"],
