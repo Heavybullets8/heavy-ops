@@ -9,7 +9,7 @@ instance:
     - notification-controller
   sync:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
     url: "ssh://git@github.com/Heavybullets8/heavy-ops"
     ref: refs/heads/main
     path: kubernetes/main/flux/config
