@@ -14,7 +14,7 @@ spec:
     - name: external-secrets-stores
   wait: false
   path: ./kubernetes/main/apps/media/sabnzbd/app
-  prune: true
+  prune: false # Revert to true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
