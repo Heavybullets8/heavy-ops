@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
-  path: ./kubernetes/main/apps/observability/dcgm-exporter/app
+  path: ./kubernetes/apps/observability/dcgm-exporter/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

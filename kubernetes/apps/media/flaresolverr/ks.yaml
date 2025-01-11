@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   wait: false
-  path: ./kubernetes/main/apps/media/flaresolverr/app
+  path: ./kubernetes/apps/media/flaresolverr/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

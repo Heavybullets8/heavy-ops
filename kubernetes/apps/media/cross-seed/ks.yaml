@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/media/cross-seed/app
+  path: ./kubernetes/apps/media/cross-seed/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

@@ -12,7 +12,7 @@
 #       app.kubernetes.io/name: *app
 #   dependsOn:
 #     - name: external-secrets-stores
-#   path: ./kubernetes/main/apps/cert-manager/certificates/import
+#   path: ./kubernetes/apps/cert-manager/certificates/import
 #   prune: false # Revert to true
 #   sourceRef:
 #     kind: GitRepository
@@ -36,7 +36,7 @@ spec:
     # - name: certificates-import
     - name: cert-manager-issuers
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/cert-manager/certificates/export
+  path: ./kubernetes/apps/cert-manager/certificates/export
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

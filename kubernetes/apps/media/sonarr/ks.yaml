@@ -14,7 +14,7 @@ spec:
     - name: cloudnative-pg-cluster
     - name: external-secrets-stores
   wait: false
-  path: ./kubernetes/main/apps/media/sonarr/app
+  path: ./kubernetes/apps/media/sonarr/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

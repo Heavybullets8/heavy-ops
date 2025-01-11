@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   wait: false
-  path: kubernetes/main/apps/media/plex/plex
+  path: kubernetes/apps/media/plex/plex
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -39,7 +39,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: kubernetes/main/apps/media/plex/plex-auto-languages
+  path: kubernetes/apps/media/plex/plex-auto-languages
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -63,7 +63,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: kubernetes/main/apps/media/plex/kometa
+  path: kubernetes/apps/media/plex/kometa
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -88,7 +88,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: kubernetes/main/apps/media/plex/daps
+  path: kubernetes/apps/media/plex/daps
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -112,7 +112,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: kubernetes/main/apps/media/plex/new-plex-dubs
+  path: kubernetes/apps/media/plex/new-plex-dubs
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -136,7 +136,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: kubernetes/main/apps/media/plex/plex-image-cleanup
+  path: kubernetes/apps/media/plex/plex-image-cleanup
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -158,7 +158,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   wait: false
-  path: kubernetes/main/apps/media/plex/tautulli
+  path: kubernetes/apps/media/plex/tautulli
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: ./kubernetes/main/apps/media/notifiarr/app
+  path: ./kubernetes/apps/media/notifiarr/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

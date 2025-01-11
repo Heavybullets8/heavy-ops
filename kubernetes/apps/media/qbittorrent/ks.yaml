@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: ./kubernetes/main/apps/media/qbittorrent/qbittorrent
+  path: ./kubernetes/apps/media/qbittorrent/qbittorrent
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
@@ -40,7 +40,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   wait: false
-  path: ./kubernetes/main/apps/media/qbittorrent/qbitmanage
+  path: ./kubernetes/apps/media/qbittorrent/qbitmanage
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository

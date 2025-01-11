@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: dragonfly-cluster
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/default/nextcloud/app
+  path: ./kubernetes/apps/default/nextcloud/app
   prune: false # Revert to true
   sourceRef:
     kind: GitRepository
