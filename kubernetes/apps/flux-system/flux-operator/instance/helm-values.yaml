@@ -1,5 +1,8 @@
 ---
 instance:
+  distribution:
+    # renovate: datasource=github-releases depName=fluxcd/flux2
+    version: 2.4.0
   cluster:
     networkPolicy: false
   components:
@@ -9,11 +12,13 @@ instance:
     - notification-controller
   sync:
     kind: GitRepository
-    name: flux-system
     url: "ssh://git@github.com/Heavybullets8/heavy-ops"
     ref: refs/heads/main
-    path: kubernetes/flux/config
+    path: kubernetes/flux/cluster
     pullSecret: github-deploy-key
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: flux
   kustomize:
     patches:
       # Increase the number of workers and limits
