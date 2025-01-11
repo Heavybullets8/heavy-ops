@@ -11,7 +11,6 @@
     ":skipStatusChecks",
     ":timezone(America/Denver)",
     "github>heavybullets8/heavy-ops//.github/renovate/autoMerge.json5",
-    "github>heavybullets8/heavy-ops//.github/renovate/clusters.json5",
     "github>heavybullets8/heavy-ops//.github/renovate/customManagers.json5",
     "github>heavybullets8/heavy-ops//.github/renovate/grafanaDashboards.json5",
     "github>heavybullets8/heavy-ops//.github/renovate/groups.json5",
@@ -38,5 +37,5 @@
     "fileMatch": [
       "(^|/)kubernetes/.+\\.ya?ml$"
     ]
-  }
+ }
 }
