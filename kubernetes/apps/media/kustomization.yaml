@@ -2,8 +2,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # Pre Flux-Kustomizations
   - ./namespace.yaml
-
+  - ../../templates/flux
+  # Flux-Kustomizations
   - ./autobrr/ks.yaml # TODO: Remove autobrr once snatches are sufficient
   - ./cross-seed/ks.yaml
   - ./deemix/ks.yaml
@@ -22,3 +24,11 @@ resources:
   - ./prowlarr/ks.yaml
   - ./unpackerr/ks.yaml
   - ./wizarr/ks.yaml
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: NamespaceTransformer
+    metadata:
+      name: not-used
+      namespace: media
+    unsetOnly: true

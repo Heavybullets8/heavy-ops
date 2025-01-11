@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
+  - ../../templates/flux
   # Flux-Kustomizations
   - ./authelia/ks.yaml
   - ./glauth/ks.yaml
@@ -16,3 +17,11 @@ resources:
   - ./stirling-pdf/ks.yaml
   - ./theme-park/ks.yaml
   - ./vaultwarden/ks.yaml
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: NamespaceTransformer
+    metadata:
+      name: not-used
+      namespace: default
+    unsetOnly: true
