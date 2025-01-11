@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/apps/network/nginx/certificates
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -36,7 +36,7 @@ spec:
     - name: nginx-certificates
     - name: external-secrets-stores
   path: ./kubernetes/apps/network/nginx/external
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -58,7 +58,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/apps/network/nginx/internal
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
