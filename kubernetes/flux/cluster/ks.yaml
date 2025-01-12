@@ -74,5 +74,8 @@ spec:
         - op: replace
           path: /metadata/namespace
           value: database
+        - op: add
+          path: /metadata/annotations/test-patch
+          value: "working"
       target:
         kind: Database
