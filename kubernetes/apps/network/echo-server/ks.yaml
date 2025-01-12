@@ -18,19 +18,6 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
-
-  # TODO: Delete after testing
-  patches:
-    - patch: |
-        - op: add
-          path: /metadata/namespace
-          value: database
-        - op: add
-          path: /metadata/annotations/test-patch
-          value: "working"
-      target:
-        kind: Database
-
   postBuild:
     substitute:
       DB_NAME: *app

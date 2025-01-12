@@ -5,3 +5,13 @@ resources:
   - ./helmrelease.yaml
   # TODO: Delete after testing
   - ./database.yaml
+patches:
+  - patch: |
+      - op: add
+        path: /metadata/namespace
+        value: database
+      - op: add
+        path: /metadata/annotations/test-patch
+        value: "workingggg"
+    target:
+      kind: Database
