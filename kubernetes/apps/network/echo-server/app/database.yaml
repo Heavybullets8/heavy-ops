@@ -3,8 +3,6 @@ kind: Database
 metadata:
   name: &name "${DB_NAME}"
   namespace: database
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: Merge
 spec:
   cluster:
     name: postgres16

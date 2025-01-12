@@ -21,18 +21,17 @@ spec:
 
   # TODO: Delete after testing
   patches:
-    - patch: |-
-        apiVersion: postgresql.cnpg.io/v1
-        kind: Database
-        metadata:
-          name: echo-server
-          annotations:
-            patch-test: "applied"
+    - patch: |
+        - op: replace
+          path: /metadata/namespace
+          value: database
+        - op: add
+          path: /metadata/annotations/patch-test
+          value: "applied"
       target:
         kind: Database
         name: echo-server
         namespace: network
-
 
   postBuild:
     substitute:
