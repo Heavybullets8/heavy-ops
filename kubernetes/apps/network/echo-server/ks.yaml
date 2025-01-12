@@ -26,12 +26,12 @@ spec:
         kind: Database
         metadata:
           name: echo-server
-          namespace: database
-        annotations:
-          patch-test: "applied"
+          annotations:
+            patch-test: "applied"
       target:
         kind: Database
         name: echo-server
+        namespace: network
 
 
   postBuild:
