@@ -69,3 +69,11 @@ spec:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
         labelSelector: substitution.flux.home.arpa/disabled notin (true)
+    # TODO: Probably wont work. probably gonna have to delete this. ugh.
+    - patch: |-
+        apiVersion: postgresql.cnpg.io/v1
+        kind: Database
+        metadata:
+          namespace: database
+      target:
+        kind: Database
