@@ -45,7 +45,7 @@ instance:
                   - name: manager
                     resources:
                       limits:
-                        memory: 4Gi
+                        memory: 5Gi
         target:
           kind: Deployment
           name: (kustomize-controller|helm-controller|source-controller)
@@ -69,7 +69,7 @@ instance:
       - patch: |
           - op: add
             path: /spec/template/spec/containers/0/args/-
-            value: --helm-cache-max-size=10
+            value: --helm-cache-max-size=35
           - op: add
             path: /spec/template/spec/containers/0/args/-
             value: --helm-cache-ttl=60m
@@ -94,3 +94,12 @@ instance:
         target:
           kind: Deployment
           name: helm-controller
+      # Only clone when HEAD changed
+      # Ref: https://fluxcd.io/flux/components/source/options/#feature-gates
+      - patch: |
+          - op: add
+            path: /spec/template/spec/containers/0/args/-
+            value: --feature-gates=OptimizedGitClones=true
+        target:
+          kind: Deployment
+          name: source-controller
