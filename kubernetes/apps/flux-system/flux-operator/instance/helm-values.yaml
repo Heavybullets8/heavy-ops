@@ -94,12 +94,3 @@ instance:
         target:
           kind: Deployment
           name: helm-controller
-      # Only clone when HEAD changed
-      # Ref: https://fluxcd.io/flux/components/source/options/#feature-gates
-      - patch: |
-          - op: add
-            path: /spec/template/spec/containers/0/args/-
-            value: --feature-gates=OptimizedGitClones=true
-        target:
-          kind: Deployment
-          name: source-controller
