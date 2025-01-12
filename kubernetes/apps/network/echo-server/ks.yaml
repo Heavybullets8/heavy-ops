@@ -22,7 +22,7 @@ spec:
   # TODO: Delete after testing
   patches:
     - patch: |
-        - op: replace
+        - op: add
           path: /metadata/namespace
           value: database
         - op: add
