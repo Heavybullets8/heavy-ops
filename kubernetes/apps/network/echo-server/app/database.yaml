@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: &name "${DB_NAME}"
+  namespace: database
+  annotations:
+    kustomize.toolkit.fluxcd.io/ssa: Merge
+spec:
+  cluster:
+    name: postgres16
+  name: *name
+  owner: *name

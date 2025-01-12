@@ -17,3 +17,7 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
+  # TODO: Delete after testing
+  postBuild:
+    substitute:
+      DB_NAME: *app
