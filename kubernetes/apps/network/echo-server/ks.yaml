@@ -26,12 +26,10 @@ spec:
           path: /metadata/namespace
           value: database
         - op: add
-          path: /metadata/annotations/patch-test
-          value: "applied"
+          path: /metadata/annotations/test-patch
+          value: "working"
       target:
         kind: Database
-        name: echo-server
-        namespace: network
 
   postBuild:
     substitute:
