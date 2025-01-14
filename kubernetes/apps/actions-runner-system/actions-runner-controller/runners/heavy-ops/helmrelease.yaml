@@ -59,6 +59,8 @@ spec:
       namespace: actions-runner-system
     template:
       spec:
+        securityContext:
+          fsGroup: 1001
         containers:
           - name: runner
             image: ghcr.io/onedr0p/actions-runner:2.321.0@sha256:a7539dc157f3f0129f49459826576ab53a529580916bb8a09a395e61e38354c0
