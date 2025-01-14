@@ -6,7 +6,6 @@ metadata:
   name: kube-prometheus-stack
 spec:
   interval: 30m
-  timeout: 15m
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -26,24 +25,35 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: prometheus-operator-crds
+    - name: kube-prometheus-stack-crds
       namespace: observability
     - name: openebs
       namespace: openebs-system
+
   values:
     crds:
       enabled: false
     cleanPrometheusOperatorObjectNames: true
+
     alertmanager:
       ingress:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: external
         hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix
+        annotations: &annotations
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
       alertmanagerSpec:
-        replicas: 1
-        useExistingSecret: true
-        configSecret: alertmanager-secret
+        alertmanagerConfiguration:
+          name: alertmanager
+          global:
+            resolveTimeout: 5m
+        externalUrl: https://alertmanager.${SECRET_DOMAIN}
         storage:
           volumeClaimTemplate:
             spec:
@@ -51,88 +61,64 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          # Drop high cardinality labels
-          - action: labeldrop
-            regex: (uid)
-          - action: labeldrop
-            regex: (id|name)
-          - action: drop
-            sourceLabels: ["__name__"]
-            regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
+
     kubeApiServer:
-      enabled: true
       serviceMonitor:
-        metricRelabelings:
-          # Drop high cardinality labels
-          - action: drop
-            sourceLabels: ["__name__"]
-            regex: (apiserver|etcd|rest_client)_request(|_sli|_slo)_duration_seconds_bucket
-          - action: drop
-            sourceLabels: ["__name__"]
-            regex: (apiserver_response_sizes_bucket|apiserver_watch_events_sizes_bucket)
-    kubeControllerManager:
-      enabled: true
-      endpoints: ["192.168.200.16"]
-    kubeEtcd:
-      enabled: true
-      endpoints: ["192.168.200.16"]
+        selector:
+          k8s-app: kube-apiserver
+
     kubeScheduler:
-      enabled: true
-      endpoints: ["192.168.200.16"]
+      service:
+        selector:
+          k8s-app: kube-scheduler
+
+    kubeControllerManager: &kubeControllerManager
+      service:
+        selector:
+          k8s-app: kube-controller-manager
+
+    kubeEtcd:
+      <<: *kubeControllerManager # etcd runs on control plane nodes
+
     kubeProxy:
       enabled: false
+
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: external
         hosts: ["prometheus.${SECRET_DOMAIN}"]
         pathType: Prefix
-      thanosService:
-        enabled: false
-      thanosServiceMonitor:
-        enabled: false
+        annotations: *annotations
+
       prometheusSpec:
-        image:
-          registry: quay.io
-          repository: prometheus/prometheus
-          tag: v3.1.0
-        podMetadata:
-          annotations:
-            secret.reloader.stakater.com/reload: alertmanager-secret
-        replicas: 1
-        replicaExternalLabelName: __replica__
-        scrapeInterval: 1m # Must match interval in Grafana Helm chart
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
           - memory-snapshot-on-shutdown
-        retention: 2d
-        retentionSize: 15GB
-        externalLabels:
-          cluster: main
+        retention: 14d
+        retentionSize: 50GB
         resources:
           requests:
             cpu: 100m
           limits:
-            memory: 1500Mi
+            memory: 2000Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: openebs-hostpath
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 50Gi
+
     nodeExporter:
       enabled: true
+
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
@@ -144,8 +130,7 @@ spec:
               replacement: $1
               sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
-    kubeStateMetrics:
-      enabled: true
+
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
       metricLabelsAllowlist:
@@ -161,11 +146,39 @@ spec:
               replacement: $1
               sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
+
     grafana:
       enabled: false
       forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          multicluster:
-            etcd:
-              enabled: true
+
+    additionalPrometheusRulesMap:
+      dockerhub-rules:
+        groups:
+          - name: dockerhub
+            rules:
+              - alert: DockerhubRateLimitRisk
+                annotations:
+                  summary: Kubernetes cluster Dockerhub rate limit risk
+                expr: count(time() - container_last_seen{image=~"(docker.io).*",container!=""} < 30) > 100
+                labels:
+                  severity: critical
+      oom-rules:
+        groups:
+          - name: oom
+            rules:
+              - alert: OomKilled
+                annotations:
+                  summary: Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }} times in the last 10 minutes.
+                expr: (kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1
+                labels:
+                  severity: critical
+      zfs-rules:
+        groups:
+          - name: zfs
+            rules:
+              - alert: ZfsUnexpectedPoolState
+                annotations:
+                  summary: ZFS pool {{$labels.zpool}} on {{$labels.instance}} is in a unexpected state {{$labels.state}}
+                expr: node_zfs_zpool_state{state!="online"} > 0
+                labels:
+                  severity: critical
