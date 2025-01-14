@@ -71,23 +71,26 @@ spec:
       service:
         selector:
           k8s-app: kube-scheduler
-        ipDualStack:
-          enabled: false
+        ipFamilyPolicy: SingleStack
+        ipFamilies:
+          - IPv4
 
     kubeControllerManager: &kubeControllerManager
       service:
         selector:
           k8s-app: kube-controller-manager
-        ipDualStack:
-          enabled: false
+        ipFamilyPolicy: SingleStack
+        ipFamilies:
+          - IPv4
 
     kubeEtcd:
       <<: *kubeControllerManager # etcd runs on control plane nodes
       service:
         selector:
           k8s-app: kube-etcd
-        ipDualStack:
-          enabled: false
+        ipFamilyPolicy: SingleStack
+        ipFamilies:
+          - IPv4
 
     kubeProxy:
       enabled: false
