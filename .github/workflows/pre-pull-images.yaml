@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: ["main"]
     paths:
-      - kubernetes/**
+      - kubernetes/apps/**
+      - kubernetes/flux/**
+      - kubernetes/templates/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -78,7 +80,7 @@ jobs:
   pre-pull-images:
     if: ${{ needs.compare-images.outputs.images != '[]' }}
     name: Pre-pull Images
-    runs-on: ["gha-runner-scale-set"]
+    runs-on: ["heavy-ops-runner"]
     needs: ["compare-images"]
     strategy:
       matrix:
