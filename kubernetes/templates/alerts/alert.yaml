@@ -24,6 +24,6 @@ spec:
   exclusionList:
     - "error.*lookup github\\.com"
     - "error.*lookup raw\\.githubusercontent\\.com"
-    - "dial.*tcp.*timeout"
+    - ".*ssh://git@github.com.*connection timed out"
     - "waiting.*socket"
   suspend: false
