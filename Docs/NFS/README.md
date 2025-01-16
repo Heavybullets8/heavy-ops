@@ -173,4 +173,4 @@ spec:
 
 - [NVIDIA Enterprise Support: How to Configure NFS over RDMA (RoCE)](https://enterprise-support.nvidia.com/s/article/howto-configure-nfs-over-rdma--roce-x)
 
-  **Note:** The client module on Talos is `rdma_rxe`, which differs from the documentation. Ensure you use `rdma_rxe` for compatibility.
+  **Note:** The documentation is a bit outdated, ignore the instructions regarding the module loading on the client, as the module is either deprecated or included in the kernel now. You should not have to load any additional modules. 
