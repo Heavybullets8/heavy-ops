@@ -8,7 +8,7 @@ tasks:
     desc: Apply Talos config to a node [IP=required]
     dotenv: ['{{.BOOTSTRAP_DIR}}/.cluster.env']
     cmds:
-      - sops exec-file --input-type yaml --output-type yaml {{.BOOTSTRAP_DIR}}/talos/{{.IP}}.sops.yaml.j2 "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --mode={{.MODE}} --file /dev/stdin
+      - sops exec-file --input-type yaml --output-type yaml {{.BOOTSTRAP_DIR}}/talos/{{.IP}}.sops.yaml "minijinja-cli {}" | talosctl --nodes {{.IP}} apply-config --mode={{.MODE}} --file /dev/stdin
       - talosctl --nodes {{.IP}} health
     vars:
       MODE: '{{.MODE | default "auto"}}'
@@ -17,7 +17,7 @@ tasks:
     preconditions:
       - talosctl --nodes {{.IP}} get machineconfig
       - test -f {{.BOOTSTRAP_DIR}}/.cluster.env
-      - test -f {{.BOOTSTRAP_DIR}}/talos/{{.IP}}.sops.yaml.j2
+      - test -f {{.BOOTSTRAP_DIR}}/talos/{{.IP}}.sops.yaml
       - test -f {{.CLUSTER_DIR}}/talosconfig
       - which minijinja-cli sops talosctl
 

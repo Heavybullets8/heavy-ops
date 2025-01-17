@@ -1,24 +1,23 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: '3'
+version: "3"
 
 tasks:
-
   talos:
     desc: Bootstrap Talos
-    dotenv: ['{{.BOOTSTRAP_DIR}}/.cluster.env']
+    dotenv: ["{{.BOOTSTRAP_DIR}}/.cluster.env"]
     cmds:
       - for: { var: TALOS_NODES }
         cmd: >
           sops exec-file --input-type yaml --output-type yaml {{.ITEM}} "minijinja-cli {}"
-          | talosctl --nodes {{base .ITEM | replace ".sops.yaml.j2" ""}} apply-config --insecure --file /dev/stdin
+          | talosctl --nodes {{base .ITEM | replace ".sops.yaml" ""}} apply-config --insecure --file /dev/stdin
       - until talosctl --nodes {{.TALOS_CONTROLLER}} bootstrap; do sleep 5; done
       - talosctl kubeconfig --nodes {{.TALOS_CONTROLLER}} --force --force-context-name main {{.CLUSTER_DIR}}
     vars:
       TALOS_CONTROLLER:
         sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1
       TALOS_NODES:
-        sh: ls {{.BOOTSTRAP_DIR}}/talos/*.j2
+        sh: ls {{.BOOTSTRAP_DIR}}/talos/*.yaml
     preconditions:
       - talosctl config info
       - test -f {{.CLUSTER_DIR}}/talosconfig
@@ -29,12 +28,12 @@ tasks:
     prompt: Bootstrap apps into the Talos cluster?
     cmds:
       - until kubectl wait nodes --for=condition=Ready=False --all --timeout=10m; do sleep 5; done
-      - op run --env-file {{.BOOTSTRAP_DIR}}/.secrets.env --no-masking -- minijinja-cli {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml.j2 | kubectl apply --server-side --filename -
+      - op run --env-file {{.BOOTSTRAP_DIR}}/.secrets.env --no-masking -- minijinja-cli {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml | kubectl apply --server-side --filename -
       - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
     env:
       FLUX_GITHUB_PUBLIC_KEYS:
         sh: curl -fsSL https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
-      MODEL: '{{.MODEL}}'
+      MODEL: "{{.MODEL}}"
       NODE_COUNT:
         sh: talosctl config info --output json | jq --raw-output '.nodes | length'
       VAULT: kubernetes
@@ -45,5 +44,5 @@ tasks:
       - talosctl config info
       - test -f {{.CLUSTER_DIR}}/talosconfig
       - test -f {{.BOOTSTRAP_DIR}}/apps/helmfile.yaml
-      - test -f {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml.j2
+      - test -f {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml
       - which curl jq helmfile kubectl op talosctl
