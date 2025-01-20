@@ -73,6 +73,11 @@ spec:
     persistence:
       config:
         existingClaim: *app
+        globalMounts:
+          - path: /config
+            subPath: config
+          - path: /cross-seeds
+            subPath: cross-seeds
 
       secret-file:
         type: secret
@@ -95,3 +100,4 @@ spec:
         path: /mnt/tank/media
         globalMounts:
           - path: /media
+
