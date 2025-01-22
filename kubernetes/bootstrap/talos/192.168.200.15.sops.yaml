@@ -2,267 +2,268 @@ version: v1alpha1
 debug: false
 persist: true
 machine:
-    type: controlplane
-    token: ENC[AES256_GCM,data:BKlXdWw3Ws72yDqqHZprbfZrlS+W8nE=,iv:CjgWpHWdVuvxK8KpzmsEVuJ77jMXMcEVUfD+RhvJ1eE=,tag:f+loksgNa2R5yzlcbGv7lQ==,type:str]
-    ca:
-        crt: ENC[AES256_GCM,data:rUFIToxYZBfz+j+QztbBBHjW5TOVfTxQhZOGbau3KO+toLSnFhmXmKGMOrpmy4jHoy9z4lSb/PcIHcIFnBE+xl7ZWUK3rfCZlDJoy45UuKqGi+hbqq9KWwW5Wz64IFnGA9soCV5s8ZeuDzTN+vai8tSrygVFYnLnTvFgAJgzSloHvJ8nKDLpPWbVDYGxp+/04oEG8TKVDgYRWpJpTQUB6hYhanv2TIvcLFs+j6qhxY7oPtjF4YECshFufvMLteQ6GNGm1shYqIjloHEdvud0uwMPfmrriT1jSvJgluhFnvVxeFPDFy+L9+droCv9o0Rp53cvQLPlFvdG1YctVRU5Tx+0VSwjtGw8cEU+4O8lkGHQkyNnRq8qvpNer35Y8W7Jvw1bGg3vmMLT0MaVpIAj7AzE3svsdy+HPl6fwb7MYsR0dNAtVyy2M3+wRDObTTT9pJD3pmApnvo9NWbFFtThNE9a5nNtdLSSAMyYmUcpVDDFF1JdYqiYnaXE4BzywziRwcdYAH2Hr6kDlG4wCTNfnm2mmabiMrvbC4WI9TGvGBrbkq1lwjVThokmp/phvCqiJoTOTeGLMYkDEWx3MTVKwxMosSeJ4vpwpOf8cS9u+8mct6al8MLFMKV3stLoliSXVXdTAVN2+/LzP/iEt2ShqnOGuP2BK0MKL6YaoagQO71MN9uPukkCpCrjdHrV0kWHkgWpttQM4yVgkdCSndeCFmNEjtm8b/MijNbO2wF2ux262qQrNrVIhJ7vYqJ3Pi+unJBgPW/9/YqnhB9I0DQzyWhfYtMJgtsWqtpuZd7U0TeYM50ZhwBecWyl3X0UnAIZ9f3FgEHCA+8V9opqm1VuxCe8uWxYc6a73kATXC4TAZNp//cX,iv:LOljSvapj3itp6tdRhbu6dyGsIhXGXtUlzdHg5qQCXA=,tag:dQ8KW+GuIwIxiJgk5jZ62A==,type:str]
-        key: ENC[AES256_GCM,data:7KLxwxAzmS94QdAuJodzHHbLQeDobofhuE6eCmutoX+98p31hb8G9UHMfG8ewZcuUc+hH0NAuVYhmismR4njPSzKNEE/cZzeuPi2el/X6rXNBkB6SJT5rMzTL2WGGOAwsscHeDUw/5nwDcpFSlfWEFeaM4b9cmmPSBNnQc78j5RCoHHwlNH7N7Tk7wSh/qsVASVXdtTtsV1s4xRtD//AkjKuA95IR0ISLrDt7avstkcM2iJJ,iv:I79uMY2qdtOumg9rMt4MJhbskzC6cvTc18O+PJCDe6A=,tag:K7FM8styVcufVAv4bG1VOA==,type:str]
-    certSANs:
-        - 192.168.200.16
-        - 127.0.0.1
-    kubelet:
-        image: ghcr.io/siderolabs/kubelet:{{ ENV.KUBERNETES_VERSION }}
-        extraConfig:
-            maxPods: 150
-        extraMounts:
-            - destination: /var/openebs/local
-              type: bind
-              source: /var/openebs/local
-              options:
-                - bind
-                - rshared
-                - rw
-        defaultRuntimeSeccompProfileEnabled: true
-        nodeIP:
-            validSubnets:
-                - 192.168.200.0/23
-        disableManifestsDirectory: true
-    kernel:
-        modules:
-            - name: nvidia
-            - name: nvidia_uvm
-            - name: nvidia_drm
-            - name: nvidia_modeset
-            - name: zfs
-    network:
-        hostname: heavy-control
-        interfaces:
-            # Outbound
-            - deviceSelector:
-                hardwareAddr: b8:3f:d2:48:88:2e
-              # Max XDP MTU
-              mtu: 3498
-              dhcp: true
-              vip:
-                ip: 192.168.200.16
-            # Direct Connect to TrueNAS
-            - deviceSelector:
-                hardwareAddr: b8:3f:d2:48:88:2f
-              addresses:
-                - 10.10.10.1/30
-              # Jumbo Frames
-              mtu: 9000
-              dhcp: false
-        disableSearchDomain: true
-    install:
-        diskSelector:
-            model: INTEL SSDPE21D960GA
-        image: factory.talos.dev/installer/c5cc6a0c0509730099ac813644b1b0c5c5d47f26688a23cbcd9a93a05b5763c6:{{ ENV.TALOS_VERSION }}
-        wipe: false
-        extraKernelArgs:
-            - talos.platform=metal
-            - apparmor=0
-            - security=none
-            - init_on_alloc=0
-            - init_on_free=0
-    files:
-        - op: create
-          path: /etc/cri/conf.d/20-customization.part
-          content: |
-            [plugins."io.containerd.cri.v1.images"]
-            discard_unpacked_layers = false
-        - op: overwrite
-          path: /etc/nfsmount.conf
-          permissions: 420
-          content: |
-            [ NFSMount_Global_Options ]
-            nconnect=8
-          #   content: |
-          #     [ NFSMount_Global_Options ]
-          #     proto=rdma
-          #     port=20049
-    sysctls:
-        fs.inotify.max_queued_events: "65536"
-        fs.inotify.max_user_instances: "8192"
-        fs.inotify.max_user_watches: "1048576"
-        net.core.bpf_jit_harden: "1"
-        net.core.default_qdisc: fq
-        net.core.rmem_max: "67108864"
-        net.core.wmem_max: "67108864"
-        net.core.rmem_default: "67108864"
-        net.core.wmem_default: "67108864"
-        net.core.optmem_max: "67108864"
-        net.core.netdev_max_backlog: "250000"
-        net.ipv4.tcp_timestamps: "0"
-        net.ipv4.tcp_congestion_control: bbr
-        net.ipv4.tcp_fastopen: 3
-        net.ipv4.tcp_max_syn_backlog: "8192"
-        net.ipv4.tcp_rmem: 4096 262144 67108864
-        net.ipv4.tcp_wmem: 4096 262144 67108864
-        net.ipv4.tcp_mtu_probing: "1"
-        vm.nr_hugepages: "3072"
-    sysfs:
-        # ZFS ARC Max (89% of total RAM)
-        module.zfs.parameters.zfs_arc_max: 179827979589
-        # ZFS ARC Free (11% of total RAM)
-        module.zfs.parameters.zfs_arc_sys_free: 22225824443
-        # Scaling Govenor
-        devices.system.cpu.cpu0.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu1.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu2.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu3.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu4.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu5.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu6.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu7.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu8.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu9.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu10.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu11.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu12.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu13.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu14.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu15.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu16.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu17.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu18.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu19.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu20.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu21.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu22.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu23.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu24.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu25.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu26.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu27.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu28.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu29.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu30.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu31.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu32.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu33.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu34.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu35.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu36.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu37.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu38.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu39.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu40.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu41.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu42.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu43.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu44.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu45.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu46.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu47.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu48.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu49.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu50.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu51.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu52.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu53.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu54.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu55.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu56.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu57.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu58.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu59.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu60.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu61.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu62.cpufreq.scaling_governor: performance
-        devices.system.cpu.cpu63.cpufreq.scaling_governor: performance
-    features:
-        rbac: true
-        stableHostname: true
-        kubernetesTalosAPIAccess:
-            enabled: true
-            allowedRoles:
-                - os:admin
-            allowedKubernetesNamespaces:
-                - kube-system
-                - actions-runner-system
-        apidCheckExtKeyUsage: true
-        diskQuotaSupport: true
-        kubePrism:
-            enabled: true
-            port: 7445
-        hostDNS:
-            enabled: true
-            forwardKubeDNSToHost: false
-            resolveMemberNames: true
+  type: controlplane
+  token: ENC[AES256_GCM,data:LfW11qghsNCntBdEPlGKxwy2c5siq0Y=,iv:vE1roAFwuy0ZcCeod81ei3UV+denY5v3khKVR/vOcT8=,tag:fw4Kx/krxcK8lHCZdyFnAw==,type:str]
+  ca:
+    crt: ENC[AES256_GCM,data:HXrw2Rc0tA4LKtg+v9BaFSS5U1ct9pBMCOTZbYbJB2PYHLUJSU40dMkubhOpC76KJkQIldSUBWI8XoylfXKZh8rC4Nd2nxD/A4wP+Z6pkMF7CPX5IU/zSHD9tBiIG5pkgBaeb+mF4OPGZly5rFPU3f/d783BhP47W7FOd/PtRKFruLMUqh/qoxxPudOiZN69Aep8z2dJszV259JlblZLsOML3EYZXjVQdKj3Rl+y/UM0C2nOfaeqjXvtdb5/lqMj6CnPkxBbaQ7x36kPnunNMxpnP3XzYQgjyiuIMK0nYpURPREuEPyfPW4XgG4c6IlUB5kuNPg7d8SpXO/CyeEf/F6plsqO9ps/O6Wen3KGTESFkVlnY7hKxAwyFQwVL2R2gNN99SA2fLb7drs5tsuZACHjKdt9eBVRfY3+PRxv2EdE3u/F36N7pcAguDifd5rXi1cHoENd5fo6eV9ibC1Zh58Icwt3f6MsYAxtr5F/5H5zPcwQlOr5Y96ziNLIZ+VM+M91MVfVy/4k7SlUMGw6L/fVDS+oUGY9ZNFYpXly1YQRFoy7pcbD0zyi1IZkb4qV3HFepUH44yW0f5JudqNkHhpcjTpaefmXdV5CN6iHmEdjCrVxJBpUKvA+6Odji4yTXLdHdbuQORaiPxizK4Qm4dY9K/Kapa1UsZGFkWLmIrlSVfdiiLwU4czFe8k+HLuoB+jDbMqyWYcuL3jgrJvOWyd3ebjHA3y9qIpqWNVFEeXx+AqsNtRsvguJ/Gf6apacZmbLilBJzFHg29fhmy3xA1CeHC/Zl3fWIOzHHSDsZFgAWMxdKgCJyOzk2kLjRQQAIBDwWFTqzqkasc6uATY5OG8+RofOXBW93RxDzlxHAU3vJsyA,iv:v67AGS5TKxFk69D9VsSVaeONkGlJo3kowNoTGXxfBk4=,tag:tqpzvktCAxFVYDmP0l7/bA==,type:str]
+    key: ENC[AES256_GCM,data:kdpq6HQu2RV+/gJ8H09QFcPMwXL1hGwgRXIDiiMP2RriL8q/8vpm2gxIJZCoh80QKllvZGcdfdYEysNjqEh7Q2aDoC7HPOeX1a4A94VRD965zfVaBOqqLtijc/ci0iiDRRPekXwxrEWblQcdpGpey/mmgLdvYl66T0rV8fqzU5BI3Dwcnj/uHvaIRp5WpNbrdP5BiCqRY8Q0cCi8hLtMQizjiAeT3ZiWgJSNH7QYMft9Fr7y,iv:cEI3CZ7hdIoozWrKsbitVl2BmvV+p/EhELKPMY5mXQY=,tag:P5OhTyzCfaonB+X7N/IU4w==,type:str]
+  certSANs:
+    - 192.168.200.16
+    - 127.0.0.1
+  kubelet:
+    image: ghcr.io/siderolabs/kubelet:{{ ENV.KUBERNETES_VERSION }}
+    extraConfig:
+      maxPods: 150
+    extraMounts:
+      - destination: /var/openebs/local
+        type: bind
+        source: /var/openebs/local
+        options:
+          - bind
+          - rshared
+          - rw
+    defaultRuntimeSeccompProfileEnabled: true
+    nodeIP:
+      validSubnets:
+        - 192.168.200.0/23
+    disableManifestsDirectory: true
+  kernel:
+    modules:
+      - name: nvidia
+      - name: nvidia_uvm
+      - name: nvidia_drm
+      - name: nvidia_modeset
+      - name: zfs
+  network:
+    hostname: heavy-control
+    interfaces:
+      # Outbound
+      - deviceSelector:
+          hardwareAddr: b8:3f:d2:48:88:2e
+        # Max XDP MTU
+        mtu: 3498
+        dhcp: true
+        vip:
+          ip: 192.168.200.16
+      # Direct Connect to TrueNAS
+      - deviceSelector:
+          hardwareAddr: b8:3f:d2:48:88:2f
+        addresses:
+          - 10.10.10.1/30
+        # Jumbo Frames
+        mtu: 9000
+        dhcp: false
+    disableSearchDomain: true
+  install:
+    diskSelector:
+      model: INTEL SSDPE21D960GA
+    image: factory.talos.dev/installer/c5cc6a0c0509730099ac813644b1b0c5c5d47f26688a23cbcd9a93a05b5763c6:{{ ENV.TALOS_VERSION }}
+    wipe: true
+    extraKernelArgs:
+      - talos.platform=metal
+      - apparmor=0
+      - security=none
+      - init_on_alloc=0
+      - init_on_free=0
+  files:
+    - op: create
+      path: /etc/cri/conf.d/20-customization.part
+      content: |
+        [plugins."io.containerd.cri.v1.images"]
+        discard_unpacked_layers = false
+    - op: overwrite
+      path: /etc/nfsmount.conf
+      permissions: 420
+      content: |
+        [ NFSMount_Global_Options ]
+        nconnect=8
+      #   content: |
+      #     [ NFSMount_Global_Options ]
+      #     proto=rdma
+      #     port=20049
+  sysctls:
+    fs.inotify.max_queued_events: "65536"
+    fs.inotify.max_user_instances: "8192"
+    fs.inotify.max_user_watches: "1048576"
+    net.core.bpf_jit_harden: "1"
+    net.core.default_qdisc: fq
+    net.core.rmem_max: "67108864"
+    net.core.wmem_max: "67108864"
+    net.core.rmem_default: "67108864"
+    net.core.wmem_default: "67108864"
+    net.core.optmem_max: "67108864"
+    net.core.netdev_max_backlog: "250000"
+    net.ipv4.tcp_timestamps: "0"
+    net.ipv4.tcp_congestion_control: bbr
+    net.ipv4.tcp_fastopen: 3
+    net.ipv4.tcp_max_syn_backlog: "8192"
+    net.ipv4.tcp_rmem: 4096 262144 67108864
+    net.ipv4.tcp_wmem: 4096 262144 67108864
+    net.ipv4.tcp_mtu_probing: "1"
+    vm.nr_hugepages: "3072"
+  sysfs:
+    # ZFS ARC Max (89% of total RAM)
+    module.zfs.parameters.zfs_arc_max: 179827979589
+    # ZFS ARC Free (11% of total RAM)
+    module.zfs.parameters.zfs_arc_sys_free: 22225824443
+    # Scaling Govenor
+    devices.system.cpu.cpu0.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu1.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu2.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu3.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu4.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu5.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu6.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu7.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu8.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu9.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu10.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu11.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu12.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu13.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu14.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu15.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu16.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu17.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu18.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu19.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu20.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu21.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu22.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu23.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu24.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu25.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu26.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu27.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu28.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu29.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu30.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu31.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu32.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu33.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu34.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu35.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu36.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu37.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu38.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu39.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu40.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu41.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu42.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu43.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu44.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu45.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu46.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu47.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu48.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu49.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu50.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu51.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu52.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu53.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu54.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu55.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu56.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu57.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu58.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu59.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu60.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu61.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu62.cpufreq.scaling_governor: performance
+    devices.system.cpu.cpu63.cpufreq.scaling_governor: performance
+  features:
+    rbac: true
+    stableHostname: true
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:admin
+      allowedKubernetesNamespaces:
+        - kube-system
+        - actions-runner-system
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: true
+    kubePrism:
+      enabled: true
+      port: 7445
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: false
+      resolveMemberNames: true
 cluster:
-    id: ENC[AES256_GCM,data:JIAp2+tBDoNDtmDZnmsTKMIEPn9fNGwPle+IEKNkltX6qF7YEbh8bvEJ8iQ=,iv:dIILW0I/EyuQbF0ppGAFPS3AegGIDLa5YJJfdzoPYOI=,tag:w7tTAOkJTe86vQRuRCpT7w==,type:str]
-    secret: ENC[AES256_GCM,data:BooAA6awRyBdi5GdQnw/Efc9V43lD7CNyKFuH0j9eWtB1fw1OLoHz5v9fqo=,iv:zzbbXPiVxXSvyXP8mSGUrmJEfBgW8f5FrPIqFpInwgM=,tag:m5MGpzjAw3zu7cn3lFNmOQ==,type:str]
-    controlPlane:
-        endpoint: https://192.168.200.16:6443
-    clusterName: main
-    network:
-        cni:
-            name: none
-        dnsDomain: cluster.local
-        podSubnets:
-            - 10.69.0.0/16
-        serviceSubnets:
-            - 10.96.0.0/16
-    token: ENC[AES256_GCM,data:qCr83YOmPX8M1TZQkKJPl4qZ65zt71M=,iv:OzJLc/0UkBdWm7XhMHOhMCc1WtX2NJsxnkUkWTvzOLo=,tag:bzsK93mtMKBESibC4NgrFw==,type:str]
-    secretboxEncryptionSecret: ENC[AES256_GCM,data:QXO53IwTNWuMAIlgRjy1I4LKuK5ObFTcxbxr3XtsUp16KD+A5RzmrjMphbs=,iv:zu+BLSYwTpD4j/+XTYPNyctgXVKoJvAVgEG0m4Dsupg=,tag:kAurB7ZWKRGohJNI38gbGw==,type:str]
+  id: ENC[AES256_GCM,data:/6l4Jj8zKHy4quLg/eji0NkM6YZ1/dObMSLBLZ3Bw18ZTHi5VbhfX704biU=,iv:f1aQYvyot2cMV8OqMo5MdupwioMxnyhc5/eQVvWQKFM=,tag:JYMaHW99iqfUvmdCdGdQyw==,type:str]
+  secret: ENC[AES256_GCM,data:WEK/a0z6odc3z62GgomrTUcvmFTfWNe0RKh21UORuovTjsgjj1+qjXuh1n4=,iv:Axcq/Hjyj7K+fnUQFE1dFgWe8MJUpzlf3ybjaY/5PYA=,tag:vUuLmSpkG61U+db2rKsCmA==,type:str]
+  controlPlane:
+    endpoint: https://192.168.200.16:6443
+  clusterName: main
+  network:
+    cni:
+      name: none
+    dnsDomain: cluster.local
+    podSubnets:
+      - 10.69.0.0/16
+    serviceSubnets:
+      - 10.96.0.0/16
+  token: ENC[AES256_GCM,data:ePxIpCUbuERaAR0Pov60Cy3DCjpPb08=,iv:w0uY6GJLR8Yzb7lkk23nqVjdti3T4ki/CYZH4wbacsk=,tag:JDrVikBkrst/wxwcIjZ6DA==,type:str]
+  secretboxEncryptionSecret: ENC[AES256_GCM,data:g9c9DnQNHoo7EKan4aMKvNn+6nx0eLWe3YZW61aI8/Ohg7DLGabC3V5FqIY=,iv:4WUCYELf+uQTeNW5Jp81quIkjfuqKDb1He4jwHxyb/I=,tag:nAj211ulnP4le+3+0Q024Q==,type:str]
+  ca:
+    crt: ENC[AES256_GCM,data:Q+rVN9XPAUSjjpz5f2hVnkxaz4qatX1DzJTrrywUstZWQ+U7DEZwB/nkMnC5wc12MZ/a3gsG4a8rCjwvAhQCiWmVTUNp6uqZMP6DWjHC8RlhcwfGpzGY6Z68S50jPrBroNQywBXZQPlqo4pBWzbjLTqKDCmb9kIwcaoSvh5mM4YFv5NojTb58kwEDExwJKFZ8GG/XxpLWX2UAB7/qi6Jb/5aeCt98ROEnROXo80xJ3ebxfC+sG5h22fGO9iZzEMMEic6hz0HQSvIiQNuH3MKJL/qn3lnnn2wZfnzneia8C0pN07s6MKnwqLXiDaqlMIPaVMr8khxNDQAVM3HBdXOH6Imrc1pVZtMtYeQXsjNglUtF7h4YiMzs61QvLmdFIVEGaE2fCC83HL/1CWxkfJmwz4N+KWwYDJXyAiX21uxaVQJ0QgoAt0MRbv7PD7TxvlN6nTeZjvI+Zy3H0hCt0KU7vYvp+mL8PyChr8byOPc9w8PZeWyH34ddfEjlPZgDuFTyqTi4ga3Sr/GywWIi9hEW714v/++uttEhh37Xuq61gnwqk73y9/vsuk5Z1HGTwyQK7PSn+1ObFq5Dyx4lkrer0u6v6qlagOHYL5Ufw9VyWYL6oc6VQo1Ij5mkMWga6L7Z9ayZnJmKu9I4UvegAeHazWReFgVv25rNtH1fqHfLK+rXJSKHs4ryWSOs/vafNMlWZe9spIlYKyA/xztGr3yySgnt55QTTH1FMPNpS8bcagy4Ppbt/01tQpSlylxXh51iYsRLgsXjJJQCe8tMOFLz9wJiSKqUu986o4sKpUR0ZHhyu4KM5A4I3vtHl9npkYLWxV5YaYNcAATOdW3OFPWZKLTb/iGvAtqQqg7saerqdcWviuCK4h1FeWM8jHvo/L2KwC/gshQavqpZIUpactkqZ189lyGgErYvPlhufHi0pYCvy6qYdwj+HF25ZVTmh0kPTKhVkM2P36M5/BhOcoNV4dtqTeWFpK3W/gf+n5NzuCfxtkh+4pCqAcnr2Df+bYughi+1vN08Izc9TZpqxhl7EJKfZ+ysNLot681lg==,iv:0jWcKMfesctmFz94C5qovPt9rzUIIJR0POkVpNWHgY4=,tag:pbV98qzEy/JyVJsW7PmZcw==,type:str]
+    key: ENC[AES256_GCM,data:GZiUs9L/xk0f7Hg9Ge1AZSvlsw/5nGx2sxnOkWzTo82J6q6ZK0Pf+SV8cI+L2welWqBbpb9Q6btQCaFMc3XFBhXwPbDXlugvuhRgEXwFdDelYB2PFVPiS+X1D5EO32sNWHVOrpGWMKqPrWpM/ldcw3XkYCOWOhcMtBysXist4DKkgAq88whubpDL9YAjoABJsb6Z5I8cUSeuwvYv9eBlxPROA6S7LwR7+tZKSszhY7s40y/uwVn4vkQYnH/DKuP724zcJEZk1HXIG94STmuoaY1GrE6ikM13qalImZ24RhKYrVa7AOpW1WahCSx64hrKW1dsCc5s6bTrS+kox7VVAAxDihCwrubQCGa4I7vKL2gXK/Z+v6GtK3E4ZcJjXTUXHVftXKjw7xZb0jXZWSDZ0A==,iv:87qNuEu45gtHv/ViXlhJgvw0L8rR7nE/4WSM5447P5M=,tag:nRk0UXhfjAgU9psK3H5fKQ==,type:str]
+  aggregatorCA:
+    crt: ENC[AES256_GCM,data:6IVj0RnLMWgehMAdAomz9WTyVlcZy/ierob8Ua1OQafWTkB0jk8Muo2krllvoODIIINCHXEnq21ZxdDu40eWiwbuqVESVk2Mw+/9dQUrPNRPa+j801SnJaBTZb9kFJe9KlD/aqVjZPzicJPUOasOk7eBcXRRcSepCf/PsRlU/0X5YOxRYkF3S+VcdizOhQCzkWZh+oJZumFmC54dRBeILKky/n3S1i9nFAVKX/ZVX6bRXBAzWJMV0C6HFn+61HKjfVKvFZb1bPhRm30n9zz3mCGLCwFVyjY71VykjpVtIz7nD2dDOX9fKGd/Tf5h2YSNTyP/HZ14yWxhxiJVjnAKV+9gCac8FjAR8QDA+ZR4CKQH1AYUGdd7qQQzrBWmVmBC9kcBilscpkt2geDFSZH3F79Kfok/tIBpyer3vcLM6XV6D9GtkbX4CI/5SMpYk1nQixaY2y3HJFWg/FCqcLtYC65klQQGRxScyTaSNLW49MBuvnxs5umk5MDdjuuOXj2uHE4qH5FfcaUzTfqN7ME3DE0xW6LW9ERxySBqCk/6QgD7J9KnTK5Di9vngU0zTsbIrxOfvxQ+Yv5yiJIHQxgg/3Ats5Fc1qxd+QN7UMBafE3Y8N4/YghcGZILbr5toEQ8KbusWBoJj5sleWhaaFJk3iQSERQr9LssQziwQTXDAkqbI8wZL4ALQx0bcwK4P3E/jPUgTAz/jmeFQbQYOKchmSZ+lsXg/YK/B9u3dzv1+kYbt/bSOKdkPA1JSkXooXNT1RqqVauzGsatFmtBTQGeDJXoBzB3VhnlLGDN3OsDZpXkscaNNCGKU/qM8uEZPG8Xoefe49vNQqvmwUTxKtqtn5csBisWmNLJCQ90HOTnIbmAEHPZuBHV5u4IzXKePLAhX7pyvFWo945MURXpvs71A493LjpPb5Heeqfhq19szJSDHs4Qzai0mUISzZEXK7HF,iv:BqAcX+Ivn7rfR9fhLqS34l6/ESuzH35SD5OC+JN+vPU=,tag:QyzCok/8sh86TKCYQ8xpPA==,type:str]
+    key: ENC[AES256_GCM,data:tYtq32HhdDn5TzYoQNzNPe9E1qOrJYLqMDplSXyrNaHSTVcOzX5Ayv9Skw90gsnQh5BSMK/c+t1dFM+OByam4u2a42H/POhSJJ9x5MSqz1Qn/E9IQLp5FkK6hTWHCHV+SLejJYM6+DlV55v+gJ9f/HI3FC2pvLTfBE9oB2jtiaeZIOOv9e1njPcNFYKNt119UBQj006Wvv0yJlwogR68xaXC4G4DxFjl9ZCMxMI+8AXhGYGVJ0Oz8IvxBgmP4YQaDSRNsxxQbqpl/AVWY90OZcQcAFzefB0G8arL6USo6575qQflrir4NS7/Z5ExNHYD2SOZ2wflOdRITibQ7n0pbYqQlgDd2e77G9TkkahgqvKw/bBgdPPn59ssbHmsA49VOYGhOjov95Auc2LTsSuNZA==,iv:0Mhst31ILZraMfEh5b8xLGqZuRuYPq2LkPlR1CzHcaM=,tag:/yDiGbkStA69nuH66/1Z2w==,type:str]
+  serviceAccount:
+    key: ENC[AES256_GCM,data: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,iv:zPCQsBoRr4bW0Z3lBKPf7AHuAkEIJydZb4Sn1nlylSM=,tag:ls0iUuSR8LLQlniDOM7jFw==,type:str]
+  apiServer:
+    image: registry.k8s.io/kube-apiserver:{{ ENV.KUBERNETES_VERSION }}
+    certSANs:
+      - 192.168.200.16
+      - 127.0.0.1
+    disablePodSecurityPolicy: true
+    auditPolicy:
+      apiVersion: audit.k8s.io/v1
+      kind: Policy
+      rules:
+        - level: Metadata
+  controllerManager:
+    image: registry.k8s.io/kube-controller-manager:{{ ENV.KUBERNETES_VERSION }}
+    extraArgs:
+      bind-address: 0.0.0.0
+  proxy:
+    disabled: true
+  scheduler:
+    image: registry.k8s.io/kube-scheduler:{{ ENV.KUBERNETES_VERSION }}
+    extraArgs:
+      bind-address: 0.0.0.0
+  etcd:
     ca:
-        crt: ENC[AES256_GCM,data:PEKhcmN6z6agidEZmXeQlQ/wcBGXbzleMMncjKjKjcuLDe4k9d5HrExrSoIy5hRiRIBbPVGZ4Smz04PVJOBS3Hqxc/wZg54poopx6xoFITjb53LrkvFrTjohvtSjtF1UwjY5af0WXPqE3vCkJ/hLI0LzlyeHNCF7M/7mYHS3bPzl4VAs6hSU0xG4oNMFcsae9rCFQXO9rC2A8KDRJRu9xgDe1lbtLwq/i5un+7xwhA5VMXjMd5XHE4MxG8nDngTth7GuKx9KYr7p0WFkXNR9J0OTiA38F33T6SdNNurApt/uCVNEyAkv04/57T88sQe5FQQuy+Cmn38fQ3axCqJ3o5ZEDUjC/ItuFKTj5kO8ZyWquuGtANjnV8OSral6bFaY0es8YvUCVCroVdsClpl1BIYMtnBIsJETA31Fo/KrOKrcwMCTXuDzq1l0ka6Vy8EtCOMwRI/JInjvLoNm+pfLjVfaVJt1o/qZOnU/UYRXfj67d2nAXjByacbOW4f5VSy/FeVkFSLtG3vO/AGXL1uV4fbkdK4z1c6v0c4U/6FpwjKKyjY4tuHptkD4a+3Rc1wtS//7nHVVIeFKPBYqh0AT4gmeVJnRPAHPkHRJlfMVQ4lbgkUFvzOgBSnTilSPJNwmyT3OSuI+NVYwc/V3V+9EwxpbKHY7091TJTqCvKOhnKQ4mpyi9gk6I7FiG2dYruEo4F0efJZ5aXYBTL35yrpU54yQwz9PhYcmNokOoa6ORCLgh+5VPqVvgUqCqyI0F2iG2+PyXaS4F2XJuFfj3pvmlDxWrpAaVXINFN9ysm8WyyUemjmhqtkwSdiulxhtmWPc/XmGeZs0KwjFSVSPJgYVeRzQaBNfgaSDN5pEWt2ifihRvkEzZBaSEbx8aJCVmrGg3QGDwswgfXIIVTanv/ZdJMtdLD7iY6au85s1tsFHr5TahPrByhn9ydxOJj99K8vTMPDhbE9tAUZYHAL/syk+3VPwI3TeA+TUIX8cdQ3iRMrqwO20Ha1kG95j9waC+kdDTlXbBGgNjGvR6cue5zAH51LtXqBM2APFYTUbXw==,iv:D2rup9nF9d+2nTZgC86F10u1Neo0pDUmGFD9+UGtU6E=,tag:wyaisxYD3lKVhETIt0Vqwg==,type:str]
-        key: ENC[AES256_GCM,data:fukRg3vvuuxzWNr4b4w1zBPvAjdk88dSzisZlFbt9qDSl7jzE4Jq79QUyr756QzjRQkNekfKCWYHPQl5lDYgkJWPD/QsSzCUKxtcAHQAuhIEFJnlz0F4hcx0aqZdOOjQDIE+kt+Wtp1qnRSDLgmITgksCU1u7bAhldX01e/QOYQ3miNFvYW88nuYhCRnoC0KbIrKTCA1IK0MkuEcoQtDlCyVLQh3KD9KTxTBNiPfjxmKFvMYz3RpKTL2J6YjEDD7JeY/N7G3MJQrHFcS/5MFeToJuPx2OPC1yMhqvbSQIiSnXwRROfadb/YWp5t0Ve3fi5zx2p11T09+sJtrdAaYMcYVTWApiqwRuIg8tVV3yGQdpHsFarUi60lDszVYRuR/V+4+zHfsDG4I0lflZj2etw==,iv:x/mncNk0V99B8STD/l8H9i0nwnLonHbTHpSkvsUjg0Q=,tag:Fa3AQFljXw6KooHPVsgHNg==,type:str]
-    aggregatorCA:
-        crt: ENC[AES256_GCM,data:yFZ9yB4vHrqLQ0nDYkN4JBVH9KjL0nh4Z+UzISZ++PD6mE5jmoowMBIas6eM0ssbVKETn2pQ7WJbyZCuz2xlrEOirvxGGqTASyuuew2fdrplK+9ZAgFy88aybe83oQ4gDgvDC+7oB+7DovAiL2jUL0rE1hqsLjTbiUBa/PHIiFuPVWu7MMPCIBJsR/dXb++l2f1m8Q3wFFk0bM7TIY5KGk4r+KnDxnEkpGDzioKX7DQe9kpXVZ94DDxxQcoTdJlSGpxX2vmkV0fJRI0j1ET90nxdvrX9QdZJxpSCv6S20Bn0YYxDUN58bf78KoBmrdnEgvI4wQO0HbNZLysuP5ClhXto3/f2iUlkuXoEQUVPQcIZAk3MrqItCFS8ndHAnpWYLJyX1wA+GT6BVGylDQ7cxxB1YNlBAE8+Yepy0WTln87rVKN+/diZuHpI06GQg/WqTE//qj0nzt6iS5Zag6VfvZGBpJ9ymg7hCviKvFniJHaqqDTpv4pIk6si4NmB0zqe/E/wumqzT6bsokaFQ/znpImdIVeo9fcSrviRlYlay1iuoKJexN39blH06wnFuRyGq7APT7fOPyXSbz48R9Ontfde5rgPMGLdqWfPBhr3G6eMHe4XRoKLrvGknW5ri96vRba/prrASUUdf4ZN1iqq2edWb8tfi2FjUqBqAgaD0ZMwOJJbeNUtLLOslEihaXgc9RORf2ZBGNdGrUsDyl/Z0aFpUUBFq1uVyuYbfgvHXhouhoBZE1ZdSTzwVtnvp5LxSGgQuWhk6D9qvNC1WBiKPP8mM9hqksRUUjEC1HMKUVaEq22TJzOGOmul6sN/jDNErFrPqXfmYq1n9YmKHLeZ7DcvXCyh0jWbfBCTO6+75YU8JaAgMuHfku5nAwYmbGz+Eufh+O15hS16FKGd+IT5kU3rBErTp91jfL09MMjXldG1KFawe4viFbTI3Y+fiU4h,iv:4ByjSpQ1V8iIfjlnvLVTkLOSOEnvkxaPbSvz/QrV+qw=,tag:MOo/2RkmpjHF7/7hwpTXow==,type:str]
-        key: ENC[AES256_GCM,data:lNzltq1Dx6UzZilR0NJNxc73c+MWkWHb9Tkexn7qVdTGL+p14b6x20T4F2Kx3GaEOHKGEkycaCX/OnyhY7wHXekIzO5kTyFWdSKN9zf5DDrS//MtVzWFRkoG6hzby6qHOoHBEdqr+YmZ3sxlH/Sr6NHi000Dsizte8fd+FnpqSY62rKZ/uSIHwUUaaMBHN8kppMSFLR64D2I1NCkHfLGw0VR8zA1OsEHHie4d2GP+na1beW0tlon2as4QiTwgk8S9bnC1UKyySXm+dCau2NTuqlAbAvBIqIQvTkKwJk5nK5m7y26e+Tb624HQmcr75mOAtoJo0jZgxl762LgJTISRGFWaXTGHz8g/X6/ZzF05CvhIq76ob0XZ/zHsOm05kq+MVUobL7vmmy8r8v/vaUA0A==,iv:VheXkFuxzeQ7CvvzUhlZuT65XcA1aVqzEirjwecOqZQ=,tag:bi+5QrhYzM3vx1aLIP/YEw==,type:str]
-    serviceAccount:
-        key: ENC[AES256_GCM,data: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,iv:3jhURVcTj60tMrYzb8L8B2hm9Awt50pFym35TBC7/BU=,tag:cdSqk/w/eaOKJvjcVg+X4A==,type:str]
-    apiServer:
-        image: registry.k8s.io/kube-apiserver:{{ ENV.KUBERNETES_VERSION }}
-        certSANs:
-            - 192.168.200.16
-            - 127.0.0.1
-        disablePodSecurityPolicy: true
-        auditPolicy:
-            apiVersion: audit.k8s.io/v1
-            kind: Policy
-            rules:
-                - level: Metadata
-    controllerManager:
-        image: registry.k8s.io/kube-controller-manager:{{ ENV.KUBERNETES_VERSION }}
-        extraArgs:
-            bind-address: 0.0.0.0
-    proxy:
-        disabled: true
-    scheduler:
-        image: registry.k8s.io/kube-scheduler:{{ ENV.KUBERNETES_VERSION }}
-        extraArgs:
-            bind-address: 0.0.0.0
-    etcd:
-        ca:
-            crt: ENC[AES256_GCM,data:qHW92gOJWs23BR4I750Mb7NGkh7rjco8Hnq1OQVt5mpY+g5LWZgLF7TqJEPQtnLqIl/xB747kopmL2MUEZ+rRyZJAGLxeZ5Ne8o5GLRJkOmyMZhVqm6JD/9iPZ4/dl5SjJh3j0BtjEwD3CV9iZ7DKUU4ZnRdeiwRIazlufoMV8kNyDY+GKYYGXM4pODRkB6LmHODdOmWouaWu2FKJ0c3DdfIU5hb5ehua2WRzS/eCt2HqyXEcsOoJq61qFwbhl6QYJD7ScKAxCZW3QEBANTeJiWL8FkvJLik4ZIUzRBM0d7t/Kj0O15b+iDeji2iVatGJuWEpsdZTwYuh2mIZ6avjZg41y43IKDRWqC09jFk9/U7dP5EBMHevZVSQb+0EGnBysyARgxYkm1ZaZYHA1sqanWiBDf8TcCjRrQr2xj9cuGfVAu0eCFhJVW79kfJIONy301kA34pj+BR/M+roXwYCxzvAiyXGUFzrNZdtS2zf/LE4OGpEZFVjsFD8F4x+D/yD5e7NhTtMKrPcg6sARs1KPni6wKwgfytp83frtFs4XN/NS4FPyzq9Ar05ylB2oLIAT+z64g0eW8i7CGkhIZr8L3wYKYfpHjwS2+l8SlUFRIxlI3kikfz7ASZ8QL2aWTP/APp0qLrs1vIdTk5wD4FBOzJYmXbT9IW9fu72vIkNebym7B6pgc31Cu2GgLpZAcpTMZIRNZziC2yIpH4vd1RSuf8SfRzjGADUxbT2OGodg/aLnZrp1U8pGUo/4j9Fm2F8oMnpnaKTz4i6X/gHBOVIu41SQe+IofX8BKQZlsjgwuq+u0A/R4tosVwmzq+Yzr1sq3chz0oKT+uLZ/xshWItvJANcupQGaFPILP2XhzQy441pxEN5AgthatT7LSOP5Hn/zJfonQCul7YcVsf6pY9tNpJLc8gifO580by4uItDEGun8yQbls2osbkFJOtVGI5TarEtvBRFAAJj+ig+cnHD7do1dxdFumxfkVvxZmS5ekJEAbwPYQKF/QyLzUrIzq/M5rlg==,iv:v+1wku2mCgVo9F8UJckiLLG0KtGW1CtGNMJPh1A3SCU=,tag:uMoSFSLasJzHhOgIzWijYg==,type:str]
-            key: ENC[AES256_GCM,data:Y7/Wz7KCMwSW0MFpC6danG+fbMs+WCjQDxkKMp/pSDbxiPO4I/BkL9Rz5QNXhYma5RU58KPTbpwN0xEapWO0BmyNwBdAdcMISJZxJXZR7nB++HmmZeJyZMoG1+0vq0QNl9vblUY/HTqVhzv721xxfRFK/8AoCRA4EX3Z9M67/lrrkKvVgr8JXXDz+zvaLyDWQFadTiBfcN3b68UP746Ybcq0rsx8r/o6oE37EOREOLUL08HSv0BqIWgv5HZcUT8hdqlqFeHFJzqCSgBkX0nDC/24z/Mzq67Lftzev7ImTHlhozoFnnpYVUqoNU1zQ0Bkedt6MYCd2Hl/X7JM/NnWN5Z4SF+EVriTq4taJ6T/X1V+s9Q136BKoDWhTGm20SygSCqNF01dGF3XAClNzqFazQ==,iv:+YsFwNy0QBBJlYYxMEBTi40MxBThDWYUm/KxjRGzV1c=,tag:EfDoaxAgv2vnDpTLP9Ufuw==,type:str]
-        extraArgs:
-            listen-metrics-urls: http://0.0.0.0:2381
-        advertisedSubnets:
-            - 192.168.200.0/23
-    coreDNS:
-        disabled: true
-    allowSchedulingOnControlPlanes: true
+      crt: ENC[AES256_GCM,data:P0pAZ1gUAXahJ3xmPu94QGqnTa4pkKvGUttndRuIc4Kh64XKys1bhBzV7gf47dODMqd2ZHPYXybUcmcATpajim4Lvj26ItOzWxpl87Egj4z47LqvIeiJvz8B5MQZcREi64z1ASUZ3GaKosk6fyNDRI1NAz1TgV2NqtbAugS9GQhcO2NgFkrnWBFslqvCdMEGQpPlLPXLuPzX9l20XgxSFyo862gxobpU1IxuuYk7srmoaN1vmO8ywMIH4mJ/4CtBeQlenqSbgpzLYHml8CVQeaEtrurZvIxrm0ekfiTE+AgeDOi0S1QXS4pAFsIhHVol0mydtnrLj2IFiwywzCnOfvs2ibFXom2DcmvJZBgE2ndL17Dx86sCKsS8/YjIqEtPxiLiWvgS/pS7096yi4KBIVVltLZo8XVrolZvSU6YPOnLed3ruUyU0FgQFfILBuoJoUnYZWkXGFHiTvZvPsh302xdg08sxFtLaL9rDcCmcRzxoxbY5Rg9thKeG4bokp6n/O64DPn1B2u0Nhgib41ef35lCihlHqnjZqcdKqKxkc5d4+iw59qluHbsTjOTVpHwr1NUOO7LC7hQlEA+AJuumP/h9mcOsYKLlxkB8JtNgq59q1j7ASrTCuEhyINIsXAAGNJ/wXObx3pGgxVHlaB8SWJLkfCYEefOj0QHXlmXDTFtfvALWamIjUzwHtYFk8pkNYt33ChTOtz2OrycmFemp95eQ6zSaSBbNqm7viZU6JeFMl80syfX63uI80ovg42UFHa67opm3KkUvUpkljygvl2A+ScYm8P95XmCx6Om0Qeaj8iGPZW+QniHBjaeSOvB0v9xoMJ3BQEcVdUuwIIZ8khalOnyC8mFLWMlguGudWbfz8+Ge+dI/7NucgxF2o7BYOqYQ6o0pm1pM0pjSSxg2nEdK91o390sXtydr7MUFLQrIskN7lTofkwQ89K5Ij1hdUmMu9fet3Em0QIWlZrFCbFi5/9Nn/FcRBxdw8W81VPHQNOJXfMnsjy9Wr751Fup8lk90Q==,iv:JzgQCFO1gLkUW2MXRfponIr++vtVoLNx8fL1E2WgoFU=,tag:3YNZZmJ02KVJf6/OHVnQgQ==,type:str]
+      key: ENC[AES256_GCM,data:iyJzzR9JwWt/c1J5ZiIuXU7c3L0yKJ2FoHUcn3PpIYoH5jVqln/5cdYldsnwTNzldXOdNwSBsTSDKdlP1o9EN7EMFFfdAPJF9bs7QLydRT5U0uCrRFZ9ULT+3mdbjxoWevkz4tXAqLRmT0slDWWNbb4aiavcbNKwcCUs+DeRFxaiZhTNEKLJvDVQ4LeJd3w5aTbtbyJnaCrdsWWqnKt0UGEstXTa2W4+P4ZfARrU4MytHoNw7iUAz2nktJG5i/9wUUjPMPmgQEQBRNmtBzV5yrSpeqGZMFtUMJHSpT8LwDGscdIrVJnPfrYSBsl54/pLb94zY5SZ6vZ3NqUE8EgnHNelWvkaI1Mq57ZCM7uRCdAmbCO7QMBjlf29blAm1HK0q2HIYkdhFRekMiDajPgzfw==,iv:PasJHJUGy5ZG/epKlM4UUG6DBxYrcANweEHWNUUlcXg=,tag:S5rzzolEin+1Otw597uS5Q==,type:str]
+    extraArgs:
+      listen-metrics-urls: http://0.0.0.0:2381
+    advertisedSubnets:
+      - 192.168.200.0/23
+  coreDNS:
+    disabled: true
+  allowSchedulingOnControlPlanes: true
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age172ga8ydq62pezn7jcg2xkc4ytc4uf7ymzahvydqjszul30j2accstykn84
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsaHRTL2xEOTJQQXRmcTJ5
-            NUF3Wk0xejcyb01WV1FDbW9kQTVJTW9wSmkwCjhUS3RnUGlHQkJiR3J2aVdITk5h
-            Rjd4L3g3ZWFrT25hWGI1SExaL0ZOUFUKLS0tIGFLR3NTR0RZVFNTV3ZZUHdwSmZQ
-            dEFneS9QRXhZOVExellFVzRqZk1rK3MKz5yH9jNqLzopMO3ATbN23i3lJSNONkwg
-            +4TFzcEwW3WZ1bpE9F7lWM0I1cRGHuz01ZvzMffEkJwp5JK3KWSFsw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-07T22:03:13Z"
-    mac: ENC[AES256_GCM,data:cLiyzg48Fr2vHF7kVRBg6NogD+ms0+aZNmpwdCcz51v8WLeddAu0tCf/tNTsLUXIaWNkYJ1/QNnDalAVetAIq2TF6mDSUZHTFdFKWT1EhwMK62VgC2O0bLFyQGt0SXRckF8bnbXnpc3eP+cYoKW/O79rK4W1kwkTVmam2ICtMAY=,iv:xqUSaREL67N+rEspbcSNnvbZztyqHQGJjXIajAhHBXE=,tag:BbBNzFgSIExdx/eyFvLJ1Q==,type:str]
-    pgp: []
-    encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca)$
-    version: 3.9.2
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age:
+    - recipient: age172ga8ydq62pezn7jcg2xkc4ytc4uf7ymzahvydqjszul30j2accstykn84
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpOFVvSGxYZGFuWTFtUDNT
+        emNYSmMrTEdGTTBVOUdUTEhSUUdKQm04bDFjCkNaODBubm82NnFmdGQ5TW0wV0Jw
+        SjFkR284cVJQV1paR0prWDNGNlFyQ00KLS0tIHhtWUx4em5CejR5bG1HNzNxL2l3
+        S1Qwb25XVjdkcUFyRjM0bU5iVEhmM1EKhmfMDhqzlVa1wBRdpid0sZ6SZqHFmeoL
+        7n05IQRBDaUozeJdb2haWv3cY4A+yYoPidp29L4ga0gsQO0QTWdNZQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-01-22T01:06:09Z"
+  mac: ENC[AES256_GCM,data:zaJGnm4JjVWMjyVxLtMcIu3lzp2fkT8BLOXu9ZRDSd4+iuXm1DgcXuQVNp8YOocVNLbWqmQEPrjiQEhfgJVDWTDgdtSY2bknNk6Zzm1MULrtd7h6MjRSKXHo9lrVBXIYg/LgMwV+QcmjiH7ANvXelIJos8gcmxtuzlq1hIerI/s=,iv:IumBPl3xkk/vNC+K8OdYuvvcCXPz8cdG2TJoBD320TU=,tag:JzSxICIXcF1gk5c3GpnO2Q==,type:str]
+  pgp: []
+  encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca)$
+  mac_only_encrypted: true
+  version: 3.9.2

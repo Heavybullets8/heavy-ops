@@ -28,17 +28,14 @@ tasks:
     prompt: Bootstrap apps into the Talos cluster?
     cmds:
       - until kubectl wait nodes --for=condition=Ready=False --all --timeout=10m; do sleep 5; done
-      - op run --env-file {{.BOOTSTRAP_DIR}}/.secrets.env --no-masking -- minijinja-cli {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml | kubectl apply --server-side --filename -
+      - op run --env-file {{.BOOTSTRAP_DIR}}/apps/.secrets.env --no-masking -- minijinja-cli {{.BOOTSTRAP_DIR}}/apps/templates/resources.yaml | kubectl apply --server-side --filename -
       - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
     env:
       FLUX_GITHUB_PUBLIC_KEYS:
         sh: curl -fsSL https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
-      MODEL: "{{.MODEL}}"
       NODE_COUNT:
         sh: talosctl config info --output json | jq --raw-output '.nodes | length'
-      VAULT: kubernetes
-    requires:
-      vars: [MODEL]
+      VAULT: talos
     preconditions:
       - op user get --me
       - talosctl config info
