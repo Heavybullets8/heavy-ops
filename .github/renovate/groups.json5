@@ -43,8 +43,8 @@
     {
       "description": ["Immich Group"],
       "groupName": "Immich",
-      "matchPackagePatterns": ["^immich-.*"],
-      "matchDatasources": ["docker", "github-releases"],
+      "matchPackageNames": "/immich/",
+      "matchDatasources": ["github-releases", "docker"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       },
