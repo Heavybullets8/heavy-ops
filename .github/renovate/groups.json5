@@ -43,12 +43,12 @@
     {
       "description": ["Immich Group"],
       "groupName": "Immich",
-      "matchPackageNames": ["immich-app/immich"],
-      "matchDatasources": ["github-releases"],
+      "matchPackagePatterns": ["^immich-.*"],
+      "matchDatasources": ["docker", "github-releases"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       },
-      "separateMinorPatch": true
+      "separateMinorPatch": false
     },
     {
       "description": ["Talos Group"],
