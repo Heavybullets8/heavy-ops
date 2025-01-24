@@ -70,7 +70,7 @@ spec:
             dependsOn: immich-server
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.124.2
+              tag: v1.125.2
 
         defaultContainerOptions:
           env:
