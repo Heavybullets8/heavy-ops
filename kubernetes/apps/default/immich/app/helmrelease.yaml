@@ -39,7 +39,7 @@ spec:
             nameOverride: immich-server
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.124.2
+              tag: v1.125.2
             probes:
               liveness: &probes
                 enabled: true
