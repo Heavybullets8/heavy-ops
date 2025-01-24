@@ -39,8 +39,7 @@ spec:
             nameOverride: immich-server
             image:
               repository: ghcr.io/immich-app/immich-server
-              # renovate: datasource=github-releases depName=immich-app/immich
-              tag: v1.125.2
+              tag: v1.124.2
             probes:
               liveness: &probes
                 enabled: true
@@ -71,8 +70,7 @@ spec:
             dependsOn: immich-server
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              # renovate: datasource=github-releases depName=immich-app/immich
-              tag: v1.125.2
+              tag: v1.124.2
 
         defaultContainerOptions:
           env:
