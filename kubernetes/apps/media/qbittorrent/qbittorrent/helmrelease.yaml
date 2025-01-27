@@ -37,7 +37,7 @@ spec:
             env:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
-              QBT_TORRENTING_PORT: &BT-port 51749
+              QBT_TORRENTING_PORT: &BT-port 52885
             probes:
               liveness: &probes
                 enabled: true
@@ -202,3 +202,4 @@ spec:
         path: /mnt/speed/snatch
         globalMounts:
           - path: /speed/snatch
+
