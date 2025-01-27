@@ -16,7 +16,7 @@ resources:
   - ./plex/ks.yaml
   - ./podgrab/ks.yaml
   - ./sonarr/ks.yaml
-  # - ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
   - ./radarr/ks.yaml
   - ./recyclarr/ks.yaml
   - ./requestrr/ks.yaml
