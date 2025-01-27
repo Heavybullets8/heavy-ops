@@ -37,7 +37,7 @@ spec:
             env:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
-              QBT_TORRENTING_PORT: &BT-port 52885
+              QBT_TORRENTING_PORT: &BT-port 52665
             probes:
               liveness: &probes
                 enabled: true
