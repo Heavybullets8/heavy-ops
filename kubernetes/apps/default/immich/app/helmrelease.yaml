@@ -39,7 +39,7 @@ spec:
             nameOverride: immich-server
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.125.6
+              tag: v1.125.7
             probes:
               liveness: &probes
                 enabled: true
@@ -70,7 +70,7 @@ spec:
             dependsOn: immich-server
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.125.6
+              tag: v1.125.7
 
         defaultContainerOptions:
           env:
