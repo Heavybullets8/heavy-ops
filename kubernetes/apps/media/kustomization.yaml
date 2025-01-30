@@ -23,7 +23,6 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./prowlarr/ks.yaml
   - ./unpackerr/ks.yaml
-  - ./wizarr/ks.yaml
 transformers:
   - |-
     apiVersion: builtin
