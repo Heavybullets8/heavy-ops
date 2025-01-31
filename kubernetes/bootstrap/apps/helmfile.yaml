@@ -9,15 +9,12 @@ helmDefaults:
 
 repositories:
   - name: cilium
-    url: https://helm.cilium.io
-
-  - name: coredns
-    url: https://coredns.github.io/helm
+    url: "https://helm.cilium.io"
 
 releases:
   - name: kube-prometheus-stack-crds
     namespace: observability
-    chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
+    chart: "oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds"
     version: 17.0.2
 
   - name: cilium
@@ -31,7 +28,7 @@ releases:
 
   - name: coredns
     namespace: kube-system
-    chart: coredns/coredns
+    chart: "oci://ghcr.io/coredns/charts/coredns"
     version: 1.39.0
     values:
       - ../../apps/kube-system/coredns/app/helm-values.yaml
@@ -40,7 +37,7 @@ releases:
 
   - name: spegel
     namespace: kube-system
-    chart: oci://ghcr.io/spegel-org/helm-charts/spegel
+    chart: "oci://ghcr.io/spegel-org/helm-charts/spegel"
     version: v0.0.30
     values:
       - ../../apps/kube-system/spegel/app/helm-values.yaml
@@ -49,7 +46,7 @@ releases:
 
   - name: flux-operator
     namespace: flux-system
-    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+    chart: "oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator"
     version: 0.13.0
     values:
       - ../../apps/flux-system/flux-operator/app/helm-values.yaml
@@ -58,7 +55,7 @@ releases:
 
   - name: flux-instance
     namespace: flux-system
-    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+    chart: "oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance"
     version: 0.13.0
     wait: false
     values:
