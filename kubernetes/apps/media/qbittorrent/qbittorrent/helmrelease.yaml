@@ -37,7 +37,7 @@ spec:
             env:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 80
-              QBT_TORRENTING_PORT: &BT-port 52665
+              QBT_TORRENTING_PORT: &BT-port 22852
             probes:
               liveness: &probes
                 enabled: true
@@ -88,13 +88,14 @@ spec:
               FIREWALL_INPUT_PORTS: 80,8388,9999 # 80: WebUI, 8388: Socks Proxy, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
               HEALTH_SERVER_ADDRESS: :9999
+              HEALTH_TARGET_ADDRESS: 9.9.9.9
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: custom
               WIREGUARD_MTU: 3418
             envFrom:
               - secretRef:
-                  name: torguard-secret
+                  name: wireguard-secret
             probes:
               liveness:
                 enabled: true
@@ -202,4 +203,3 @@ spec:
         path: /mnt/speed/snatch
         globalMounts:
           - path: /speed/snatch
-
