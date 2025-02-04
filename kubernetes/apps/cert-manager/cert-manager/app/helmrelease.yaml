@@ -29,4 +29,3 @@ spec:
       enabled: true
       servicemonitor:
         enabled: true
-    featureGates: "ServerSideApply=true"
