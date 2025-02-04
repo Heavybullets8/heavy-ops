@@ -8,6 +8,7 @@ resources:
   - ../../templates/alerts
   # Flux-Kustomizations
   - ./cert-manager/ks.yaml
+  - ./certificates/ks.yaml
 transformers:
   - |-
     apiVersion: builtin
