@@ -93,7 +93,8 @@ spec:
               PUBLICIP_ENABLED: false
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
-              VPN_SERVICE_PROVIDER: custom
+              VPN_SERVICE_PROVIDER: airvpn
+              SERVER_COUNTRIES: "United States"
               WIREGUARD_MTU: 3418
             envFrom:
               - secretRef:
