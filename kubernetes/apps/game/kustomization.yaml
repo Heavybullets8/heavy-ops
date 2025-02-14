@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   - ../../templates/alerts
   # Flux-Kustomizations
+  - ./romm/ks.yaml
   - ./valheim/ks.yaml
 transformers:
   - |-
