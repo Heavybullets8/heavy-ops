@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -78,6 +79,12 @@ spec:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-buffering: "off"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
         hosts:
           - host: "romm.${SECRET_DOMAIN}"
             paths:
@@ -89,3 +96,7 @@ spec:
     persistence:
       romm:
         existingClaim: *app
+
+      tmp:
+        type: emptyDir
+        medium: Memory
