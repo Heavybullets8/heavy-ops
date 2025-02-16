@@ -14,7 +14,7 @@ spec:
     - name: external-secrets-stores
       namespace: external-secrets
   path: ./kubernetes/apps/database/dragonfly/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -38,7 +38,7 @@ spec:
     - name: dragonfly
       namespace: database
   path: ./kubernetes/apps/database/dragonfly/cluster
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

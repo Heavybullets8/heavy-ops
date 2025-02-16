@@ -8,7 +8,7 @@ metadata:
 spec:
   targetNamespace: *namespace
   path: ./kubernetes/apps/network/external-service/truenas
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

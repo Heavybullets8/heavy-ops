@@ -20,7 +20,7 @@ spec:
       namespace: external-secrets
   wait: false
   path: ./kubernetes/apps/media/radarr/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

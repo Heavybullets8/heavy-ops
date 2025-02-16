@@ -17,7 +17,7 @@ spec:
     - name: external-secrets-stores
       namespace: external-secrets
   path: ./kubernetes/apps/game/valheim/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -47,7 +47,7 @@ spec:
     - name: valheim
       namespace: *namespace
   path: ./kubernetes/apps/game/valheim/filebrowser
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -13,7 +13,7 @@ spec:
   components:
     - ../../../../components/gatus/guarded
   path: ./kubernetes/apps/default/homepage/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
