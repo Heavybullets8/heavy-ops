@@ -4,19 +4,24 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app valheim
-  namespace: flux-system
+  namespace: &namespace game
 spec:
-  targetNamespace: game
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   path: ./kubernetes/apps/game/valheim/app
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   wait: false
   interval: 30m
   timeout: 5m
@@ -30,19 +35,23 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app vh-mods
-  namespace: flux-system
+  namespace: &namespace game
 spec:
-  targetNamespace: game
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/guarded
   dependsOn:
     - name: valheim
+      namespace: *namespace
   path: ./kubernetes/apps/game/valheim/filebrowser
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   wait: false
   interval: 30m
   timeout: 5m

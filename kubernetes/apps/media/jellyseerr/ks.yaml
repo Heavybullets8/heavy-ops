@@ -4,22 +4,29 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app jellyseerr
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/external
+    - ../../../../components/volsync
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: database
     - name: external-secrets-stores
+      namespace: external-secrets
     - name: volsync
+      namespace: volsync-system
   wait: false
   path: ./kubernetes/apps/media/jellyseerr/app
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 30m
   timeout: 5m
   postBuild:

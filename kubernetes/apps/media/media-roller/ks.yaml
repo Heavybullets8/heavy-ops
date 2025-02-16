@@ -4,18 +4,21 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app media-roller
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/guarded
   wait: false
   path: ./kubernetes/apps/media/media-roller/app
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 30m
   timeout: 5m
   postBuild:

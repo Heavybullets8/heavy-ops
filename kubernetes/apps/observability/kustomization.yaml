@@ -1,11 +1,11 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: observability
+components:
+  - ../../components/common
 resources:
-  # Pre Flux-Kustomizations
-  - ./namespace.yaml
-  - ../../templates/alerts
-  # Flux-Kustomizations
   - ./dcgm-exporter/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
@@ -13,11 +13,3 @@ resources:
   - ./loki/ks.yaml
   - ./promtail/ks.yaml
   - ./smartctl-exporter/ks.yaml
-transformers:
-  - |-
-    apiVersion: builtin
-    kind: NamespaceTransformer
-    metadata:
-      name: not-used
-      namespace: observability
-    unsetOnly: true

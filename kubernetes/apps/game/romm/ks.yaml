@@ -4,20 +4,26 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app romm
-  namespace: flux-system
+  namespace: &namespace game
 spec:
-  targetNamespace: game
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/external
+    - ../../../../components/volsync
   dependsOn:
     - name: cloudnative-pg-cluster
+      namespace: database
     - name: external-secrets-stores
+      namespace: external-secrets
   path: ./kubernetes/apps/game/romm/app
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   wait: false
   interval: 30m
   timeout: 5m

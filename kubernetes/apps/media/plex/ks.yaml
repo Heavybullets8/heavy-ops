@@ -4,18 +4,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app plex
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/external
+    - ../../../../components/volsync
   wait: false
   path: kubernetes/apps/media/plex/plex
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 30m
   timeout: 5m
   postBuild:
@@ -30,20 +34,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app plex-auto-languages
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   wait: false
   path: kubernetes/apps/media/plex/plex-auto-languages
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 10m
   postBuild:
     substitute:
@@ -54,20 +60,24 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app kometa
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/volsync
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   wait: false
   path: kubernetes/apps/media/plex/kometa
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 10m
   postBuild:
     substitute:
@@ -79,20 +89,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app daps
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   wait: false
   path: kubernetes/apps/media/plex/daps
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 10m
   postBuild:
     substitute:
@@ -103,20 +115,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app new-plex-dubs
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   wait: false
   path: kubernetes/apps/media/plex/new-plex-dubs
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 10m
   postBuild:
     substitute:
@@ -127,20 +141,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app plex-image-cleanup
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
+      namespace: external-secrets
   wait: false
   path: kubernetes/apps/media/plex/plex-image-cleanup
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 10m
   postBuild:
     substitute:
@@ -151,18 +167,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app tautulli
-  namespace: flux-system
+  namespace: &namespace media
 spec:
-  targetNamespace: media
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   wait: false
   path: kubernetes/apps/media/plex/tautulli
   prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   interval: 30m
   timeout: 5m
   postBuild:

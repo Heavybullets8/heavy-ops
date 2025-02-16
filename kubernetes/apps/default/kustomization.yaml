@@ -2,11 +2,10 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: default
+components:
+  - ../../components/common
 resources:
-  # Pre Flux-Kustomizations
-  - ./namespace.yaml
-  - ../../templates/alerts
-  # Flux-Kustomizations
   - ./authelia/ks.yaml
   - ./glauth/ks.yaml
   - ./homepage/ks.yaml
@@ -16,11 +15,3 @@ resources:
   - ./stirling-pdf/ks.yaml
   - ./theme-park/ks.yaml
   - ./vaultwarden/ks.yaml
-transformers:
-  - |-
-    apiVersion: builtin
-    kind: NamespaceTransformer
-    metadata:
-      name: not-used
-      namespace: default
-    unsetOnly: true
