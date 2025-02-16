@@ -7,7 +7,6 @@
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":separatePatchReleases",
     ":skipStatusChecks",
     ":timezone(America/Denver)",
     "github>heavybullets8/heavy-ops//.github/renovate/autoMerge.json5",
