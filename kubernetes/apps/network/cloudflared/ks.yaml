@@ -16,7 +16,7 @@ spec:
     - name: external-dns-cloudflare
     - name: external-secrets-stores
   path: ./kubernetes/apps/network/cloudflared/app
-  prune: true
+  prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system

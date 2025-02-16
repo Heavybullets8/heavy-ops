@@ -14,7 +14,7 @@ spec:
     - name: external-secrets-stores
   wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbittorrent
-  prune: true
+  prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -42,7 +42,7 @@ spec:
     - name: external-secrets-stores
   wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbitmanage
-  prune: true
+  prune: false # TODO: Set to true
   sourceRef:
     kind: GitRepository
     name: flux-system
