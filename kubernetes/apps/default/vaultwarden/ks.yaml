@@ -14,7 +14,7 @@ spec:
     - ../../../../components/gatus/external
     - ../../../../components/volsync
   path: ./kubernetes/apps/default/vaultwarden/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

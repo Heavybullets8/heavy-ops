@@ -22,7 +22,7 @@ spec:
       namespace: volsync-system
   wait: false
   path: ./kubernetes/apps/media/jellyseerr/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

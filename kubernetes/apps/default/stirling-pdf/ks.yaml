@@ -13,7 +13,7 @@ spec:
   components:
     - ../../../../components/gatus/external
   path: ./kubernetes/apps/default/stirling-pdf/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -15,7 +15,7 @@ spec:
     - ../../../../components/volsync
   wait: false
   path: ./kubernetes/apps/media/komga/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

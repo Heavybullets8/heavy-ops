@@ -14,7 +14,7 @@ spec:
     - ../../../../components/gatus/guarded
   wait: false
   path: ./kubernetes/apps/media/media-roller/app
-  prune: false # TODO: Set to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
