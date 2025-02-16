@@ -15,7 +15,7 @@ spec:
   dependsOn:
     - name: external-dns-cloudflare
       namespace: *namespace
-    - name: external-secrets-stores
+    - name: onepassword-store
       namespace: external-secrets
   path: ./kubernetes/apps/network/cloudflared/app
   prune: true
