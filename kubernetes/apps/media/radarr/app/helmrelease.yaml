@@ -95,7 +95,6 @@ spec:
         runAsNonRoot: true
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: { type: RuntimeDefault }
 
     service:
       app:

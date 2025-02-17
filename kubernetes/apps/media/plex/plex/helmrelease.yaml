@@ -87,7 +87,6 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
-        seccompProfile: { type: RuntimeDefault }
       runtimeClassName: nvidia
 
     service:
