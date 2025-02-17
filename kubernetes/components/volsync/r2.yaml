@@ -65,7 +65,5 @@ spec:
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     capacity: "${VOLSYNC_CAPACITY}"
     cleanupCachePVC: true
-    # TODO: Enable once openebs 2.7.0 is out - Thanks for the confirm darkfella
-    # Ref: https://github.com/openebs/zfs-localpv/pull/613
-    # cleanupTempPVC: true
+    cleanupTempPVC: true
     enableFileDeletion: true
