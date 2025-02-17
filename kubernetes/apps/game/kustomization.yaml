@@ -6,5 +6,4 @@ namespace: game
 components:
   - ../../components/common
 resources:
-  - ./romm/ks.yaml
   - ./valheim/ks.yaml
