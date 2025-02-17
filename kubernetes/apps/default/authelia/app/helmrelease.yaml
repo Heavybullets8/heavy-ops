@@ -101,7 +101,6 @@ spec:
     ingress:
       app:
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.org/proxy-set-headers: >
             X-Frame-Options: SAMEORIGIN,
             X-XSS-Protection: 1; mode=block,
