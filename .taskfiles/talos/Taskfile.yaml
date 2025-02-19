@@ -5,7 +5,7 @@ version: '3'
 tasks:
   apply-node:
     desc: Apply Talos config to the node
-    cmd: minijinja-cli {{.TALOS_DIR}}/{{.TALOS_MACHINE_TYPE}}.yaml.j2 | op inject | talosctl --nodes {{.NODE_IP}} apply-config --mode {{.MODE}} --file /dev/stdin
+    cmd: minijinja-cli {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2 | op inject | talosctl --nodes {{.NODE_IP}} apply-config --mode {{.MODE}} --file /dev/stdin
     vars:
       MODE: '{{.MODE | default "auto"}}'
       NODE_IP: '192.168.200.15'
@@ -14,7 +14,7 @@ tasks:
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
       - test -f {{.ROOT_DIR}}/.talos.env
-      - test -f {{.TALOS_DIR}}/{{.TALOS_MACHINE_TYPE}}.yaml.j2
+      - test -f {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2
       - test -f {{.ROOT_DIR}}/talosconfig
       - which minijinja-cli op talosctl
 

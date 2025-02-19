@@ -76,7 +76,9 @@ machine:
       permissions: 420
       content: |
         [ NFSMount_Global_Options ]
-        nconnect=8
+        proto=rdma
+        port=20049
+      # nconnect=8
       #   content: |
       #     [ NFSMount_Global_Options ]
       #     proto=rdma
