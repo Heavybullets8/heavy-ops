@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: ronnieroller/media-roller
-              tag: "latest@sha256:6ea2f7ea1ddaad53ba37ca103c854a7fc5634fcdd763b28f464ae11b215b3e8b"
+              repository: "ghcr.io/rroller/media-roller"
+              tag: "master@sha256:8b68495530a62b9c192c13aecf61e93986b65e267238aa288409dcc1dcfe1807"
             command:
               - /bin/sh
               - -c
