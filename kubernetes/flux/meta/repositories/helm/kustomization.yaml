@@ -21,6 +21,7 @@ resources:
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
+  - ./kustomize-mutating-webhook.yaml
   - ./metrics-server.yaml
   - ./nextcloud.yaml
   - ./node-feature-discovery.yaml
