@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: test-db
+  namespace: database
+spec:
+  name: test-db
+  owner: test-db
+  cluster:
+    name: postgres16
