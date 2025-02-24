@@ -65,6 +65,7 @@ machine:
       - security=none
       - init_on_alloc=0
       - init_on_free=0
+      - talos.auditd.disabled=1
   files:
     - op: create
       path: /etc/cri/conf.d/20-customization.part
@@ -78,11 +79,6 @@ machine:
         [ NFSMount_Global_Options ]
         proto=rdma
         port=20049
-      # nconnect=8
-      #   content: |
-      #     [ NFSMount_Global_Options ]
-      #     proto=rdma
-      #     port=20049
   sysctls:
     fs.inotify.max_queued_events: "65536"
     fs.inotify.max_user_instances: "8192"
@@ -95,7 +91,6 @@ machine:
     net.core.wmem_default: "67108864"
     net.core.optmem_max: "67108864"
     net.core.netdev_max_backlog: "250000"
-    net.ipv4.tcp_timestamps: "0"
     net.ipv4.tcp_congestion_control: bbr
     net.ipv4.tcp_fastopen: 3
     net.ipv4.tcp_max_syn_backlog: "8192"
