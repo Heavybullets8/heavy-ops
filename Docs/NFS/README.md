@@ -1,21 +1,26 @@
-# NFS-RDMA Setup Guide (ARCHIVE, I No longer use RDMA, caused too many crashes at least with RoCE)
+# NFS-RDMA Setup Guide
 
-This guide explains how to enable NFS over RDMA between a Talos Linux client and a TrueNAS SCALE server. RDMA (Remote Direct Memory Access) allows for high-throughput, low-latency networking.
+This guide explains how to enable NFS over RDMA between a Talos Linux client and
+a TrueNAS SCALE server. RDMA (Remote Direct Memory Access) allows for
+high-throughput, low-latency networking.
 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
 2. [Server Setup (TrueNAS SCALE)](#server-setup-truenas-scale)
 3. [Client Setup (Talos Linux)](#client-setup-talos-linux)
-6. [Helm Release Usage](#helm-release-usage)
-7. [Cilium Consideration](#cilium-consideration)
-8. [Additional Resources](#additional-resources)
+4. [Helm Release Usage](#helm-release-usage)
+5. [Cilium Consideration](#cilium-consideration)
+6. [Additional Resources](#additional-resources)
 
 ---
 
 ## Prerequisites
 
-- **NIC Support:** Ensure that both the server and client network interface cards (NICs) support RDMA. Without RDMA-capable NICs, this setup will not work. If a switch is between the two NICs, it will also need to support RDMA, which is why a direct connection is recommended.
+- **NIC Support:** Ensure that both the server and client network interface
+  cards (NICs) support RDMA. Without RDMA-capable NICs, this setup will not
+  work. If a switch is between the two NICs, it will also need to support RDMA,
+  which is why a direct connection is recommended.
 - **Software:**
   - TrueNAS SCALE (Optional, any Server should be fine, but I only cover TNS)
   - Talos Linux
@@ -25,7 +30,9 @@ This guide explains how to enable NFS over RDMA between a Talos Linux client and
 
 ## Network Configuration
 
-Since I am using a direct connection, I chose an IP space that was not being used. I went with `10.10.10.0/30`, giving us 2 active IP addresses. One for the server, one for Talos.
+Since I am using a direct connection, I chose an IP space that was not being
+used. I went with `10.10.10.0/30`, giving us 2 active IP addresses. One for the
+server, one for Talos.
 
 - **Subnet:** Use a `/30` subnet for the direct connection.
 - **IP Addresses:**
@@ -52,20 +59,28 @@ Since I am using a direct connection, I chose an IP space that was not being use
    - **When:** Post Init
 
 ### Network Settings
-My Mellanox has two ports, one is connected to the switch for LAN and WAN, the other is directly connected to the client (Talos) and has the following settings:
+
+My Mellanox has two ports, one is connected to the switch for LAN and WAN, the
+other is directly connected to the client (Talos) and has the following
+settings:
 
 <img src="tns-nfs-networking.png" alt="TrueNAS SCALE Configuration" width="35%"/>
 
 ### NFS Service Configuration
 
 **Navigate to NFS Service Settings:**
-  - Go to `System Settings` > `Advanced` > `Services`.
-  - Click the **Pencil Icon** to the right of the **NFS** service to edit its settings.
+
+- Go to `System Settings` > `Advanced` > `Services`.
+- Click the **Pencil Icon** to the right of the **NFS** service to edit its
+  settings.
   <img src="tns-nfs-settings.png" alt="NFS Settings on TrueNAS SCALE Server" width="50%"/>
 
 ### Cron Job
 
-Since TrueNAS SCALE does not support RDMA by default, theres a chance that the portlist is reset.. I have ran into this, which has unfortunately caused me to create a cronjob that runs every 5 mintues to ensure the RDMA port is in the port list..
+Since TrueNAS SCALE does not support RDMA by default, theres a chance that the
+portlist is reset.. I have ran into this, which has unfortunately caused me to
+create a cronjob that runs every 5 mintues to ensure the RDMA port is in the
+port list..
 
 This is likely not needed if you are not using TrueNAS SCALE.
 
@@ -128,10 +143,7 @@ machine:
         port = 20049
 ```
 
-Note: Pretty much everything unlisted, such as the version, (r|w)size are all auto-negotiated to the highest value, so I ommit them from my config.
-Additionally, atime mount options have no affect on NFS.
-Ref: https://man7.org/linux/man-pages/man5/nfs.5.html
----
+## Note: Pretty much everything unlisted, such as the version, (r|w)size are all auto-negotiated to the highest value, so I ommit them from my config. Additionally, atime mount options have no affect on NFS. Ref: https://man7.org/linux/man-pages/man5/nfs.5.html
 
 ## Helm Release Usage
 
@@ -151,7 +163,8 @@ media:
 
 ## Cilium Consideration
 
-If using Cilium for layer 2 announcements, set the `Outbound` (Non RDMA NIC) as the interface:
+If using Cilium for layer 2 announcements, set the `Outbound` (Non RDMA NIC) as
+the interface:
 
 ```yaml
 # https://docs.cilium.io/en/latest/network/l2-announcements
@@ -173,4 +186,6 @@ spec:
 
 - [NVIDIA Enterprise Support: How to Configure NFS over RDMA (RoCE)](https://enterprise-support.nvidia.com/s/article/howto-configure-nfs-over-rdma--roce-x)
 
-  **Note:** `xprtrdma` is [already enabled](https://github.com/siderolabs/pkgs/blob/38749d1f08fcb46e522450c1ad530309a8fa327d/kernel/build/config-amd64#L6308C1-L6308C26) on Talos Linux, so there is no need to enable it in any way.
+  **Note:** `xprtrdma` is
+  [already enabled](https://github.com/siderolabs/pkgs/blob/38749d1f08fcb46e522450c1ad530309a8fa327d/kernel/build/config-amd64#L6308C1-L6308C26)
+  on Talos Linux, so there is no need to enable it in any way.
