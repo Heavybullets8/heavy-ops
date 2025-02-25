@@ -194,9 +194,10 @@ spec:
           - path: /media/download/torrent
 
       addons:
-        type: emptyDir
-        globalMounts:
-          - path: /addons
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: openebs-hostpath
+        size: 1Gi
 
       # TODO: Remove once snatches are sufficient
       tempmedia:
