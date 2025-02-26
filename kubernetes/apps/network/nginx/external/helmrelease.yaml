@@ -63,7 +63,6 @@ spec:
         keep-alive-requests: 10000
         keep-alive: 120
         log-format-escape-json: "true"
-        TODO: Uncomment once maxmind is no longer exhausted
         log-format-upstream: >
           {"time": "$time_iso8601", "remote_addr": "$http_cf_connecting_ip", "x_forwarded_for": "$proxy_add_x_forwarded_for",
           "request_id": "$req_id", "remote_user": "$remote_user", "bytes_sent": $bytes_sent, "request_time": $request_time,
