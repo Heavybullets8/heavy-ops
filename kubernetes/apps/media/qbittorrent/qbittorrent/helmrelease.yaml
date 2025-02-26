@@ -88,9 +88,7 @@ spec:
               FIREWALL_INPUT_PORTS: 80,8388,9999 # 80: WebUI, 8388: Socks Proxy, 9999 Kube Probes
               FIREWALL_VPN_INPUT_PORTS: *BT-port
               HEALTH_SERVER_ADDRESS: :9999
-              HEALTH_SUCCESS_WAIT_DURATION: 10s
               HEALTH_TARGET_ADDRESS: airvpn.org
-              PUBLICIP_ENABLED: false
               VPN_TYPE: wireguard
               VPN_INTERFACE: tun0
               VPN_SERVICE_PROVIDER: airvpn
