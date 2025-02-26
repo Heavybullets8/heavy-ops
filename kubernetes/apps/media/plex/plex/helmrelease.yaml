@@ -117,22 +117,23 @@ spec:
           - path: /config/Library/Application Support/Plex Media Server
 
       cache:
-        existingClaim: plex-cache
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: openebs-zfs-64k
+        size: 100Gi
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Cache
 
-      logs:
+      temporary:
         type: emptyDir
+        medium: Memory
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Logs
-
-      tmp:
-        type: emptyDir
-        medium: Memory
-
-      transcode:
-        type: emptyDir
-        medium: Memory
+            subPath: logs
+          - path: /tmp
+            subPath: tmp
+          - path: /transcode
+            subPath: transcode
 
       media:
         type: nfs
