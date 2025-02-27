@@ -12,5 +12,8 @@ configMapGenerator:
     options:
       labels:
         loki_rule: "true"
+  - name: config.js
+    files:
+      - config.js=./config/config.js
 generatorOptions:
   disableNameSuffixHash: true
