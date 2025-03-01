@@ -4,31 +4,10 @@ version: '3'
 
 tasks:
 
-  talos:
-    desc: Bootstrap Single Node Talos
-    cmds:
-      - cmd: minijinja-cli {{.TALOS_DIR}}/controlplane.yaml.j2 | op inject | talosctl --nodes {{.NODE_IP}} apply-config --insecure --file /dev/stdin
-      - until talosctl --nodes {{.NODE_IP}} bootstrap; do sleep 5; done
-      - talosctl kubeconfig --nodes {{.NODE_IP}} --force --force-context-name main {{.ROOT_DIR}}
-    vars:
-      NODE_IP:
-        sh: talosctl config info --output json | jq --raw-output '.endpoints[0]'
+  default:
+    desc: Bootstrap Talos node and Cluster apps
+    cmd: bash {{.SCRIPTS_DIR}}/bootstrap-cluster.sh {{.NODE_IP}}
     preconditions:
-      - op user get --me
-      - talosctl config info
-      - test -f {{.ROOT_DIR}}/talos/192.168.200.15.yaml
-      - which jq minijinja-cli op talosctl
-
-  apps:
-    desc: Bootstrap Apps
-    prompt: Bootstrap apps into the Talos cluster?
-    cmds:
-      - bash {{.BOOTSTRAP_DIR}}/resources/prepare.sh
-      - helmfile --file {{.BOOTSTRAP_DIR}}/helmfile.yaml apply --skip-diff-on-install --suppress-diff
-    preconditions:
-      - op user get --me
       - talosctl config info
       - test -f {{.ROOT_DIR}}/talosconfig
-      - test -f {{.BOOTSTRAP_DIR}}/helmfile.yaml
-      - test -f {{.BOOTSTRAP_DIR}}/resources/prepare.sh
-      - which helmfile op talosctl
+      - test -f {{.SCRIPTS_DIR}}/bootstrap-cluster.sh

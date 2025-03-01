@@ -3,76 +3,66 @@
 version: '3'
 
 tasks:
-  apply-node:
-    desc: Apply Talos config to the node
-    cmd: minijinja-cli {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2 | op inject | talosctl --nodes {{.NODE_IP}} apply-config --mode {{.MODE}} --file /dev/stdin
+
+  apply:
+    desc: Apply Talos config to the node [MODE=auto]
     vars:
       MODE: '{{.MODE | default "auto"}}'
-      NODE_IP: '192.168.200.15'
-      TALOS_MACHINE_TYPE:
-        sh: talosctl --nodes {{.NODE_IP}} get machinetypes --output jsonpath='{.spec}'
+      CONFIG_FILE: '{{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2'
+    cmd: |
+      minijinja-cli {{.CONFIG_FILE}} | op inject | talosctl --nodes {{.NODE_IP}} apply-config --mode {{.MODE}} --file /dev/stdin
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
-      - test -f {{.ROOT_DIR}}/.talos.env
-      - test -f {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2
-      - test -f {{.ROOT_DIR}}/talosconfig
+      - test -f {{.CONFIG_FILE}}
       - which minijinja-cli op talosctl
 
-  upgrade-node:
-    desc: Upgrade Talos on the node
-    cmd: talosctl --nodes {{.NODE_IP}} upgrade --image="{{.TALOS_IMAGE}}" --timeout=10m
+  upgrade:
+    desc: Upgrade Talos on the node [MODE=powercycle]
     vars:
-      NODE_IP: '192.168.200.15'
-      TALOS_MACHINE_TYPE:
-        sh: talosctl --nodes {{.NODE_IP}} get machinetypes --output jsonpath='{.spec}'
-      TALOS_IMAGE:
-        sh: minijinja-cli {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2 | yq '.machine.install.image' -
+      MODE: '{{.MODE | default "powercycle"}}'
+      FACTORY_IMAGE:
+        sh: minijinja-cli {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2 | yq --exit-status '.machine.install.image'
+    cmd: talosctl --nodes {{.NODE_IP}} upgrade --image="{{.FACTORY_IMAGE}}" --reboot-mode={{.MODE}} --timeout=10m
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
-      - test -f {{.ROOT_DIR}}/.talos.env
-      - test -f {{.TALOS_DIR}}/{{.NODE_IP}}.yaml.j2
-      - test -f {{.ROOT_DIR}}/talosconfig
+      - test -f {{.TALOS_DIR}}/nodes/{{.NODE_IP}}.yaml.j2
       - which minijinja-cli talosctl yq
 
   upgrade-k8s:
     desc: Upgrade Kubernetes on the node
     cmd: talosctl --nodes {{.NODE_IP}} upgrade-k8s --to $KUBERNETES_VERSION
-    vars:
-      NODE_IP: '192.168.200.15'
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
-      - test -f {{.ROOT_DIR}}/.talos.env
-      - test -f {{.ROOT_DIR}}/talosconfig
       - which talosctl
 
-  reboot-node:
-    desc: Reboot Talos node
+  reboot:
+    desc: Reboot Talos on the node [MODE=powercycle]
+    vars:
+      MODE: '{{.MODE | default "powercycle"}}'
     cmd: talosctl --nodes {{.NODE_IP}} reboot --mode={{.MODE}}
-    vars:
-      NODE_IP: '192.168.200.15'
-      MODE: '{{.MODE | default "default"}}'
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
-      - test -f {{.ROOT_DIR}}/.talos.env
-      - test -f {{.ROOT_DIR}}/talosconfig
       - which talosctl
 
-  reset-node:
-    desc: Reset Talos node
-    prompt: Reset Talos node ... continue?
-    cmd: talosctl reset --nodes {{.NODE_IP}} --graceful=false
-    vars:
-      NODE_IP: '192.168.200.15'
+  shutdown:
+    desc: Shutdown the Talos node
+    prompt: Shutdown the Talos node ... continue?
+    cmd: talosctl shutdown --nodes {{.NODE_IP}} --force
     preconditions:
       - talosctl --nodes {{.NODE_IP}} get machineconfig
-      - test -f {{.ROOT_DIR}}/talosconfig
+      - which talosctl
+
+  reset:
+    desc: Reset Talos on the node
+    prompt: Reset Talos node '{{.NODE_IP}}' ... continue?
+    cmd: talosctl reset --nodes {{.NODE_IP}} --graceful=false
+    preconditions:
+      - talosctl --nodes {{.NODE_IP}} get machineconfig
       - which talosctl
 
   kubeconfig:
-    desc: Generate the kubeconfig
+    desc: Generate the kubeconfig for the Talos node
     cmd: talosctl kubeconfig --nodes {{.NODE_IP}} --force --force-context-name main {{.ROOT_DIR}}
-    vars:
-      NODE_IP: '192.168.200.15'
     preconditions:
-      - test -f {{.ROOT_DIR}}/talosconfig
+      - talosctl --nodes {{.NODE_IP}} get machineconfig
       - which talosctl
