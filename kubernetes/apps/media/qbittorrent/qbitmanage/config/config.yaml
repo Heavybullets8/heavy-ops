@@ -14,7 +14,6 @@ settings:
   share_limits_min_seeding_time_tag: MinSeedTimeNotReached
   share_limits_min_num_seeds_tag: MinSeedsNotMet
   share_limits_last_active_tag: LastActiveLimitNotReached
-  cross_seed_tag: cross-seed
   cat_filter_completed: true
   share_limits_filter_completed: true
   tag_nohardlinks_filter_completed: true
@@ -46,23 +45,48 @@ nohardlinks:
         - MaM
 
 share_limits:
+  # Torrents not in use by plex, and not "ignored" or "other"
+  # These should be removed to save space on the server
   noHL:
-    priority: 5
+    priority: 1
     exclude_any_tags:
+      - ignore
       - other
     include_all_tags:
       - noHL
-    last_active: 2h
-    max_seeding_time: 90d
-    max_ratio: 10
+    last_active: 1m
+    max_seeding_time: 30d
+    max_ratio: 4
     cleanup: true
+  # Torrents pulled for initial swarm, increasing snatches
   snatches:
+    priority: 2
     categories:
       - snatches
     last_active: 1m
     max_seeding_time: 7d
     max_ratio: 2
     cleanup: true
+  # Torrents associated with files currently being used by plex
+  # Also apart of a private tracker
+  # Do not remove these, or stop seeding them
+  private:
+    priority: 3
+    exclude_any_tags:
+      - ignore
+      - other
+    include_any_tags: {{ .QBITMANAGE_PRIVATE_TAGS | nindent 4 }}
+  # Torrents associated with files currently being used by plex
+  # Also apart of a public tracker
+  # Do not remove these, but stop seeding them
+  public:
+    priority: 4
+    exclude_any_tags:
+      - ignore
+      - other
+    last_active: 1m
+    max_seeding_time: 14d
+    max_ratio: 4
 
 recyclebin:
   # TODO: Re-enable later
