@@ -17,6 +17,8 @@ settings:
   cat_filter_completed: true
   share_limits_filter_completed: true
   tag_nohardlinks_filter_completed: true
+  tag_stalled_torrents: true
+  rem_unregistered_ignore_list: []
   cat_update_all: true
   disable_qbt_default_share_limits: true
 
@@ -98,6 +100,7 @@ recyclebin:
   max_orphaned_files_to_delete: 50
 
 orphaned:
+  max_orphaned_files_to_delete: 50
   empty_after_x_days: 3
   exclude_patterns:
   - '**/.DS_Store'
