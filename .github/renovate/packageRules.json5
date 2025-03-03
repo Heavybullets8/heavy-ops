@@ -4,20 +4,20 @@
     {
       "description": ["Allowed postgresql major release"],
       "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["postgresql"],
+      "matchPackageNames": ["/postgresql/"],
       "allowedVersions": "<17"
     },
     {
       "description": ["Custom schedule for frequently updated container digests"],
       "matchDataSources": ["docker"],
-      "matchPackagePatterns": ["postgresql"],
+      "matchPackageNames": ["/postgresql/"],
       "matchUpdateTypes": ["digest"],
       "schedule": ["every 3 months on the first day of the month"]
     },
     {
       "description": ["Loose versioning for non-semver containers"],
       "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["plex"],
+      "matchPackageNames": ["/plex/"],
       "versioning": "loose"
     }
   ]

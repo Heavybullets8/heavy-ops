@@ -14,6 +14,7 @@ machine:
     image: ghcr.io/siderolabs/kubelet:{{ ENV.KUBERNETES_VERSION }}
     extraConfig:
       maxPods: 150
+      serializeImagePulls: false
     extraMounts:
       - destination: /var/openebs/local
         type: bind
