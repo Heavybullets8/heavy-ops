@@ -14,7 +14,7 @@ spec:
     - name: flux-operator
       namespace: flux-system
   path: ./kubernetes/apps/flux-system/flux-instance/app
-  prune: false # never should be deleted
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
