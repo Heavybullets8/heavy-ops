@@ -4,28 +4,26 @@
     {
       "description": ["1Password Connect Group"],
       "groupName": "1Password Connnect",
-      "matchPackagePatterns": ["1password/connect"],
       "matchDatasources": ["docker"],
+      "matchPackageNames": ["/1password/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
-      },
-      "separateMinorPatch": true
+      }
     },
     {
       "description": ["Actions Runner Controller Group"],
       "groupName": "Actions Runner Controller",
-      "matchPackagePatterns": ["gha-runner-scale-set"],
       "matchDatasources": ["docker", "helm"],
+      "matchPackageNames": ["/gha-runner-scale-set/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
-      },
-      "separateMinorPatch": true
+      }
     },
     {
       "description": ["Flux Operator Group"],
       "groupName": "Flux Operator",
-      "matchPackagePatterns": ["flux-operator", "flux-instance"],
       "matchDatasources": ["docker"],
+      "matchPackageNames": ["/flux-operator/", "/flux-instance/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
@@ -33,8 +31,8 @@
     {
       "description": ["Dragonfly Operator Group"],
       "groupName": "Dragonfly Operator",
-      "matchPackagePatterns": ["dragonfly(?:db)?.operator"],
       "matchDatasources": ["docker", "github-releases"],
+      "matchPackageNames": ["/dragonflydb/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       },
@@ -43,7 +41,7 @@
     {
       "description": ["Immich Group"],
       "groupName": "Immich",
-      "matchPackageNames": "/immich/",
+      "matchPackageNames": ["/immich/"],
       "matchDatasources": ["github-releases", "docker"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
@@ -53,7 +51,7 @@
     {
       "description": ["Talos Group"],
       "groupName": "Talos",
-      "matchPackagePatterns": ["siderolabs/talosctl", "siderolabs/installer"],
+      "matchPackageNames": ["/siderolabs/"],
       "matchDatasources": ["docker"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
