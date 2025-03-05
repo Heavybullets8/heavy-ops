@@ -16,7 +16,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: database
-    - name: onepassword-store
+    - name: onepassword
       namespace: external-secrets
   wait: false
   path: ./kubernetes/apps/media/sonarr/app

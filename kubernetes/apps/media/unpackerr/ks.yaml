@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: onepassword-store
+    - name: onepassword
       namespace: external-secrets
   wait: false
   path: ./kubernetes/apps/media/unpackerr/app
