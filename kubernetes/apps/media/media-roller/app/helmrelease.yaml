@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: "ghcr.io/rroller/media-roller"
-              tag: "latest@sha256:77f6b22ed7bb0f4e7f403021c5948efceab9779b9a7631e455959bb45e055699"
+              tag: "latest@sha256:2806af4f3ea618513985c1b36c1ef790fbab7417dde3c23754166603a9b65eb5"
             command:
               - /bin/sh
               - -c
