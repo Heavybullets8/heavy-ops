@@ -10,6 +10,8 @@ spec:
     kind: OCIRepository
     name: external-secrets
     namespace: external-secrets
+  driftDetection:
+    mode: enabled
   install:
     remediation:
       retries: 3
