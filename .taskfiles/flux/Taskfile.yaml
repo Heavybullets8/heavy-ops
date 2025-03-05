@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+
+  rk:
+    desc: Reconcile all Kustomizations across the cluster
+    cmd: >
+      kubectl get kustomization --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{" "}{.metadata.name}{"\n"}{end}' |
+      xargs -I {} bash -c 'flux reconcile kustomization -n $(echo {} | cut -d" " -f1) $(echo {} | cut -d" " -f2)'
+    preconditions:
+      - which flux kubectl
+
+  rh:
+    desc: Reconcile all HelmReleases across the cluster
+    cmd: >
+      kubectl get helmrelease --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{" "}{.metadata.name}{"\n"}{end}' |
+      xargs -I {} bash -c 'flux reconcile helmrelease -n $(echo {} | cut -d" " -f1) $(echo {} | cut -d" " -f2)'
+    preconditions:
+      - which flux kubectl
