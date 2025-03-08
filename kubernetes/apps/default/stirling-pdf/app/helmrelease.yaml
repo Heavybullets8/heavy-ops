@@ -34,6 +34,8 @@ spec:
               TZ: ${TIMEZONE}
               DOCKER_ENABLE_SECURITY: false
               SECURITY_ENABLE_LOGIN: false
+              # TODO: remove once https://github.com/Stirling-Tools/Stirling-PDF/issues/3138 is closed
+              PATH: "/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
             resources:
               requests:
                 cpu: 10m
