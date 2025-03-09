@@ -29,18 +29,23 @@ spec:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
               tag: 0.44.0@sha256:d315d6fcc03da60e939d4924335fa7fa8ad6b990bac99a7a17ebfacc37f6a88f
-              pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
               DOCKER_ENABLE_SECURITY: false
+              LANGS: en_US
+              METRICS_ENABLED: false
+              SYSTEM_CUSTOMPATHS_OPERATIONS_WEASYPRINT: "/opt/venv/bin/weasyprint"
+              SYSTEM_CUSTOMPATHS_OPERATIONS_UNOCONVERT: "/opt/venv/bin/unoconvert"
+              SYSTEM_DEFAULTLOCALE: en-US
+              SYSTEM_ENABLEANALYTICS: false
               SECURITY_ENABLE_LOGIN: false
-              # TODO: remove once https://github.com/Stirling-Tools/Stirling-PDF/issues/3138 is closed
-              PATH: "/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+              SYSTEM_GOOGLEVISIBILITY: false
+              SYSTEM_SHOW_UPDATE: false
             resources:
               requests:
                 cpu: 10m
               limits:
-                memory: 5Gi
+                memory: 8Gi
 
     service:
       app:
@@ -61,11 +66,19 @@ spec:
                   port: http
 
     persistence:
-      configs:
+      temporary:
         type: emptyDir
-      logs:
-        type: emptyDir
-      tessdata:
-        type: emptyDir
+        medium: Memory
         globalMounts:
+          - path: /configs
+            subPath: configs
+          - path: /customFiles
+            subPath: customFiles
+          - path: /logs
+            subPath: logs
+          - path: /pipeline
+            subPath: pipeline
+          - path: /tmp
+            subPath: tmp
           - path: /usr/share/tessdata
+            subPath: tessdata
