@@ -54,8 +54,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr-develop
-              tag: 1.32.1.4983@sha256:2843eddba1d11bde19b733a9226b996775fcb39701ca0c6c1e746222ded35dc6
+              repository: ghcr.io/onedr0p/prowlarr
+              tag: 1.31.2@sha256:f1c8615cab30b98b2a71254ceafea5b99fa8000d71276df3347cb230e9e5af01
             env:
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__APP__THEME: dark
@@ -63,7 +63,6 @@ spec:
               PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
               PROWLARR__LOG__LEVEL: info
               PROWLARR__SERVER__PORT: &port 80
-              PROWLARR__UPDATE__BRANCH: develop
               PROWLARR__LOG__DBENABLED: "False"
               TZ: ${TIMEZONE}
             envFrom: *envFrom
