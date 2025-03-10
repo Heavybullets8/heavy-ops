@@ -12,7 +12,7 @@ configMapGenerator:
     options:
       labels:
         loki_rule: "true"
-  - name: config.js
+  - name: cross-seed-configmap
     files:
       - config.js=./config/config.js
 generatorOptions:
