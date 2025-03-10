@@ -1,177 +1,224 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Set global variables
-export LOG_LEVEL
-export ROOT_DIR
+export LOG_LEVEL LOG_LEVELS ROOT_DIR NODE_IP
+NODE_IP=$1
 
 LOG_LEVEL="debug"
+LOG_LEVELS=([ERROR]=1 [WARNING]=2 [INFO]=3 [DEBUG]=4)
 ROOT_DIR="$(git rev-parse --show-toplevel)"
 
-# Log function (unchanged)
-function log() {
-    local level="${1:-info}"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+log() {
+    local level="$1"
     shift
-    local -A level_priority=([debug]=1 [info]=2 [warn]=3 [error]=4)
-    local current_priority=${level_priority[$level]:-2}
-    local configured_level=${LOG_LEVEL:-info}
-    local configured_priority=${level_priority[$configured_level]:-2}
-    if ((current_priority < configured_priority)); then
-        return
+
+    level=$(echo "$level" | tr '[:lower:]' '[:upper:]')
+
+    if [[ -z "${LOG_LEVELS[$level]}" ]]; then
+        echo "Invalid log level: $level" >&2
+        return 1
     fi
-    local -A colors=([debug]="\033[1m\033[38;5;63m" [info]="\033[1m\033[38;5;87m" [warn]="\033[1m\033[38;5;192m" [error]="\033[1m\033[38;5;198m")
-    local color="${colors[$level]:-${colors[info]}}"
-    local msg="$1"
-    shift
-    local data=""
-    if [[ $# -gt 0 ]]; then
-        for item in "$@"; do
-            if [[ "${item}" == *=* ]]; then
-                data+="\033[1m\033[38;5;236m${item%%=*}=\033[0m\"${item#*=}\" "
-            else
-                data+="${item} "
-            fi
-        done
+
+    local level_num=${LOG_LEVELS[$level]}
+    local threshold_num=${LOG_LEVELS[$LOG_LEVEL]}
+
+    if ((level_num <= threshold_num)); then
+        local color
+
+        case "$level" in
+        ERROR) color="$RED" ;;
+        WARNING) color="$YELLOW" ;;
+        INFO) color="$GREEN" ;;
+        DEBUG) color="$BLUE" ;;
+        *) color="$NC" ;;
+        esac
+
+        printf "${color}[%s] [%s] %s${NC}\n" "$level" "$*"
     fi
-    local output_stream="/dev/stdout"
-    [[ "$level" == "error" ]] && output_stream="/dev/stderr"
-    printf "%s %b%s%b %s %b\n" "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" "${color}" "${level^^}" "\033[0m" "${msg}" "${data}" >"${output_stream}"
-    [[ "$level" == "error" ]] && exit 1
 }
 
-# Check env and cli functions (unchanged)
 function check_env() {
     local envs=("$@")
-    local missing=()
+    local exit_bool=false
+
+    log debug "Checking Enivironment Variables..."
+
     for env in "${envs[@]}"; do
-        [[ -z "${!env-}" ]] && missing+=("${env}")
+        if [[ -z "${!env-}" ]]; then
+            log error \""$env\" unset.."
+            exit_bool=true
+        else
+            log debug "\"$env\" set.."
+        fi
     done
-    [[ ${#missing[@]} -ne 0 ]] && log error "Missing required env variables" "envs=${missing[*]}"
-    log debug "Env variables are set" "envs=${envs[*]}"
+
+    $exit_bool && exit 1
 }
 
 function check_cli() {
     local deps=("$@")
-    local missing=()
+    local exit_bool=false
+
+    log debug "Checking Dependencies..."
+
     for dep in "${deps[@]}"; do
-        command -v "${dep}" &>/dev/null || missing+=("${dep}")
+        if ! command -v "$dep" &>/dev/null; then
+            log error "\"$dep\" not found.."
+            exit_bool=true
+        else
+            log debug "\"$dep\" found.."
+        fi
     done
-    [[ ${#missing[@]} -ne 0 ]] && log error "Missing required deps" "deps=${missing[*]}"
-    log debug "Deps are installed" "deps=${deps[*]}"
+
+    $exit_bool && exit 1
 }
 
-# Render template function (unchanged)
 function render_template() {
     local file="$1"
-    [[ ! -f "$file" ]] && log error "File does not exist" "file=$file"
     local output
-    if ! output=$(minijinja-cli "$file" | op inject 2>/dev/null) || [[ -z "$output" ]]; then
-        log error "Failed to render config" "file=$file"
+
+    log debug "Rendering \"$file\""
+
+    if [[ ! -f "$file" ]]; then
+        log error "File not found file=\"$file\""
+        exit 1
     fi
+
+    if ! output=$(minijinja-cli "$file" | op inject 2>/dev/null) || [[ -z "$output" ]]; then
+        log error "Failed to render file=\"$file\""
+        exit 1
+    fi
+
     echo "$output"
 }
 
-# Apply Talos config with improved path
 function apply_talos_config() {
-    local config_file="${ROOT_DIR}/talos/${node}.yaml.j2"
-    log debug "Applying Talos configuration" "node=$node" "file=$config_file"
-    [[ ! -f "$config_file" ]] && log error "No Talos config file found" "file=$config_file"
+    local config_file="${ROOT_DIR}/talos/${NODE_IP}.yaml.j2"
     local machine_config
-    if ! machine_config=$(render_template "$config_file") || [[ -z "$machine_config" ]]; then
-        log error "Failed to render Talos config" "file=$config_file"
-    fi
-    log info "Talos config rendered successfully" "node=$node"
+
+    log info "\nApplying Talos configuration"
+
+    machine_config=$(render_template "$config_file")
+    log info "Talos config rendered successfully"
+
     local output
-    if ! output=$(echo "$machine_config" | talosctl --nodes "$node" apply-config --insecure --file /dev/stdin 2>&1); then
+    if ! output=$(echo "$machine_config" | talosctl --nodes "$NODE_IP" apply-config --insecure --file /dev/stdin 2>&1); then
         if [[ "$output" == *"certificate required"* ]]; then
-            log warn "Talos node already configured, skipping" "node=$node"
+            log warn "Looks like talos is already bootstrapped..."
+            log warn "Will still attempt to bootstrap applications..."
         else
-            log error "Failed to apply Talos config" "node=$node" "output=$output"
+            log error "Failed to apply Talos config output=\"$output\""
+            exit 1
         fi
     else
-        log info "Talos config applied successfully" "node=$node"
+        log info "Talos config applied successfully"
     fi
 }
 
-# Remaining functions (unchanged except for using global $node)
 function bootstrap_talos() {
-    log debug "Bootstrapping Talos" "node=$node"
     local bootstrapped=true
     local output
-    until output=$(talosctl --nodes "$node" bootstrap 2>&1); do
+
+    log info "\nBootstrapping Talos"
+
+    until output=$(talosctl --nodes "$NODE_IP" bootstrap 2>&1); do
+
         if [[ "$bootstrapped" == true && "$output" == *"AlreadyExists"* ]]; then
-            log info "Talos is bootstrapped" "node=$node"
+            log info "Talos is bootstrapped"
             break
         fi
+
         bootstrapped=false
-        log info "Talos bootstrap failed, retrying in 10s" "node=$node"
+        log info "Talos bootstrap failed, retrying in 10s"
         sleep 10
     done
 }
 
 function fetch_kubeconfig() {
-    log debug "Fetching kubeconfig" "node=$node"
-    if ! talosctl kubeconfig --nodes "$node" --force --force-context-name main "$(basename "${KUBECONFIG}")" &>/dev/null; then
-        log error "Failed to fetch kubeconfig" "node=$node"
+    log info "\nFetching kubeconfig"
+
+    if ! output=$(talosctl kubeconfig --nodes "$NODE_IP" --force --force-context-name main "$(basename "${KUBECONFIG}")" 2>&1); then
+        log error "Failed to fetch kubeconfig: $output"
+        exit 1
     fi
+
     log info "Kubeconfig fetched successfully"
 }
 
 function wait_for_nodes() {
-    log debug "Waiting for node to be available"
+    log info "\nWaiting for node to be available"
+
     if kubectl wait nodes --for=condition=Ready=True --all --timeout=10s &>/dev/null; then
         log info "Node is ready, skipping wait"
         return
     fi
+
+    # HACK: Hmm. this is from onedr0p, confused about the Ready=False. We'll see on next bootstrap.
     until kubectl wait nodes --for=condition=Ready=False --all --timeout=10s &>/dev/null; do
-        log info "Node not available, retrying in 10s"
+        log info "Node not ready, retrying in 10s"
         sleep 10
     done
 }
 
 function apply_resources() {
-    log debug "Applying resources"
     local resources_file="${ROOT_DIR}/bootstrap/resources.yaml.j2"
-    [[ ! -f "$resources_file" ]] && {
-        log warn "Resources file not found, skipping" "file=$resources_file"
-        return
-    }
+
+    log info "\nApplying resources"
+
+    if [[ ! -f "$resources_file" ]]; then
+        log error "Resources file not found..."
+        exit 1
+    fi
+
     local output
-    if ! output=$(render_template "$resources_file") || [[ -z "$output" ]]; then
-        log error "Failed to render resources" "file=$resources_file"
-    fi
+    output=$(render_template "$resources_file")
+
     if echo "$output" | kubectl diff --filename - &>/dev/null; then
-        log info "Resources are up-to-date"
-        return
+        log warn "Resources are up-to-date"
+        return 0
     fi
+
     if echo "$output" | kubectl apply --server-side --filename - &>/dev/null; then
         log info "Resources applied"
     else
         log error "Failed to apply resources"
+        exit 1
     fi
 }
 
 function apply_helm_releases() {
-    log debug "Applying Helm releases"
     local helmfile_file="${ROOT_DIR}/bootstrap/helmfile.yaml"
-    [[ ! -f "$helmfile_file" ]] && {
-        log warn "Helmfile not found, skipping" "file=$helmfile_file"
-        return
-    }
+
+    log info "\nApplying Helm releases"
+
+    if [[ ! -f "$helmfile_file" ]]; then
+        log error "Helmfile not found..."
+        exit 1
+    fi
+
     if ! helmfile --file "$helmfile_file" apply --hide-notes --skip-diff-on-install --suppress-diff --suppress-secrets; then
         log error "Failed to apply Helm releases"
+        exit 1
     fi
+
     log info "Helm releases applied successfully"
 }
 
-# Main function with global node
 function main() {
-    export node="$1"
-    [[ -z "$node" ]] && log error "No node IP provided"
-    check_env KUBECONFIG KUBERNETES_VERSION TALOS_VERSION
+    check_env KUBECONFIG KUBERNETES_VERSION TALOS_VERSION NODE_IP
     check_cli helmfile jq kubectl kustomize minijinja-cli op talosctl yq
     if ! op user get --me &>/dev/null; then
-        log error "Failed to authenticate with 1Password CLI"
+        echo "Please authenticate with 1Password CLI"
+        if ! eval "$(op signin)"; then
+            log error "1Password authentication failed"
+            exit 1
+        fi
     fi
     apply_talos_config
     bootstrap_talos
