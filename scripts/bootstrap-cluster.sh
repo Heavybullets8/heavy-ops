@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
 
 export LOG_LEVEL LOG_LEVELS ROOT_DIR NODE_IP
 NODE_IP=$1
@@ -7,6 +6,8 @@ NODE_IP=$1
 LOG_LEVEL="debug"
 LOG_LEVELS=([ERROR]=1 [WARNING]=2 [INFO]=3 [DEBUG]=4)
 ROOT_DIR="$(git rev-parse --show-toplevel)"
+BOOTSTRAP_DIR="$ROOT_DIR/bootstrap"
+TALOS_DIR="$ROOT_DIR/talos"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -15,10 +16,8 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 log() {
-    local level="$1"
+    local level="${1^^}"
     shift
-
-    level=$(echo "$level" | tr '[:lower:]' '[:upper:]')
 
     if [[ -z "${LOG_LEVELS[$level]}" ]]; then
         echo "Invalid log level: $level" >&2
@@ -99,7 +98,7 @@ function render_template() {
 }
 
 function apply_talos_config() {
-    local config_file="${ROOT_DIR}/talos/${NODE_IP}.yaml.j2"
+    local config_file="${TALOS_DIR}/${NODE_IP}.yaml.j2"
     local machine_config
 
     log info "\nApplying Talos configuration"
@@ -167,7 +166,7 @@ function wait_for_nodes() {
 }
 
 function apply_resources() {
-    local resources_file="${ROOT_DIR}/bootstrap/resources.yaml.j2"
+    local resources_file="${BOOTSTRAP_DIR}/resources.yaml.j2"
 
     log info "\nApplying resources"
 
@@ -193,7 +192,7 @@ function apply_resources() {
 }
 
 function apply_helm_releases() {
-    local helmfile_file="${ROOT_DIR}/bootstrap/helmfile.yaml"
+    local helmfile_file="${BOOTSTRAP_DIR}/helmfile.yaml"
 
     log info "\nApplying Helm releases"
 
