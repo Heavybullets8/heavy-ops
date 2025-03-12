@@ -191,6 +191,30 @@ function apply_resources() {
     fi
 }
 
+function apply_crds() {
+    log info "\nApplying CRDs"
+
+    local -r crds=(
+        # renovate: datasource=github-releases depName=kubernetes-sigs/gateway-api
+        https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/experimental-install.yaml
+        # renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
+        https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.80.1/stripped-down-crds.yaml
+    )
+
+    for crd in "${crds[@]}"; do
+        if kubectl diff --filename "${crd}" &>/dev/null; then
+            log info "CRDs are up-to-date\n$crd"
+            continue
+        fi
+
+        if kubectl apply --server-side --filename "${crd}" &>/dev/null; then
+            log info "CRDs applied"
+        else
+            log error "Failed to apply:\n$crd"
+        fi
+    done
+}
+
 function apply_helm_releases() {
     local helmfile_file="${BOOTSTRAP_DIR}/helmfile.yaml"
 
@@ -224,6 +248,7 @@ function main() {
     fetch_kubeconfig
     wait_for_nodes
     apply_resources
+    apply_crds
     apply_helm_releases
     log info "Cluster bootstrapped successfully!"
 }
