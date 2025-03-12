@@ -244,9 +244,4 @@ cluster:
       - 192.168.200.0/23
   coreDNS:
     disabled: true
-  extraManifests:
-    {% for crd in ["alertmanagerconfigs", "alertmanagers", "podmonitors", "probes", "prometheusagents", "prometheuses", "prometheusrules", "scrapeconfigs", "servicemonitors", "thanosrulers"] %}
-    - # renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
-      https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.81.0/example/prometheus-operator-crd/monitoring.coreos.com_{{ crd }}.yaml
-    {% endfor %}
   allowSchedulingOnControlPlanes: true
