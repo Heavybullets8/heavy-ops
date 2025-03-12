@@ -38,20 +38,20 @@ machine:
   network:
     hostname: heavy-control
     interfaces:
-      # Outbound
+      # Outbound - enp130s0f0np0
       - deviceSelector:
-          hardwareAddr: b8:3f:d2:48:88:2e
+        hardwareAddr: b8:3f:d2:48:88:2e
         # Max XDP MTU
         mtu: 3498
         dhcp: true
         vip:
           ip: 192.168.200.16
-      # Direct Connect to TrueNAS
+          # Direct Connect to TrueNAS - enp130s0f1np1
       - deviceSelector:
-          hardwareAddr: b8:3f:d2:48:88:2f
+        hardwareAddr: b8:3f:d2:48:88:2f
         addresses:
           - 10.10.10.1/30
-        # Jumbo Frames
+          # Jumbo Frames
         mtu: 9000
         dhcp: false
     disableSearchDomain: true
