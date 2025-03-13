@@ -11,10 +11,28 @@
       }
     },
     {
+      "description": ["CoreDNS Group"],
+      "groupName": "CoreDNS",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/coredns/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      }
+    },
+    {
       "description": ["Actions Runner Controller Group"],
       "groupName": "Actions Runner Controller",
       "matchDatasources": ["docker", "helm"],
       "matchPackageNames": ["/gha-runner-scale-set/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      }
+    },
+    {
+      "description": ["External Secrets Operator Group"],
+      "groupName": "External Secrets Operator",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/external-secrets/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
@@ -49,14 +67,13 @@
       "separateMinorPatch": false
     },
     {
-      "description": ["Talos Group"],
-      "groupName": "Talos",
-      "matchPackageNames": ["/siderolabs/"],
+      "description": ["Spegel Group"],
+      "groupName": "Spegel",
       "matchDatasources": ["docker"],
+      "matchPackageNames": ["/spegel/"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
-      },
-      "separateMinorPatch": true
+      }
     }
   ]
 }
