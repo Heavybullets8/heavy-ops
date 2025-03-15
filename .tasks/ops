@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+export ROOT_DIR TASK_DIR TALOS_DIR BOOTSTRAP_DIR NODE_IP
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+TASK_DIR="$ROOT_DIR/.tasks"
+TALOS_DIR="$ROOT_DIR/talos"
+BOOTSTRAP_DIR="$ROOT_DIR/bootstrap"
+NODE_IP="192.168.200.15"
+
+source "$TASK_DIR/common.sh"
+
+function show_help() {
+  echo "Usage: $0 [command] [args...]"
+  echo "Commands: bootstrap, flux, kubernetes, talos, volsync"
+  echo "Run without arguments to open the interactive menu."
+  echo "Options:"
+  echo "  -h, --help, help    Display this help message"
+}
+
+function menu() {
+  local choice
+
+  choice=$(find "$TASK_DIR" -maxdepth 1 -type d -not -path "$TASK_DIR" -print0 | xargs -0 -n 1 basename | gum choose)
+
+  if [ -n "$choice" ]; then
+    echo "$choice"
+  fi
+}
+
+function main() {
+  local args=("$@")
+
+  if [[ ${#args[@]} -eq 0 || "${args[0]}" =~ ^(-{1,2})?$ ]]; then
+    args[0]=$(menu)
+  fi
+
+  case "${args[0]}" in
+  "bootstrap")
+    source "$TASK_DIR/bootstrap/bootstrap.sh" "${args[@]:1}"
+    ;;
+
+  "flux")
+    source "$TASK_DIR/flux/flux.sh" "${args[@]:1}"
+    ;;
+
+  "kubernetes")
+    source "$TASK_DIR/kubernetes/kubernetes.sh" "${args[@]:1}"
+    ;;
+
+  "talos")
+    source "$TASK_DIR/talos/talos.sh" "${args[@]:1}"
+    ;;
+
+  "volsync")
+    source "$TASK_DIR/volsync/volsync.sh" "${args[@]:1}"
+    ;;
+
+  "-h" | "--help" | "help")
+    show_help
+    ;;
+
+  *)
+    gum log --structured --level error "Unknown command" "command" "${args[0]}"
+    exit 1
+    ;;
+  esac
+}
+
+main "$@"
