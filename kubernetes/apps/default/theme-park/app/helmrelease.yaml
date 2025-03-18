@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/heavybullets8/theme-park
-              tag: 1.19.1@sha256:499346916662beaa30dd70d8e2e817c54945c361d5776e775424c23b8e5e4fff
+              tag: 1.20.0@sha256:9fee931d7beea337d972ced3eb31d59fdcdec77610572e78962c9e12f77c3cb0
             env:
               TZ: ${TIMEZONE}
             resources:
