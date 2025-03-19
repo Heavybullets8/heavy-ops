@@ -40,7 +40,7 @@ function main() {
         for k in $kustomizations; do
             namespace=$(echo "$k" | awk -F',' '{print $1}')
             name=$(echo "$k" | awk -F',' '{print $2}')
-            if ! gum spin --spinner monkey --title "ns=$namespace name=$name" -- flux reconcile kustomization -n "$namespace" "$name"; then
+            if ! gum spin --spinner monkey --title "flux reconcile kustomization -n $namespace $name" -- flux reconcile kustomization -n "$namespace" "$name"; then
                 gum log --structured --level error "Failed to reconcile kustomization" "namespace" "$namespace" "name" "$name"
             else
                 gum log --structured --level info "Successfully reconciled kustomization" "namespace" "$namespace" "name" "$name"
@@ -57,7 +57,7 @@ function main() {
         for h in $helmreleases; do
             namespace=$(echo "$h" | awk -F',' '{print $1}')
             name=$(echo "$h" | awk -F',' '{print $2}')
-            if ! gum spin --spinner monkey --title "ns=$namespace name=$name" -- flux reconcile helmrelease -n "$namespace" "$name"; then
+            if ! gum spin --spinner monkey --title "flux reconcile helmrelease -n $namespace $name" -- flux reconcile helmrelease -n "$namespace" "$name"; then
                 gum log --structured --level error "Failed to reconcile helm release" "namespace" "$namespace" "name" "$name"
             else
                 gum log --structured --level info "Successfully reconciled helm release" "namespace" "$namespace" "name" "$name"

@@ -9,8 +9,7 @@ function apply_talos_config() {
     local output
     if ! output=$(echo "$machine_config" | talosctl --nodes "$NODE_IP" apply-config --insecure --file /dev/stdin 2>&1); then
         if [[ "$output" == *"certificate required"* ]]; then
-            gum log --structured --level warn "Looks like Talos is already bootstrapped..."
-            gum log --structured --level warn "Will still attempt to bootstrap applications..."
+            gum log --structured --level warn "Talos already has an applied configuration..."
         else
             gum log --structured --level error "Failed to apply Talos config" "output" "$output"
             exit 1
