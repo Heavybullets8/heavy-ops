@@ -4,4 +4,5 @@ KUBECONFIG = '{{config_root}}/kubeconfig'
 MINIJINJA_CONFIG_FILE = '{{config_root}}/.minijinja.toml'
 SOPS_AGE_KEY_FILE = '{{config_root}}/age.key'
 TALOSCONFIG = '{{config_root}}/talosconfig'
+# HACK: Seems PATH has some issues for people using WSL, im assuming because of the $PATH.
 PATH = '{{config_root}}/.tasks:$PATH'
