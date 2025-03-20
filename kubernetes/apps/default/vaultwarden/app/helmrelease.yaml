@@ -9,7 +9,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: app-template
-    namespace: flux-system
   maxHistory: 2
   install:
     createNamespace: true
@@ -22,6 +21,7 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+
   values:
     controllers:
       vaultwarden:
@@ -62,6 +62,7 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 5Gi
+
     service:
       app:
         controller: *app

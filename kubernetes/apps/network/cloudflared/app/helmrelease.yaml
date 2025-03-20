@@ -9,7 +9,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: app-template
-    namespace: flux-system
   install:
     remediation:
       retries: 3
@@ -21,6 +20,7 @@ spec:
   dependsOn:
     - name: nginx-external
       namespace: network
+
   values:
     controllers:
       cloudflared:
@@ -70,22 +70,26 @@ spec:
                 cpu: 10m
               limits:
                 memory: 256Mi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
         runAsGroup: 65534
+
     service:
       app:
         controller: *app
         ports:
           http:
             port: *port
+
     serviceMonitor:
       app:
         serviceName: *app
         endpoints:
           - port: http
+
     persistence:
       config-file:
         type: configMap
@@ -94,6 +98,7 @@ spec:
           - path: /etc/cloudflared/config/config.yaml
             subPath: config.yaml
             readOnly: true
+
       secret-file:
         type: secret
         name: cloudflared-tunnel-secret

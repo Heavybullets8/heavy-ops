@@ -7,14 +7,9 @@ metadata:
 spec:
   timeout: 15m
   interval: 30m
-  chart:
-    spec:
-      chart: nextcloud
-      version: 6.6.9
-      sourceRef:
-        kind: HelmRepository
-        name: nextcloud
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: nextcloud
   install:
     remediation:
       retries: 3
