@@ -1,10 +1,11 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: openebs
 spec:
-  interval: 30m
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: openebs
@@ -16,6 +17,7 @@ spec:
     cleanupOnFail: true
     disableHooks: true
     remediation:
+      strategy: rollback
       retries: 3
   values:
     engines:
@@ -31,6 +33,7 @@ spec:
       csi:
         volumeSnapshots:
           enabled: false
+          keep: false
     localpv-provisioner:
       localpv:
         image:
@@ -40,6 +43,9 @@ spec:
         name: openebs-hostpath
         isDefaultClass: false
         basePath: /var/openebs/local
+      helperPod:
+        image:
+          registry: quay.io/
     zfs-localpv:
       enabled: true
       zfsNode:
