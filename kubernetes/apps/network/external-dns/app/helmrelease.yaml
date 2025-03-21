@@ -5,17 +5,17 @@ kind: HelmRelease
 metadata:
   name: &app external-dns-cloudflare
 spec:
-  interval: 30m
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: external-dns
   install:
-    crds: CreateReplace
+    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
-    crds: CreateReplace
+    disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
     remediation:
       strategy: rollback
       retries: 3
