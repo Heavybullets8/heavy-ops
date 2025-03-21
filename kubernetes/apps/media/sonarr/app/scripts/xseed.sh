@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
 # Source from: https://github.com/bakerboy448/StarrScripts/blob/main/xseed.sh
-# Radarr: Connect -> Custom Script - - On Import Complete
-# Sonarr: Connect -> Custom Script - - On File Import AND On File Upgrade
+# INFO: Radarr: Connect -> Custom Script - - On Import Complete
+# INFO: Sonarr: Connect -> Custom Script - - On File Import AND On File Upgrade
 
-### UPDATED FOR SEASON PACK FROM USENET SUPPORT IN
-### CROSS SEED v6 ONLY!! v5 IS NOT SUPPORTED FOR USENET
-### SEASON PACKS AND WILL ALWAYS FAIL TO FIND MATCHES
+# INFO: TO ENABLE THIS FEATURE YOU _MUST_ SWITCH TO THE
+# INFO: ON IMPORT COMPLETE EVENT TYPE IN YOUR SONARR SETTINGS
 
-### TO ENABLE THIS FEATURE YOU _MUST_ SWITCH TO THE
-### ON IMPORT COMPLETE EVENT TYPE IN YOUR SONARR SETTINGS
-
-# Load environment variables from .env file if it exists
-# in the same directory as this bash script
 VERSION='4.0.0'
-OLD_IFS="$IFS"
+TORRENT_CLIENTS=("qBitVPN")
+USENET_CLIENTS=("SABnzbd")
+XSEED_HOST=cross-seed.media.svc.cluster.local
+XSEED_PORT=80
+LOG_FILE=${LOG_FILE:-/config/xseed.log}
+LOGID_FILE=${LOGID_FILE:-/config/xseed-id.log}
+CROSS_SEED_API_KEY=${CROSS_SEED_API_KEY:-}
 
 # Function to log messages
 log_message() {
@@ -28,33 +28,6 @@ log_message() {
         echo "$log_line"
     fi
 }
-
-log_message "INFO" "xseed.sh script started $VERSION"
-
-### START OF CONFIGURATION SECTION
-### START OF CONFIGURATION SECTION
-
-TORRENT_CLIENTS=("Qbit")
-USENET_CLIENTS=("SABnzbd")
-
-XSEED_HOST=cross-seed.media.svc.cluster.local
-XSEED_PORT=80
-LOG_FILE=${LOG_FILE:-/config/xseed.log}
-LOGID_FILE=${LOGID_FILE:-/config/xseed-id.log}
-CROSS_SEED_API_KEY=${CROSS_SEED_API_KEY:-}
-
-### END OF CONFIGURATION SECTION
-
-# Restore original IFS
-IFS="$OLD_IFS"
-
-log_message "INFO" "Using Configuration:"
-log_message "INFO" "TORRENT_CLIENTS=$(printf '"%s" ' "${TORRENT_CLIENTS[@]}")"
-log_message "INFO" "USENET_CLIENTS=$(printf '"%s" ' "${USENET_CLIENTS[@]}")"
-log_message "INFO" "XSEED_HOST=$XSEED_HOST"
-log_message "INFO" "XSEED_PORT=$XSEED_PORT"
-log_message "INFO" "LOG_FILE=$LOG_FILE"
-log_message "INFO" "LOGID_FILE=$LOGID_FILE"
 
 # Function to check if a client is in the allowed list
 is_valid_client() {
@@ -230,5 +203,14 @@ handle_operations() {
         exit 1
     fi
 }
+
+log_message "INFO" "xseed.sh script started $VERSION"
+log_message "INFO" "Using Configuration:"
+log_message "INFO" "TORRENT_CLIENTS=$(printf '"%s" ' "${TORRENT_CLIENTS[@]}")"
+log_message "INFO" "USENET_CLIENTS=$(printf '"%s" ' "${USENET_CLIENTS[@]}")"
+log_message "INFO" "XSEED_HOST=$XSEED_HOST"
+log_message "INFO" "XSEED_PORT=$XSEED_PORT"
+log_message "INFO" "LOG_FILE=$LOG_FILE"
+log_message "INFO" "LOGID_FILE=$LOGID_FILE"
 
 handle_operations
