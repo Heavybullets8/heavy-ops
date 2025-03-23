@@ -13,12 +13,6 @@
       "matchPackageNames": ["/postgresql/"],
       "matchUpdateTypes": ["digest"],
       "schedule": ["every 3 months on the first day of the month"]
-    },
-    {
-      "description": ["Loose versioning for non-semver containers"],
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/plex/"],
-      "versioning": "loose"
     }
   ]
 }
