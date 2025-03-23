@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/kube-system/cilium/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -36,6 +37,7 @@ spec:
       namespace: *namespace
   path: ./kubernetes/apps/kube-system/cilium/config
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

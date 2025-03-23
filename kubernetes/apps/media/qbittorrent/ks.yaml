@@ -19,6 +19,7 @@ spec:
   wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbittorrent
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -49,6 +50,7 @@ spec:
   wait: false
   path: ./kubernetes/apps/media/qbittorrent/qbitmanage
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

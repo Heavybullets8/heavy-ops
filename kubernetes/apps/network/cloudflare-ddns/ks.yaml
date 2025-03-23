@@ -15,6 +15,7 @@ spec:
       namespace: external-secrets
   path: ./kubernetes/apps/network/cloudflare-ddns/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

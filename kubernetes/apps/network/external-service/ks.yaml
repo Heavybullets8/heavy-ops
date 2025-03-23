@@ -9,6 +9,7 @@ spec:
   targetNamespace: *namespace
   path: ./kubernetes/apps/network/external-service/truenas
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

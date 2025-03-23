@@ -11,6 +11,7 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/network/k8s-gateway/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

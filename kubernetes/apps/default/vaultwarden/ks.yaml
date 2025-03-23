@@ -15,6 +15,7 @@ spec:
     - ../../../../components/volsync
   path: ./kubernetes/apps/default/vaultwarden/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

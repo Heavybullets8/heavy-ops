@@ -21,6 +21,7 @@ spec:
   wait: false
   path: ./kubernetes/apps/media/sonarr/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

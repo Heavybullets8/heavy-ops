@@ -18,6 +18,7 @@ spec:
       namespace: external-secrets
   path: ./kubernetes/apps/game/valheim/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -48,6 +49,7 @@ spec:
       namespace: *namespace
   path: ./kubernetes/apps/game/valheim/filebrowser
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

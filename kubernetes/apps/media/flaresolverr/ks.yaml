@@ -13,6 +13,7 @@ spec:
   wait: false
   path: ./kubernetes/apps/media/flaresolverr/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
