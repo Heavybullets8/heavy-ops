@@ -24,8 +24,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/theme-park
-              tag: 1.20.0@sha256:7c1c89eed22a1582139decab6278db5690f3a5da18697aa7cc6b55ee2db1e35b
+              repository: ghcr.io/heavybullets8/theme-park
+              tag: 1.20.0@sha256:a62e29f6f747a9e010ed79edfcca465da7eb938133c9cf9b97318d140e62ec7d
             env:
               TZ: ${TIMEZONE}
             resources:
