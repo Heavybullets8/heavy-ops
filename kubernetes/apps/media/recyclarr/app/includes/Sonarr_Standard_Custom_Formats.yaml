@@ -131,7 +131,6 @@ custom_formats:
       - b66a699fba6f9df91becab798d7502e5 # NOW
 
       # Unwanted
-      - 15a05bc7c1a36e2b57fd628f8977e2fc # AV1
       - 85c61753df5da1fb2aab6f2a47426b09 # BR-DISK
       - fbcb31d8dabd2a319072b84fc0b7249c # Extras
       - 9c11cd3f07101cdba90a2d81cf0e56b4 # LQ

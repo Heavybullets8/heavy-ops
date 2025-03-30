@@ -136,7 +136,6 @@ custom_formats:
 
       # Unwanted
       - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D
-      - cae4ca30163749b891686f95532519bd # AV1
       - ed38b889b31be83fda192888e2286d83 # BR-DISK
       - 0a3f082873eb454bde444150b70253cc # Extras
       - 90a6f9a284dff5103f6346090e6280c8 # LQ

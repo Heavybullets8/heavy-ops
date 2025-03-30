@@ -81,7 +81,7 @@ which serves as the router, firewall, and DNS server for my home network.
 - **Persistent Volumes**:
   - 4× Intel Optane 905p 1.5 TB (configured as 2 mirrored VDEVs using ZFS)
   - **Adapter**: GLOTRENDS PU41 Quad U.2 SSD to PCIe 4.0 X16
-- **GPU**: NVIDIA Quadro P2200
+- **GPU**: NVIDIA RTX 4000 ADA
 - **Cooling**: SilverStone Technology XE360-TR5 AIO cooler
 - **Power Supply**: FSP Twins Pro 900 W
 - **Network**:
@@ -93,6 +93,7 @@ which serves as the router, firewall, and DNS server for my home network.
 - **RAM**: 256 GB
 - **Storage**:
   - **HDDs**: 12× 18 TB WD Red Pro (configured as 2 VDEVs in RAIDZ2)
+- **GPU**: NVIDIA Quadro P2200
 - **Power Supply**: FSP Twins Pro 900 W
 - **Network**:
   - Mellanox X5 ADAT 25 Gb
