@@ -8,6 +8,7 @@ bpf:
   tproxy: true
   preallocateMaps: true
   datapathMode: netkit
+bpfClockProbe: true
 cgroup:
   automount:
     enabled: false
