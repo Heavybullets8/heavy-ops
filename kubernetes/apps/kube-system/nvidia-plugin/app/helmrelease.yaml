@@ -17,7 +17,6 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    runtimeClassName: nvidia
     affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

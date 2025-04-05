@@ -41,8 +41,6 @@ spec:
               PLEX_NO_AUTH_NETWORKS: 192.168.200.0/23
               PLEX_UID: 568
               PLEX_GID: 568
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
             probes:
               liveness: &probes
                 enabled: true
@@ -82,7 +80,6 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
-      runtimeClassName: nvidia
 
     service:
       app:

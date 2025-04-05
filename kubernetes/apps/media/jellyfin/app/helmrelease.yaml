@@ -38,8 +38,6 @@ spec:
             env:
               TZ: ${TIMEZONE}
               JELLYFIN_PublishedServerUrl: https://jellyfin.${SECRET_DOMAIN}
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
             probes:
               liveness: &probes
                 enabled: true
@@ -76,7 +74,6 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
-      runtimeClassName: nvidia
 
     service:
       app:
