@@ -124,3 +124,10 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
+
+      posters:
+        type: persistentVolumeClaim
+        existingClaim: kometa-assets
+        globalMounts:
+          - path: /config/posters
+            subPath: posters
