@@ -20,18 +20,13 @@ function apply_talos_config() {
 }
 
 function bootstrap_talos() {
-    local bootstrapped=true
     local output
     gum log --structured --level info "Bootstrapping Talos"
-    until output=$(talosctl --nodes "$NODE_IP" bootstrap 2>&1); do
-        if [[ "$bootstrapped" == true && "$output" == *"AlreadyExists"* ]]; then
-            gum log --structured --level info "Talos is bootstrapped"
-            break
-        fi
-        bootstrapped=false
-        gum log --structured --level info "Talos bootstrap failed, retrying in 10s"
+    until output=$(talosctl --nodes "$NODE_IP" bootstrap 2>&1 || true) && [[ "${output}" == *"AlreadyExists"* ]]; do
+        gum log --structured --level info "Talos bootstrap in progress, waiting 10 seconds..."
         sleep 10
     done
+    gum log --structured --level info "Talos is bootstrapped"
 }
 
 function wait_for_nodes() {
