@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/mbround18/valheim
-              tag: 3.1.0@sha256:70bd4da591cd50290454a9cc1511e640700c2e2f82ea4d5a8b2ee44629988936
+              tag: 3.1.1@sha256:f5e27e9488c0770295360a5db7f2a9ef3553236f0089985cfc014fb91258f82d
             probes:
               liveness:
                 enabled: false
