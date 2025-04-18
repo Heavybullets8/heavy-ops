@@ -5,21 +5,23 @@ kind: HelmRelease
 metadata:
   name: reloader
 spec:
-  interval: 30m
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: reloader
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
   values:
     fullnameOverride: reloader
     reloader:
+      enableHA: true
+      deployment:
+        replicas: 1
       readOnlyRootFileSystem: true
       podMonitor:
         enabled: true
