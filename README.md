@@ -34,6 +34,8 @@ a single powerful node. For persistent storage, I use
   reverse proxy and load balancer for Kubernetes services.
 - [sops](https://github.com/mozilla/sops): Encrypts and manages secrets within
   Git.
+- [kopiur](https://github.com/home-operations/kopiur): Backs up application PVCs
+  to TrueNAS and R2.
 
 ### GitOps and Automation
 

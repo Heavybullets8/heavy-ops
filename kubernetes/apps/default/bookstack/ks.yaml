@@ -13,7 +13,10 @@ spec:
   components:
     - ../../../../components/forward-auth
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   path: ./kubernetes/apps/default/bookstack/app
   prune: true
   retryInterval: 2m
@@ -28,4 +31,7 @@ spec:
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: bookstack
-      VOLSYNC_CAPACITY: 5Gi
+      KOPIUR_CAPACITY: 5Gi
+      KOPIUR_PUID: "1000"
+      KOPIUR_PGID: "1000"
+      KOPIUR_FSGROUP: "1000"

@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kopiur.home-operations.com/snapshotpolicy_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: SnapshotPolicy
+metadata:
+  name: ${APP}
+spec:
+  compression:
+    compressor: zstd
+  copyMethod: ${KOPIUR_COPYMETHOD:-Clone}
+  mover:
+    cache:
+      capacity: ${KOPIUR_CACHE_CAPACITY:-8Gi}
+      mode: Persistent
+      storageClassName: openebs-zfs-${KOPIUR_RECORD_SIZE:-128k}
+    securityContext:
+      runAsUser: ${KOPIUR_PUID:-568}
+      runAsGroup: ${KOPIUR_PGID:-568}
+    podSecurityContext:
+      fsGroup: ${KOPIUR_FSGROUP:-568}
+      fsGroupChangePolicy: OnRootMismatch
+      supplementalGroups: [568]
+  repositories:
+    - kind: ClusterRepository
+      name: truenas
+    - kind: ClusterRepository
+      name: r2
+  retention:
+    keepHourly: 24
+    keepDaily: 14
+  sources:
+    - pvc:
+        name: ${APP}
+      readOnly: false
+  volumeSnapshotClassName: openebs-zfs

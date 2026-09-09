@@ -12,14 +12,14 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
     - name: cloudnative-pg-cluster
       namespace: database
     - name: onepassword
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: ./kubernetes/apps/media/seerr/app
   prune: true
@@ -35,5 +35,5 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: request
       GATUS_PATH: /api/v1/status
-      VOLSYNC_CAPACITY: 500Mi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 500Mi
+      KOPIUR_RECORD_SIZE: 64k

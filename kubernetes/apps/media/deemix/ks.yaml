@@ -13,7 +13,10 @@ spec:
   components:
     - ../../../../components/forward-auth
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: ./kubernetes/apps/media/deemix/app
   prune: true
@@ -27,4 +30,4 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 5Gi
+      KOPIUR_CAPACITY: 5Gi

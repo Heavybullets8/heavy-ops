@@ -12,8 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   path: ./kubernetes/apps/game/valheim/app
@@ -29,5 +31,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 10Gi
+      KOPIUR_CAPACITY: 10Gi
 

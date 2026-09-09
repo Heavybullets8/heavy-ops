@@ -12,8 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   path: ./kubernetes/apps/game/minecraft/minecraft
@@ -29,8 +31,11 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 30Gi
-      VOLSYNC_RECORD_SIZE: 16k
+      KOPIUR_CAPACITY: 30Gi
+      KOPIUR_RECORD_SIZE: 16k
+      KOPIUR_PUID: "1000"
+      KOPIUR_PGID: "3000"
+      KOPIUR_FSGROUP: "2000"
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1

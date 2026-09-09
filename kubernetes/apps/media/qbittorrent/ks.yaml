@@ -13,8 +13,10 @@ spec:
   components:
     - ../../../../components/forward-auth
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   wait: false
@@ -31,8 +33,8 @@ spec:
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: qbit
-      VOLSYNC_CAPACITY: 5Gi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 5Gi
+      KOPIUR_RECORD_SIZE: 64k
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1

@@ -12,7 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: kubernetes/apps/media/plex/plex
   prune: true
@@ -27,8 +30,8 @@ spec:
     substitute:
       APP: *app
       GATUS_PATH: /web/index.html
-      VOLSYNC_CAPACITY: 600Gi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 600Gi
+      KOPIUR_RECORD_SIZE: 64k
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -69,8 +72,10 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   wait: false
@@ -85,7 +90,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 10Gi
+      KOPIUR_CAPACITY: 10Gi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -181,7 +186,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: kubernetes/apps/media/plex/tautulli
   prune: true
@@ -195,5 +203,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 2Gi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 2Gi
+      KOPIUR_RECORD_SIZE: 64k

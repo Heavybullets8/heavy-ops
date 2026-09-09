@@ -12,8 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: cloudnative-pg-cluster
       namespace: database
     - name: onepassword
@@ -36,5 +38,8 @@ spec:
       GATUS_SUBDOMAIN: sign
       GATUS_DOMAIN: bighornbyte.com
       GATUS_PATH: /api/health
-      VOLSYNC_CAPACITY: 10Gi
-      VOLSYNC_RECORD_SIZE: 1m
+      KOPIUR_CAPACITY: 10Gi
+      KOPIUR_RECORD_SIZE: 1m
+      KOPIUR_PUID: "1001"
+      KOPIUR_PGID: "1001"
+      KOPIUR_FSGROUP: "1001"

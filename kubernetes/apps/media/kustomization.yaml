@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: media
 components:
   - ../../components/common
+  - ../../components/kopiur/secret
 resources:
   - ./agregarr/ks.yaml
   - ./audiobookshelf/ks.yaml

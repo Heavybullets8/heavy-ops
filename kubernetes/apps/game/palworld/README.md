@@ -79,7 +79,7 @@ game build.
 ## Backups
 
 - Container: 05:00 daily into `/palworld/backups`, pruned at 7 days.
-- VolSync: 09:00 daily, whole 40Gi PVC, local + remote.
+- Kopiur: 09:00 UTC daily, whole 40Gi PVC, TrueNAS + R2.
 
 ## Wiping
 

@@ -12,8 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: cloudnative-pg-cluster
       namespace: database
     - name: dragonfly-cluster
@@ -36,5 +38,8 @@ spec:
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: tasks
-      VOLSYNC_CAPACITY: 5Gi
-      VOLSYNC_RECORD_SIZE: 1m
+      KOPIUR_CAPACITY: 5Gi
+      KOPIUR_RECORD_SIZE: 1m
+      KOPIUR_PUID: "1000"
+      KOPIUR_PGID: "1000"
+      KOPIUR_FSGROUP: "1000"

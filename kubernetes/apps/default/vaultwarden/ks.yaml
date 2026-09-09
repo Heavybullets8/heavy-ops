@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   path: ./kubernetes/apps/default/vaultwarden/app
   prune: true
   retryInterval: 2m
@@ -25,13 +25,13 @@ spec:
       namespace: database
     - name: onepassword
       namespace: external-secrets
-    - name: volsync
-      namespace: volsync-system
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   interval: 30m
   timeout: 5m
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 10Gi
+      KOPIUR_CAPACITY: 10Gi
       GATUS_SUBDOMAIN: vault

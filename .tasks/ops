@@ -13,7 +13,7 @@ source "$TASK_DIR/common.sh"
 
 function show_help() {
   echo "Usage: $0 [command] [args...]"
-  echo "Commands: bootstrap, flux, kubernetes, talos, volsync"
+  echo "Commands: bootstrap, flux, kubernetes, talos, kopiur"
   echo "Run without arguments to open the interactive menu."
   echo "Options:"
   echo "  -h, --help, help    Display this help message"
@@ -53,8 +53,8 @@ function main() {
     source "$TASK_DIR/talos/talos.sh" "${args[@]:1}"
     ;;
 
-  "volsync")
-    source "$TASK_DIR/volsync/volsync.sh" "${args[@]:1}"
+  "kopiur")
+    source "$TASK_DIR/kopiur/kopiur.sh" "${args[@]:1}"
     ;;
 
   "-h" | "--help" | "help")

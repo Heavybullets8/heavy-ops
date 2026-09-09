@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: game
 components:
   - ../../components/common
+  - ../../components/kopiur/secret
 resources:
   - ./minecraft/ks.yaml
   - ./minecraft-rotational/ks.yaml

@@ -261,8 +261,8 @@ When players join the server with addons installed:
 
 ### Resetting the Rotational Server
 
-1. Verify the `minecraft-rotational-local` and
-   `minecraft-rotational-remote` VolSync backups succeeded
+1. Verify the `minecraft-rotational` Kopiur policy has successful backups in
+   both the `truenas` and `r2` repositories
 2. Stop `minecraft-rotational`
 3. Clear the worlds and custom pack directories on the existing
    `minecraft-rotational` PVC
@@ -271,8 +271,8 @@ When players join the server with addons installed:
 5. Start the server and verify a new world was generated with every declared
    pack loaded
 
-Do not delete and recreate the rotational PVC for a reset. Its VolSync
-`dataSourceRef` can restore the previous rotation into a new claim.
+Do not delete and recreate the rotational PVC for a reset. The Kopiur
+`dataSourceRef` restores the previous rotation into a new claim.
 
 ### Cleanup
 

@@ -11,8 +11,10 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   path: ./kubernetes/apps/media/cross-seed/app
@@ -28,5 +30,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 15Gi
-      VOLSYNC_RECORD_SIZE: 16k
+      KOPIUR_CAPACITY: 15Gi
+      KOPIUR_RECORD_SIZE: 16k

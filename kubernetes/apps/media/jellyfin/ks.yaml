@@ -12,7 +12,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: kubernetes/apps/media/jellyfin/app
   prune: true
@@ -26,5 +29,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 300Gi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 300Gi
+      KOPIUR_RECORD_SIZE: 64k

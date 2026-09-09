@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kopiur.home-operations.com/clusterrepository_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: ClusterRepository
+metadata:
+  name: r2
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+spec:
+  allowedNamespaces:
+    list: [database, default, game, media, kopiur-system]
+  backend:
+    s3:
+      auth:
+        secretRef:
+          name: kopiur-repository-secret
+          namespace: kopiur-system
+      bucket: restic
+      endpoint: 82ad5f83e00ee38f2502ad72ac2a7802.r2.cloudflarestorage.com
+      prefix: kopiur/
+      region: auto
+  encryption:
+    passwordSecretRef:
+      name: kopiur-repository-secret
+      namespace: kopiur-system
+      key: KOPIA_PASSWORD
+  concurrency:
+    maxConcurrentJobs: 4
+  maintenance:
+    schedule:
+      quick:
+        cron: 0 * * * *
+        jitter: 10m
+      full:
+        cron: 0 3 * * *
+        jitter: 1h
+  moverDefaults:
+    cache:
+      contentCacheSizeMb: 512
+      metadataCacheSizeMb: 1024
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+    podSecurityContext:
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+  parameters:
+    epoch:
+      minDuration: 1h
+  scheduleDefaults:
+    timezone: Etc/UTC

@@ -13,7 +13,10 @@ spec:
   components:
     - ../../../../components/forward-auth
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
+  dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
   wait: false
   path: ./kubernetes/apps/media/agregarr/app
   prune: true
@@ -27,5 +30,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 2Gi
-      VOLSYNC_RECORD_SIZE: 64k
+      KOPIUR_CAPACITY: 2Gi
+      KOPIUR_RECORD_SIZE: 64k

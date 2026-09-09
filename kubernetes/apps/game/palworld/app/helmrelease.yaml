@@ -47,7 +47,7 @@ spec:
               # WORKER_THREADS_SERVER is left unset to keep the game's own default
               ENABLE_PERF_THREADING_ARGS: "true"
               # In-container save snapshots under /palworld/backups, for quick
-              # rollback of a corrupt world. VolSync still backs up the whole PVC.
+              # rollback of a corrupt world. Kopiur still backs up the whole PVC.
               BACKUP_ENABLED: "true"
               BACKUP_CRON_EXPRESSION: "0 5 * * *"
               DELETE_OLD_BACKUPS: "true"

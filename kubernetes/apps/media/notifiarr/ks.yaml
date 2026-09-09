@@ -13,8 +13,10 @@ spec:
   components:
     - ../../../../components/forward-auth
     - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../../components/kopiur/backup
   dependsOn:
+    - name: kopiur-repository
+      namespace: kopiur-system
     - name: onepassword
       namespace: external-secrets
   wait: false
@@ -30,4 +32,4 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 3Gi
+      KOPIUR_CAPACITY: 3Gi
