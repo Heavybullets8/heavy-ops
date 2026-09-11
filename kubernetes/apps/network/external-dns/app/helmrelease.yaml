@@ -30,6 +30,8 @@ spec:
             name: *secret
             key: *name
     extraArgs:
+      # v0.22 changed the default; keep honoring the annotations used by our routes and gateways.
+      - --annotation-prefix=external-dns.alpha.kubernetes.io/
       - --cloudflare-dns-records-per-page=1000
       - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
