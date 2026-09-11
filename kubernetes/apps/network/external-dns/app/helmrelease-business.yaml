@@ -9,6 +9,9 @@ spec:
   chartRef:
     kind: OCIRepository
     name: external-dns
+  # Both releases share CRDs; let the primary release finish updating them first.
+  dependsOn:
+    - name: external-dns-cloudflare
   install:
     disableSchemaValidation: true # Ref: https://github.com/kubernetes-sigs/external-dns/issues/5206
   upgrade:
